@@ -12,6 +12,8 @@ Eruano Rubens de Almeida - Dev
 
 [Mateus Soares](https://github.com/MateusMSoares) - Product Manager (PO) e Dev
 
+[Sara Nahra](https://github.com/sararobertnahra) - Dev
+
 [William Gomes de Freitas](https://github.com/willigfreitas) - Dev
 
 ### Metodológia Ágil
