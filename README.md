@@ -20,7 +20,9 @@ Aqui utilizamos metodológia ágeis: Scrum!
 A parte mais importante é realizar entregas contínuas de parte do softwares em funcionamento. Sem documentações longas, apenas o essencial. Reajuste de expectativas com o cliente continuamente.
 Visite nosso documento de definição do scrum, regras de contribuição.
 
-<a href="scrum.md"> Scrum da Equipe </a>
+[Scrum da equipe](scrum.md)
+
+[Como fazer Contribuir no Projeto. PullRequest? CodeReview? ](PR_CR.md)
 
 </div>
 
