@@ -6,6 +6,8 @@ Trabalho de API do 1º semestre da FATEC.
 
 [Clara Santos](https://github.com/ClaraSantosmf) - Dev
 
+[Danielle Mayumi Tamazato Santos](https://github.com/danitamazato) - Dev
+
 Eruano Rubens de Almeida - Dev
 
 [Marília Borgo](https://github.com/marilia-borgo) - Dev
