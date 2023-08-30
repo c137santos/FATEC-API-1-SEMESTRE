@@ -58,6 +58,8 @@ Visite nosso documento de definição do scrum, regras de contribuição.
         <td> 06/11 </td>
         <td> 26/11 </td>
     </tr>
+
+    tste dani
     <tr>
         <td> Feira de Soluções </td>
         <td> 12/12 </td>
