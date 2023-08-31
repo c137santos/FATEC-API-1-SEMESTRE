@@ -4,7 +4,11 @@ Trabalho de API do 1º semestre da FATEC.
 
 ### Equipe
 
+[Caio Augusto Palma](https://github.com/caiopalma) - Dev
+
 [Clara Santos](https://github.com/ClaraSantosmf) - Scrum Master (SM) e Dev
+
+[Danielle Mayumi Tamazato Santos](https://github.com/danitamazato) - Dev
 
 Eruano Rubens de Almeida - Dev
 
@@ -12,7 +16,7 @@ Eruano Rubens de Almeida - Dev
 
 [Mateus Soares](https://github.com/MateusMSoares) - Product Manager (PO) e Dev
 
-[Sara Nahra](https://github.com/sararobertnahra) - Dev
+[Sara Robert Nahra](https://github.com/sararobertnahra) - Dev
 
 [William Gomes de Freitas](https://github.com/willigfreitas) - Dev
 
@@ -57,9 +61,12 @@ Visite nosso documento de definição do scrum, regras de contribuição.
         <td> 06/11 </td>
         <td> 26/11 </td>
     </tr>
+
+    tste dani
     <tr>
         <td> Feira de Soluções </td>
         <td> 12/12 </td>
         <td> 12/12 </td>
     </tr>
+
 </table>
