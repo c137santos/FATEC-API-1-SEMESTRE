@@ -1,0 +1,8 @@
+site_name: Fatequinha
+nav:
+  - Home: index.md
+  - Documentação: documentacao.md
+  - Biblioteca: biblioteca.md
+theme:
+  name: mkdocs
+  nav_style: dark
