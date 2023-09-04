@@ -1,4 +1,5 @@
 from wsgiref.simple_server import make_server
+import pdb
 # Implementação do protocolo de comunicação entre o python e a web
 # WSGI - Web Server Gateway Interface
 # Esse padrão permitirá que o navegador possa executar nosso código para internet
@@ -43,10 +44,10 @@ def retorna_response(environ, start_response):
         Como o método HTTP, cabeçalhos, URL, parâmetros de consulta e outras informações relacionadas à solicitação.
         start_response (str): callback enviado pelo servidor para acionar a requisição
         """
+    start_response("200 OK", [])
     url = environ.get('PATH_INFO', "/")
     view = url_match(url)
     response = view(None)
-    start_response(response.status, [])
     return response
 
 # 'PATH_INFO' é uma das chaves no dicionário environ. 
@@ -54,6 +55,6 @@ def retorna_response(environ, start_response):
 # ou seja, a parte do caminho da URL que segue a barra (/). 
 # Por exemplo, para a URL "http://example.com/pagina", 'PATH_INFO' conteria "/pagina".
 
-server = make_server("127.0.0.1", 8080, retorna_response)
-server.serve_forever()
-
+if __name__ == '__main__':
+    server = make_server("127.0.0.1", 8080, retorna_response)
+    server.serve_forever()
