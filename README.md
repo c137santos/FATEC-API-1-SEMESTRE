@@ -61,3 +61,10 @@ Para acessar a documentação do projeto, fique a vontade para ver nosso site.
     </tr>
 
 </table>
+
+<h1> Primeira Sprint </h1>
+
+**Planning**
+
+* Entregas:
+- Instalar e configurar um formatador de código (black?)
