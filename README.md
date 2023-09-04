@@ -20,18 +20,11 @@ Eruano Rubens de Almeida - Dev
 
 [William Gomes de Freitas](https://github.com/willigfreitas) - Dev
 
-### Metodológia Ágil
+### Documentação do projeto
 
-<div>
-Aqui utilizamos metodológia ágeis: Scrum!
-A parte mais importante é realizar entregas contínuas de parte do softwares em funcionamento. Sem documentações longas, apenas o essencial. Reajuste de expectativas com o cliente continuamente.
-Visite nosso documento de definição do scrum, regras de contribuição.
+Para acessar a documentação do projeto, fique a vontade para ver nosso site. 
 
-[Scrum da equipe](scrum.md)
-
-[Como fazer Contribuir no Projeto. PullRequest? CodeReview? ](PR_CR.md)
-
-</div>
+[Documentação FATEC API](https://github.com/ClaraSantosmf/FATEC-API-1S-DOCUMENTS
 
 #### Prazos
 
@@ -61,8 +54,6 @@ Visite nosso documento de definição do scrum, regras de contribuição.
         <td> 06/11 </td>
         <td> 26/11 </td>
     </tr>
-
-    tste dani
     <tr>
         <td> Feira de Soluções </td>
         <td> 12/12 </td>
