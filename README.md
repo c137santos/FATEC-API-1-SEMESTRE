@@ -24,7 +24,7 @@ Eruano Rubens de Almeida - Dev
 
 Para acessar a documentação do projeto, fique a vontade para ver nosso site. 
 
-[Documentação FATEC API](https://github.com/ClaraSantosmf/FATEC-API-1S-DOCUMENTS
+[Documentação FATEC API](https://github.com/ClaraSantosmf/FATEC-API-1S-DOCUMENTS)
 
 #### Prazos
 
