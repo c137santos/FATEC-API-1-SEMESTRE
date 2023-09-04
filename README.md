@@ -6,7 +6,7 @@ Trabalho de API do 1º semestre da FATEC.
 
 [Caio Augusto Palma](https://github.com/caiopalma) - Dev
 
-[Clara Santos](https://github.com/ClaraSantosmf) - Dev
+[Clara Santos](https://github.com/ClaraSantosmf) - Scrum Master (SM) e Dev
 
 [Danielle Mayumi Tamazato Santos](https://github.com/danitamazato) - Dev
 
@@ -21,6 +21,7 @@ Eruano Rubens de Almeida - Dev
 [William Gomes de Freitas](https://github.com/willigfreitas) - Dev
 
 ### Metodológia Ágil
+
 <div>
 Aqui utilizamos metodológia ágeis: Scrum!
 A parte mais importante é realizar entregas contínuas de parte do softwares em funcionamento. Sem documentações longas, apenas o essencial. Reajuste de expectativas com o cliente continuamente.
@@ -67,4 +68,5 @@ Visite nosso documento de definição do scrum, regras de contribuição.
         <td> 12/12 </td>
         <td> 12/12 </td>
     </tr>
+
 </table>
