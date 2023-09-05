@@ -1,5 +1,6 @@
 from wsgiref.simple_server import make_server
-import pdb
+import json
+
 # Implementação do protocolo de comunicação entre o python e a web
 # WSGI - Web Server Gateway Interface
 # Esse padrão permitirá que o navegador possa executar nosso código para internet
@@ -20,19 +21,75 @@ class HttpResponse:
         __iter__(self): Permite tornar o objeto iterável
     """
 
-    def __init__(self, header, body, content_type, status) -> None:
-        self.header = header
-        self.body = body
-        self.content_type = content_type
+    def __init__(
+    self,
+    content="",
+    status="200 OK",
+    headers={},
+    content_type="text/html;charset=UTF-8",
+    ):
+        self.content = content
         self.status = status
+        self.headers = headers 
+        self.headers["content-type"] = content_type
 
     def __iter__(self):
-        """
-        Permite o body ser interável
-        """
-        yield self.body.encode("utf-8")
-    
+        # iterável que será escrito no body do response
+        yield self.content.encode("utf-8")
 ## Função retorna um response dado o request
+
+class JsonResponse():
+    """
+    JSON é o formato JavaScript Object Notation.
+    Formato de dados leve e fácil de ler usado para transmitir dados 
+    estruturados entre um servidor e um cliente. Amplamente utilizado
+    em APIs para transmitir informações. Importante a diferença entre
+    resposta JSON e resposta HTTP
+     
+    Methods:
+        __init__ (self, header, body, content_type, status): Inicializa a instância HTTP
+        __iter__(self): Permite tornar o objeto iterável
+            
+    """
+    def __init__(self, content="{}", status="200 OK",
+    headers={}, content_type="application/json"):
+        self.content = json.dumps(content)
+        self.status = status
+        self.headers = headers
+        self.headers["content-type"] = content_type
+    
+    def __iter__(self):
+        # iterável que será escrito no body do response
+        yield self.content.encode("utf-8")
+
+class HTTPRequest:
+    def __init__(self, environ):
+        self.method = environ.get("REQUEST_METHOD", "GET")
+        # URL
+        self.path = environ.get("PATH_INFO", "/")
+        # 'PATH_INFO' é uma das chaves no dicionário environ. 
+        # Ela contém a parte da URL da solicitação após o nome do domínio e a porta, 
+        # ou seja, a parte do caminho da URL que segue a barra (/). 
+        # Por exemplo, para a URL "http://example.com/pagina", 'PATH_INFO' conteria "/pagina".
+        self.query_string = environ.get("QUERY_STRING", "")
+        self.content_type = environ.get("CONTENT_TYPE", "")
+        # Por padrão os headers começam com HTTP_
+        # retira o HTTP_ e deixa tudo em minúscilo
+        self.headers = {
+            key[5:].lower(): value
+            for key, value in environ.items()
+            if key.startswith("HTTP_")
+        }
+        self.environ = environ
+        try:
+            request_body_size = int(environ.get("CONTENT_LENGTH", 0))
+        except ValueError:
+            request_body_size = 0
+
+        # lê o corpo do request HTTP
+        self.body = environ["wsgi.input"].read(request_body_size).decode("utf-8")
+
+
 
 def retorna_response(environ, start_response):
     from urls import url_match
@@ -44,17 +101,13 @@ def retorna_response(environ, start_response):
         Como o método HTTP, cabeçalhos, URL, parâmetros de consulta e outras informações relacionadas à solicitação.
         start_response (str): callback enviado pelo servidor para acionar a requisição
         """
-    start_response("200 OK", [])
-    url = environ.get('PATH_INFO', "/")
-    view = url_match(url)
-    response = view(None)
+    request = HTTPRequest(environ)
+    view = url_match(request.path)
+    response = view(request)
+    start_response(response.status, list(response.headers.items()))
     return response
 
-# 'PATH_INFO' é uma das chaves no dicionário environ. 
-# Ela contém a parte da URL da solicitação após o nome do domínio e a porta, 
-# ou seja, a parte do caminho da URL que segue a barra (/). 
-# Por exemplo, para a URL "http://example.com/pagina", 'PATH_INFO' conteria "/pagina".
-
 if __name__ == '__main__':
+    print(f"🚀 Servidor HTTP rodando! 🚀 \n Acesse o servidor em: localhost:8080")
     server = make_server("127.0.0.1", 8080, retorna_response)
     server.serve_forever()

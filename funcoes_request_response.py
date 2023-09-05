@@ -1,6 +1,10 @@
-from wgsi import HttpResponse
+from wgsi import HttpResponse, JsonResponse
+from regra_de_negocio.service import busca_dados_json
 
 def hola_mundinho(request):
-   response  =  HttpResponse({}, "hey mundinho", "", "200 OK")
+   return HttpResponse("Olá Mundo")
 
-   return response
+def get_arquivos_json(request):
+   dados = busca_dados_json()
+   return JsonResponse(dados)
+
