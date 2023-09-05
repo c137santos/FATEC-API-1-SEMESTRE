@@ -38,7 +38,7 @@ class HttpResponse:
         yield self.content.encode("utf-8")
 ## Função retorna um response dado o request
 
-class JsonResponse(HttpResponse):
+class JsonResponse():
     """
     Adicionar aqui a difereça entre http response e json response
     Atributos: 
@@ -53,6 +53,10 @@ class JsonResponse(HttpResponse):
         self.status = status
         self.headers = headers
         self.headers["content-type"] = content_type
+    
+    def __iter__(self):
+        # iterável que será escrito no body do response
+        yield self.content.encode("utf-8")
 
 class HTTPRequest:
     def __init__(self, environ):
