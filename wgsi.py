@@ -40,11 +40,15 @@ class HttpResponse:
 
 class JsonResponse():
     """
-    Adicionar aqui a difereça entre http response e json response
-    Atributos: 
+    JSON é o formato JavaScript Object Notation.
+    Formato de dados leve e fácil de ler usado para transmitir dados 
+    estruturados entre um servidor e um cliente. Amplamente utilizado
+    em APIs para transmitir informações. Importante a diferença entre
+    resposta JSON e resposta HTTP
      
     Methods:
         __init__ (self, header, body, content_type, status): Inicializa a instância HTTP
+        __iter__(self): Permite tornar o objeto iterável
             
     """
     def __init__(self, content="{}", status="200 OK",
