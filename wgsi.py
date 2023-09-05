@@ -24,12 +24,12 @@ class HttpResponse:
     self,
     content="",
     status="200 OK",
-    headers=None,
+    headers={},
     content_type="text/html;charset=UTF-8",
     ):
         self.content = content
         self.status = status
-        self.headers = headers or {}
+        self.headers = headers 
         self.headers["content-type"] = content_type
 
     def __iter__(self):
@@ -47,10 +47,10 @@ class JsonResponse(HttpResponse):
             
     """
     def __init__(self, content="{}", status="200 OK",
-    headers=None, content_type="application/json"):
+    headers={}, content_type="application/json"):
         self.content = json.dumps(content)
         self.status = status
-        self.headers = headers or {}
+        self.headers = headers
         self.headers["content-type"] = content_type
 
 class HTTPRequest:
