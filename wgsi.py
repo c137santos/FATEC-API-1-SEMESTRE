@@ -1,5 +1,6 @@
 from wsgiref.simple_server import make_server
 import json
+
 # Implementação do protocolo de comunicação entre o python e a web
 # WSGI - Web Server Gateway Interface
 # Esse padrão permitirá que o navegador possa executar nosso código para internet
@@ -99,5 +100,6 @@ def retorna_response(environ, start_response):
     return response
 
 if __name__ == '__main__':
+    print(f"🚀 Servidor HTTP rodando! 🚀 \n Acesse o servidor em: localhost:8080")
     server = make_server("127.0.0.1", 8080, retorna_response)
     server.serve_forever()
