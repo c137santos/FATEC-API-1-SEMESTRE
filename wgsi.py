@@ -32,6 +32,7 @@ class HttpResponse:
         self.status = status
         self.headers = headers 
         self.headers["content-type"] = content_type
+        self.headers["access-control-allow-origin"] = "*"
 
     def __iter__(self):
         # iterável que será escrito no body do response

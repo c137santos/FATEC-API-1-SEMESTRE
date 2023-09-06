@@ -8,16 +8,12 @@
 </body>
 </html>
 <script>
-    let variavel;
-    
     async function inicializando() {
         console.log("Clicou no botão");
         debugger;
-        
         try {
             const response = await fetch('http://127.0.0.1:8080/'); // Substitua 'sua-rota-aqui' pela rota correta da sua API
-            variavel = await response.json();
-            console.log(variavel);
+            await console.log(response);
         } catch (error) {
             variavel = console.error("Erro ao buscar dados da API:", error);
         }
