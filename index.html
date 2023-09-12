@@ -4,18 +4,28 @@
     <title>Comunicação FrontEnd e Backend</title>
 </head>
 <body>
-    <button onclick="inicializando()">Botão</button>
+    <button onclick="inicializando()">Busca textos do tipo HttpResponse</button>
+    <button onclick="testando_json_data()">Buscas json()</button>
 </body>
 </html>
 <script>
     async function inicializando() {
-        console.log("Clicou no botão");
-        debugger;
         try {
             const response = await fetch('http://127.0.0.1:8080/'); // Substitua 'sua-rota-aqui' pela rota correta da sua API
-            await console.log(response);
+            const data = await response.text()
+            console.log("Capturado o text retornado" + data)
         } catch (error) {
-            variavel = console.error("Erro ao buscar dados da API:", error);
+            variavel = console.error("Erro ao buscar dados da API -> ", error);
+        }
+    }
+    async function testando_json_data() {
+        try {
+            const response = await fetch('http://127.0.0.1:8080/get_json'); // Substitua 'sua-rota-aqui' pela rota correta da sua API
+            debugger
+            const data = await response.json()
+            console.log("Capturado o text retornado", data)
+        } catch (error) {
+            variavel = console.error("Erro ao buscar dados da API -> ", error);
         }
     }
 </script>

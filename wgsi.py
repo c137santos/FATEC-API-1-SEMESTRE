@@ -37,7 +37,7 @@ class HttpResponse:
     def __iter__(self):
         # iterável que será escrito no body do response
         yield self.content.encode("utf-8")
-## Função retorna um response dado o request
+        ## Função retorna um response dado o request
 
 class JsonResponse():
     """
@@ -58,6 +58,7 @@ class JsonResponse():
         self.status = status
         self.headers = headers
         self.headers["content-type"] = content_type
+        self.headers["access-control-allow-origin"] = "*"
     
     def __iter__(self):
         # iterável que será escrito no body do response
@@ -89,7 +90,6 @@ class HTTPRequest:
 
         # lê o corpo do request HTTP
         self.body = environ["wsgi.input"].read(request_body_size).decode("utf-8")
-
 
 
 def retorna_response(environ, start_response):
