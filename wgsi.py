@@ -98,9 +98,9 @@ def retorna_response(environ, start_response):
     Essa é a função desenhada no padrão WSGI. Recebe request do navegador e gera response adequado.
 
     Args:
-        environ (dict): Conteúdo preenchido pelo servidor. 
-        Como o método HTTP, cabeçalhos, URL, parâmetros de consulta e outras informações relacionadas à solicitação.
-        start_response (str): callback enviado pelo servidor para acionar a requisição
+        environ (dict): Conteúdo preenchido pelo servidor. Como o método HTTP, cabeçalhos, URL,
+        parâmetros de consulta e outras informações relacionadas à solicitação.
+        start_response (str): callback enviado pelo servidor para acionar a requisição.
         """
     request = HTTPRequest(environ)
     view = url_match(request.path)
