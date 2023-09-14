@@ -1,14 +1,16 @@
 {
     "1": {
         "aluno": 1,
-        "primeira_parcial": 10,
-        "segundaparcial": 8,
-        "media": 3
+        "turma": 1,
+        "valor": 8,
+        "peso": 3,
+        "periodo":3
     },
     "2": {
         "aluno": 2,
-        "primeira_parcial": 10,
-        "segundaparcial": 8,
-        "media": 3
+        "turma": 1,
+        "valor": 8,
+        "peso": 3,
+        "periodo":3
     }
 }
