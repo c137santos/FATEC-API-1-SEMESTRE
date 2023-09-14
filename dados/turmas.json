@@ -1,0 +1,10 @@
+{
+    "1": {
+        "nome": "turma1",
+        "curso":1 
+    },
+    "2": {
+        "nome": "Turma da manhã",
+        "curso":2 
+    }
+}

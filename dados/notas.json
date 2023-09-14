@@ -1,0 +1,14 @@
+{
+    "1": {
+        "aluno": 1,
+        "primeira_parcial": 10,
+        "segundaparcial": 8,
+        "media": 3
+    },
+    "2": {
+        "aluno": 2,
+        "primeira_parcial": 10,
+        "segundaparcial": 8,
+        "media": 3
+    }
+}
