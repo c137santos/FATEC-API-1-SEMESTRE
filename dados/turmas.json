@@ -1,14 +1,12 @@
 {
     "1": {
         "nome": "turma1",
-        "quantia_de_sprint": 4,
-        "dias_na_sprints": 15,
-        "professor": "Nadalete"
+        "professor": "Nadalete",
+        "data_de_inicio":"21/02/2023"
     },
     "2": {
         "nome": "Turma da manhã",
-        "quantia_de_sprint": 4,
-        "dias_na_sprints": 15,
-        "professor": "Gorete"
+        "professor": "Gorete",
+        "data_de_inicio":"21/02/2023"
     }
 }
