@@ -1,10 +1,14 @@
 {
     "1": {
         "nome": "turma1",
-        "curso":1 
+        "quantia_de_sprint": 4,
+        "dias_na_sprints": 15,
+        "professor": "Nadalete"
     },
     "2": {
         "nome": "Turma da manhã",
-        "curso":2 
+        "quantia_de_sprint": 4,
+        "dias_na_sprints": 15,
+        "professor": "Gorete"
     }
 }
