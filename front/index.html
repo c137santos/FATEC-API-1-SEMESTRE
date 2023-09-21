@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="style/sakura.css" type="text/css">
     <title>Comunicação FrontEnd e Backend</title>
 </head>
 <body>
@@ -9,7 +10,7 @@
 </body>
 </html>
 <script>
-    async function inicializando() {
+    async function inicializando() {    
         try {
             const response = await fetch('http://127.0.0.1:8080/'); // Substitua 'sua-rota-aqui' pela rota correta da sua API
             const data = await response.text()
