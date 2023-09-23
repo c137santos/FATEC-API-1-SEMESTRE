@@ -6,13 +6,14 @@ Trabalho de API do 1º semestre da FATEC.
 
 | Integrantes | Redes Sociais |
 |-------|--------|
-|Caio Augusto Palma ![Static Badge](https://img.shields.io/badge/Dev-black)|![Static Badge](https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black&link=https://github.com/caiopalma)|
-|Clara Santos ![Static Badge](https://img.shields.io/badge/Scrum_master-pink)![Static Badge](https://img.shields.io/badge/Dev-black)|![Static Badge](https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black&link=https://github.com/ClaraSantosmf)|
-|Danielle Mayumi Tamazato Santos ![Static Badge](https://img.shields.io/badge/Dev-black) |![Static Badge](https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black&link=https://github.com/danitamazato) |
-|Eruano Rubens de ALmeida ![Static Badge](https://img.shields.io/badge/Dev-black)|![Static Badge](https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black&link=https://github.com)|
-|Marília Borgo de Moraes ![Static Badge](https://img.shields.io/badge/Dev-black)|![Static Badge](https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black&link=https://github.com/marilia-borgo)|
-|Mateus Soares ![Static Badge](https://img.shields.io/badge/Product_owner-blue)![Static Badge](https://img.shields.io/badge/Dev-black) |![Static Badge](https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black&link=https://github.com/MateusMSoares)|
-|Sara Robert Nara ![Static Badge](https://img.shields.io/badge/Dev-black) |![Static Badge](https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black&link=https://github.com/willigfreitas)|
+|Caio Augusto Palma ![Static Badge](https://img.shields.io/badge/Dev-black)|<a href="https://github.com/caiopalma" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
+|Clara Santos ![Static Badge](https://img.shields.io/badge/Scrum_master-pink)![Static Badge](https://img.shields.io/badge/Dev-black)|<a href="https://github.com/ClaraSantosmf" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
+|Danielle Mayumi Tamazato Santos ![Static Badge](https://img.shields.io/badge/Dev-black) |<a href="https://github.com/danitamazato" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
+|Eruano Rubens de ALmeida ![Static Badge](https://img.shields.io/badge/Dev-black)|<a href="www.github.com" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
+|Marília Borgo de Moraes ![Static Badge](https://img.shields.io/badge/Dev-black)|<a href="https://github.com/marilia-borgo" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
+|Mateus Soares ![Static Badge](https://img.shields.io/badge/Product_owner-blue)![Static Badge](https://img.shields.io/badge/Dev-black) |<a href="https://github.com/MateusMSoares" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
+|Sara Robert Nara ![Static Badge](https://img.shields.io/badge/Dev-black) |<a href="https://github.com/sararobertnahra" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
+|William Gomes de Freitas ![Static Badge](https://img.shields.io/badge/Dev-black) |<a href="https://github.com/willigfreitas" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
 
 ### Tema
 Desenvolver uma solução para a instituição de ensino PBLTex, especializada em cursos práticas de ensino aplicando PBL(Problem Based Learning), para construir um sistema de informação direcionado para a gestão e acompanhamento de scores de alunos.
