@@ -78,20 +78,7 @@ Para acessar a documentação do projeto, fique a vontade para ver nosso site.
 # Produto
 
 ### Tecnologias e Ferramentas Utilizadas
-<table border="1 px">
-    <tr>
-        <td> Python</td>
-    </tr>
-    <tr>
-        <td> Git </td>
-    </tr>
-    <tr>
-        <td> Excalidraw </td>
-    </tr>
-    <tr>
-        <td> Html </td>
-    </tr>
-</table>
+![alt text](/imgs_readme/tecnologias_api.png)
 
 ### Configurando e rodando o projeto localmente
 [Como rodar o projeto localmente](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/biblioteca/#como-configurar-o-projeto)
