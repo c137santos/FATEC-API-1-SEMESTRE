@@ -7,7 +7,7 @@ Trabalho de API do 1º semestre da FATEC.
 | Integrantes | Redes Sociais |
 |-------|--------|
 |Caio Augusto Palma ![Static Badge](https://img.shields.io/badge/Dev-black)|<a href="https://github.com/caiopalma" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
-|Clara Santos ![Static Badge](https://img.shields.io/badge/Scrum_master-pink)![Static Badge](https://img.shields.io/badge/Dev-black)|<a href="https://github.com/ClaraSantosmf" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
+|Maria Clara Freitas Santos ![Static Badge](https://img.shields.io/badge/Scrum_master-pink)![Static Badge](https://img.shields.io/badge/Dev-black)|<a href="https://github.com/ClaraSantosmf" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
 |Danielle Mayumi Tamazato Santos ![Static Badge](https://img.shields.io/badge/Dev-black) |<a href="https://github.com/danitamazato" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
 |Eruano Rubens de ALmeida ![Static Badge](https://img.shields.io/badge/Dev-black)|<a href="www.github.com" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
 |Marília Borgo de Moraes ![Static Badge](https://img.shields.io/badge/Dev-black)|<a href="https://github.com/marilia-borgo" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
@@ -16,7 +16,7 @@ Trabalho de API do 1º semestre da FATEC.
 |William Gomes de Freitas ![Static Badge](https://img.shields.io/badge/Dev-black) |<a href="https://github.com/willigfreitas" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
 
 ### Tema
-Desenvolver uma solução para a instituição de ensino PBLTex, especializada em cursos práticas de ensino aplicando PBL(Problem Based Learning), para construir um sistema de informação direcionado para a gestão e acompanhamento de scores de alunos.
+Desenvolver uma solução para a instituição de ensino PBLTex, especializada em cursos práticas de ensino aplicando PBL(Problem Based Learning), que consiste em construir um sistema de informação direcionado para a gestão e acompanhamento de scores de alunos.
 
 ### Objetivos 
   Desenvolvimento de uma solução computacional que exercite a capacidade de pesquisa e autodidaxia dos integrantes dos grupos, no que tange:
@@ -99,7 +99,7 @@ Para acessar a documentação do projeto, fique a vontade para ver nosso site.
 
 ### Requisitos Funcionais
 - Linguagem de programação Python e tecnologias relacionadas.
-- Uso de bases de dados simples, dentre as opções: Arquivo(Text, cSV, Json ou outros formatos) ou ZODB.
+- Uso de bases de dados simples, dentre as opções: Arquivo(Text, CSV, Json ou outros formatos) ou ZODB.
 - Sistema de controle de versão de código (Git)
 - Documentações
 
