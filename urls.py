@@ -2,14 +2,17 @@ import funcoes_request_response as view
 from wgsi import JsonResponse
 import re
 
+
 def URL(pattern):
-    return re.sub(r':(\w+)', r'(?P<\1>[^/]+)', pattern) + '$'
-#Essa função tem objetivo de compreender os IDs que são passados na URL por meio da aplicação de regex. 
+    return re.sub(r":(\w+)", r"(?P<\1>[^/]+)", pattern) + "$"
+
+
+# Essa função tem objetivo de compreender os IDs que são passados na URL por meio da aplicação de regex.
 
 URLS = {
-    URL("/") : view.hola_mundinho,
+    URL("/"): view.hola_mundinho,
     URL("/get_json"): view.get_arquivos_json,
-    URL('/api/v1/alunos/:id/edit'): view.edit_aluno,
+    URL("/api/v1/alunos/:id/edit"): view.edit_aluno,
 }
 
 
