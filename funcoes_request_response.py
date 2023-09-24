@@ -8,3 +8,5 @@ def get_arquivos_json(request):
    dados = busca_dados_json()
    return JsonResponse(dados)
 
+def edit_aluno(request, id):
+    return JsonResponse({"message": f"Editando o aluno com ID {id}."})
