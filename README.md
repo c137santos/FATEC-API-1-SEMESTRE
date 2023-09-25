@@ -72,7 +72,7 @@ Para acessar a documentação do projeto, fique a vontade para ver nosso site.
 </table>
 
 ### Priorização das Sprints
-O Kanbam utilizado possui quatro colunas, onde backlog geral do projeto se encontra em aba de backlog, o da sprint que está sendo executada na ana de priorizado, os que estão em execução em doing e os feitos em done. 
+O Kanbam utilizado possui quatro colunas. Backlog geral do projeto se encontra em aba de backlog. As tasks priorizada para a sprint que está ocorrendo na aba Priorizado. As task em execução estão na aba Coding, e as tasks já finalizadas na aba Done. 
 
 [Board Kanbam com a priorização](https://github.com/users/ClaraSantosmf/projects/5)
 
