@@ -1,8 +1,10 @@
 # FATEC-API-1-SEMESTRE
 
 Trabalho de API do 1º semestre da FATEC.
+## Tema
+Desenvolver uma solução para a instituição de ensino PBLTex, especializada em cursos práticas de ensino aplicando PBL(Problem Based Learning), que consiste em construir um sistema de informação direcionado para a gestão e acompanhamento de scores de alunos.
 
-# Equipe
+### Equipe
 
 | Integrantes | Redes Sociais |
 |-------|--------|
@@ -14,9 +16,6 @@ Trabalho de API do 1º semestre da FATEC.
 |Mateus Soares ![Static Badge](https://img.shields.io/badge/Product_owner-blue)![Static Badge](https://img.shields.io/badge/Dev-black) |<a href="https://github.com/MateusMSoares" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
 |Sara Robert Nara ![Static Badge](https://img.shields.io/badge/Dev-black) |<a href="https://github.com/sararobertnahra" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
 |William Gomes de Freitas ![Static Badge](https://img.shields.io/badge/Dev-black) |<a href="https://github.com/willigfreitas" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
-
-### Tema
-Desenvolver uma solução para a instituição de ensino PBLTex, especializada em cursos práticas de ensino aplicando PBL(Problem Based Learning), que consiste em construir um sistema de informação direcionado para a gestão e acompanhamento de scores de alunos.
 
 ### Objetivos 
   Desenvolvimento de uma solução computacional que exercite a capacidade de pesquisa e autodidaxia dos integrantes dos grupos, no que tange:
@@ -73,14 +72,32 @@ Para acessar a documentação do projeto, fique a vontade para ver nosso site.
 </table>
 
 ### Priorização das Sprints
+O Kanbam utilizado possui quatro colunas, onde backlog geral do projeto se encontra em aba de backlog, o da sprint que está sendo executada na ana de priorizado, os que estão em execução em doing e os feitos em done. 
+
 [Board Kanbam com a priorização](https://github.com/users/ClaraSantosmf/projects/5)
+
+[Aqui se encontra os detalhamentos dos épicos](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epicos) que será desenvolvdo ao longo de todo o projeto.
+
+Nos hiperlinks, você pode encontrar as tasks detalhadas da próxima sprint. 
+
+| Prioridade | Épicos planejados | Sprint 
+| ------------- | ------------- | ------------- 
+| Alta | [ **Gerenciamento de Turmas:**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-1-exportacao-de-dados)  | [#2]  | 
+| Alta |  [**Global Settings**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-2-gerenciamento-de-turmas)  | [#2]  | 
+| Alta | **Gerenciamento de grupo** | [#3]  |
+| Alta | **Gerenciamento de alunos** | [#3]  |
+| Média | **Gerenciamento de Ciclos de Entrega e Scores:** | [#4] |
+| Média | **Importação massiva de daos** | [#4] |
+| Baixa | **Visibilidade e Acompanhamento (relatório)**| [#4] |
+| Baixa | **Carga massiva de Alunos**| [#4] |
+
 
 # Produto
 
 ### Tecnologias e Ferramentas Utilizadas
 ![alt text](/imgs_readme/tecnologias_api.png)
 
-### Configurando e rodando o projeto localmente
+### Como configurar e rodar o projeto localmente
 [Como rodar o projeto localmente](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/biblioteca/#como-configurar-o-projeto)
 
 ### Wireframe do Produto
@@ -102,6 +119,3 @@ Para acessar a documentação do projeto, fique a vontade para ver nosso site.
 - Uso de bases de dados simples, dentre as opções: Arquivo(Text, CSV, Json ou outros formatos) ou ZODB.
 - Sistema de controle de versão de código (Git)
 - Documentações
-
-### Tecnologias Adicionais
-- Uso adicional de outras linguagens de programação (desenvolvimento poliglota).
