@@ -77,6 +77,30 @@ O Kanbam utilizado possui quatro colunas. Backlog geral do projeto se encontra e
 
 [Board Kanbam com a priorização](https://github.com/users/ClaraSantosmf/projects/5)
 
+Ao abrir os cards do kanbam será possível ver a priorização no lado direito como um dos atributos dos cards, com as seguintes nomenclaturas.
+
+Legenda Priorização:
+<table border="1 px">
+    <tr>
+        <th> Tipo </th>
+        <th> Representação </th>
+    </tr>
+    <tr>
+        <td>Tarefas que entregarão maior valor de negócio </td>
+        <td>🔴prioridade-máxima</td>
+    </tr>
+     <tr>
+        <td>Tarefas que entregarão valor de negócio médio </td>
+        <td>🟠prioridade-média</td>
+    </tr>
+     <tr>
+        <td>Tarefas que entregarão valor baixo de negócio</td>
+        <td>🟡prioridade-baixa</td>
+    </tr>
+</table>
+
+Obs: Os cards na coluna "priorizado" são os cards escolhidos para serem feitos na próxima sprint. 
+
 [Aqui se encontra os detalhamentos dos épicos](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epicos) que será desenvolvdo ao longo de todo o projeto.
 
 Nos hiperlinks, você pode encontrar as tasks detalhadas da próxima sprint. 
@@ -115,7 +139,7 @@ Nos hiperlinks, você pode encontrar as tasks detalhadas da próxima sprint.
 - O SI deve permitir a exportação de dados consolidados, computados e métricas inferidas.
 - O SI deve prover visibilidades objetivas e diretas que possibilitem o acompanhamento dos cursos providos pela PBLTeX.
 
-### Requisitos Funcionais
+### Requisitos Não Funcionais
 - Linguagem de programação Python e tecnologias relacionadas.
 - Uso de bases de dados simples, dentre as opções: Arquivo(Text, CSV, Json ou outros formatos) ou ZODB.
 - Sistema de controle de versão de código (Git)
