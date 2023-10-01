@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciamento de Turma</title>
+    <link rel="stylesheet" href="../front/style/gerenciamento_turmas.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">Logo aqui</div>
+      <div class="dots">...</div>
+    </header>
+    <h1 class="title">Gerenciamento de Turmas:</h1>
+    <div class="turma-container">
+      <div class="flex-warp-container">
+        <!-- As turmas serão adicionadas automaticamente aqui -->
+      </div>
+    </div>
+    <button class="add-turma-button">Adicionar Turma</button>
+    <script>
+      // verifica click
+      document.addEventListener("DOMContentLoaded", function () {
+        const turmaContainer = document.querySelector(".turma-container");
+
+        turmaContainer.addEventListener("click", function (event) {
+          const target = event.target;
+
+          // Verifique se o clique ocorreu em um ícone de deletar
+          if (target.classList.contains("trash-icon")) {
+            event.stopPropagation(); // Impede a propagação do clique para o turma-square
+            const turmaId = target.id; // informa qual o id responsavel pela turma
+            alert(`Cliquei no ícone de deletar da turma com ID: ${turmaId}`);
+          } else if (target.classList.contains("turma-square")) {
+            const turmaId = target.id; // informa qual o id responsavel pela turma
+            alert(`Cliquei no turma-square com ID: ${turmaId}`);
+          }
+        });
+      });
+
+      //requicicao http
+      async function inicializando() {
+        try {
+          const response = await fetch(
+            "http://127.0.0.1:8080/gerenciamento_turmas"
+          );
+          const data = await response.json();
+          console.log(data);
+
+          // insere turmas automaticamente
+          // Seleciona o elemento onde deseja inserir as turmas
+          const container = document.querySelector(".flex-warp-container");
+
+          // Itera sobre os objetos do JSON e cria elementos HTML para cada turma
+          for (const turmaId in data) {
+            if (data.hasOwnProperty(turmaId)) {
+              const turma = data[turmaId];
+
+              const turmaSquare = document.createElement("div");
+              turmaSquare.className = "turma-square";
+              turmaSquare.id = `turma-${turmaId}`; // adiciona o ID da turma ao turmaSquare
+
+              const nomeTurma = document.createElement("p");
+              nomeTurma.textContent = `Nome da Turma: ${turma.nome}`;
+
+              const nomeProfessor = document.createElement("p");
+              nomeProfessor.textContent = `Professor: ${turma.professor}`;
+
+              turmaSquare.appendChild(nomeTurma);
+              turmaSquare.appendChild(nomeProfessor);
+
+              const imagemIcon = document.createElement("img");
+              imagemIcon.src = "../front/icon/trash-icon.svg"; // Substitua pelo caminho correto da imagem
+              imagemIcon.alt = "Ícone";
+              imagemIcon.className = "trash-icon";
+              imagemIcon.width = 20;
+              imagemIcon.height = 20;
+              imagemIcon.id = `turma-${turmaId}`; // adiciona o ID da turma ao icone de deletar
+
+              // Adiciona a imagem à "turma-square"
+              turmaSquare.appendChild(imagemIcon);
+
+              // Adiciona a turmaSquare ao container
+              container.appendChild(turmaSquare);
+            }
+          }
+        } catch (error) {
+          console.error("Erro ao buscar dados da API -> ", error);
+        }
+      }
+
+      inicializando();
+    </script>
+  </body>
+</html>

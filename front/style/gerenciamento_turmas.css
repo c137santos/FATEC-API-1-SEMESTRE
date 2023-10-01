@@ -1,0 +1,119 @@
+/* Adicione Normalize.css */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.header {
+  background-color: #3498db;
+  text-align: left;
+  padding: 10px 0; /* Adicione espaçamento apenas na parte superior e inferior */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 20px; /* Adicione espaçamento à esquerda */
+  color: #fff;
+}
+
+.dots {
+  font-size: 24px;
+  margin-right: 20px; /* Adicione espaçamento à direita */
+  color: #fff;
+}
+
+.title {
+  font-size: 30px;
+  color: #000;
+  margin: 40px 20px;
+  text-align: center; /* Centralizar horizontalmente */
+}
+
+.turma-container {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border: 1px solid #ccc; /* Adicione uma borda sutil */
+  border-radius: 5px;
+  width: 800px;
+  min-height: 600px;
+  max-height: 600px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flex-warp-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 13px;
+}
+
+.turma-square {
+  position: relative;
+  width: calc(25% - 10px);
+  height: 150px;
+  background-color: #e74c3c;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.turma-square p {
+  font-size: 15px;
+  margin: 2px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.trash-icon {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 20px; /* Defina a largura desejada para o ícone */
+  height: 20px; /* Defina a altura desejada para o ícone */
+  fill: #fff; /* Defina a cor do ícone como branco ou a cor desejada */
+  cursor: pointer; /* Mudar o cursor para indicar que é clicável */
+}
+
+.turma-square:hover {
+  background-color: #258cd1; /* Cor de fundo ao passar o mouse */
+  color: #fff; /* Cor do texto ao passar o mouse */
+}
+
+.add-turma-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  align-self: center;
+}
+
+.add-turma-button:hover {
+  background-color: #258cd1; /* Cor de fundo ao passar o mouse */
+  color: #fff; /* Cor do texto ao passar o mouse */
+}
