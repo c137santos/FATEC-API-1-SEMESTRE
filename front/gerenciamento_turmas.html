@@ -26,14 +26,16 @@
         turmaContainer.addEventListener("click", function (event) {
           const target = event.target;
 
-          // Verifique se o clique ocorreu em um ícone de deletar
-          if (target.classList.contains("trash-icon")) {
-            event.stopPropagation(); // Impede a propagação do clique para o turma-square
-            const turmaId = target.id; // informa qual o id responsavel pela turma
-            alert(`Cliquei no ícone de deletar da turma com ID: ${turmaId}`);
-          } else if (target.classList.contains("turma-square")) {
-            const turmaId = target.id; // informa qual o id responsavel pela turma
-            alert(`Cliquei no turma-square com ID: ${turmaId}`);
+          // Verifique se o clique ocorreu em um ícone de deletar ou dentro do turma-square
+          const turmaSquare = target.closest(".turma-square");
+          if (turmaSquare) {
+            const turmaId = turmaSquare.id; // adiciona o id
+            if (target.classList.contains("trash-icon")) {
+              event.stopPropagation();
+              alert(`Cliquei no ícone de deletar do turma com ID: ${turmaId}`);
+            } else if (target.classList.contains("turma-square")) {
+              alert(`Cliquei no turma-square com ID: ${turmaId}`);
+            }
           }
         });
       });
