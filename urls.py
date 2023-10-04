@@ -13,7 +13,10 @@ URLS = {
     URL("/"): view.hola_mundinho,
     URL("/get_json"): view.get_arquivos_json,
     URL("/api/v1/alunos/:id/edit"): view.edit_aluno,
-    URL("/gerenciamento_turmas"): view.tela_gerenciar_turmas
+    URL("/get/turmas"): view.get_turmas,
+    URL("/get/grupos"): view.get_grupos,
+    URL("/get/grupo_alunos"): view.get_grupo_alunos,
+    URL("/get/alunos"): view.get_alunos
 }
 
 

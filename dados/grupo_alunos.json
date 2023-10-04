@@ -1,11 +1,8 @@
 {
-    "1":{
-        "grupo":1
-    },
-    "2":{
-        "grupo":2
-    }
+  "1": {
+    "grupo": 1
+  },
+  "2": {
+    "grupo": 2
+  }
 }
-
-
-//a chave é o id do aluno

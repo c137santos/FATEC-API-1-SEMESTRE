@@ -1,9 +1,10 @@
 {
-    "1":{
-        "turma":1
-    },
-    "2":{
-        "turma":2
-    }
+  "1": {
+    "turma": 1,
+    "nome": "team bee"
+  },
+  "2": {
+    "turma": 2,
+    "nome": "team tatata"
+  }
 }
-
