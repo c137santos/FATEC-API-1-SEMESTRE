@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background-color: #7b9df2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: rgb(15, 10, 10);
+            text-align: left; /* Alinha o texto à esquerda */
+        }
+
+        .header img {
+            margin-right: 10px; /* Adiciona um espaçamento à direita da imagem */
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .menu-button, .action-button {
+            background-color: #180305;
+            color: white;
+            border: 2px solid #220a11;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .menu-button:hover, .action-button:hover {
+            background-color: #e7e2ee;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="caminho/para/sua/imagem.jpg" alt="Logo" width="100">
+        
+    </div>
+
+    <div class="container">
+        <button class="menu-button">Turma</button>
+        <button class="menu-button">Aluno</button>
+        <button class="menu-button">Grupos</button>
+        <button class="menu-button">Global Settings</button>
+    </div>
+
+    <div class="container">
+        <button class="action-button">Importar Alunos</button>
+        <button class="action-button">Exportar Relatórios</button>
+    </div>
+</body>
+</html>
+
