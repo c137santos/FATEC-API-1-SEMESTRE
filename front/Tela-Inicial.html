@@ -58,7 +58,9 @@
     </div>
 
     <div class="container">
-        <button class="menu-button">Turma</button>
+        <button class="menu-button">
+            <a href="front/index.html">Turma</a>
+        </button>
         <button class="menu-button">Aluno</button>
         <button class="menu-button">Grupos</button>
         <button class="menu-button">Global Settings</button>
@@ -69,5 +71,16 @@
         <button class="action-button">Exportar Relatórios</button>
     </div>
 </body>
+<script>
+    // Obtém o elemento do botão pelo ID
+    var botao = document.getElementById("menu-button");
+
+    // Adiciona um ouvinte de evento para o clique no botão
+    botao.addEventListener("click", function() {
+        // Redireciona para a página desejada
+        window.location.href = "https://www.exemplo.com";
+    });
+</script>
+
 </html>
 
