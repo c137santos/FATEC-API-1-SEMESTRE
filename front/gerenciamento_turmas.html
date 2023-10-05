@@ -19,37 +19,40 @@
     </div>
     <button class="add-turma-button">Adicionar Turma</button>
     <script>
+      // Função que lida com o evento "DOMContentLoaded" e configura os ouvintes de eventos
       document.addEventListener("DOMContentLoaded", function () {
         const turmaContainer = document.querySelector(".turma-container");
-        // verifica click
+        // Verifica se ocorreu um clique em algum lugar dentro do elemento turmaContainer
         turmaContainer.addEventListener("click", function (event) {
           const target = event.target;
-
-          // Verifique se o clique ocorreu em um ícone de deletar ou dentro do turma-square
+          // Verifica se o clique ocorreu dentro de um elemento com a classe "turma-square"
           const turmaSquare = target.closest(".turma-square");
+
           if (turmaSquare) {
-            const turmaId = turmaSquare.id; // adiciona o id
+            const turmaId = turmaSquare.id; // Obtém o ID da turma
+
+            // Verifica se o clique ocorreu no ícone de lixeira ou no próprio "turma-square"
             if (target.classList.contains("trash-icon")) {
-              event.stopPropagation();
-              alert(`Cliquei no ícone de deletar do turma com ID: ${turmaId}`);
+              event.stopPropagation(); // Impede a propagação do evento
+              alert(`Cliquei no ícone de deletar da turma com ID: ${turmaId}`);
             } else if (target.classList.contains("turma-square")) {
               alert(`Cliquei no turma-square com ID: ${turmaId}`);
             }
-            getGrupos(turmaId);
+            ColetaInfoTurmaSelecionada(turmaId);
           }
         });
       });
-      //requisicao http para buscar turmas
+
+      // Função assíncrona para buscar e inserir informações sobre as turmas no DOM
       async function getTurmas() {
         try {
           const response = await fetch(
-            "http://127.0.0.1:8080/get/turmas" // busca turma
+            "http://127.0.0.1:8080/api/v1/turmas/get" // URL para buscar as turmas
           );
           const Turmadata = await response.json();
           console.log(Turmadata);
 
-          // insere turmas automaticamente
-          // Seleciona o elemento onde deseja inserir as turmas
+          // Seleciona o elemento onde as turmas serão inseridas
           const container = document.querySelector(".flex-warp-container");
 
           // Itera sobre os objetos do JSON e cria elementos HTML para cada turma
@@ -57,31 +60,35 @@
             if (Turmadata.hasOwnProperty(turmaId)) {
               const turma = Turmadata[turmaId];
 
+              // Cria um elemento div para representar uma turma
               const turmaSquare = document.createElement("div");
               turmaSquare.className = "turma-square";
-              turmaSquare.id = `${turmaId}`; // adiciona o ID da turma ao turmaSquare
+              turmaSquare.id = `${turmaId}`; // Adiciona o ID da turma ao turmaSquare
 
+              // Cria elementos de parágrafo para o nome da turma e nome do professor
               const nomeTurma = document.createElement("p");
               nomeTurma.textContent = `Nome da Turma: ${turma.nome}`;
 
               const nomeProfessor = document.createElement("p");
               nomeProfessor.textContent = `Professor: ${turma.professor}`;
 
+              // Adiciona os parágrafos ao turmaSquare
               turmaSquare.appendChild(nomeTurma);
               turmaSquare.appendChild(nomeProfessor);
 
+              // Cria um ícone de lixeira para deletar a turma
               const imagemIcon = document.createElement("img");
               imagemIcon.src = "../front/icon/trash-icon.svg"; // Substitua pelo caminho correto da imagem
               imagemIcon.alt = "Ícone";
               imagemIcon.className = "trash-icon";
               imagemIcon.width = 20;
               imagemIcon.height = 20;
-              imagemIcon.id = `${turmaId}`; // adiciona o ID da turma ao icone de deletar
+              imagemIcon.id = `${turmaId}`; // Adiciona o ID da turma ao ícone de deletar
 
-              // Adiciona a imagem à "turma-square"
+              // Adiciona o ícone ao turmaSquare
               turmaSquare.appendChild(imagemIcon);
 
-              // Adiciona a turmaSquare ao container
+              // Adiciona o turmaSquare ao container
               container.appendChild(turmaSquare);
             }
           }
@@ -89,53 +96,26 @@
           console.error("Erro ao buscar dados da API -> ", error);
         }
       }
-      async function getGrupos(turmaId) {
-        try {
-          const response = await fetch("http://127.0.0.1:8080/get/grupos");
-          const gruposData = await response.json();
-          console.log(gruposData);
 
-          for (const grupoId in gruposData) {
-            if (gruposData.hasOwnProperty(grupoId)) {
-              const grupo = gruposData[grupoId];
-              // Verifique se o grupo tem a turma com o ID desejado
-              if (grupo.turma == turmaId) {
-                const nomeGrupo = grupo.nome;
-                console.log(`ID do Grupo: ${grupoId}`);
-                console.log(`Nome do Grupo: ${nomeGrupo}`);
-                console.log(`Nome do Grupo: ${turmaId}`);
-              }
-            }
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      }
-      async function getAlunos() {
-        try {
-          const response = await fetch("http://127.0.0.1:8080/get/alunos");
-          const alunosData = await response.json();
-          console.log(alunosData);
-          // Faça algo com os dados, como exibir na interface do usuário.
-        } catch (error) {
-          console.error(error);
-        }
-      }
-      async function getGrupoAlunos() {
+      // Função assíncrona para coletar informações da turma selecionada
+      async function ColetaInfoTurmaSelecionada(turmaId) {
         try {
           const response = await fetch(
-            "http://127.0.0.1:8080/get/grupo_alunos"
+            `http://127.0.0.1:8080/api/v1/gerenciamento_turmas/${turmaId}/get`
           );
-          const grupolunosData = await response.json();
-          console.log(grupolunosData);
-          // Faça algo com os dados, como exibir na interface do usuário.
+
+          if (!response.ok) {
+            throw new Error(`Erro na solicitação: ${response.statusText}`);
+          }
+
+          const teste = await response.json();
+          console.log(teste);
         } catch (error) {
           console.error(error);
         }
       }
-      getTurmas();
-      getAlunos();
-      getGrupoAlunos();
+
+      getTurmas(); // Chama a função para buscar e exibir as turmas
     </script>
   </body>
 </html>
