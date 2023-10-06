@@ -1,0 +1,39 @@
+
+body {
+    font-family: Georgia, serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .header {
+    background-color: #333;
+    color: rgb(15, 10, 10);
+    text-align: left;
+    /* Alinha o texto à esquerda */
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+
+  .menu-button,
+  .action-button {
+    background-color: #180305;
+    color: white;
+    border: 2px solid #220a11;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .menu-button:hover,
+  .action-buttheaderon:hover {
+    background-color: #e7e2ee;
+  }
+
+  
+
+
