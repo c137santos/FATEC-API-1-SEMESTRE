@@ -65,11 +65,6 @@
       }
       // Função para exibir as turmas no DOM
       function exibirTurmas(Turmadata) {
-        if (Turmadata === null) {
-          // Lida com erros de busca
-          return;
-        }
-
         const container = document.querySelector(".flex-warp-container");
 
         // Itera sobre os objetos do JSON e cria elementos HTML para cada turma
