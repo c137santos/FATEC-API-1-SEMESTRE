@@ -6,11 +6,11 @@ def busca_dados_json():
         data = json.load(f)
         return data
     
-def  busca_turmas_json():
+def  busca_turmas_json(): #retorna todas turmas
     turmas_data = gt.busca_turmas()
     return turmas_data
     
-def busca_info_turmas_json(id):
+def busca_info_turmas_json(id): #retorna grupos e alunos de um turma_id
     grupos_data, alunos_data = gt.busca_info_turmas(id)
     return grupos_data, alunos_data
 

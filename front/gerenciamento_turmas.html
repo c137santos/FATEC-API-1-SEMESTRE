@@ -22,8 +22,10 @@
       // Função que lida com o evento "DOMContentLoaded" e configura os ouvintes de eventos
       document.addEventListener("DOMContentLoaded", function () {
         const turmaContainer = document.querySelector(".turma-container");
-        // Chama a função para buscar e exibir as turmas
+
+        // Chama a função para buscar turmas
         GetTurmas();
+
         // Verifica se ocorreu um clique em algum lugar dentro do elemento turmaContainer
         turmaContainer.addEventListener("click", function (event) {
           const target = event.target;
@@ -40,7 +42,7 @@
             } else if (target.classList.contains("turma-square")) {
               alert(`Cliquei no turma-square com ID: ${turmaId}`);
             }
-
+            // Função para coletar informações da turma selecionada
             ColetaInfoTurmaSelecionada(turmaId);
           }
         });
@@ -51,10 +53,11 @@
           const response = await fetch(
             "http://127.0.0.1:8080/api/v1/turmas/get" //
           );
-          const Turmadata = await response.json();
-          console.log(Turmadata);
+          const turma_Data = await response.json();
+          console.log(turma_Data);
+
           // Chama a função para exibir as turmas
-          exibirTurmas(Turmadata);
+          exibirTurmas(turma_Data);
         } catch (error) {
           console.error("Erro ao buscar dados da API -> ", error);
           return null;

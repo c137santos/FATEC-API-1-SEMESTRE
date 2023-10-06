@@ -25,7 +25,7 @@ def busca_alunos():
     return alunos_data
 
 
-# Esta função busca grupos de uma turma específica e os nomes dos alunos associados a esses grupos
+# Esta função busca grupos e alunos de uma turma específica
 def busca_info_turmas(id):
     grupos = busca_grupos_turma(id)
     alunos = busca_grupos_alunos(grupos)
