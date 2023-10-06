@@ -8,22 +8,22 @@ class TesteGerenciadorGrupos(unittest.TestCase):
     def teste_obter_todos_grupos(self):
         esperado =  {
                         "1":{
-                                "grupo":1
+                                "turma":1
                         },
                         "2":{
-                                "grupo":2
+                                "turma":2
                         }
                     }
-        erro, grupos = gt.obter_todos_grupos()
+        grupos = gt.obter_todos_grupos()
         self.assertEqual(esperado, grupos, "verifica a leitura e desserialização do arquivo grupos.json")
 
     def teste_obter_ultimo_id(self):
         semente =  {
                         "1":{
-                                "grupo":1
+                                "turma":1
                         },
                         "2":{
-                                "grupo":2
+                                "turma":2
                         }
                     }
         gt.salvar_grupos(semente)
@@ -34,10 +34,10 @@ class TesteGerenciadorGrupos(unittest.TestCase):
     def teste_obter_novo_id(self):
         semente =  {
                         "1":{
-                                "grupo":1
+                                "turma":1
                         },
                         "2":{
-                                "grupo":2
+                                "turma":2
                         }
                     }
         gt.salvar_grupos(semente)
@@ -48,80 +48,80 @@ class TesteGerenciadorGrupos(unittest.TestCase):
     def teste_salvar_grupos(self):
         esperado =  {
                         "1":{
-                                "grupo":1
+                                "turma":1
                         },
                         "2":{
-                                "grupo":2
+                                "turma":2
                         }
                     }
         gt.salvar_grupos(esperado)
-        erro, obtido = gt.obter_todos_grupos()
+        obtido = gt.obter_todos_grupos()
         self.assertEqual(esperado, obtido, "verifica se a inserção ou remoção foram salvos")
 
     def teste_remover_grupo(self):
         semente =  {
                         "1":{
-                                "grupo":1
+                                "turma":1
                         },
                         "2":{
-                                "grupo":2
+                                "turma":2
                         }
                     }
         gt.salvar_grupos(semente)
         gt.remover_grupo("2")
         esperado = {
                         "1":{
-                                "grupo":1
+                                "turma":1
                         }
                     }
-        erro, obtido = gt.obter_todos_grupos()
+        obtido = gt.obter_todos_grupos()
         self.assertEqual(esperado, obtido, "verifica se a remoção ocorreu")
     
     def teste_inserir_grupo(self):
         semente = {
                        "1":{
-                               "grupo":1
+                               "turma":1
                        },
                        "2":{
-                               "grupo":2
+                               "turma":2
                        }
                   }
         gt.salvar_grupos(semente)
-        gt.inserir_grupo("bee", 3)
+        gt.inserir_grupo("bee")
         esperado = {
                         "1":{
-                                "grupo":1
+                                "turma":1
                         },
                         "2":{
-                                "grupo":2
+                                "turma":2
                         },
                         "3":{
-                                "grupo":"bee"
+                                "turma":"bee"
                         }
                     }
-        erro, obtido = gt.obter_todos_grupos()
+        obtido = gt.obter_todos_grupos()
         self.assertEqual(esperado, obtido, "verifica se a inserção ocorreu")
     
     def teste_editar_grupos(self):
         semente =  {
                         "1":{
-                                "grupo":"bee"
+                                "turma":"bee"
                         },
                         "2":{
-                                "grupo":"abelha"
+                                "turma":"abelha"
                         }
                     }
         gt.salvar_grupos(semente)
         esperado = {
                         "1":{
-                                "grupo":"bee"
+                                "turma":"bee"
                         },
                         "2":{
-                                "grupo":"cat"
+                                "turma":"cat"
                         }
                     }
         gt.editar_grupos("2", "cat")
-        erro, obtido = gt.obter_todos_grupos()
+        obtido = gt.obter_todos_grupos()
         self.assertEqual(esperado, obtido, "verificar se as alterações foram salvas")
 
 if __name__ == '__main__':

@@ -18,7 +18,7 @@ class TesteGerenciadorTurmas(unittest.TestCase):
                             "data_de_inicio":"21/02/2023"
                         }
                     }
-        erro, turmas = gt.obter_todas_turmas()
+        turmas = gt.obter_todas_turmas()
         self.assertEqual(esperado, turmas, "verifica a leitura e desserialização do arquivo turmas.json")
 
     def teste_obter_ultimo_id(self):
@@ -71,7 +71,7 @@ class TesteGerenciadorTurmas(unittest.TestCase):
                         }
                     }
         gt.salvar_turmas(esperado)
-        erro, obtido = gt.obter_todas_turmas()
+        obtido = gt.obter_todas_turmas()
         self.assertEqual(esperado, obtido, "verifica se a inserção ou remoção foram salvos")
 
     def teste_remover_turma(self):
@@ -96,7 +96,7 @@ class TesteGerenciadorTurmas(unittest.TestCase):
                             "data_de_inicio":"21/02/2023"
                         }
                     }
-        erro, obtido = gt.obter_todas_turmas()
+        obtido = gt.obter_todas_turmas()
         self.assertEqual(esperado, obtido, "verifica se a remoção ocorreu")
     
     def teste_inserir_turma(self):
@@ -131,7 +131,7 @@ class TesteGerenciadorTurmas(unittest.TestCase):
                             "data_de_inicio":"21/02/2023"
                         }
                     }
-        erro, obtido = gt.obter_todas_turmas()
+        obtido = gt.obter_todas_turmas()
         self.assertEqual(esperado, obtido, "verifica se a inserção ocorreu")
     
     def teste_editar_turmas(self):
@@ -161,7 +161,7 @@ class TesteGerenciadorTurmas(unittest.TestCase):
                         }
                     }
         gt.editar_turmas("1", "turma7", "Nadaleta", "21/03/2023")
-        erro, obtido = gt.obter_todas_turmas()
+        obtido = gt.obter_todas_turmas()
         self.assertEqual(esperado, obtido, "verificar se as alterações foram salvas")
 
 if __name__ == '__main__':
