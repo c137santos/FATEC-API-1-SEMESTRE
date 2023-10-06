@@ -12,12 +12,9 @@ def URL(pattern):
 URLS = {
     URL("/"): view.hola_mundinho,
     URL("/get_json"): view.get_arquivos_json,
-    URL("/api/v1/alunos/:id/edit"): view.edit_aluno,
     URL("/api/v1/turmas/get"): view.get_turmas,
-    URL("/api/v1/grupos/get"): view.get_grupos,
-    URL("/api/v1/grupo_alunos/get"): view.get_grupo_alunos,
-    URL("/api/v1/alunos/get"): view.get_alunos,
-    URL("/api/v1/gerenciamento_turmas/:id/get"): view.get_grupos_alunos_turma
+    URL("/api/v1/alunos/:id/edit"): view.edit_aluno,
+    URL("/api/v1/get_grupos_alunos/:id/get"): view.get_grupos_alunos
 }
 
 

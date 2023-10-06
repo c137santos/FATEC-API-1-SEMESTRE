@@ -22,6 +22,8 @@
       // Função que lida com o evento "DOMContentLoaded" e configura os ouvintes de eventos
       document.addEventListener("DOMContentLoaded", function () {
         const turmaContainer = document.querySelector(".turma-container");
+        // Chama a função para buscar e exibir as turmas
+        GetTurmas();
         // Verifica se ocorreu um clique em algum lugar dentro do elemento turmaContainer
         turmaContainer.addEventListener("click", function (event) {
           const target = event.target;
@@ -38,62 +40,71 @@
             } else if (target.classList.contains("turma-square")) {
               alert(`Cliquei no turma-square com ID: ${turmaId}`);
             }
+
             ColetaInfoTurmaSelecionada(turmaId);
           }
         });
       });
 
-      // Função assíncrona para buscar e inserir informações sobre as turmas no DOM
-      async function getTurmas() {
+      async function GetTurmas() {
         try {
           const response = await fetch(
-            "http://127.0.0.1:8080/api/v1/turmas/get" // URL para buscar as turmas
+            "http://127.0.0.1:8080/api/v1/turmas/get" //
           );
           const Turmadata = await response.json();
           console.log(Turmadata);
-
-          // Seleciona o elemento onde as turmas serão inseridas
-          const container = document.querySelector(".flex-warp-container");
-
-          // Itera sobre os objetos do JSON e cria elementos HTML para cada turma
-          for (const turmaId in Turmadata) {
-            if (Turmadata.hasOwnProperty(turmaId)) {
-              const turma = Turmadata[turmaId];
-
-              // Cria um elemento div para representar uma turma
-              const turmaSquare = document.createElement("div");
-              turmaSquare.className = "turma-square";
-              turmaSquare.id = `${turmaId}`; // Adiciona o ID da turma ao turmaSquare
-
-              // Cria elementos de parágrafo para o nome da turma e nome do professor
-              const nomeTurma = document.createElement("p");
-              nomeTurma.textContent = `Nome da Turma: ${turma.nome}`;
-
-              const nomeProfessor = document.createElement("p");
-              nomeProfessor.textContent = `Professor: ${turma.professor}`;
-
-              // Adiciona os parágrafos ao turmaSquare
-              turmaSquare.appendChild(nomeTurma);
-              turmaSquare.appendChild(nomeProfessor);
-
-              // Cria um ícone de lixeira para deletar a turma
-              const imagemIcon = document.createElement("img");
-              imagemIcon.src = "../front/icon/trash-icon.svg"; // Substitua pelo caminho correto da imagem
-              imagemIcon.alt = "Ícone";
-              imagemIcon.className = "trash-icon";
-              imagemIcon.width = 20;
-              imagemIcon.height = 20;
-              imagemIcon.id = `${turmaId}`; // Adiciona o ID da turma ao ícone de deletar
-
-              // Adiciona o ícone ao turmaSquare
-              turmaSquare.appendChild(imagemIcon);
-
-              // Adiciona o turmaSquare ao container
-              container.appendChild(turmaSquare);
-            }
-          }
+          // Chama a função para exibir as turmas
+          exibirTurmas(Turmadata);
         } catch (error) {
           console.error("Erro ao buscar dados da API -> ", error);
+          return null;
+        }
+      }
+      // Função para exibir as turmas no DOM
+      function exibirTurmas(Turmadata) {
+        if (Turmadata === null) {
+          // Lida com erros de busca
+          return;
+        }
+
+        const container = document.querySelector(".flex-warp-container");
+
+        // Itera sobre os objetos do JSON e cria elementos HTML para cada turma
+        for (const turmaId in Turmadata) {
+          if (Turmadata.hasOwnProperty(turmaId)) {
+            const turma = Turmadata[turmaId];
+
+            // Cria um elemento div para representar uma turma
+            const turmaSquare = document.createElement("div");
+            turmaSquare.className = "turma-square";
+            turmaSquare.id = `${turmaId}`; // Adiciona o ID da turma ao turmaSquare
+
+            // Cria elementos de parágrafo para o nome da turma e nome do professor
+            const nomeTurma = document.createElement("p");
+            nomeTurma.textContent = `Nome da Turma: ${turma.nome}`;
+
+            const nomeProfessor = document.createElement("p");
+            nomeProfessor.textContent = `Professor: ${turma.professor}`;
+
+            // Adiciona os parágrafos ao turmaSquare
+            turmaSquare.appendChild(nomeTurma);
+            turmaSquare.appendChild(nomeProfessor);
+
+            // Cria um ícone de lixeira para deletar a turma
+            const imagemIcon = document.createElement("img");
+            imagemIcon.src = "../front/icon/trash-icon.svg"; // Substitua pelo caminho correto da imagem
+            imagemIcon.alt = "Ícone";
+            imagemIcon.className = "trash-icon";
+            imagemIcon.width = 20;
+            imagemIcon.height = 20;
+            imagemIcon.id = `${turmaId}`; // Adiciona o ID da turma ao ícone de deletar
+
+            // Adiciona o ícone ao turmaSquare
+            turmaSquare.appendChild(imagemIcon);
+
+            // Adiciona o turmaSquare ao container
+            container.appendChild(turmaSquare);
+          }
         }
       }
 
@@ -101,7 +112,7 @@
       async function ColetaInfoTurmaSelecionada(turmaId) {
         try {
           const response = await fetch(
-            `http://127.0.0.1:8080/api/v1/gerenciamento_turmas/${turmaId}/get`
+            `http://127.0.0.1:8080/api/v1/get_grupos_alunos/${turmaId}/get`
           );
 
           if (!response.ok) {
@@ -114,8 +125,6 @@
           console.error(error);
         }
       }
-
-      getTurmas(); // Chama a função para buscar e exibir as turmas
     </script>
   </body>
 </html>
