@@ -4,7 +4,7 @@
   --text-main: #363636;
   --text-bright: #000;
   --text-muted: #70777f;
-  --links: #0076d1;
+  --links: black;
   --focus: #0096bfab;
   --border: #dbdbdb;
   --code: #000;
@@ -23,14 +23,13 @@
 
 body {
   background: rgb(206,76,101);
-  background: linear-gradient(90deg, rgba(206,76,101,1) 0%, rgba(181,80,143,1) 35%, rgba(155,108,235,1) 100%);
+  background: linear-gradient(90deg, rgba(206,76,101,1) 0%, rgba(181,80,143,1) 35%, rgb(154, 107, 235) 100%);
 }
 
 body {
   position: relative;
   height: 1500px; /* Apenas para criar espaço suficiente para rolar a página */
 }
-
 .muleke {
 background-color: transparent;
 width:  130px;
@@ -39,3 +38,17 @@ bottom: 0;
 right: 0;
 }
 
+/*
+header {
+  width: 100vw;
+  display: flex;
+  justify-content: right;
+  height: 100px;
+}
+
+header img {
+  border: 1px solid red;
+  width: 250px;
+  padding: 0;
+  height: 200px;
+}
