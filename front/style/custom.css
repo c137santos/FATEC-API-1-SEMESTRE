@@ -38,7 +38,6 @@ bottom: 0;
 right: 0;
 }
 
-/*
 header {
   width: 100vw;
   display: flex;
@@ -47,8 +46,8 @@ header {
 }
 
 header img {
-  border: 1px solid red;
-  width: 250px;
+  border: 1px solid transparent;
+  width: 350px;
   padding: 0;
-  height: 200px;
+  height: 75px;
 }
