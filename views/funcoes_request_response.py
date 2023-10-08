@@ -1,5 +1,5 @@
 from wgsi import HttpResponse, JsonResponse
-from regra_de_negocio.service import busca_dados_json, busca_info_turmas_json, busca_turmas_json
+from regra_de_negocio.service import busca_dados_json, busca_info_turmas_json, busca_turmas_json, busca_grupo_semTurma
 
 def hola_mundinho(request):
     return HttpResponse("Olá Mundo")
@@ -24,3 +24,13 @@ def get_grupos_alunos(request, id):
     }
     # Passo 3: Retorna uma resposta JSON contendo os dados organizados
     return JsonResponse(response_data)
+
+def grupo_semTurma(request):
+    grupos_Data, grupo_semTurma_data = busca_grupo_semTurma()
+    response_data = {
+        "grupos_data": grupos_Data,
+        "grupo_semTurma_data": grupo_semTurma_data
+    }
+    return JsonResponse(response_data)
+    
+

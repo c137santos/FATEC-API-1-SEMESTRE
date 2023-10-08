@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gerenciamento de Turma</title>
     <link rel="stylesheet" href="../front/style/gerenciamento_turmas.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <title>Bootstrap Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
   </head>
   <body>
     <header class="header">
@@ -17,6 +22,38 @@
         <!-- As turmas serão adicionadas automaticamente aqui -->
       </div>
     </div>
+    <!-- Modal de Criação de Turma -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Criar Turma</h2>
+        <!-- Formulário para criar uma turma -->
+    <div class="form-floating mb-3">
+      <input
+        type="email"
+        class="form-control"
+        id="floatingInput"
+        placeholder="name@example.com"
+      />
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input
+        type="password"
+        class="form-control"
+        id="floatingPassword"
+        placeholder="Password"
+      />
+      <label for="floatingPassword">Password</label>
+    </div>
+        <!-- Exibir grupos sem turmas associadas -->
+        <h3>Grupos:</h3>
+        <ul id="gruposSemTurmaList">
+          <!-- Grupos serão adicionados automaticamente aqui -->
+        </ul>
+      </div>
+    </div>
+
     <button class="add-turma-button">Adicionar Turma</button>
     <script>
       // Função que lida com o evento "DOMContentLoaded" e configura os ouvintes de eventos
@@ -35,13 +72,6 @@
           if (turmaSquare) {
             const turmaId = turmaSquare.id; // Obtém o ID da turma
 
-            // Verifica se o clique ocorreu no ícone de lixeira ou no próprio "turma-square"
-            if (target.classList.contains("trash-icon")) {
-              event.stopPropagation(); // Impede a propagação do evento
-              alert(`Cliquei no ícone de deletar da turma com ID: ${turmaId}`);
-            } else if (target.classList.contains("turma-square")) {
-              alert(`Cliquei no turma-square com ID: ${turmaId}`);
-            }
             // Função para coletar informações da turma selecionada
             ColetaInfoTurmaSelecionada(turmaId);
           }
@@ -63,10 +93,10 @@
           return null;
         }
       }
+
       // Função para exibir as turmas no DOM
       function exibirTurmas(Turmadata) {
         const container = document.querySelector(".flex-warp-container");
-
         // Itera sobre os objetos do JSON e cria elementos HTML para cada turma
         for (const turmaId in Turmadata) {
           if (Turmadata.hasOwnProperty(turmaId)) {
@@ -122,6 +152,45 @@
         } catch (error) {
           console.error(error);
         }
+      }
+
+      // Função para mostrar o modal
+      function showModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+        // Chame a função para buscar os grupos sem turmas e adicione-os à lista no modal
+        fetch("http://127.0.0.1:8080/api/v1/grupo_semTurma/get")
+          .then((response) => response.json())
+          .then((data) => {
+            var gruposSemTurmaList =
+              document.getElementById("gruposSemTurmaList");
+
+            // Limpe a lista existente (caso haja)
+            gruposSemTurmaList.innerHTML = "";
+
+            for (const grupo in data.grupos_data) {
+              if (data.grupos_data.hasOwnProperty(grupo)) {
+                const grupoNome = data.grupos_data[grupo].nome;
+                const listItem = document.createElement("li");
+                listItem.textContent = grupoNome;
+                gruposSemTurmaList.appendChild(listItem);
+              }
+            }
+            console.log(data.grupos_data);
+          })
+          .catch((error) => {
+            console.error("Erro ao buscar grupos sem turmas: " + error);
+          });
+      }
+
+      // Adicionar um evento de clique ao botão "Adicionar Turma" para mostrar o modal
+      var addTurmaButton = document.querySelector(".add-turma-button");
+      addTurmaButton.addEventListener("click", showModal);
+
+      // Função para fechar o modal
+      function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
       }
     </script>
   </body>

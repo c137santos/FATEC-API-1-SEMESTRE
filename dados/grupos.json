@@ -10,5 +10,9 @@
   "3": {
     "turma": 1,
     "nome": "team barbuleta"
+  },
+  "4": {
+    "turma": 0,
+    "nome": "strangers"
   }
 }

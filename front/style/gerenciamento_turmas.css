@@ -15,7 +15,7 @@ body {
 .header {
   background-color: #3498db;
   text-align: left;
-  padding: 10px 0; /* Adicione espaçamento apenas na parte superior e inferior */
+  padding: 5px 0; /* Adicione espaçamento apenas na parte superior e inferior */
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -38,7 +38,7 @@ body {
 .title {
   font-size: 30px;
   color: #000;
-  margin: 40px 20px;
+  margin: 20px 20px;
   text-align: center; /* Centralizar horizontalmente */
 }
 
@@ -48,7 +48,7 @@ body {
   border: 1px solid #ccc; /* Adicione uma borda sutil */
   border-radius: 5px;
   width: 800px;
-  min-height: 600px;
+  min-height: 400px;
   max-height: 600px;
   overflow-y: auto;
   display: flex;
@@ -116,4 +116,80 @@ body {
 .add-turma-button:hover {
   background-color: #258cd1; /* Cor de fundo ao passar o mouse */
   color: #fff; /* Cor do texto ao passar o mouse */
+}
+
+/* Estilo para o conteúdo do modal */
+.modal-content {
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 900px;
+  /* max-width: 900px; Largura máxima do modal */
+  height: 450px;
+}
+
+/* Estilo para o botão de fechar */
+.close {
+  position: absolute;
+  top: 1px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 50px;
+  color: #333;
+}
+
+.modal-content h2 {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Estilo para o título do modal */
+.modal-content h3 {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Estilo para o formulário e seus elementos */
+#createTurmaForm {
+  display: grid; /* Use um layout de grid */
+  grid-template-columns: repeat(2, 1fr); /* Duas colunas iguais */
+  margin: 0;
+  padding: 0;
+}
+
+#createTurmaForm label {
+  grid-column: 1; /* Coloque o rótulo na primeira coluna */
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+#createTurmaForm input[type="text"] {
+  grid-column: 2; /* Coloque o campo de entrada na segunda coluna */
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilo para a lista de grupos sem turmas */
+#gruposSemTurmaList {
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#gruposSemTurmaList li {
+  margin-bottom: 5px;
+  font-size: 16px;
 }
