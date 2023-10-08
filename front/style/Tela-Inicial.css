@@ -47,6 +47,6 @@ body {
   .menu-button:hover,
   .action-buttheaderon:hover {
     background-color: transparent;
+    box-shadow: 0 0 50px 20px rgb(154, 104, 241); /* Adiciona um brilho quando o botão é hover */
   }
-/* add cod da cor roxa , pegar no canvas */
   

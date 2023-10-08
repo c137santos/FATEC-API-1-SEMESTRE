@@ -10,7 +10,7 @@
   --code: #000;
   --animation-duration: 0.1s;
   --button-base: #573636;
-  --button-hover: #9b9b9b;
+  --button-hover: #9A68F1;
   --scrollbar-thumb: color-mod(var(--button-hover) lightness(+6%));
   --scrollbar-thumb-hover: var(--button-hover);
   --form-placeholder: #949494;
@@ -24,6 +24,17 @@
 body {
   background: rgb(206,76,101);
   background: linear-gradient(90deg, rgba(206,76,101,1) 0%, rgba(181,80,143,1) 35%, rgb(154, 107, 235) 100%);
+}
+
+.background-alt {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../imagens/Fundo.png') no-repeat center center / cover;
+    z-index: -1;
 }
 
 body {
