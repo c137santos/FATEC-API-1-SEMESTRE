@@ -23,7 +23,7 @@
 
 body {
   background: rgb(206,76,101);
-  background: linear-gradient(90deg, rgba(206,76,101,1) 0%, rgba(181,80,143,1) 35%, rgb(154, 107, 235) 100%);
+  background: linear-gradient(90deg, #D24D5D 0%, #A952A3 30%, #9A68F1 100%);
 }
 
 .background-alt {
