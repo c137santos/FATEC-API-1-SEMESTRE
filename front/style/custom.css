@@ -9,7 +9,7 @@
   --border: #dbdbdb;
   --code: #000;
   --animation-duration: 0.1s;
-  --button-base: #573636;
+  --button-base: #ffffff;
   --button-hover: #9A68F1;
   --scrollbar-thumb: color-mod(var(--button-hover) lightness(+6%));
   --scrollbar-thumb-hover: var(--button-hover);
@@ -28,7 +28,13 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: space;
-}body {
+}
+
+body {
+  font-family:'Roboto', sans-serif "
+}
+
+body {
   position: relative;
   height: 1500px; /* Apenas para criar espaço suficiente para rolar a página */
 }
