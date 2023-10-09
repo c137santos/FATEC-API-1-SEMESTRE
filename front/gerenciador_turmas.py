@@ -10,12 +10,12 @@ def busca_turmas():
 def busca_grupos():
     with open("dados/grupos.json", "r", encoding="utf-8") as f:
         grupo_data = json.load(f)
-        grupo_semTurma = {}
+        grupo_sem_Turma = {}
         for grupoId, info_grupo in grupo_data.items():
             if info_grupo["turma"] == int(0):
                 nome_grupo = info_grupo["nome"]
-                grupo_semTurma[grupoId] = nome_grupo
-    return grupo_data, grupo_semTurma
+                grupo_sem_Turma[grupoId] = nome_grupo
+    return grupo_data, grupo_sem_Turma
 
 # Esta função busca informações sobre os grupos de alunos a partir de um arquivo JSON e as retorna
 def busca_grupo_alunos():
@@ -33,13 +33,13 @@ def busca_alunos():
 # Esta função busca grupos e alunos de uma turma específica
 def busca_info_turmas(id):
     grupos = busca_grupos_turma(id)
-    alunos_grupo = busca_grupos_alunos(grupos)
+    alunos_grupo = busca_alunos_grupos(grupos)
     alunos = busca_info_alunos(alunos_grupo)
     return grupos, alunos
 
 # Esta função busca grupos de uma turma específica
 def busca_grupos_turma(id):
-    grupo_data_raw, grupo_semTurma = busca_grupos()  # Buscar dados brutos dos grupos
+    grupo_data_raw, grupo_sem_Turma = busca_grupos()  # Buscar dados brutos dos grupos
     grupo_data = {}  # Dicionário para armazenar grupos
     for grupo_id, grupo_info in grupo_data_raw.items():
         if grupo_info["turma"] == int(id):  # Verificar se o grupo pertence à turma especificada
@@ -48,7 +48,7 @@ def busca_grupos_turma(id):
     return grupo_data  # Retornar os grupos
 
 # Esta função busca alunos associados a grupos
-def busca_grupos_alunos(grupos):
+def busca_alunos_grupos(grupos):
     grupos_alunos_data_raw = busca_grupo_alunos()  # Buscar dados brutos de alunos e seus respectivos grupos
     alunos = []
     grupos =  grupos.keys()
