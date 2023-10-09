@@ -118,78 +118,71 @@ body {
   color: #fff; /* Cor do texto ao passar o mouse */
 }
 
-/* Estilo para o conteúdo do modal */
+/* Estilos para o modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
 .modal-content {
   background-color: #fff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 60%;
+  margin: 100px auto;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 900px;
-  /* max-width: 900px; Largura máxima do modal */
-  height: 450px;
+  position: relative;
 }
 
-/* Estilo para o botão de fechar */
 .close {
   position: absolute;
-  top: 1px;
+  top: 10px;
   right: 10px;
+  font-size: 24px;
   cursor: pointer;
-  font-size: 50px;
-  color: #333;
 }
 
-.modal-content h2 {
+/* Estilos para o formulário e seus campos */
+.form-container {
   display: flex;
-  justify-content: center;
-  font-size: 20px;
-  margin-bottom: 10px;
+  flex-direction: column;
 }
 
-/* Estilo para o título do modal */
-.modal-content h3 {
+.data-content {
   display: flex;
-  justify-content: center;
-  font-size: 20px;
+  flex-direction: row; /* Alinhar os campos na horizontal */
+  flex-wrap: wrap; /* Permite quebrar para a próxima linha se não couberem na largura */
+  gap: 10px; /* Espaço entre os campos */
+}
+
+.input-field {
+  width: 150px;
+  padding: 10px;
   margin-bottom: 10px;
-}
-
-/* Estilo para o formulário e seus elementos */
-#createTurmaForm {
-  display: grid; /* Use um layout de grid */
-  grid-template-columns: repeat(2, 1fr); /* Duas colunas iguais */
-  margin: 0;
-  padding: 0;
-}
-
-#createTurmaForm label {
-  grid-column: 1; /* Coloque o rótulo na primeira coluna */
-  margin-bottom: 10px;
-  font-weight: bold;
-  font-size: 15px;
-}
-
-#createTurmaForm input[type="text"] {
-  grid-column: 2; /* Coloque o campo de entrada na segunda coluna */
-  padding: 8px;
-  margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-/* Estilo para a lista de grupos sem turmas */
-#gruposSemTurmaList {
-  display: block;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+h2 {
+  text-align: center;
 }
 
-#gruposSemTurmaList li {
-  margin-bottom: 5px;
-  font-size: 16px;
+/* Estilos para a lista de grupos */
+h3 {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-container input {
+  margin-right: 10px;
 }
