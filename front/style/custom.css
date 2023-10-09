@@ -22,28 +22,20 @@
 }
 
 body {
-  background: rgb(206,76,101);
-  background: linear-gradient(90deg, #D24D5D 0%, #A952A3 30%, #9A68F1 100%);
-}
-
-.background-alt {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('../imagens/Fundo.png') no-repeat center center / cover;
-    z-index: -1;
-}
-
-body {
+  background-image:url('../imagens/Fundo.png'), linear-gradient(90deg, #D24D5D 0%, #A952A3 30%, #9A68F1 100%);
+  background-color: rgb(206, 76, 101);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: space;
+}body {
   position: relative;
   height: 1500px; /* Apenas para criar espaço suficiente para rolar a página */
 }
+
 .muleke {
 background-color: transparent;
-width:  130px;
+width:  150px;
 position: fixed;
 bottom: 0;
 right: 0;
