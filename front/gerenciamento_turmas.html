@@ -62,10 +62,11 @@
           const trashIcon = target.closest(".trash-icon")
           if (target.classList.contains("trash-icon")) {
             console.log("Deletar turma", trashIcon.id + "?");
+            deletarTurmaSelecionada(trashIcon.id)
           } else {
             console.log("ID da Turma Clicada:", turmaSquare.id);
 
-            ColetaInfoTurmaSelecionada(turmaSquare.id);
+            coletaInfoTurmaSelecionada(turmaSquare.id);
           }
 
         });
@@ -130,7 +131,7 @@
       }
 
       // Função assíncrona para coletar informações da turma selecionada
-      async function ColetaInfoTurmaSelecionada(turmaId) {
+      async function coletaInfoTurmaSelecionada(turmaId) {
         try {
           const response = await fetch(
             `http://127.0.0.1:8080/api/v1/get_grupos_alunos/${turmaId}/get`
@@ -145,6 +146,18 @@
         } catch (error) {
           console.error(error);
         }
+      }
+
+      async function deletarTurmaSelecionada(turmaId){
+        try {
+          const response = await fetch (
+            `http://127.0.0.1:8080/api/v1/delete_turma/${turmaId}/delete`
+          )
+
+        } catch (error) {
+          console.error(error);
+        }
+        
       }
 
       // Função para mostrar o modal

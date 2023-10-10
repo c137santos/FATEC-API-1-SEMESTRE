@@ -110,7 +110,8 @@ body {
 
 .modal-content {
   background-color: #fff;
-  width: 60%;
+  width: 40%;
+  height: 500px;
   margin: 100px auto;
   padding: 20px;
   border-radius: 5px;
