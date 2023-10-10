@@ -1,7 +1,7 @@
 # FATEC-API-1-SEMESTRE
 
 Trabalho de API do 1º semestre da FATEC.
-## Tema
+
 Desenvolver uma solução para a instituição de ensino PBLTex, especializada em cursos práticas de ensino aplicando PBL(Problem Based Learning), que consiste em construir um sistema de informação direcionado para a gestão e acompanhamento de scores de alunos.
 
 ### Equipe

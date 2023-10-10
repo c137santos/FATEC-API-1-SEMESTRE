@@ -16,88 +16,18 @@
         <!-- As turmas serão adicionadas automaticamente aqui -->
       </div>
     </div>
-    <!-- Modal de Criação de Turma -->
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-          <span class="close" onclick="closeModal()">&times;</span>
-          <h2>Criar Turma</h2>
-          
-          <!-- Formulário para criar uma turma -->
-          <div class="form-container">
-            <div id="turmaForm" class="data-content">
-              <label for="turmaNome">Nome da turma:</label>
-              <input type="text" id="turmaNome" class="input-field" />
-  
-              <label for="professor">Professor responsável:</label>
-              <input type="text" id="professor" class="input-field" />
-  
-              <label for="dataInicio">Data de início:</label>
-              <input type="date" id="dataInicio" class="input-field" />
-            </div>
-              <h3>Grupos:</h3>
-              <div class="mostra-grupos">
-                <ul id="gruposSemTurmaList">
-                    <!-- Grupos serão adicionados automaticamente aqui -->
-                </ul>
-              </div>
-              <button class="submit-turma">Criar turma</button>
-          </div>
-      </div>
-  </div>
-    <button class="add-turma-button">Adicionar Turma</button>
-
     <script>
-      // Função que lida com o evento "DOMContentLoaded" e configura os ouvintes de eventos
-      document.addEventListener("DOMContentLoaded", function () {
-        const turmaContainer = document.querySelector(".turma-container");
-
-        // Chama a função para buscar turmas
-        GetTurmas();
-
-        // Verifica se ocorreu um clique em algum lugar dentro do elemento turmaContainer
-        turmaContainer.addEventListener("click", function (event) {
-          const target = event.target;
-
-          // Verifica se o clique ocorreu no turma-square ou no trash-icon
-          const turmaSquare = target.closest(".turma-square");
-          const trashIcon = target.closest(".trash-icon")
-          if (target.classList.contains("trash-icon")) {
-            console.log("Deletar turma", trashIcon.id + "?");
-            deletarTurmaSelecionada(trashIcon.id)
-          } else {
-            console.log("ID da Turma Clicada:", turmaSquare.id);
-
-            coletaInfoTurmaSelecionada(turmaSquare.id);
-          }
-
-        });
-           // Adicionar um evento de clique ao botão "Adicionar Turma" para mostrar o modal
-          const addTurmaButton = document.querySelector(".add-turma-button");
-          addTurmaButton.addEventListener("click", showModal);
-          
-          // Adiciona evento para o click de "criar turma" e enviar dados para o backend
-          const criarTurma = document.querySelector(".submit-turma")
-
-          criarTurma.addEventListener("click", function(event){
-            // Capturar os valores dos campos do formulário
-            const turmaNome = document.getElementById("turmaNome").value;
-            const professor = document.getElementById("professor").value;
-            const dataInicio = document.getElementById("dataInicio").value;
-
-          })
-
-      });
-
+      GetTurmas()
       async function GetTurmas() {
         try {
           const response = await fetch(
-            "http://127.0.0.1:8080/api/v1/turmas/get" //
+            "http://127.0.0.1:8080/api/v1/turmas/get"
           );
-          const turma_Data = await response.json();
-          console.log(turma_Data);
+          const turmaData = await response.json();
+          console.log(turmaData);
 
           // Chama a função para exibir as turmas
-          exibirTurmas(turma_Data);
+          exibirTurmas(turmaData);
         } catch (error) {
           console.error("Erro ao buscar dados da API -> ", error);
           return null;
@@ -144,87 +74,6 @@
             container.appendChild(turmaSquare);
           }
         }
-      }
-
-      // Função assíncrona para coletar informações da turma selecionada
-      async function coletaInfoTurmaSelecionada(turmaId) {
-        try {
-          const response = await fetch(
-            `http://127.0.0.1:8080/api/v1/get_grupos_alunos/${turmaId}/get`
-          );
-
-          if (!response.ok) {
-            throw new Error(`Erro na solicitação: ${response.statusText}`);
-          }
-
-          const teste = await response.json();
-          console.log(teste);
-        } catch (error) {
-          console.error(error);
-        }
-      }
-
-      async function deletarTurmaSelecionada(turmaId){
-        try {
-          const response = await fetch (
-            `http://127.0.0.1:8080/api/v1/delete_turma/${turmaId}/delete`
-          )
-
-        } catch (error) {
-          console.error(error);
-        }
-        
-      }
-
-      // Função para mostrar o modal
-      function showModal() {
-        var modal = document.getElementById("myModal");
-        modal.style.display = "block";
-        // Chame a função para buscar os grupos sem turmas e adicione-os à lista no modal
-        fetch("http://127.0.0.1:8080/api/v1/grupo_semTurma/get")
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data)
-            var gruposSemTurmaList =
-              document.getElementById("gruposSemTurmaList");
-
-            // Limpe a lista existente (caso haja)
-            gruposSemTurmaList.innerHTML = "";
-
-            for (const grupo in data.grupos_data) {
-              if (data.grupos_data.hasOwnProperty(grupo) && data.grupos_data[grupo].turma == 0) {
-                const grupoNome = data.grupos_data[grupo].nome;
-                console.log("ID:", grupo);
-                console.log("Nome:", grupoNome);
-
-                    // Criar um checkbox para cada grupo
-                    const checkbox = document.createElement("input");
-                    checkbox.type = "checkbox";
-                    checkbox.id = grupo; // ID único para cada checkbox
-                    checkbox.classList = "checkbox";
-
-                    // Criar uma label para o checkbox
-                    const label = document.createElement("label");
-                    label.setAttribute("for", checkbox.id);
-                    label.textContent = grupoNome;
-
-                    // Adicionar o checkbox e a label à lista
-                    const listItem = document.createElement("li");
-                    listItem.appendChild(checkbox);
-                    listItem.appendChild(label);
-                    gruposSemTurmaList.appendChild(listItem);
-                }
-            }
-        })
-          .catch((error) => {
-            console.error("Erro ao buscar grupos sem turmas: " + error);
-          });
-      }
-
-      // Função para fechar o modal
-      function closeModal() {
-        var modal = document.getElementById("myModal");
-        modal.style.display = "none";
       }
     </script>
   </body>
