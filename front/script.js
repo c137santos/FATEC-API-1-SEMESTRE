@@ -1,6 +1,6 @@
 function redirecionarParaPagina(id) {
     if (id === 'turma') {
-        window.location.href = 'index.html';
+        window.location.href = 'gerenciamento_turmas.html';
     } else if (id === 'aluno') {
         window.location.href = 'pagina-aluno.html';
     } else if (id === 'grupos') {
