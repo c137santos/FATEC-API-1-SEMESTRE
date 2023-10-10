@@ -35,6 +35,7 @@
               <input type="text" id="dataInicio" class="input-field" />
             </div>
               <h3>Grupos:</h3>
+              <div class="mostra-turmas"></div>
               <ul id="gruposSemTurmaList">
                   <!-- Grupos serão adicionados automaticamente aqui -->
               </ul>
@@ -55,15 +56,18 @@
         // Verifica se ocorreu um clique em algum lugar dentro do elemento turmaContainer
         turmaContainer.addEventListener("click", function (event) {
           const target = event.target;
-          // Verifica se o clique ocorreu dentro de um elemento com a classe "turma-square"
+
+          // Verifica se o clique ocorreu no turma-square ou no trash-icon
           const turmaSquare = target.closest(".turma-square");
+          const trashIcon = target.closest(".trash-icon")
+          if (target.classList.contains("trash-icon")) {
+            console.log("Deletar turma", trashIcon.id + "?");
+          } else {
+            console.log("ID da Turma Clicada:", turmaSquare.id);
 
-          if (turmaSquare) {
-            const turmaId = turmaSquare.id; // Obtém o ID da turma
-
-            // Função para coletar informações da turma selecionada
-            ColetaInfoTurmaSelecionada(turmaId);
+            ColetaInfoTurmaSelecionada(turmaSquare.id);
           }
+
         });
       });
 
@@ -165,6 +169,7 @@
                     const checkbox = document.createElement("input");
                     checkbox.type = "checkbox";
                     checkbox.id = grupo; // ID único para cada checkbox
+                    checkbox.classList = "checkbox";
 
                     // Criar uma label para o checkbox
                     const label = document.createElement("label");

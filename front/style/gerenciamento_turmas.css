@@ -65,7 +65,7 @@ body {
   position: relative;
   width: calc(25% - 10px);
   height: 150px;
-  background-color: #e74c3c;
+  background-color: #e6d8d3;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -155,23 +155,13 @@ h3 {
   text-align: center;
 }
 
-.gruposSemTurmaList {
-  display: flex;
-  flex-direction: row; /* Alinhar os campos na horizontal */
-  align-items: center;
-}
-
 ul {
   display: flex;
   flex-direction: column; /* Alinhar os campos na horizontal */
   align-items: center;
 }
 
-.checkbox-container {
+.checkbox {
   display: flex;
-  align-items: center;
-}
-
-.checkbox-container input {
-  margin-right: 10px;
+  text-align: left;
 }
