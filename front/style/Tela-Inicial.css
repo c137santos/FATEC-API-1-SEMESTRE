@@ -25,8 +25,18 @@ body {
     flex-wrap: wrap;
     justify-content: center;
   }
+
+  .menu-button a,
+  .action-button a,
+  .action-buttheaderson {
+    text-decoration: none; /*Retira sublinhados de links*/
+    color: inherit;
+    display: inline-lock;
+    width: 100%;
+    height: 100%;
+  } /*Height e Width garantem que o link ocupe o espaço completo do botão*/
   
-  .menu-button,
+  .menu-button ,
   .action-button {
     background-color: white;
     color: black;
