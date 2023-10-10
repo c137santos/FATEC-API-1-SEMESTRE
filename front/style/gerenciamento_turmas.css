@@ -1,11 +1,6 @@
-/* Adicione Normalize.css */
-@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
-
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,6 +40,7 @@ body {
 .turma-container {
   background-color: #f7f7f7;
   padding: 20px;
+  margin-bottom: 20px;
   border: 1px solid #ccc; /* Adicione uma borda sutil */
   border-radius: 5px;
   width: 800px;
@@ -100,24 +96,6 @@ body {
   color: #fff; /* Cor do texto ao passar o mouse */
 }
 
-.add-turma-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-  align-self: center;
-}
-
-.add-turma-button:hover {
-  background-color: #258cd1; /* Cor de fundo ao passar o mouse */
-  color: #fff; /* Cor do texto ao passar o mouse */
-}
-
 /* Estilos para o modal */
 .modal {
   display: none;
@@ -155,14 +133,13 @@ body {
 
 .data-content {
   display: flex;
-  flex-direction: row; /* Alinhar os campos na horizontal */
-  flex-wrap: wrap; /* Permite quebrar para a próxima linha se não couberem na largura */
-  gap: 10px; /* Espaço entre os campos */
+  flex-direction: column; /* Alinhar os campos na horizontal */
+  align-items: center;
 }
 
 .input-field {
-  width: 150px;
-  padding: 10px;
+  width: 220px;
+  padding: 2px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -176,6 +153,18 @@ h2 {
 h3 {
   margin-top: 20px;
   text-align: center;
+}
+
+.gruposSemTurmaList {
+  display: flex;
+  flex-direction: row; /* Alinhar os campos na horizontal */
+  align-items: center;
+}
+
+ul {
+  display: flex;
+  flex-direction: column; /* Alinhar os campos na horizontal */
+  align-items: center;
 }
 
 .checkbox-container {
