@@ -12,12 +12,8 @@ def URL(pattern):
 # Essa função tem objetivo de compreender os IDs que são passados na URL por meio da aplicação de regex.
 
 URLS = {
-    URL("/"): view.hola_mundinho,
     URL("/get_json"): view.get_arquivos_json,
-    URL("/api/v1/alunos/:id/edit"): view.edit_aluno,
-
-    URL("/api/v1/turma/:id/edit"): view.edit_turma,
-    URL("/api/v1/grupo/:id/edit"): view.edit_grupo,
+    URL("/api/v1/turma/:id/editar"): view.editar_turma,
 }
 
 
