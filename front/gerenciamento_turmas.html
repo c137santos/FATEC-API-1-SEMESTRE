@@ -24,7 +24,7 @@
           
           <!-- Formulário para criar uma turma -->
           <div class="form-container">
-            <div class="data-content">
+            <div id="turmaForm" class="data-content">
               <label for="turmaNome">Nome da turma:</label>
               <input type="text" id="turmaNome" class="input-field" />
   
@@ -32,19 +32,20 @@
               <input type="text" id="professor" class="input-field" />
   
               <label for="dataInicio">Data de início:</label>
-              <input type="text" id="dataInicio" class="input-field" />
+              <input type="date" id="dataInicio" class="input-field" />
             </div>
               <h3>Grupos:</h3>
-              <div class="mostra-turmas"></div>
-              <ul id="gruposSemTurmaList">
-                  <!-- Grupos serão adicionados automaticamente aqui -->
-              </ul>
+              <div class="mostra-grupos">
+                <ul id="gruposSemTurmaList">
+                    <!-- Grupos serão adicionados automaticamente aqui -->
+                </ul>
+              </div>
+              <button class="submit-turma">Criar turma</button>
           </div>
       </div>
   </div>
-
-
     <button class="add-turma-button">Adicionar Turma</button>
+
     <script>
       // Função que lida com o evento "DOMContentLoaded" e configura os ouvintes de eventos
       document.addEventListener("DOMContentLoaded", function () {
@@ -70,6 +71,21 @@
           }
 
         });
+           // Adicionar um evento de clique ao botão "Adicionar Turma" para mostrar o modal
+          const addTurmaButton = document.querySelector(".add-turma-button");
+          addTurmaButton.addEventListener("click", showModal);
+          
+          // Adiciona evento para o click de "criar turma" e enviar dados para o backend
+          const criarTurma = document.querySelector(".submit-turma")
+
+          criarTurma.addEventListener("click", function(event){
+            // Capturar os valores dos campos do formulário
+            const turmaNome = document.getElementById("turmaNome").value;
+            const professor = document.getElementById("professor").value;
+            const dataInicio = document.getElementById("dataInicio").value;
+
+          })
+
       });
 
       async function GetTurmas() {
@@ -168,6 +184,7 @@
         fetch("http://127.0.0.1:8080/api/v1/grupo_semTurma/get")
           .then((response) => response.json())
           .then((data) => {
+            console.log(data)
             var gruposSemTurmaList =
               document.getElementById("gruposSemTurmaList");
 
@@ -175,8 +192,10 @@
             gruposSemTurmaList.innerHTML = "";
 
             for (const grupo in data.grupos_data) {
-              if (data.grupos_data.hasOwnProperty(grupo)) {
+              if (data.grupos_data.hasOwnProperty(grupo) && data.grupos_data[grupo].turma == 0) {
                 const grupoNome = data.grupos_data[grupo].nome;
+                console.log("ID:", grupo);
+                console.log("Nome:", grupoNome);
 
                     // Criar um checkbox para cada grupo
                     const checkbox = document.createElement("input");
@@ -201,10 +220,6 @@
             console.error("Erro ao buscar grupos sem turmas: " + error);
           });
       }
-
-      // Adicionar um evento de clique ao botão "Adicionar Turma" para mostrar o modal
-      var addTurmaButton = document.querySelector(".add-turma-button");
-      addTurmaButton.addEventListener("click", showModal);
 
       // Função para fechar o modal
       function closeModal() {
