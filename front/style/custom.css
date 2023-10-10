@@ -31,7 +31,9 @@ body {
 }
 
 body {
-  font-family:'Roboto', sans-serif "
+  font-family:'Roboto', sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 body {
@@ -50,13 +52,20 @@ right: 0;
 header {
   width: 100vw;
   display: flex;
-  justify-content: right;
+  justify-content: flex-start; /*alinhar à esquerda*/
+  align-items: center;
   height: 100px;
+  padding: 10px;
 }
 
 header img {
   border: 1px solid transparent;
   width: 350px;
-  padding: 0;
+  padding: 120px;
   height: 75px;
+}
+
+.content {
+  padding-left: 200px;
+  margin-top: 20px;
 }

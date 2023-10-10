@@ -4,12 +4,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 100%;
   }
 
   .header {
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 300px;
   }
   
@@ -18,6 +20,7 @@ body {
     width: 491px;
     padding: 0;
     height: 131px;
+    margin-top: -150px;
   } 
 
   .container {
