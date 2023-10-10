@@ -13,3 +13,12 @@ def get_arquivos_json(request):
 
 def edit_aluno(request, id):
     return JsonResponse({"message": f"Editando o aluno com ID {id}."})
+
+def edit_turma(request, id):
+    print(request.body)
+    print(id)
+    return JsonResponse({"message": f"Editado a turma com ID {id}."})
+
+def edit_grupo(request, id):
+    return JsonResponse({"message": f"Editado o grupo com ID {id}."})
+
