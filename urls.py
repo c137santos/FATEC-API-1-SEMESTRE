@@ -1,5 +1,3 @@
-import sys
-sys.path.append('.')
 import views.funcoes_request_response as view
 from wgsi import JsonResponse
 import re
@@ -15,9 +13,7 @@ URLS = {
     URL("/"): view.hola_mundinho,
     URL("/get_json"): view.get_arquivos_json,
     URL("/api/v1/alunos/:id/edit"): view.edit_aluno,
-
-    URL("/api/v1/turma/:id/edit"): view.edit_turma,
-    URL("/api/v1/grupo/:id/edit"): view.edit_grupo,
+    URL("/api/v1/turmas/get"): view.get_turmas,
 }
 
 

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciamento de Turma</title>
+    <link rel="stylesheet" href="../front/style/gerenciamento_turmas.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
+    <link rel="stylesheet" href="style/custom.css">
+  </head>
+  </head>
+  <body>
+    <h1 class="title">Gerenciamento de Turmas:</h1>
+    <div class="turma-container">
+      <div class="flex-warp-container">
+        <!-- As turmas serão adicionadas automaticamente aqui -->
+      </div>
+    </div>
+    <script>
+      GetTurmas()
+      async function GetTurmas() {
+        try {
+          const response = await fetch(
+            "http://127.0.0.1:8080/api/v1/turmas/get"
+          );
+          const turmaData = await response.json();
+          console.log(turmaData);
+
+          // Chama a função para exibir as turmas
+          exibirTurmas(turmaData);
+        } catch (error) {
+          console.error("Erro ao buscar dados da API -> ", error);
+          return null;
+        }
+      }
+
+      // Função para exibir as turmas no DOM
+      function exibirTurmas(Turmadata) {
+        const container = document.querySelector(".flex-warp-container");
+        // Itera sobre os objetos do JSON e cria elementos HTML para cada turma
+        for (const turmaId in Turmadata) {
+          if (Turmadata.hasOwnProperty(turmaId)) {
+            const turma = Turmadata[turmaId];
+
+            // Cria um elemento div para representar uma turma
+            const turmaSquare = document.createElement("div");
+            turmaSquare.className = "turma-square";
+            turmaSquare.id = `${turmaId}`; // Adiciona o ID da turma ao turmaSquare
+
+            // Cria elementos de parágrafo para o nome da turma e nome do professor
+            const nomeTurma = document.createElement("p");
+            nomeTurma.textContent = `Nome da Turma: ${turma.nome}`;
+
+            const nomeProfessor = document.createElement("p");
+            nomeProfessor.textContent = `Professor: ${turma.professor}`;
+
+            // Adiciona os parágrafos ao turmaSquare
+            turmaSquare.appendChild(nomeTurma);
+            turmaSquare.appendChild(nomeProfessor);
+
+            // Cria um ícone de lixeira para deletar a turma
+            const imagemIcon = document.createElement("img");
+            imagemIcon.src = "../front/icon/trash-icon.svg"; // Substitua pelo caminho correto da imagem
+            imagemIcon.alt = "Ícone";
+            imagemIcon.className = "trash-icon";
+            imagemIcon.width = 20;
+            imagemIcon.height = 20;
+            imagemIcon.id = `${turmaId}`; // Adiciona o ID da turma ao ícone de deletar
+
+            // Adiciona o ícone ao turmaSquare
+            turmaSquare.appendChild(imagemIcon);
+
+            // Adiciona o turmaSquare ao container
+            container.appendChild(turmaSquare);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
