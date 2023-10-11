@@ -116,6 +116,6 @@ def retorna_response(environ, start_response):
 
 
 if __name__ == "__main__":
-    print("🚀 Servidor HTTP rodando! 🚀 \n Acesse o servidor em: localhost:8080")
+    print("🚀 Servidor HTTP rodando! 🚀 \n Acesse o servidor em: 127.0.0.1:8080")
     server = make_server("127.0.0.1", 8080, retorna_response)
     server.serve_forever()

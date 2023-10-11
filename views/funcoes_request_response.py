@@ -1,5 +1,5 @@
 from wgsi import HttpResponse, JsonResponse
-from regra_de_negocio.service import busca_dados_json
+from regra_de_negocio.service import busca_dados_json, busca_turmas
 
 
 def hola_mundinho(request):
@@ -18,3 +18,8 @@ def edit_aluno(request, id):
 def get_global_settings():
     global_settings = global_settings.read_global_settings()
     return JsonResponse(global_settings)
+
+
+def get_turmas(request):
+    turmas_data = busca_turmas()
+    return JsonResponse(turmas_data)
