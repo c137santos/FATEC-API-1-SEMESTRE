@@ -68,5 +68,8 @@ header {
   -webkit-backdrop-filter: blur(8.9px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding:64px;
-  
+}
+
+.texto_global_settings{
+  color: white;
 }
