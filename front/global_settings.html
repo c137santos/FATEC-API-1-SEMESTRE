@@ -5,13 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
         <link rel="stylesheet" href="style/custom.css">
+        <link rel="stylesheet" href="./style/index.css">
         <title>Configurações Globais</title>
     </head>
+    <header class="header">
+        <img src="./imagens/Logo.png" alt="logo">
+    </header>
     <body>
-        <h1> Quantidade de dias na sprint:</h1>
-        <h3 id="dias"></h3>
-        <h1> Quantidade de sprints:</h1>
-        <h3 id="sprints"></h3>
+        <div class="card_global_settings">
+            <h1 style="color:white"> Quantidade de dias na sprint:</h1>
+            <h3  style="color:white" id="dias"></h3>
+            <h1 style="color:white"> Quantidade de sprints:</h1>
+            <h3  style="color:white" id="sprints"></h3>
+        </div>
+        <div class="muleke">
+            <img src="./imagens/mascote2.png" alt="mascote">
+        </div>
     </body>
 </html>
 
@@ -23,7 +32,6 @@ async function GetTurmas() {
         "http://127.0.0.1:8080/api/v1/globalsettings/"
         );
         const globalSettings = await response.json();
-        console.log(globalSettings);
         mostraGlobalSettings(globalSettings)
     } catch (error) {
         console.error("Erro ao buscar dados da API -> ", error);
