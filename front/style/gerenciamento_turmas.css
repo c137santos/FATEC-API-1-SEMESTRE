@@ -1,47 +1,18 @@
 body {
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
 }
-
 .header {
-  background-color: #3498db;
-  text-align: left;
-  padding: 5px 0; /* Adicione espaçamento apenas na parte superior e inferior */
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
 }
-
-.logo {
-  font-weight: bold;
-  font-size: 20px;
-  margin-left: 20px; /* Adicione espaçamento à esquerda */
-  color: #fff;
-}
-
-.dots {
-  font-size: 24px;
-  margin-right: 20px; /* Adicione espaçamento à direita */
-  color: #fff;
-}
-
-.title {
-  font-size: 30px;
-  color: #000;
-  margin: 20px 60px;
-  text-align: center; /* Centralizar horizontalmente */
-}
-
 .turma-container {
-  background-color: #f7f7f7;
+  background-color: #f7f7f718;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #ccc; /* Adicione uma borda sutil */
+  border: 0.2px solid #cccccc23; /* Adicione uma borda sutil */
   border-radius: 5px;
   width: 800px;
   min-height: 400px;
@@ -65,13 +36,18 @@ body {
   position: relative;
   width: calc(25% - 10px);
   height: 150px;
-  background-color: #e6d8d3;
+  background-color: #ffffff;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+.turma-square:hover {
+  background-color: transparent;
+  box-shadow: 0 0 50px 20px rgb(154, 104, 241);
 }
 
 .turma-square p {
@@ -92,6 +68,106 @@ body {
 }
 
 .turma-square:hover {
-  background-color: #258cd1; /* Cor de fundo ao passar o mouse */
-  color: #fff; /* Cor do texto ao passar o mouse */
+  background-color: transparent;
+  box-shadow: 0 0 50px 20px rgb(154, 104, 241);
+}
+
+/* Estilos para o modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.modal-content {
+  background-image: url("../imagens/Fundo.png"),
+    linear-gradient(90deg, #d24d5d 0%, #a952a3 30%, #9a68f1 100%);
+  width: 40%;
+  height: 550px;
+  margin: 100px auto;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Estilos para o formulário e seus campos */
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.data-content {
+  display: flex;
+  flex-direction: column; /* Alinhar os campos na horizontal */
+  align-items: center;
+}
+
+.input-field {
+  width: 250px;
+  padding: 2px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* Estilos para a lista de grupos */
+h3 {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Estilo para a lista de checkboxes */
+ul {
+  display: flex; /* Usar flexbox para centralizar horizontalmente */
+  flex-direction: column;
+  align-items: center;
+  list-style-type: none; /* Remover marcadores de lista */
+  padding: 0;
+  margin-top: 0;
+  min-height: 150px;
+  max-height: 150px; /* Altura máxima com barra de rolagem */
+  overflow-y: auto; /* Adicionar barra de rolagem vertical quando necessário */
+}
+
+/* Estilo para cada item da lista (checkbox + label) */
+li {
+  background-color: #ece2e27e; /* Fundo colorido */
+  border-radius: 5px;
+  width: 250px;
+  height: 25px;
+  padding: 5px; /* Espaçamento interno */
+  margin-bottom: 5px; /* Espaçamento entre itens */
+}
+li:hover {
+  background-color: transparent;
+  box-shadow: 0 0 50px 20px rgb(154, 104, 241);
+}
+
+/* Estilo para o checkbox */
+.checkbox {
+  margin-right: 20px; /* Espaçamento entre o checkbox e o label */
+}
+
+.submit-turma {
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  margin: 0 auto;
 }
