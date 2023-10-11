@@ -1,22 +1,12 @@
 {
-  "1": {
-    "nome": "Turma1",
-    "professor": "Nadalete",
-    "data_de_inicio": "21/02/2023"
-  },
-  "2": {
-    "nome": "Turma2",
-    "professor": "Gorete",
-    "data_de_inicio": "21/02/2023"
-  },
-  "3": {
-    "nome": "Turma3",
-    "professor": "Nadalete",
-    "data_de_inicio": "21/02/2023"
-  },
-  "4": {
-    "nome": "Turma4",
-    "professor": "Gorete",
-    "data_de_inicio": "21/02/2023"
-  }
+    "1": {
+        "nome": "turma1",
+        "professor": "Nadalete",
+        "data_de_inicio": "21/02/2023"
+    },
+    "2": {
+        "nome": "Turma da manh\u00e3",
+        "professor": "Gorete",
+        "data_de_inicio": "21/02/2023"
+    }
 }

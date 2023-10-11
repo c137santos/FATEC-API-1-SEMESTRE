@@ -15,7 +15,7 @@ def busca_turmas():
 # Retorno:
 #   True se bem sucedido / False caso não exista o id solicitado
 def editar_turma(id, nome, professor, data_de_inicio):
-    turmas = _listar_todas_turmas()
+    turmas = busca_turmas()
     if id in turmas.keys():
         turma = turmas[id]
         turma["nome"] = nome
@@ -28,7 +28,7 @@ def editar_turma(id, nome, professor, data_de_inicio):
     
 # Retorna:
 #    um dicionário onde cada turma é um par chave-valor
-def _listar_todas_turmas():
+def busca_turmas():
     return {
         "1": {
             "nome": "turma1",
