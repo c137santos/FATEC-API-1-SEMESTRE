@@ -10,12 +10,45 @@
   </head>
   </head>
   <body>
+    <header class="header">
+      <img src="./imagens/Logo.png" alt="logo">
+    </header>
     <h1 class="title">Gerenciamento de Turmas:</h1>
     <div class="turma-container">
       <div class="flex-warp-container">
         <!-- As turmas serão adicionadas automaticamente aqui -->
       </div>
     </div>
+     <!-- Modal de Criação de Turma -->
+     <div id="myModal" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h2>Criar Turma</h2>
+          
+          <!-- Formulário para criar uma turma -->
+          <div class="form-container">
+            <div id="turmaForm" class="data-content">
+              <label for="turmaNome">Nome da turma:</label>
+              <input type="text" id="turmaNome" class="input-field" />
+  
+              <label for="professor">Professor responsável:</label>
+              <input type="text" id="professor" class="input-field" />
+  
+              <label for="dataInicio">Data de início:</label>
+              <input type="date" id="dataInicio" class="input-field" />
+            </div>
+              <h3>Grupos:</h3>
+                <ul id="gruposSemTurmaList">
+                    <!-- Grupos serão adicionados automaticamente aqui -->
+                </ul>
+              <button class="submit-turma">Criar turma</button>
+          </div>
+      </div>
+  </div>
+    <button class="add-turma-button">Adicionar Turma</button>
+    <div class="muleke">
+      <img src="./imagens/mascote2.png" alt="mascote">
+  </div>
     <script>
       GetTurmas()
       async function GetTurmas() {
@@ -74,6 +107,59 @@
             container.appendChild(turmaSquare);
           }
         }
+      }
+
+      const addTurmaButton = document.querySelector(".add-turma-button");
+      addTurmaButton.addEventListener("click", showModal);
+      // Função para mostrar o modal
+      function showModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+        // Chame a função para buscar os grupos sem turmas e adicione-os à lista no modal
+        fetch("http://127.0.0.1:8080/api/v1/grupos/get")
+          .then((response) => response.json())
+          .then((grupos_data) => {
+            console.log(grupos_data)
+            var gruposSemTurmaList =
+              document.getElementById("gruposSemTurmaList");
+
+            // Limpe a lista existente (caso haja)
+            gruposSemTurmaList.innerHTML = "";
+
+            for (const grupo in grupos_data) {
+              if (grupos_data.hasOwnProperty(grupo) && grupos_data[grupo].turma == 0) {
+                const grupoNome = grupos_data[grupo].nome;
+                console.log("ID:", grupo);
+                console.log("Nome:", grupoNome);
+
+                    // Criar um checkbox para cada grupo
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.id = grupo; // ID único para cada checkbox
+                    checkbox.classList = "checkbox";
+
+                    // Criar uma label para o checkbox
+                    const label = document.createElement("label");
+                    label.setAttribute("for", checkbox.id);
+                    label.textContent = grupoNome;
+
+                    // Adicionar o checkbox e a label à lista
+                    const listItem = document.createElement("li");
+                    listItem.appendChild(checkbox);
+                    listItem.appendChild(label);
+                    gruposSemTurmaList.appendChild(listItem);
+                }
+            }
+        })
+          .catch((error) => {
+            console.error("Erro ao buscar grupos sem turmas: " + error);
+          });
+      }
+
+      // Função para fechar o modal
+      function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
       }
     </script>
   </body>

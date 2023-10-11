@@ -14,6 +14,7 @@ URLS = {
     URL("/get_json"): view.get_arquivos_json,
     URL("/api/v1/alunos/:id/edit"): view.edit_aluno,
     URL("/api/v1/turmas/get"): view.get_turmas,
+    URL("/api/v1/grupos/get"): view.get_grupos,
 }
 
 
