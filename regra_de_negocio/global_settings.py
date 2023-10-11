@@ -6,14 +6,3 @@ def read_global_settings():
         dados = arquivo.read()
     global_settings = json.loads(dados)
     return global_settings
-
-
-def edit_global_settings(quantidade_sprint=0, dias_sprint=0):
-    settings_atual = read_global_settings()
-    if quantidade_sprint != 0:
-        settings_atual["quantidade_sprint"] = quantidade_sprint
-    if dias_sprint != 0:
-        settings_atual["dias_sprint"] = dias_sprint
-    dados_global_settings = open("dados/global_setting.json", "w")
-    json.dump(settings_atual, dados_global_settings)
-    dados_global_settings.close()
