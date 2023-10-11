@@ -8,34 +8,32 @@
         <title>Configurações Globais</title>
     </head>
     <body>
-        <form id="formulario"></form>
-            <label for="fname">quantidade de sprints:</label>
-            <input type="text" id="quant" name="quant"><br><br>
-            <label for="fname">quantidade de dias na sprint</label>
-            <input type="text" id="dia" name="dia"><br><br>
-            <input type="submit" id="submit" value="Enviar">
-        </form>
+        <h1> Quantidade de dias na sprint:</h1>
+        <h3 id="dias"></h3>
+        <h1> Quantidade de sprints:</h1>
+        <h3 id="sprints"></h3>
     </body>
 </html>
 
 <script>
-function mostrarValor() {
-    // aqui vai ter a função pro back
-    console.log(document.getElementById("quant").value);
-    console.log(document.getElementById("dia").value);
-}
-
-document.getElementById("quant").onkeypress = function(e) {
-    // 13 é a tecla <ENTER>. Se ela for pressionada, mostrar o valor
-    if (e.keyCode == 13) {
-        mostrarValor();
-        e.preventDefault();
+GetTurmas()
+async function GetTurmas() {
+    try {
+        const response = await fetch(
+        "http://127.0.0.1:8080/api/v1/globalsettings/"
+        );
+        const globalSettings = await response.json();
+        console.log(globalSettings);
+        mostraGlobalSettings(globalSettings)
+    } catch (error) {
+        console.error("Erro ao buscar dados da API -> ", error);
+        return null;
     }
 }
 
-document.getElementById("submit").onclick = function(e) {
-    mostrarValor();
-    e.preventDefault();
+function mostraGlobalSettings(globalSettings) {
+    document.getElementById("dias").textContent=globalSettings.dias_sprint;
+    document.getElementById("sprints").textContent=globalSettings.quantidade_sprint;
 }
 
 </script>

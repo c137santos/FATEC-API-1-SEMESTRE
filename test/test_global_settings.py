@@ -1,4 +1,4 @@
-from global_settings import read_global_settings, edit_global_settings
+from regra_de_negocio.global_settings import read_global_settings, edit_global_settings
 
 
 def test_pega_as_global_settings():
