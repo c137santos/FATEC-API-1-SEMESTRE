@@ -1,4 +1,4 @@
-import funcoes_request_response as view
+import views.funcoes_request_response as view
 from wgsi import JsonResponse
 import re
 
