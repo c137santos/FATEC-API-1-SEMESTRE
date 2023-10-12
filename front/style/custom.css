@@ -59,3 +59,17 @@ header {
   padding-left: 200px;
   margin-top: 20px;
 }
+
+.card_global_settings{
+  background: rgba(255, 0, 0, 0);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.9px);
+  -webkit-backdrop-filter: blur(8.9px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding:64px;
+}
+
+.texto_global_settings{
+  color: white;
+}
