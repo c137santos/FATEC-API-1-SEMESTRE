@@ -1,5 +1,5 @@
 from wgsi import HttpResponse, JsonResponse
-from regra_de_negocio.service import busca_dados_json, busca_turmas, buscar_grupos
+from regra_de_negocio.service import busca_dados_json, busca_turmas, buscar_grupos, cria_turma
 
 
 def hola_mundinho(request):
@@ -25,4 +25,6 @@ def get_grupos(request):
     return JsonResponse(grupos_data)
 
 def post_turma(request):
-    pass
+    body = request.body
+    print(body)
+    cria_turma(body)

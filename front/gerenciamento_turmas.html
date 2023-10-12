@@ -258,6 +258,7 @@
         //aciona evento para enviar os dados da turma que sera criada para o back end
         const confirmarButton = document.getElementById("confirmarButton");
         confirmarButton.addEventListener("click", function () {
+          console.log(novaTurmaData);
           criarNovaTurma(novaTurmaData);
         });
 
@@ -265,11 +266,17 @@
         const cancelarButton = document.getElementById("cancelarButton");
         cancelarButton.addEventListener("click", closeConfirmacao);
       }
-
       async function criarNovaTurma(novaTurmaData) {
         try {
           const response = await fetch(
-            "http://127.0.0.1:8080/api/v1/nova_turma/:novaTurmaData/post"
+            `http://127.0.0.1:8080/api/v1/nova_turma/criar`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(novaTurmaData),
+            }
           );
         } catch (error) {
           console.error("Erro ao enviar os dados para o servidor: " + error);

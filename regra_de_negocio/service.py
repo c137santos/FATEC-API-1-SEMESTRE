@@ -16,3 +16,6 @@ def busca_turmas():  # retorna todas turmas
 def buscar_grupos():  # retorna todos os grupos
     grupos_data = gt.busca_grupos()
     return grupos_data
+
+def cria_turma(novaTurmaData):
+    pass
