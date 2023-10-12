@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gerenciamento de Turma</title>
     <link rel="stylesheet" href="../front/style/gerenciamento_turmas.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
-    <link rel="stylesheet" href="style/custom.css">
-  </head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
+    />
+    <link rel="stylesheet" href="style/custom.css" />
   </head>
   <body>
     <header class="header">
-      <img src="./imagens/Logo.png" alt="logo">
+      <img src="./imagens/Logo.png" alt="logo" />
     </header>
     <h1 class="title">Gerenciamento de Turmas:</h1>
     <div class="turma-container">
@@ -19,38 +21,50 @@
         <!-- As turmas serão adicionadas automaticamente aqui -->
       </div>
     </div>
-     <!-- Modal de Criação de Turma -->
-     <div id="myModal" class="modal">
+    <!-- Modal de Criação de Turma -->
+    <div id="myModal" class="modal">
       <div class="modal-content">
-          <span class="close" onclick="closeModal()">&times;</span>
-          <h2>Criar Turma</h2>
-          
-          <!-- Formulário para criar uma turma -->
-          <div class="form-container">
-            <div id="turmaForm" class="data-content">
-              <label for="turmaNome">Nome da turma:</label>
-              <input type="text" id="turmaNome" class="input-field" />
-  
-              <label for="professor">Professor responsável:</label>
-              <input type="text" id="professor" class="input-field" />
-  
-              <label for="dataInicio">Data de início:</label>
-              <input type="date" id="dataInicio" class="input-field" />
-            </div>
-              <h3>Grupos:</h3>
-                <ul id="gruposSemTurmaList">
-                    <!-- Grupos serão adicionados automaticamente aqui -->
-                </ul>
-              <button class="submit-turma">Criar turma</button>
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Criação de Turma</h2>
+
+        <!-- Formulário para criar uma turma -->
+        <div class="form-container">
+          <div id="turmaForm" class="data-content">
+            <label for="turmaNome">Nome da turma:</label>
+            <input type="text" id="turmaNome" class="input-field" />
+
+            <label for="professor">Professor responsável:</label>
+            <input type="text" id="professor" class="input-field" />
+
+            <label for="dataInicio">Data de início:</label>
+            <input type="date" id="dataInicio" class="input-field" />
           </div>
+          <h3>Grupos:</h3>
+          <ul id="gruposSemTurmaList">
+            <!-- Grupos serão adicionados automaticamente aqui -->
+          </ul>
+          <button class="submit-turma">Criar turma</button>
+          <div id="confirmacaoContainer" style="display: none">
+            <p><strong>Confirme os dados da turma:</strong></p>
+            <p>Nome da Turma: <span id="turmaNomeConfirmacao"></span></p>
+            <p>Professor: <span id="professorConfirmacao"></span></p>
+            <p>Data de Início: <span id="dataInicioConfirmacao"></span></p>
+            <p>
+              Grupos Selecionados:
+              <span id="gruposSelecionadosConfirmacao"></span>
+            </p>
+            <button id="confirmarButton">Confirmar</button>
+            <button id="cancelarButton">Cancelar</button>
+          </div>
+        </div>
       </div>
-  </div>
+    </div>
     <button class="add-turma-button">Adicionar Turma</button>
     <div class="muleke">
-      <img src="./imagens/mascote2.png" alt="mascote">
-  </div>
+      <img src="./imagens/mascote2.png" alt="mascote" />
+    </div>
     <script>
-      GetTurmas()
+      GetTurmas();
       async function GetTurmas() {
         try {
           const response = await fetch(
@@ -93,11 +107,9 @@
 
             // Cria um ícone de lixeira para deletar a turma
             const imagemIcon = document.createElement("img");
-            imagemIcon.src = "../front/icon/trash-icon.svg"; // Substitua pelo caminho correto da imagem
+            imagemIcon.src = "../front/icon/trash-icon.svg";
             imagemIcon.alt = "Ícone";
             imagemIcon.className = "trash-icon";
-            imagemIcon.width = 20;
-            imagemIcon.height = 20;
             imagemIcon.id = `${turmaId}`; // Adiciona o ID da turma ao ícone de deletar
 
             // Adiciona o ícone ao turmaSquare
@@ -111,55 +123,164 @@
 
       const addTurmaButton = document.querySelector(".add-turma-button");
       addTurmaButton.addEventListener("click", showModal);
+      let grupos_data;
+
       // Função para mostrar o modal
-      function showModal() {
-        var modal = document.getElementById("myModal");
+      async function showModal() {
+        const modal = document.getElementById("myModal");
         modal.style.display = "block";
-        // Chame a função para buscar os grupos sem turmas e adicione-os à lista no modal
-        fetch("http://127.0.0.1:8080/api/v1/grupos/get")
-          .then((response) => response.json())
-          .then((grupos_data) => {
-            console.log(grupos_data)
-            var gruposSemTurmaList =
-              document.getElementById("gruposSemTurmaList");
+        try {
+          const response = await fetch(
+            "http://127.0.0.1:8080/api/v1/grupos/get"
+          );
+          grupos_data = await response.json();
+          console.log(grupos_data);
 
-            // Limpe a lista existente (caso haja)
-            gruposSemTurmaList.innerHTML = "";
+          const gruposSemTurmaList =
+            document.getElementById("gruposSemTurmaList");
 
-            for (const grupo in grupos_data) {
-              if (grupos_data.hasOwnProperty(grupo) && grupos_data[grupo].turma == 0) {
-                const grupoNome = grupos_data[grupo].nome;
-                console.log("ID:", grupo);
-                console.log("Nome:", grupoNome);
+          // Limpe a lista existente
+          gruposSemTurmaList.innerHTML = "";
 
-                    // Criar um checkbox para cada grupo
-                    const checkbox = document.createElement("input");
-                    checkbox.type = "checkbox";
-                    checkbox.id = grupo; // ID único para cada checkbox
-                    checkbox.classList = "checkbox";
+          for (const grupo in grupos_data) {
+            if (
+              grupos_data.hasOwnProperty(grupo) &&
+              grupos_data[grupo].turma == 0
+            ) {
+              const grupoNome = grupos_data[grupo].nome;
 
-                    // Criar uma label para o checkbox
-                    const label = document.createElement("label");
-                    label.setAttribute("for", checkbox.id);
-                    label.textContent = grupoNome;
+              // Criar um checkbox para cada grupo
+              const checkbox = document.createElement("input");
+              checkbox.type = "checkbox";
+              checkbox.id = grupo; // ID único para cada checkbox
+              checkbox.classList = "checkbox";
 
-                    // Adicionar o checkbox e a label à lista
-                    const listItem = document.createElement("li");
-                    listItem.appendChild(checkbox);
-                    listItem.appendChild(label);
-                    gruposSemTurmaList.appendChild(listItem);
-                }
+              // Criar uma label para o checkbox
+              const label = document.createElement("label");
+              label.setAttribute("for", checkbox.id);
+              label.textContent = grupoNome;
+
+              // Adicionar o checkbox e a label à lista
+              const listItem = document.createElement("li");
+              listItem.appendChild(checkbox);
+              listItem.appendChild(label);
+              gruposSemTurmaList.appendChild(listItem);
             }
-        })
-          .catch((error) => {
-            console.error("Erro ao buscar grupos sem turmas: " + error);
-          });
+          }
+        } catch (error) {
+          console.error("Erro ao buscar grupos sem turmas: " + error);
+        }
       }
 
       // Função para fechar o modal
       function closeModal() {
-        var modal = document.getElementById("myModal");
+        const modal = document.getElementById("myModal");
         modal.style.display = "none";
+      }
+
+      const criarTurmaButton = document.querySelector(".submit-turma");
+      criarTurmaButton.addEventListener("click", coletaDadosNovaTurma);
+
+      // Função para abrir tela e coletar os dados da nova turma
+      async function coletaDadosNovaTurma() {
+        const turmaNome = document.getElementById("turmaNome").value;
+        const professor = document.getElementById("professor").value;
+        const dataInicio = document.getElementById("dataInicio").value;
+
+        const regex = /^[A-Za-z\s]*$/;
+        if (turmaNome === "") {
+          alert("O Nome da Turma é obrigatório.");
+          return;
+        } else if (!regex.test(turmaNome)) {
+          alert("O Nome da Turma deve conter apenas letras e espaços.");
+          return;
+        }
+        if (professor === "") {
+          alert("O Professor responsável é obrigatório.");
+          return;
+        } else if (!regex.test(professor)) {
+          alert("O Professor responsável deve conter apenas letras e espaços.");
+          return;
+        }
+        if (dataInicio === "") {
+          alert("A Data de início é obrigatório.");
+          return;
+        }
+
+        // Formata a data para dia/mes/ano
+        const data = new Date(dataInicio);
+        const dia = data.getDate();
+        const mes = data.getMonth() + 1; // Os meses em JavaScript começam de 0
+        const ano = data.getFullYear();
+        if (ano < 1000 || ano > 9999) {
+          alert("O ano deve ter exatamente 4 dígitos.");
+          return;
+        }
+        const dataFormatada = `${dia.toString().padStart(2, "0")}/${mes
+          .toString()
+          .padStart(2, "0")}/${ano}`;
+
+        //captura grupos selecionados
+        let gruposSelecionados = [];
+        const checkboxes = document.querySelectorAll(".checkbox");
+        checkboxes.forEach((checkbox) => {
+          if (checkbox.checked) {
+            gruposSelecionados.push(checkbox.id);
+          }
+        });
+
+        const nomeGruposSelecionados = gruposSelecionados.map((id) => {
+          return grupos_data[id].nome;
+        });
+
+        // Construir o objeto de turma
+        const novaTurmaData = {
+          nome: turmaNome,
+          professor: professor,
+          dataInicio: dataInicio,
+          grupos: gruposSelecionados,
+        };
+
+        // Exiba a div de confirmação
+        const confirmacaoContainer = document.getElementById(
+          "confirmacaoContainer"
+        );
+        confirmacaoContainer.style.display = "block";
+
+        // Preencha os detalhes da turma na div de confirmação
+        document.getElementById("turmaNomeConfirmacao").textContent = turmaNome;
+        document.getElementById("professorConfirmacao").textContent = professor;
+        document.getElementById("dataInicioConfirmacao").textContent =
+          dataFormatada;
+        document.getElementById("gruposSelecionadosConfirmacao").textContent =
+          nomeGruposSelecionados.join(", ");
+
+        //aciona evento para enviar os dados da turma que sera criada para o back end
+        const confirmarButton = document.getElementById("confirmarButton");
+        confirmarButton.addEventListener("click", function () {
+          criarNovaTurma(novaTurmaData);
+        });
+
+        //aciona evento para fechar a tela de confirmacao e editar a criacao de turma
+        const cancelarButton = document.getElementById("cancelarButton");
+        cancelarButton.addEventListener("click", closeConfirmacao);
+      }
+
+      async function criarNovaTurma(novaTurmaData) {
+        try {
+          const response = await fetch(
+            "http://127.0.0.1:8080/api/v1/nova_turma/:novaTurmaData/post"
+          );
+        } catch (error) {
+          console.error("Erro ao enviar os dados para o servidor: " + error);
+        }
+      }
+
+      function closeConfirmacao() {
+        const confirmacaoContainer = document.getElementById(
+          "confirmacaoContainer"
+        );
+        confirmacaoContainer.style.display = "none";
       }
     </script>
   </body>

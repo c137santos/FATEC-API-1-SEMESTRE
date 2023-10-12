@@ -19,6 +19,10 @@ def get_turmas(request):
     turmas_data = busca_turmas()
     return JsonResponse(turmas_data)
 
+
 def get_grupos(request):
     grupos_data = buscar_grupos()
     return JsonResponse(grupos_data)
+
+def post_turma(request):
+    pass

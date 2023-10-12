@@ -12,6 +12,7 @@ def busca_turmas():  # retorna todas turmas
     turmas_data = gt.busca_turmas()
     return turmas_data
 
-def buscar_grupos(): #retorna todos os grupos
+
+def buscar_grupos():  # retorna todos os grupos
     grupos_data = gt.busca_grupos()
     return grupos_data

@@ -9,7 +9,7 @@ body {
   justify-content: center;
 }
 .turma-container {
-  background-color: #f7f7f718;
+  background-color: #f7f7f700;
   padding: 20px;
   margin-bottom: 20px;
   border: 0.2px solid #cccccc23; /* Adicione uma borda sutil */
@@ -63,7 +63,6 @@ body {
   right: 5px;
   width: 20px; /* Defina a largura desejada para o ícone */
   height: 20px; /* Defina a altura desejada para o ícone */
-  fill: #fff; /* Defina a cor do ícone como branco ou a cor desejada */
   cursor: pointer; /* Mudar o cursor para indicar que é clicável */
 }
 
@@ -93,14 +92,6 @@ body {
   padding: 20px;
   border-radius: 5px;
   position: relative;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 24px;
-  cursor: pointer;
 }
 
 /* Estilos para o formulário e seus campos */
@@ -138,6 +129,7 @@ ul {
   display: flex; /* Usar flexbox para centralizar horizontalmente */
   flex-direction: column;
   align-items: center;
+
   list-style-type: none; /* Remover marcadores de lista */
   padding: 0;
   margin-top: 0;
@@ -148,10 +140,9 @@ ul {
 
 /* Estilo para cada item da lista (checkbox + label) */
 li {
-  background-color: #ece2e27e; /* Fundo colorido */
+  background-color: #ece2e23a; /* Fundo colorido */
   border-radius: 5px;
-  width: 250px;
-  height: 25px;
+  width: 200px;
   padding: 5px; /* Espaçamento interno */
   margin-bottom: 5px; /* Espaçamento entre itens */
 }
@@ -162,7 +153,17 @@ li:hover {
 
 /* Estilo para o checkbox */
 .checkbox {
-  margin-right: 20px; /* Espaçamento entre o checkbox e o label */
+  margin-right: 10px; /* Espaçamento entre o checkbox e o label */
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  font-size: 50px; /* Tamanho da fonte maior */
+  display: inline-block; /* Torna o botão um elemento de bloco para definir largura e altura */
+  line-height: 10px; /* Centraliza o ícone verticalmente */
+  cursor: pointer; /* Mostra o cursor de mão ao passar o mouse */
 }
 
 .submit-turma {
@@ -170,4 +171,44 @@ li:hover {
   justify-content: center;
   width: 150px;
   margin: 0 auto;
+}
+
+/* Estilos para a seção de confirmação */
+#confirmacaoContainer {
+  display: none;
+  position: fixed; /* Importante para a centralização */
+  top: 40%; /* Centraliza verticalmente */
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translate(-50%, -50%); /* Centraliza em ambas as direções */
+  width: 300px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+#confirmacaoContainer span {
+  font-weight: 900;
+}
+
+#confirmacaoContainer p {
+  margin: 5px 0;
+}
+
+#confirmarButton {
+  margin-top: 25px;
+  background-color: #4caf50;
+}
+
+#confirmarButton:hover {
+  background-color: #45a04991;
+}
+
+#cancelarButton {
+  background-color: #ce1717;
+}
+#cancelarButton:hover {
+  background-color: #ce17179d;
 }
