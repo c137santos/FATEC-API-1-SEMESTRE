@@ -21,7 +21,7 @@
         </div>
         <div>
             <label for="fdata">Data de início:</label>
-            <input type="date" name="fdata" id="fdata" min=2023-01-01 pattern="\d{2}-\d{2}-\d{4}" placeholder="dd-mm-yyyy">
+            <input type="date" name="fdata" id="fdata">
         </div>
         <div>
             <button onclick="requisitar_editar_turma(obter_id())">Editar</button>
@@ -45,9 +45,9 @@
         async function preencher_campos_formulario(id){
             const turma = await obter_turma(id)
             if(turma){
-                document.getElementsByName('fnome')[0]['value'] = turma.nome
-                document.getElementsByName('fprofessor')[0]['value'] = turma.professor
-                document.getElementsByName('fdata')[0]['value'] = turma.data
+                document.getElementsByName('fnome')[0]['value'] = turma["nome"]
+                document.getElementsByName('fprofessor')[0]['value'] = turma["professor"]
+                document.getElementsByName('fdata')[0]['value'] = turma["data_de_inicio"]
             } else {
                 alert("Falha ao preencher os campos do formulário!\nA turma não foi encontrada.")
             }
@@ -59,7 +59,7 @@
             const turma = {
                 "nome" : document.getElementsByName('fnome')[0]['value'],
                 "professor" : document.getElementsByName('fprofessor')[0]['value'],
-                "data" : document.getElementsByName('fdata')[0]['value']
+                "data_de_inicio" : document.getElementsByName('fdata')[0]['value']
             }
             fetch (`http://localhost:8080/api/v1/turmas/${id}/editar`,{method: "POST", body:JSON.stringify(turma)})
                 .then(() => window.location.href = `http://localhost:8080/editar_turma?id=${id}`)
