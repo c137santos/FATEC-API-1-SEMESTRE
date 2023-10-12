@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PBLTex ::. Editar Turma</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    </head>
+<body onload="preencher_campos_formulario(obter_id())">
+    <div>
+        <h1>Formulário de Edição de Turma</h1>    
+    </div>
+    <div name="fturma">
+        <div>
+            <label for="fnome">Nome da turma:</label>
+            <input type="text" name="fnome" id="fnome">
+        </div>
+        <div>
+            <label for="fprofessor">Professor responsável:</label>
+            <input type="text" name="fprofessor" id="fprofessor">
+        </div>
+        <div>
+            <label for="fdata">Data de início:</label>
+            <input type="date" name="fdata" id="fdata">
+        </div>
+        <div>
+            <button onclick="requisitar_editar_turma(obter_id())">Editar</button>
+        </div>
+    </div>
+    <script>
+        /** Recupera o id da turma presente como consulta na URL
+         * @returns {string} 
+        */
+        function obter_id(){ return new URLSearchParams(window.location.search).get('id') }
+
+        async function obter_turma(id) {
+            const resposta = await fetch ('http://localhost:8080/api/v1/turmas/get')
+            const turmas = await resposta.json()
+            return turmas[id]
+        }
+
+        /** Realiza o preenchimento inicial de diversos campos da página 
+         * @param {string} id - o identificador único da turma.
+        */
+        async function preencher_campos_formulario(id){
+            const turma = await obter_turma(id)
+            if(turma){
+                document.getElementsByName('fnome')[0]['value'] = turma["nome"]
+                document.getElementsByName('fprofessor')[0]['value'] = turma["professor"]
+                document.getElementsByName('fdata')[0]['value'] = turma["data_de_inicio"]
+            } else {
+                alert("Falha ao preencher os campos do formulário!\nA turma não foi encontrada.")
+            }
+        }
+        /** Submete a edição da turma ao backend 
+         * @param {string} id - o identificador único da turma.
+        */
+        async function requisitar_editar_turma(id){
+            const turma = {
+                "nome" : document.getElementsByName('fnome')[0]['value'],
+                "professor" : document.getElementsByName('fprofessor')[0]['value'],
+                "data_de_inicio" : document.getElementsByName('fdata')[0]['value']
+            }
+            fetch (`http://localhost:8080/api/v1/turmas/${id}/editar`,{method: "POST", body:JSON.stringify(turma)})
+                .then(() => window.location.href = `http://localhost:8080/editar_turma?id=${id}`)
+            
+        }
+    </script>
+</body>
+</html>

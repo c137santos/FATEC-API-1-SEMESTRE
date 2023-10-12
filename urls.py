@@ -1,3 +1,5 @@
+import sys
+sys.path.append('.')
 import views.funcoes_request_response as view
 from wgsi import JsonResponse
 import re
@@ -10,12 +12,11 @@ def URL(pattern):
 # Essa função tem objetivo de compreender os IDs que são passados na URL por meio da aplicação de regex.
 
 URLS = {
-    URL("/"): view.hola_mundinho,
     URL("/get_json"): view.get_arquivos_json,
     URL("/api/v1/alunos/:id/edit"): view.edit_aluno,
     URL("/api/v1/turmas/get"): view.get_turmas,
+    URL("/api/v1/turmas/:id/editar"): view.api_v1_turmas_editar,
 }
-
 
 def url_match(path):
     for pattern, view_func in URLS.items():
