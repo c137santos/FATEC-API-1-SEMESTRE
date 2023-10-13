@@ -60,7 +60,7 @@ header {
   margin-top: 20px;
 }
 
-.card_global_settings {
+.card_global_settings{
   background: rgba(255, 0, 0, 0);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -70,6 +70,6 @@ header {
   padding: 64px;
 }
 
-.texto_global_settings {
+.texto_global_settings{
   color: white;
 }
