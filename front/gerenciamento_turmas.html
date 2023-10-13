@@ -76,12 +76,13 @@
           }
         }
       }
-      /** Evento para a exclusão de turmas
+      /**    a exclusão de turmas
        * @param {string} id - o id único da turma
       */
       function requisitar_excluir_turma(id){
-        window.confirm("Atenção! A turma será excluída. Deseja prosseguir?")
-        fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`,{method:'DELETE'}).then(document.getElementById(id).remove())  
+        if(window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")){
+          fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`,{method:'DELETE'}).then(document.getElementById(id).remove())
+        }  
       } 
     </script>
   </body>
