@@ -24,6 +24,6 @@ def get_grupos(request):
     return JsonResponse(grupos_data)
 
 def post_turma(request):
-    body = request.body
-    resposta  = cria_turma(body)
+    dados_nova_turma = request.body
+    resposta  = cria_turma(dados_nova_turma)
     return JsonResponse(resposta)

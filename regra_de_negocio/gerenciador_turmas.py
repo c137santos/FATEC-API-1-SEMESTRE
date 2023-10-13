@@ -14,8 +14,8 @@ def busca_grupos():
     return grupos_Data
 
 # Função para criar uma nova turma
-def criacao_turma(body):
-    body_tratado = json.loads(body)
+def criacao_turma(dados_nova_turma):
+    body_tratado = json.loads(dados_nova_turma)
     turmas = busca_turmas()
     grupos = busca_grupos()
 
@@ -28,9 +28,12 @@ def criacao_turma(body):
     }
     turmas[turma_novo_id] = nova_turma
     turma_nome = turmas[turma_novo_id]["nome"]
-    
+    resposta = {
+    "mensagem": f"Criação da turma {turma_nome.capitalize()} realizada com sucesso!",
+    "detalhes": []
+    }
+
     if len(body_tratado["grupos"]) >= 1:
-        resposta = [f"Criação da turma {turma_nome} realizada com sucesso!"] #lista para armazenar as saidas e apresentar no front
         for idGrupo in body_tratado["grupos"]:
             idGrupo = str(idGrupo) #transforma o inteiro da lista em str para comparar com as chaves
             print(f"ID do grupo a ser atualizado: {idGrupo}")
@@ -38,11 +41,12 @@ def criacao_turma(body):
             if idGrupo in grupos:
                 print(f"Atualizando grupo {idGrupo} para turma {turma_novo_id}")
                 grupo_Nome = grupos[idGrupo]["nome"]
-                resposta.append(f"Adicionado o {grupo_Nome} a turma {turma_nome}")
                 grupos[idGrupo]["turma"] = int(turma_novo_id)  # Atualize a propriedade "turma" com um valor inteiro
+                resposta["detalhes"].append(f"Adicionado o grupo {grupo_Nome.capitalize()} a turma {turma_nome.capitalize()}")
             else:
-                resposta[f"id {grupo_Nome} não encontrado nos grupos"]
-                     
+                resposta["detalhes"].append(f"id {grupo_Nome.capitalize()} não encontrado nos grupos")
+
+            
     # Salve as alterações nos arquivos JSON
     salvar_turmas(turmas)
     salvar_grupos(grupos)

@@ -1,22 +1,32 @@
 {
-  "1": {
-    "nome": "Turma",
-    "professor": "Nadalete",
-    "data_de_inicio": "21/02/2023"
-  },
-  "2": {
-    "nome": "Turma2",
-    "professor": "Gorete",
-    "data_de_inicio": "21/02/2023"
-  },
-  "3": {
-    "nome": "Turma3",
-    "professor": "Nadalete",
-    "data_de_inicio": "21/02/2023"
-  },
-  "4": {
-    "nome": "Turma4",
-    "professor": "Gorete",
-    "data_de_inicio": "21/02/2023"
-  }
+    "1": {
+        "nome": "ADS",
+        "professor": "Nadalete",
+        "data_de_inicio": "21/02/2023"
+    },
+    "2": {
+        "nome": "Banco de dados",
+        "professor": "Gorete",
+        "data_de_inicio": "21/02/2023"
+    },
+    "3": {
+        "nome": "Inteligencia Artificial",
+        "professor": "Nadalete",
+        "data_de_inicio": "21/02/2023"
+    },
+    "4": {
+        "nome": "Empreendorismo",
+        "professor": "Gorete",
+        "data_de_inicio": "21/02/2023"
+    },
+    "5": {
+        "nome": "teste",
+        "professor": "prof teste",
+        "data_de_inicio": "13/10/2023"
+    },
+    "6": {
+        "nome": " ewqew",
+        "professor": "qewqeq",
+        "data_de_inicio": "13/10/2023"
+    }
 }

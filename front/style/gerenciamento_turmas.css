@@ -50,6 +50,8 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  padding: 10px; /* Adicione um preenchimento interno para o conteúdo */
+  box-sizing: border-box; /* Evita que o preenchimento adicione à largura/altura */
 }
 
 .turma-square:hover {
@@ -60,9 +62,11 @@ body {
 /* Estilos para parágrafos dentro dos quadrados das turmas */
 .turma-square p {
   font-size: 15px;
-  margin: 2px;
   font-weight: bold;
   color: #000000;
+  text-align: center; /* Centraliza o texto horizontalmente */
+  max-width: 90%; /* Limita a largura para evitar transbordamento */
+  margin: 5px 0; /* Espaçamento interno superior e inferior */
 }
 
 /* Estilos para o ícone de lixeira */

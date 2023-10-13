@@ -119,6 +119,7 @@ async function coletaDadosNovaTurma() {
   const turmaNome = document.getElementById("turmaNome").value;
   const professor = document.getElementById("professor").value;
   const dataInicio = document.getElementById("dataInicio").value;
+  console.log(dataInicio);
 
   const regex = /^[A-Za-z\s]*$/;
   for (let id in turmaData) {
@@ -148,7 +149,7 @@ async function coletaDadosNovaTurma() {
 
   // Formata a data para dia/mes/ano
   const data = new Date(dataInicio);
-  const dia = data.getDate();
+  const dia = data.getDate() + 1; // O dia começa em 1
   const mes = data.getMonth() + 1; // Os meses em JavaScript começam de 0
   const ano = data.getFullYear();
   if (ano < 1000 || ano > 9999) {
@@ -191,7 +192,8 @@ async function coletaDadosNovaTurma() {
 
   //aciona evento para enviar os dados da turma que sera criada para o back end
   const confirmarButton = document.getElementById("confirmarButton");
-  confirmarButton.addEventListener("click", function () {
+  confirmarButton.addEventListener("click", function (event) {
+    event.preventDefault();
     console.log(novaTurmaData);
     criarNovaTurma(novaTurmaData);
   });
@@ -216,10 +218,10 @@ async function criarNovaTurma(novaTurmaData) {
 
     // Verifica se a resposta da solicitação está OK (status 200)
     if (response.ok) {
-      // Converte a resposta para o formato JSON
       const resposta = await response.json();
-      console.log("Resposta do servidor:", resposta);
-      return resposta;
+      const mensagem = resposta.mensagem;
+      const detalhes = resposta.detalhes;
+      alert("Resposta do servidor:\n" + mensagem + "\n" + detalhes.join("\n"));
     } else {
       // Lida com erros de resposta, se houver
       console.error("Erro ao criar a turma: ", response.statusText);
