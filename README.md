@@ -3,21 +3,6 @@
 Trabalho de API do 1º semestre da FATEC.
 ### Tema
 Desenvolver uma solução para a instituição de ensino PBLTex, especializada em cursos práticas de ensino aplicando PBL(Problem Based Learning), que consiste em construir um sistema de informação direcionado para a gestão e acompanhamento de scores de alunos.
-
-### Equipe
-
-| Integrantes | Redes Sociais |
-|-------|--------|
-|Caio Augusto Palma ![Static Badge](https://img.shields.io/badge/Dev-black)|<a href="https://github.com/caiopalma" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
-|Maria Clara Freitas Santos ![Static Badge](https://img.shields.io/badge/Scrum_master-pink)![Static Badge](https://img.shields.io/badge/Dev-black)|<a href="https://github.com/ClaraSantosmf" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
-|Danielle Mayumi Tamazato Santos ![Static Badge](https://img.shields.io/badge/Dev-black) |<a href="https://github.com/danitamazato" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
-|Eruano Rubens de ALmeida ![Static Badge](https://img.shields.io/badge/Dev-black)|<a href="www.github.com" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
-|Marília Borgo de Moraes ![Static Badge](https://img.shields.io/badge/Dev-black)|<a href="https://github.com/marilia-borgo" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
-|Mateus Soares ![Static Badge](https://img.shields.io/badge/Product_owner-blue)![Static Badge](https://img.shields.io/badge/Dev-black) |<a href="https://github.com/MateusMSoares" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
-|Ruth da Silva Mira ![Static Badge](https://img.shields.io/badge/Dev-black) |<a href="https://github.com/RuthMira" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
-|Sara Robert Nara ![Static Badge](https://img.shields.io/badge/Dev-black) |<a href="https://github.com/sararobertnahra" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
-|William Gomes de Freitas ![Static Badge](https://img.shields.io/badge/Dev-black) |<a href="https://github.com/willigfreitas" target="_blank"><img src="https://img.shields.io/badge/-black?style=social&logo=github&label=github&color=black" target="_blank"></a>|
-
 ### Objetivos 
   Desenvolvimento de uma solução computacional que exercite a capacidade de pesquisa e autodidaxia dos integrantes dos grupos, no que tange:
 - A aplicação (no projeto) de técnicas de programação para a construção de algoritmos.
