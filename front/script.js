@@ -6,7 +6,7 @@ function redirecionarParaPagina(id) {
     } else if (id === 'grupos') {
         window.location.href = 'pagina-grupos.html';
     } else if (id === 'global-settings') {
-        window.location.href = 'pagina-global-settings.html';
+        window.location.href = 'global_settings.html';
     } else {
         window.location.href = 'pagina-padrao.html';
     }
