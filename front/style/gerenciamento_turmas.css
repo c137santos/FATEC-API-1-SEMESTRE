@@ -1,28 +1,34 @@
+/* Estilos gerais para o corpo da página */
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+/* Estilos para o cabeçalho */
 .header {
   width: 100%;
   display: flex;
   justify-content: center;
 }
+
+/* Estilos para o contêiner principal das turmas */
 .turma-container {
-  background-color: #f7f7f700;
-  padding: 20px;
-  margin-bottom: 20px;
-  border: 0.2px solid #cccccc23; /* Adicione uma borda sutil */
-  border-radius: 5px;
   width: 800px;
   min-height: 400px;
-  max-height: 600px;
-  overflow-y: auto;
+  max-height: 460px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 0.2px solid #cccccc23;
+  border-radius: 5px;
+  background-color: #f7f7f700;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: auto;
 }
 
+/* Estilos para o contêiner flexível das turmas */
 .flex-warp-container {
   width: 100%;
   display: flex;
@@ -32,6 +38,7 @@ body {
   gap: 13px;
 }
 
+/* Estilos para os quadrados representando as turmas */
 .turma-square {
   position: relative;
   width: calc(25% - 10px);
@@ -50,6 +57,7 @@ body {
   box-shadow: 0 0 50px 20px rgb(154, 104, 241);
 }
 
+/* Estilos para parágrafos dentro dos quadrados das turmas */
 .turma-square p {
   font-size: 15px;
   margin: 2px;
@@ -57,18 +65,14 @@ body {
   color: #000000;
 }
 
+/* Estilos para o ícone de lixeira */
 .trash-icon {
   position: absolute;
   bottom: 5px;
   right: 5px;
-  width: 20px; /* Defina a largura desejada para o ícone */
-  height: 20px; /* Defina a altura desejada para o ícone */
-  cursor: pointer; /* Mudar o cursor para indicar que é clicável */
-}
-
-.turma-square:hover {
-  background-color: transparent;
-  box-shadow: 0 0 50px 20px rgb(154, 104, 241);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
 /* Estilos para o modal */
@@ -83,6 +87,7 @@ body {
   z-index: 1;
 }
 
+/* Estilos para o conteúdo do modal */
 .modal-content {
   background-image: url("../imagens/Fundo.png"),
     linear-gradient(90deg, #d24d5d 0%, #a952a3 30%, #9a68f1 100%);
@@ -98,11 +103,12 @@ body {
 .form-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .data-content {
   display: flex;
-  flex-direction: column; /* Alinhar os campos na horizontal */
+  flex-direction: column;
   align-items: center;
 }
 
@@ -126,60 +132,77 @@ h3 {
 
 /* Estilo para a lista de checkboxes */
 ul {
-  display: flex; /* Usar flexbox para centralizar horizontalmente */
+  background-color: #b1a5a517;
+  display: flex;
   flex-direction: column;
   align-items: center;
-
-  list-style-type: none; /* Remover marcadores de lista */
+  list-style-type: none;
   padding: 0;
   margin-top: 0;
-  min-height: 150px;
-  max-height: 150px; /* Altura máxima com barra de rolagem */
-  overflow-y: auto; /* Adicionar barra de rolagem vertical quando necessário */
+  width: 286px;
+  min-height: 160px;
+  max-height: 160px;
+  overflow-y: auto;
 }
 
-/* Estilo para cada item da lista (checkbox + label) */
+/* Estilo para cada item da lista checkbox e label */
 li {
-  background-color: #ece2e23a; /* Fundo colorido */
+  background-color: #ece2e218;
+  display: flex;
   border-radius: 5px;
-  width: 200px;
-  padding: 5px; /* Espaçamento interno */
-  margin-bottom: 5px; /* Espaçamento entre itens */
+  width: 265px;
+  padding: 5px;
+  margin-bottom: 5px;
 }
+
 li:hover {
   background-color: transparent;
-  box-shadow: 0 0 50px 20px rgb(154, 104, 241);
+  box-shadow: 0 0 20px 15px rgb(154, 104, 241);
 }
 
+.checkbox:checked + li {
+  background-color: transparent;
+  box-shadow: 0 0 5px 10px rgb(154, 104, 241);
+  cursor: pointer; /* Mostra o cursor de mão ao passar o mouse */
+}
 /* Estilo para o checkbox */
 .checkbox {
-  margin-right: 10px; /* Espaçamento entre o checkbox e o label */
+  margin-right: 85px;
 }
 
+label {
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Estilos para o botão de fechar o modal */
 .close {
   position: absolute;
   top: 10px;
   right: 5px;
-  font-size: 50px; /* Tamanho da fonte maior */
-  display: inline-block; /* Torna o botão um elemento de bloco para definir largura e altura */
-  line-height: 10px; /* Centraliza o ícone verticalmente */
-  cursor: pointer; /* Mostra o cursor de mão ao passar o mouse */
+  font-size: 50px;
+  display: inline-block;
+  line-height: 10px;
+  cursor: pointer;
 }
 
+/* Estilos para o botão de criar turma */
 .submit-turma {
+  font-weight: 600;
   display: flex;
   justify-content: center;
   width: 150px;
   margin: 0 auto;
+  margin-top: 20px;
 }
 
 /* Estilos para a seção de confirmação */
 #confirmacaoContainer {
   display: none;
-  position: fixed; /* Importante para a centralização */
-  top: 40%; /* Centraliza verticalmente */
-  left: 50%; /* Centraliza horizontalmente */
-  transform: translate(-50%, -50%); /* Centraliza em ambas as direções */
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 300px;
   background-color: #ffffff;
   border: 1px solid #ccc;
@@ -209,6 +232,7 @@ li:hover {
 #cancelarButton {
   background-color: #ce1717;
 }
+
 #cancelarButton:hover {
   background-color: #ce17179d;
 }
