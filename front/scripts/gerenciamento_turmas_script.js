@@ -106,8 +106,13 @@ function closeModal() {
   modal.style.display = "none";
 }
 
+//aciona evento para abrir a tela de confirmacao e editar a criacao de turma
 const criarTurmaButton = document.querySelector(".submit-turma");
 criarTurmaButton.addEventListener("click", coletaDadosNovaTurma);
+
+//aciona evento para fechar a tela de confirmacao e editar a criacao de turma
+const cancelarButton = document.getElementById("cancelarButton");
+cancelarButton.addEventListener("click", closeConfirmacao);
 
 // Função para abrir tela e coletar os dados da nova turma
 async function coletaDadosNovaTurma() {
@@ -150,7 +155,7 @@ async function coletaDadosNovaTurma() {
     alert("O ano deve ter exatamente 4 dígitos.");
     return;
   }
-  const dataFormatada = `${diaString}/${mesString}/${ano}`;
+  const dataFormatada = `${dia}/${mes}/${ano}`;
 
   //captura grupos selecionados
   let gruposSelecionados = [];
@@ -190,11 +195,15 @@ async function coletaDadosNovaTurma() {
     console.log(novaTurmaData);
     criarNovaTurma(novaTurmaData);
   });
-
-  //aciona evento para fechar a tela de confirmacao e editar a criacao de turma
-  const cancelarButton = document.getElementById("cancelarButton");
-  cancelarButton.addEventListener("click", closeConfirmacao);
 }
+
+// Fechar modal de confirmação de criação
+function closeConfirmacao() {
+  const confirmacaoContainer = document.getElementById("confirmacaoContainer");
+  confirmacaoContainer.style.display = "none";
+}
+
+//Função para enviar as informações da nova turma em formato de string para o back end
 async function criarNovaTurma(novaTurmaData) {
   try {
     const response = await fetch(
@@ -204,6 +213,7 @@ async function criarNovaTurma(novaTurmaData) {
         body: JSON.stringify(novaTurmaData),
       }
     );
+
     // Verifica se a resposta da solicitação está OK (status 200)
     if (response.ok) {
       // Converte a resposta para o formato JSON
@@ -217,11 +227,6 @@ async function criarNovaTurma(novaTurmaData) {
   } catch (error) {
     console.error("Erro ao enviar os dados para o servidor: " + error);
   }
-}
-// Fechar modal de confirmação de criação
-function closeConfirmacao() {
-  const confirmacaoContainer = document.getElementById("confirmacaoContainer");
-  confirmacaoContainer.style.display = "none";
 }
 
 GetTurmas();
