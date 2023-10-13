@@ -66,6 +66,7 @@
             imagemIcon.width = 20;
             imagemIcon.height = 20;
             imagemIcon.id = `${turmaId}`; // Adiciona o ID da turma ao ícone de deletar
+            imagemIcon.addEventListener("click",() => requisitar_excluir_turma(`${turmaId}`))
 
             // Adiciona o ícone ao turmaSquare
             turmaSquare.appendChild(imagemIcon);
@@ -75,6 +76,13 @@
           }
         }
       }
+      /** Evento para a exclusão de turmas
+       * @param {string} id - o id único da turma
+      */
+      function requisitar_excluir_turma(id){
+        window.confirm("Atenção! A turma será excluída. Deseja prosseguir?")
+        fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`,{method:'DELETE'}).then(document.getElementById(id).remove())  
+      } 
     </script>
   </body>
 </html>
