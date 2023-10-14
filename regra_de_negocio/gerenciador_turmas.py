@@ -48,9 +48,11 @@ def criacao_turma(dados_nova_turma):
             if idGrupo in grupos:
                 print(f"Atualizando grupo {idGrupo} para turma {turma_novo_id}")
                 grupo_Nome = grupos[idGrupo]["nome"]
+                # Atualize a propriedade "turma" com um valor inteiro
                 grupos[idGrupo]["turma"] = int(
                     turma_novo_id
-                )  # Atualize a propriedade "turma" com um valor inteiro
+                ) 
+                # Cria os detalhes de alterações nos grupos
                 resposta["detalhes"].append(
                     f"Adicionado o grupo {grupo_Nome.capitalize()} a turma {turma_nome.capitalize()}"
                 )
