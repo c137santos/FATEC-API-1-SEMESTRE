@@ -1,34 +1,34 @@
 {
-  "1": {
-    "turma": 1,
-    "nome": "team bee"
-  },
-  "2": {
-    "turma": 2,
-    "nome": "team tatata"
-  },
-  "3": {
-    "turma": 1,
-    "nome": "team barbuleta"
-  },
-  "4": {
-    "turma": 0,
-    "nome": "strangers"
-  },
-  "5": {
-    "turma": 0,
-    "nome": "rider"
-  },
-  "6": {
-    "turma": 0,
-    "nome": "spies"
-  },
-  "7": {
-    "turma": 0,
-    "nome": "snowden"
-  },
-  "8": {
-    "turma": 0,
-    "nome": "last of us"
-  }
+    "1": {
+        "turma": 1,
+        "nome": "team bee"
+    },
+    "2": {
+        "turma": 2,
+        "nome": "team tatata"
+    },
+    "3": {
+        "turma": 1,
+        "nome": "team barbuleta"
+    },
+    "4": {
+        "turma": 7,
+        "nome": "strangers"
+    },
+    "5": {
+        "turma": 7,
+        "nome": "rider"
+    },
+    "6": {
+        "turma": 0,
+        "nome": "spies"
+    },
+    "7": {
+        "turma": 0,
+        "nome": "snowden"
+    },
+    "8": {
+        "turma": 0,
+        "nome": "last of us"
+    }
 }
