@@ -16,18 +16,18 @@ def busca_grupos():
 
 # Função para criar uma nova turma
 def criacao_turma(dados_nova_turma):
-    body_tratado = json.loads(dados_nova_turma)
+    dados_nova_turma_json = json.loads(dados_nova_turma)
     turmas = busca_turmas()
     grupos = busca_grupos()
 
     turma_novo_id = str(len(turmas) + 1)
 
     nova_turma = {
-        "nome": body_tratado["nome"],  # Acesse a propriedade "nome" do corpo
-        "professor": body_tratado[
+        "nome": dados_nova_turma_json["nome"],  # Acesse a propriedade "nome" do corpo
+        "professor": dados_nova_turma_json[
             "professor"
         ],  # Acesse a propriedade "professor" do corpo
-        "data_de_inicio": body_tratado[
+        "data_de_inicio": dados_nova_turma_json[
             "dataInicio"
         ],  # Acesse a propriedade "dataInicio" do corpo
     }
@@ -38,8 +38,8 @@ def criacao_turma(dados_nova_turma):
         "detalhes": [],
     }
 
-    if len(body_tratado["grupos"]) >= 1:
-        for idGrupo in body_tratado["grupos"]:
+    if len(dados_nova_turma_json["grupos"]) >= 1:
+        for idGrupo in dados_nova_turma_json["grupos"]:
             idGrupo = str(
                 idGrupo
             )  # transforma o inteiro da lista em str para comparar com as chaves
