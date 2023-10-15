@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
+        <link rel="stylesheet" href="style/custom.css">
+        <link rel="stylesheet" href="./style/index.css">
+        <title>Configurações Globais</title>
+    </head>
+    <header class="header">
+        <img src="./imagens/Logo.png" alt="logo">
+    </header>
+    <body>
+        <div class="card_global_settings">
+            <h1 class="texto_global_settings"> Quantidade de dias na sprint:</h1>
+            <h3 class="texto_global_settings" id="dias"></h3>
+            <h1 class="texto_global_settings"> Quantidade de sprints:</h1>
+            <h3 class="texto_global_settings" id="sprints"></h3>
+        </div>
+        <div class="muleke">
+            <img src="./imagens/mascote2.png" alt="mascote">
+        </div>
+    </body>
+</html>
+
+<script>
+GetTurmas()
+async function GetTurmas() {
+    try {
+        const response = await fetch(
+        "http://127.0.0.1:8080/api/v1/globalsettings/"
+        );
+        const globalSettings = await response.json();
+        mostraGlobalSettings(globalSettings)
+    } catch (error) {
+        console.error("Erro ao buscar dados da API -> ", error);
+        return null;
+    }
+}
+
+function mostraGlobalSettings(globalSettings) {
+    document.getElementById("dias").textContent=globalSettings.dias_sprint;
+    document.getElementById("sprints").textContent=globalSettings.quantidade_sprint;
+}
+
+</script>
