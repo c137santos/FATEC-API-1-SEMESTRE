@@ -13,7 +13,9 @@
   </head>
   <body>
     <header class="header">
-      <img src="./imagens/Logo.png" alt="logo">
+      <a href="index.html">
+        <img src="./imagens/Logo.png" alt="logo" />
+      </a>
     </header>
     <h1 class="title">Gerenciamento de Turmas:</h1>
     <div class="turma-container">
@@ -21,6 +23,47 @@
         <!-- As turmas serão adicionadas automaticamente aqui -->
       </div>
     </div>
+    <!-- Modal de Criação de Turma -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Criação de Turma</h2>
+
+        <!-- Formulário para criar uma turma -->
+        <div class="form-container">
+          <div id="turmaForm" class="data-content">
+            <label for="turmaNome">Nome da turma:</label>
+            <input type="text" id="turmaNome" class="input-field" />
+
+            <label for="professor">Professor responsável:</label>
+            <input type="text" id="professor" class="input-field" />
+
+            <label for="dataInicio">Data de início:</label>
+            <input type="date" id="dataInicio" class="input-field" />
+          </div>
+          <h3>Grupos:</h3>
+          <ul id="gruposSemTurmaList">
+            <!-- Grupos serão adicionados automaticamente aqui -->
+          </ul>
+          <button class="submit-turma">Criar turma</button>
+
+          <!-- Modal de confirmação -->
+          <div id="confirmacaoContainer" style="display: none">
+            <p><strong>Confirme os dados da turma:</strong></p>
+            <p>Nome da Turma: <span id="turmaNomeConfirmacao"></span></p>
+            <p>Professor: <span id="professorConfirmacao"></span></p>
+            <p>Data de Início: <span id="dataInicioConfirmacao"></span></p>
+            <p>
+              Grupos Selecionados:
+              <span id="gruposSelecionadosConfirmacao"></span>
+            </p>
+            <button id="confirmarButton" type="submit">Confirmar</button>
+            <button id="cancelarButton">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="add-turma-button">Adicionar Turma</button>
     <!-- Moleke -->
     <div class="muleke">
       <img src="./imagens/mascote2.png" alt="mascote" />
