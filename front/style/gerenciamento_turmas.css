@@ -1,4 +1,5 @@
 /* Estilos gerais para o corpo da página */
+/* Estilos gerais para o corpo da página */
 body {
   display: flex;
   flex-direction: column;
@@ -6,28 +7,38 @@ body {
 }
 
 /* Estilos para o cabeçalho */
+/* Estilos para o cabeçalho */
 .header {
   width: 100%;
   display: flex;
   justify-content: center;
+  justify-content: center;
 }
 
 /* Estilos para o contêiner principal das turmas */
+/* Estilos para o contêiner principal das turmas */
 .turma-container {
+  width: 800px;
+  min-height: 400px;
+  max-height: 460px;
   width: 800px;
   min-height: 400px;
   max-height: 460px;
   padding: 20px;
   margin-bottom: 20px;
   border: 0.2px solid #cccccc23;
+  border: 0.2px solid #cccccc23;
   border-radius: 5px;
+  background-color: #f7f7f700;
   background-color: #f7f7f700;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
+  overflow-y: auto;
 }
 
+/* Estilos para o contêiner flexível das turmas */
 /* Estilos para o contêiner flexível das turmas */
 .flex-warp-container {
   width: 100%;
@@ -38,6 +49,7 @@ body {
   gap: 13px;
 }
 
+/* Estilos para os quadrados representando as turmas */
 /* Estilos para os quadrados representando as turmas */
 .turma-square {
   position: relative;
