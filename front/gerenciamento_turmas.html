@@ -5,76 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gerenciamento de Turma</title>
     <link rel="stylesheet" href="../front/style/gerenciamento_turmas.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
-    <link rel="stylesheet" href="style/custom.css">
-  </head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
+    />
+    <link rel="stylesheet" href="style/custom.css" />
   </head>
   <body>
+    <header class="header">
+      <a href="index.html">
+        <img src="./imagens/Logo.png" alt="logo" />
+      </a>
+    </header>
     <h1 class="title">Gerenciamento de Turmas:</h1>
     <div class="turma-container">
       <div class="flex-warp-container">
         <!-- As turmas serão adicionadas automaticamente aqui -->
       </div>
     </div>
-    <script>
-      GetTurmas()
-      async function GetTurmas() {
-        try {
-          const response = await fetch(
-            "http://127.0.0.1:8080/api/v1/turmas/get"
-          );
-          const turmaData = await response.json();
-          console.log(turmaData);
+    <!-- Modal de Criação de Turma -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Criação de Turma</h2>
 
-          // Chama a função para exibir as turmas
-          exibirTurmas(turmaData);
-        } catch (error) {
-          console.error("Erro ao buscar dados da API -> ", error);
-          return null;
-        }
-      }
+        <!-- Formulário para criar uma turma -->
+        <div class="form-container">
+          <div id="turmaForm" class="data-content">
+            <label for="turmaNome">Nome da turma:</label>
+            <input type="text" id="turmaNome" class="input-field" />
 
-      // Função para exibir as turmas no DOM
-      function exibirTurmas(Turmadata) {
-        const container = document.querySelector(".flex-warp-container");
-        // Itera sobre os objetos do JSON e cria elementos HTML para cada turma
-        for (const turmaId in Turmadata) {
-          if (Turmadata.hasOwnProperty(turmaId)) {
-            const turma = Turmadata[turmaId];
+            <label for="professor">Professor responsável:</label>
+            <input type="text" id="professor" class="input-field" />
 
-            // Cria um elemento div para representar uma turma
-            const turmaSquare = document.createElement("div");
-            turmaSquare.className = "turma-square";
-            turmaSquare.id = `${turmaId}`; // Adiciona o ID da turma ao turmaSquare
+            <label for="dataInicio">Data de início:</label>
+            <input type="date" id="dataInicio" class="input-field" />
+          </div>
+          <h3>Grupos:</h3>
+          <ul id="gruposSemTurmaList">
+            <!-- Grupos serão adicionados automaticamente aqui -->
+          </ul>
+          <button class="submit-turma">Criar turma</button>
 
-            // Cria elementos de parágrafo para o nome da turma e nome do professor
-            const nomeTurma = document.createElement("p");
-            nomeTurma.textContent = `Nome da Turma: ${turma.nome}`;
-
-            const nomeProfessor = document.createElement("p");
-            nomeProfessor.textContent = `Professor: ${turma.professor}`;
-
-            // Adiciona os parágrafos ao turmaSquare
-            turmaSquare.appendChild(nomeTurma);
-            turmaSquare.appendChild(nomeProfessor);
-
-            // Cria um ícone de lixeira para deletar a turma
-            const imagemIcon = document.createElement("img");
-            imagemIcon.src = "../front/icon/trash-icon.svg"; // Substitua pelo caminho correto da imagem
-            imagemIcon.alt = "Ícone";
-            imagemIcon.className = "trash-icon";
-            imagemIcon.width = 20;
-            imagemIcon.height = 20;
-            imagemIcon.id = `${turmaId}`; // Adiciona o ID da turma ao ícone de deletar
-
-            // Adiciona o ícone ao turmaSquare
-            turmaSquare.appendChild(imagemIcon);
-
-            // Adiciona o turmaSquare ao container
-            container.appendChild(turmaSquare);
-          }
-        }
-      }
-    </script>
+          <!-- Modal de confirmação -->
+          <div id="confirmacaoContainer" style="display: none">
+            <p><strong>Confirme os dados da turma:</strong></p>
+            <p>Nome da Turma: <span id="turmaNomeConfirmacao"></span></p>
+            <p>Professor: <span id="professorConfirmacao"></span></p>
+            <p>Data de Início: <span id="dataInicioConfirmacao"></span></p>
+            <p>
+              Grupos Selecionados:
+              <span id="gruposSelecionadosConfirmacao"></span>
+            </p>
+            <button id="confirmarButton" type="submit">Confirmar</button>
+            <button id="cancelarButton">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="add-turma-button">Adicionar Turma</button>
+    <!-- Moleke -->
+    <div class="muleke">
+      <img src="./imagens/mascote2.png" alt="mascote" />
+    </div>
+    <script src="/front/scripts/gerenciamento_turmas_script.js"></script>
   </body>
 </html>
