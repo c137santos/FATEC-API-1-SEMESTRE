@@ -29,7 +29,7 @@ Desenvolver uma solução para a instituição de ensino PBLTex, especializada e
 
 ### Documentação do projeto
 
-Para acessar a documentação do projeto, fique a vontade para ver nosso site. 
+Para acessar a documentação do projeto, fique a vontade para ver nosso site.
 
 [Documentação FATEC API](https://github.com/ClaraSantosmf/FATEC-API-1S-DOCUMENTS)
 
@@ -70,13 +70,15 @@ Para acessar a documentação do projeto, fique a vontade para ver nosso site.
 </table>
 
 ### Priorização das Sprints
-O Kanbam utilizado possui quatro colunas. Backlog geral do projeto se encontra em aba de backlog. As tasks priorizada para a sprint que está ocorrendo na aba Priorizado. As task em execução estão na aba Coding, e as tasks já finalizadas na aba Done. 
+
+O Kanbam utilizado possui quatro colunas. Backlog geral do projeto se encontra em aba de backlog. As tasks priorizada para a sprint que está ocorrendo na aba Priorizado. As task em execução estão na aba Coding, e as tasks já finalizadas na aba Done.
 
 [Board Kanbam com a priorização](https://github.com/users/ClaraSantosmf/projects/5)
 
 Ao abrir os cards do kanbam será possível ver a priorização no lado direito como um dos atributos dos cards, com as seguintes nomenclaturas.
 
 Legenda Priorização:
+
 <table border="1 px">
     <tr>
         <th> Tipo </th>
@@ -96,11 +98,11 @@ Legenda Priorização:
     </tr>
 </table>
 
-Obs: Os cards na coluna "priorizado" são os cards escolhidos para serem feitos na próxima sprint. 
+Obs: Os cards na coluna "priorizado" são os cards escolhidos para serem feitos na próxima sprint.
 
 [Aqui se encontra os detalhamentos dos épicos](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epicos) que será desenvolvdo ao longo de todo o projeto.
 
-Nos hiperlinks, você pode encontrar as tasks detalhadas da próxima sprint. 
+Nos hiperlinks, você pode encontrar as tasks detalhadas da próxima sprint.
 
 
 ## Board de Produto
@@ -120,12 +122,15 @@ Nos hiperlinks, você pode encontrar as tasks detalhadas da próxima sprint.
 # Produto
 
 ### Tecnologias e Ferramentas Utilizadas
+
 ![alt text](/imgs_readme/tecnologias_api.png)
 
 ### Como configurar e rodar o projeto localmente
+
 [Como rodar o projeto localmente](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/biblioteca/#como-configurar-o-projeto)
 
 ### Wireframe do Produto
+
 [Wireframe e fluxos do produto](https://drive.google.com/file/d/11kEv7yY0BUoWFASJIspfX-r-RI8AM4cm/view?usp=sharing)
 
 
