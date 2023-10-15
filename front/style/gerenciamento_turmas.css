@@ -1,57 +1,34 @@
+/* Estilos gerais para o corpo da página */
 body {
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
 }
 
+/* Estilos para o cabeçalho */
 .header {
-  background-color: #3498db;
-  text-align: left;
-  padding: 5px 0; /* Adicione espaçamento apenas na parte superior e inferior */
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
 }
 
-.logo {
-  font-weight: bold;
-  font-size: 20px;
-  margin-left: 20px; /* Adicione espaçamento à esquerda */
-  color: #fff;
-}
-
-.dots {
-  font-size: 24px;
-  margin-right: 20px; /* Adicione espaçamento à direita */
-  color: #fff;
-}
-
-.title {
-  font-size: 30px;
-  color: #000;
-  margin: 20px 60px;
-  text-align: center; /* Centralizar horizontalmente */
-}
-
+/* Estilos para o contêiner principal das turmas */
 .turma-container {
-  background-color: #f7f7f7;
-  padding: 20px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc; /* Adicione uma borda sutil */
-  border-radius: 5px;
   width: 800px;
   min-height: 400px;
-  max-height: 600px;
-  overflow-y: auto;
+  max-height: 460px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 0.2px solid #cccccc23;
+  border-radius: 5px;
+  background-color: #f7f7f700;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: auto;
 }
 
+/* Estilos para o contêiner flexível das turmas */
 .flex-warp-container {
   width: 100%;
   display: flex;
@@ -61,11 +38,12 @@ body {
   gap: 13px;
 }
 
+/* Estilos para os quadrados representando as turmas */
 .turma-square {
   position: relative;
   width: calc(25% - 10px);
   height: 150px;
-  background-color: #e6d8d3;
+  background-color: #ffffff;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -74,6 +52,12 @@ body {
   cursor: pointer;
 }
 
+.turma-square:hover {
+  background-color: transparent;
+  box-shadow: 0 0 50px 20px rgb(154, 104, 241);
+}
+
+/* Estilos para parágrafos dentro dos quadrados das turmas */
 .turma-square p {
   font-size: 15px;
   margin: 2px;
@@ -81,17 +65,12 @@ body {
   color: #000000;
 }
 
+/* Estilos para o ícone de lixeira */
 .trash-icon {
   position: absolute;
   bottom: 5px;
   right: 5px;
-  width: 20px; /* Defina a largura desejada para o ícone */
-  height: 20px; /* Defina a altura desejada para o ícone */
-  fill: #fff; /* Defina a cor do ícone como branco ou a cor desejada */
-  cursor: pointer; /* Mudar o cursor para indicar que é clicável */
-}
-
-.turma-square:hover {
-  background-color: #258cd1; /* Cor de fundo ao passar o mouse */
-  color: #fff; /* Cor do texto ao passar o mouse */
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
