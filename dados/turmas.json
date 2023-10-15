@@ -20,18 +20,8 @@
         "data_de_inicio": "21/02/2023"
     },
     "5": {
-        "nome": "teste",
-        "professor": "prof teste",
-        "data_de_inicio": "13/10/2023"
-    },
-    "6": {
-        "nome": " ewqew",
-        "professor": "qewqeq",
-        "data_de_inicio": "13/10/2023"
-    },
-    "7": {
-        "nome": "Teste",
-        "professor": "Teste",
-        "data_de_inicio": "13/10/2023"
+        "nome": "Turma Teste",
+        "professor": "ProfessorTeste",
+        "data_de_inicio": "15/10/2023"
     }
 }

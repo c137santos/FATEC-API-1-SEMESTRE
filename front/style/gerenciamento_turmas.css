@@ -12,11 +12,15 @@ body {
   justify-content: center;
 }
 
+.title {
+  margin-top: 5px;
+}
+
 /* Estilos para o contêiner principal das turmas */
 .turma-container {
   width: 800px;
-  min-height: 400px;
-  max-height: 460px;
+  min-height: 300px;
+  max-height: 300px;
   padding: 20px;
   margin-bottom: 20px;
   border: 0.2px solid #cccccc23;
@@ -96,8 +100,8 @@ body {
   background-image: url("../imagens/Fundo.png"),
     linear-gradient(90deg, #d24d5d 0%, #a952a3 30%, #9a68f1 100%);
   width: 40%;
-  height: 550px;
-  margin: 100px auto;
+  height: 530px;
+  margin: 20px auto;
   padding: 20px;
   border-radius: 5px;
   position: relative;
@@ -124,6 +128,10 @@ body {
   border-radius: 5px;
 }
 
+#titulo_modal {
+  margin-top: 5px;
+}
+
 h2 {
   text-align: center;
 }
@@ -143,6 +151,7 @@ ul {
   list-style-type: none;
   padding: 0;
   margin-top: 0;
+  margin-bottom: 5px;
   width: 286px;
   min-height: 160px;
   max-height: 160px;
@@ -197,7 +206,7 @@ label {
   justify-content: center;
   width: 150px;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 /* Estilos para a seção de confirmação */
