@@ -15,7 +15,7 @@ URLS = {
     URL("/api/v1/alunos/:id/edit"): view.edit_aluno,
     URL("/api/v1/globalsettings/"): view.get_global_settings,
     URL("/api/v1/turmas/get"): view.get_turmas,
-    URL("api/v1/globalsettings/editar"):
+    URL("/api/v1/globalsettings/editar"): view.alterar_global_settings,
 }
 
 
