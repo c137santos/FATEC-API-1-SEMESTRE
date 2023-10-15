@@ -9,15 +9,14 @@ from regra_de_negocio.service import (
 from regra_de_negocio.service import busca_dados_json, busca_turmas
 from regra_de_negocio.global_settings import read_global_settings
 from regra_de_negocio.gerenciador_turmas import excluir_turma
+from regra_de_negocio.gerenciador_turmas import editar_turma
 
 def hola_mundinho(request):
     return HttpResponse("Olá Mundo")
 
-
 def get_arquivos_json(request):
     dados = busca_dados_json()
     return JsonResponse(dados)
-
 
 def edit_aluno(request, id):
     return JsonResponse({"message": f"Editando o aluno com ID {id}."})
@@ -30,6 +29,10 @@ def get_turmas(request):
     turmas_data = busca_turmas()
     return JsonResponse(turmas_data)
 
+def api_v1_turmas_editar(requisicao, id):
+    turma = json.loads(requisicao.body)
+    resultado = editar_turma(id, turma["nome"], turma["professor"], turma["data_de_inicio"])
+    return JsonResponse({"mensagem": resultado})
 
 def get_grupos(request):
     grupos_data = buscar_grupos()
