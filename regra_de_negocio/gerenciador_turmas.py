@@ -77,3 +77,13 @@ def salvar_turmas(turmas):
 def salvar_grupos(grupos):
     with open("dados/grupos.json", "w", encoding="utf-8") as f:
         json.dump(grupos, f, indent=4)
+
+        
+def excluir_turma(id):
+    turmas = busca_turmas()
+    if id in turmas.keys():
+        turmas.pop(id)
+        salvar_turmas(turmas)
+        return True
+    else:
+        return False
