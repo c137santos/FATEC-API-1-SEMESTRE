@@ -6,11 +6,10 @@ from regra_de_negocio.service import (
     cria_turma,
 )
 
-from regra_de_negocio.service import busca_dados_json, busca_turmas
-from regra_de_negocio.global_settings import read_global_settings
-from regra_de_negocio.gerenciador_turmas import excluir_turma
-from regra_de_negocio.gerenciador_turmas import editar_turma
+from regra_de_negocio.global_settings import read_global_settings, edit_global_settings
+from regra_de_negocio.gerenciador_turmas import excluir_turma, editar_turma
 
+import json
 def hola_mundinho(request):
     return HttpResponse("Olá Mundo")
 
@@ -24,6 +23,16 @@ def edit_aluno(request, id):
 def get_global_settings(request):
     global_settings = read_global_settings()
     return JsonResponse(global_settings)
+
+def alterar_global_settings(request):
+    alteracoes = json.loads(request.body)
+    try:
+        edit_global_settings(alteracoes["sprints"], alteracoes["dias"])
+        return JsonResponse({"message": "Editou global settings"})
+
+    except Exception as error:
+        JsonResponse(error)
+
 
 def get_turmas(request):
     turmas_data = busca_turmas()
