@@ -109,8 +109,8 @@ Nos hiperlinks, você pode encontrar as tasks detalhadas da próxima sprint.
 
 | Prioridade | Épicos planejados | UserStory | Sprint |
 | ------------- | ------------- | ------------- | ------------- |
-| Alta | [**Gerenciamento de Turmas:**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-2-gerenciamento-de-turmas_1) | Como administrador, quero realizar CRUD em relação às turmas| [#2]  |
-| Alta | [**Global Settings**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-6-configuracoes-globais_1)  | Como administrador, quero realizar CRUD em relação ao Global Settings|[#2]  |
+| Alta | [**Gerenciamento de Turmas:**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-2-gerenciamento-de-turmas_1) | Como administrador, quero realizar CRUD em relação às turmas| [[#2]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/2?closed=1)  |
+| Alta | [**Global Settings**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-6-configuracoes-globais_1)  | Como administrador, quero realizar CRUD em relação ao Global Settings|[[#2]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/2?closed=1)  |
 | Alta | [**Gerenciamento de Grupo**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-3-gerenciamento-de-grupos) | Como administrador, quero realizar o CRUD para grupos, organizando os alunos e facilitar a gestão. | [#3]  |
 | Alta | [**Gerenciamento de Alunos**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-4-gerenciamento-de-alunos) | Como administrador, desejo realizar operações CRUD relacionadas aos alunos, no sistema. | [#3]  |
 | Média | [**Gerenciamento de Ciclos de Entrega e Scores:**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-5-gerenciamento-de-ciclos-de-entrega-e-scores) | Como administrador, desejo ter a capacidade de criar e gerenciar ciclos de entrega e pontuações (scores) associados a esses ciclos para acompanhar o desempenho dos alunos. Sendo possível as operações do CRUD | [#4] |
