@@ -1,8 +1,9 @@
-import sys
-sys.path.append('.')
 import views.funcoes_request_response as view
-from wgsi import JsonResponse
 import re
+import sys
+from wgsi import JsonResponse
+
+sys.path.append(".")
 
 
 def URL(pattern):
@@ -15,13 +16,15 @@ URLS = {
     URL("/get_json"): view.get_arquivos_json,
     URL("/api/v1/alunos/:id/edit"): view.edit_aluno,
     URL("/api/v1/globalsettings/"): view.get_global_settings,
-    URL("/api/v1/turmas/get"): view.get_turmas,
-    URL("/api/v1/turmas/:id/editar"): view.api_v1_turmas_editar,
-    URL("/api/v1/grupos/get"): view.get_grupos,
-    URL("/api/v1/nova_turma/criar"): view.post_turma,
-    URL("/api/v1/turmas/excluir/:id"):view.api_v1_turmas_excluir,
     URL("/api/v1/globalsettings/editar"): view.alterar_global_settings,
+    URL("/api/v1/turmas/get"): view.get_turmas,
+    URL("/api/v1/turmas/get_turma/:id"): view.obtem_turma_especifica,
+    URL("/api/v1/turmas/:id/editar"): view.editar_turma,
+    URL("/api/v1/grupos/get"): view.get_grupos,
+    URL("/api/v1/turmas/criar"): view.post_turma,
+    URL("/api/v1/turmas/excluir/:id"): view.api_v1_turmas_excluir,
 }
+
 
 def url_match(path):
     for pattern, view_func in URLS.items():

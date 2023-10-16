@@ -83,6 +83,17 @@ body {
   cursor: pointer;
 }
 
+
+/* Estilos para o ícone de lixeira */
+.edit-icon {
+  position: absolute;
+  bottom: 5px;
+  width: 25px;
+  height: 27px;
+  cursor: pointer;
+}
+
+
 /* Estilos para o modal */
 .modal {
   display: none;
