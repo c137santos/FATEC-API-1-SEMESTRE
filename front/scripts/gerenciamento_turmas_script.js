@@ -44,9 +44,18 @@ function exibirTurmas(turmadata) {
       imagemIcon.alt = "Ícone";
       imagemIcon.className = "trash-icon";
       imagemIcon.id = `${turmaId}`; // Adiciona o ID da turma ao ícone de deletar
+      imagemIcon.addEventListener("click",() => requisitar_excluir_turma(`${turmaId}`))
+
+      const imagemIconEdit = document.createElement("img")
+      imagemIconEdit.src = "../front/icon/edit-icon.svg"
+      imagemIconEdit.alt ="Icone"
+      imagemIconEdit.className = "edit-icon"
+      imagemIconEdit.id = `${turmaId}`;
+      imagemIconEdit.addEventListener("click",() => requisitar_editar_turma(`${turmaId}`))
 
       // Adiciona o ícone ao turmaSquare
       turmaSquare.appendChild(imagemIcon);
+      turmaSquare.appendChild(imagemIconEdit);
 
       // Adiciona o turmaSquare ao container
       container.appendChild(turmaSquare);
@@ -209,7 +218,7 @@ function closeConfirmacao() {
 async function criarNovaTurma(novaTurmaData) {
   try {
     const response = await fetch(
-      `http://127.0.0.1:8080/api/v1/nova_turma/criar`,
+      `http://127.0.0.1:8080/api/v1/turmas/criar`,
       {
         method: "POST",
         body: JSON.stringify(novaTurmaData),
@@ -230,5 +239,17 @@ async function criarNovaTurma(novaTurmaData) {
     console.error("Erro ao enviar os dados para o servidor: " + error);
   }
 }
+
+function requisitar_excluir_turma(id){
+  if(window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")){
+    fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`,{method:'DELETE'}).then(document.getElementById(id).remove())
+  }  
+}
+
+
+function requisitar_editar_turma(id) {
+  window.location.href = 'editar_turma.html?id=' + id;
+}
+
 
 GetTurmas();

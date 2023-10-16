@@ -7,14 +7,8 @@ def busca_turmas():
         turmas_data = json.load(f)
     return turmas_data
 
-#Editando turmas:
-#Essa função tem a finalidade de editar as informações de uma turma existente.
-# Parâmetros: 
-#   id da turma existente, 
-#   nome, professor e data de início (campos a serem modificados)
-# Retorno:
-#   True se bem sucedido / False caso não exista o id solicitado
-def editar_turma(id, nome, professor, data_de_inicio):
+
+def editar_turma_svc(id, nome, professor, data_de_inicio):
     turmas = busca_turmas()
     if id in turmas.keys():
         turma = turmas[id]
@@ -25,17 +19,7 @@ def editar_turma(id, nome, professor, data_de_inicio):
         return True
     else:
         return False
-    
-# Retorna:
-#    um dicionário onde cada turma é um par chave-valor
-def busca_turmas():
-    return {
-        "1": {
-            "nome": "turma1",
-            "professor": "Nadalete",
-            "data_de_inicio": "21/02/2023"
-        }
-    }
+
 
 # Parâmetro: um dicionário onde cada turma é um par chave-valor
 # Retorna:
@@ -45,6 +29,7 @@ def _salvar_turmas(turmas):
     with open("dados/turmas.json", "w", encoding="utf-8") as arquivo:
         arquivo.write(dados)
     return True
+
 
 def busca_grupos():
     with open("dados/grupos.json", "r", encoding="utf-8") as f:
@@ -87,9 +72,7 @@ def criacao_turma(dados_nova_turma):
                 print(f"Atualizando grupo {idGrupo} para turma {turma_novo_id}")
                 grupo_Nome = grupos[idGrupo]["nome"]
                 # Atualize a propriedade "turma" com um valor inteiro
-                grupos[idGrupo]["turma"] = int(
-                    turma_novo_id
-                ) 
+                grupos[idGrupo]["turma"] = int(turma_novo_id)
                 # Cria os detalhes de alterações nos grupos
                 resposta["detalhes"].append(
                     f"Adicionado o grupo {grupo_Nome.capitalize()} a turma {turma_nome.capitalize()}"
@@ -104,12 +87,13 @@ def criacao_turma(dados_nova_turma):
     _salvar_grupos(grupos)
     return resposta
 
+
 # Função para salvar grupos em um arquivo JSON
 def _salvar_grupos(grupos):
     with open("dados/grupos.json", "w", encoding="utf-8") as f:
         json.dump(grupos, f, indent=4)
 
-        
+
 def excluir_turma(id):
     turmas = busca_turmas()
     if id in turmas.keys():
