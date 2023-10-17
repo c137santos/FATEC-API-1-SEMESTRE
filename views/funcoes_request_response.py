@@ -74,6 +74,7 @@ def api_v1_turmas_excluir(request, id):
     resultado = excluir_turma(id)
     return JsonResponse({"mensagem": resultado})
 
+
 def api_v1_excluir_grupos(request, id):
     resposta = excluir_grupo(id)
     return JsonResponse({"Mensagem: ": resposta})

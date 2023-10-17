@@ -1,5 +1,6 @@
 import json
-from gerenciador_grupos import busca_grupos, _salvar_grupos
+from regra_de_negocio.gerenciador_grupos import busca_grupos, _salvar_grupos
+
 
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
 def busca_turmas():
@@ -29,6 +30,7 @@ def _salvar_turmas(turmas):
     with open("dados/turmas.json", "w", encoding="utf-8") as arquivo:
         arquivo.write(dados)
     return True
+
 
 # Função para criar uma nova turma
 def criacao_turma(dados_nova_turma):
@@ -79,6 +81,7 @@ def criacao_turma(dados_nova_turma):
     _salvar_turmas(turmas)
     _salvar_grupos(grupos)
     return resposta
+
 
 def excluir_turma(id):
     turmas = busca_turmas()
