@@ -8,7 +8,7 @@ body {
 }
 
 .header {
-  background-color: #3498db;
+  background-color: #030b11;
   text-align: left;
   padding: 5px 0; /* Adicione espaçamento apenas na parte superior e inferior */
   width: 100%;
@@ -32,7 +32,7 @@ body {
 
 .title {
   font-size: 30px;
-  color: #000;
+  color: #1a0b0b;
   margin: 20px 60px;
   text-align: center; /* Centralizar horizontalmente */
 }
@@ -41,7 +41,7 @@ body {
   background-color: #f7f7f7;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #ccc; /* Adicione uma borda sutil */
+  border: 1px solid #680303; /* Adicione uma borda sutil */
   border-radius: 5px;
   width: 800px;
   min-height: 400px;
@@ -109,7 +109,7 @@ body {
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: #c5baba;
   width: 40%;
   height: 550px;
   margin: 100px auto;
@@ -142,7 +142,7 @@ body {
   width: 220px;
   padding: 2px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #2929cf;
   border-radius: 5px;
 }
 
@@ -167,7 +167,7 @@ h3 {
 .mostra-grupos li {
   display: flex; /* Usar flexbox para alinhar itens horizontalmente */
   align-items: center; /* Centralizar verticalmente */
-  background-color: #f0f0f0; /* Fundo colorido */
+  background-color: #942b2b; /* Fundo colorido */
   padding: 5px; /* Espaçamento interno */
   margin-bottom: 5px; /* Espaçamento entre itens */
 }
