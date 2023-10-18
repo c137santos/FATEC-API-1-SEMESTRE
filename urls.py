@@ -14,6 +14,7 @@ def URL(pattern):
 
 URLS = {
     URL("/get_json"): view.get_arquivos_json,
+    URL("/api/v1/alunos/listar"): view.get_alunos,
     URL("/api/v1/alunos/atualizar/:id"): view.edit_aluno,
     URL("/api/v1/globalsettings/"): view.get_global_settings,
     URL("/api/v1/globalsettings/editar"): view.alterar_global_settings,

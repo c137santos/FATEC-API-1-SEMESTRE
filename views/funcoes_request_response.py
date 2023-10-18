@@ -4,6 +4,7 @@ from regra_de_negocio.service import (
     cria_turma
 )
 
+from regra_de_negocio.gerenciador_alunos import buscando_alunos
 from regra_de_negocio.global_settings import read_global_settings, edit_global_settings
 from regra_de_negocio.gerenciador_turmas import busca_turmas, excluir_turma, editar_turma_svc
 from regra_de_negocio.gerenciador_grupos import buscando_grupos, excluir_grupo
@@ -19,6 +20,9 @@ def get_arquivos_json(request):
     dados = busca_dados_json()
     return JsonResponse(dados)
 
+def get_alunos(request):
+    alunos_data = buscando_alunos()
+    return JsonResponse(alunos_data)
 
 def edit_aluno(request, id):
     return JsonResponse({"message": f"Editando o aluno com ID {id}."})
