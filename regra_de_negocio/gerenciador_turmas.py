@@ -49,7 +49,7 @@ def criacao_turma(dados_nova_turma, grupos):
     dados_nova_turma_json = json.loads(dados_nova_turma)
     turmas = busca_turmas()
 
-    turma_novo_id = gerando_novoID(turmas)
+    nova_turma_id = gerando_novoID(turmas)
 
     nova_turma = {
         "nome": dados_nova_turma_json["nome"],  # Acesse a propriedade "nome" do corpo
@@ -60,8 +60,8 @@ def criacao_turma(dados_nova_turma, grupos):
             "dataInicio"
         ],  # Acesse a propriedade "dataInicio" do corpo
     }
-    turmas[turma_novo_id] = nova_turma
-    turma_nome = turmas[turma_novo_id]["nome"]
+    turmas[nova_turma_id] = nova_turma
+    turma_nome = turmas[nova_turma_id]["nome"]
     resposta = {
         "mensagem": f"Criação da turma {turma_nome.capitalize()} realizada com sucesso!",
         "detalhes": [],
@@ -75,9 +75,9 @@ def criacao_turma(dados_nova_turma, grupos):
             print(f"ID do grupo a ser atualizado: {idGrupo}")
             # Verifique se o ID do grupo existe nos grupos
             if idGrupo in grupos: #pega esse id da lista e procura ele no grupos.json
-                print(f"Atualizando grupo {idGrupo} para turma {turma_novo_id}")
+                print(f"Atualizando grupo {idGrupo} para turma {nova_turma_id}")
                 grupo_Nome = grupos[idGrupo]["nome"] #Pega o nome do grupo
-                grupos[idGrupo]["turma"] = int(turma_novo_id) # Atualize a propriedade "turma" do grupo com um valor inteiro
+                grupos[idGrupo]["turma"] = int(nova_turma_id) # Atualize a propriedade "turma" do grupo com um valor inteiro
                 # Cria os detalhes de alterações nos grupos
                 resposta["detalhes"].append(
                     f"Adicionado o grupo {grupo_Nome.capitalize()} a turma {turma_nome.capitalize()}"

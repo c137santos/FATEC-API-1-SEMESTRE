@@ -6,7 +6,7 @@ from regra_de_negocio.service import (
 
 from regra_de_negocio.global_settings import read_global_settings, edit_global_settings
 from regra_de_negocio.gerenciador_turmas import busca_turmas, excluir_turma, editar_turma_svc
-from regra_de_negocio.gerenciador_grupos import buscando_grupos, excluir_grupo
+from regra_de_negocio.gerenciador_grupos import buscando_grupos, excluindo_grupo
 
 import json
 
@@ -73,6 +73,6 @@ def api_v1_turmas_excluir(request, id):
     return JsonResponse({"mensagem": resultado})
 
 
-def api_v1_grupos_excluir(request, id):
-    resposta = excluir_grupo(id)
+def excluir_grupo(request, id):
+    resposta = excluindo_grupo(id)
     return JsonResponse({"Mensagem: ": resposta})

@@ -27,7 +27,7 @@ def _salvar_grupos(grupos):
         json.dump(grupos, f, indent=4)
 
 
-def excluir_grupo(id):
+def excluindo_grupo(id):
     grupos = buscando_grupos()
     grupo_nome = (
         None  # Inicializa o nome do grupo como None em caso de nao ser encontrado
