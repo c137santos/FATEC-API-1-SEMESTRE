@@ -2,9 +2,24 @@ import json
 
 
 def buscando_grupos():
-    with open("dados/grupos.json", "r", encoding="utf-8") as f:
-        grupos_Data = json.load(f)
-    return grupos_Data
+    return {
+            "1": {
+            "turma": 1,
+            "nome": "team bee"
+            },
+            "2": {
+                "turma": 2,
+                "nome": "team tatata"
+            },
+            "3": {
+                "turma": 1,
+                "nome": "team barbuleta"
+            },
+            "4": {
+                "turma": 0,
+                "nome": "strangers"
+            }
+    }
 
 
 def _salvar_grupos(grupos):
