@@ -42,8 +42,8 @@ body {
   gap: 13px;
 }
 
-/* Estilos para os quadrados representando as turmas */
-.turma-square {
+/* Estilos para os quadrados representando os alunos */
+.aluno-square {
   position: relative;
   width: calc(25% - 10px);
   height: 150px;
