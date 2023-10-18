@@ -1,27 +1,17 @@
 {
-    "1": {
-        "nome": "ADS",
-        "professor": "Nadalete",
-        "data_de_inicio": "21/02/2023"
-    },
-    "2": {
-        "nome": "Turma Teste",
-        "professor": "Professora teste",
-        "data_de_inicio": "2023-10-11"
-    },
-    "3": {
-        "nome": "Inteligencia Artifical",
-        "professor": "Grugru",
-        "data_de_inicio": "16/10/2023"
-    },
-    "4": {
-        "nome": "testeteste",
-        "professor": "reere",
-        "data_de_inicio": "16/10/2023"
-    },
-    "5": {
-        "nome": "Teste",
-        "professor": "Teste",
-        "data_de_inicio": "17/10/2023"
-    }
+  "1": {
+    "nome": "ADS",
+    "professor": "Nadalete",
+    "data_de_inicio": "21/02/2023"
+  },
+  "2": {
+    "nome": "Turma Teste",
+    "professor": "Professora teste",
+    "data_de_inicio": "2023-10-11"
+  },
+  "3": {
+    "nome": "Inteligencia Artifical",
+    "professor": "Grugru",
+    "data_de_inicio": "16/10/2023"
+  }
 }

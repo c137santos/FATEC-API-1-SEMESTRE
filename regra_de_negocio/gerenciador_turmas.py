@@ -1,5 +1,4 @@
 import json
-from regra_de_negocio.gerenciador_grupos import _salvar_grupos
 
 
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
@@ -81,7 +80,6 @@ def criacao_turma(dados_nova_turma, grupos):
 
     # Salve as alterações nos arquivos JSON
     _salvar_turmas(turmas)
-    _salvar_grupos(grupos)
     return resposta
 
 
