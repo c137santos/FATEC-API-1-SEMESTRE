@@ -1,6 +1,9 @@
 import views.funcoes_request_response as view
-from wgsi import JsonResponse
 import re
+import sys
+from wgsi import JsonResponse
+
+sys.path.append(".")
 
 
 def URL(pattern):
@@ -10,12 +13,16 @@ def URL(pattern):
 # Essa função tem objetivo de compreender os IDs que são passados na URL por meio da aplicação de regex.
 
 URLS = {
-    URL("/"): view.hola_mundinho,
     URL("/get_json"): view.get_arquivos_json,
-    URL("/api/v1/turmas/get"): view.get_turmas,
-    URL("/api/v1/grupo_semTurma/get"): view.grupo_sem_Turma,
     URL("/api/v1/alunos/:id/edit"): view.edit_aluno,
-    URL("/api/v1/get_grupos_alunos/:id/get"): view.get_grupos_alunos
+    URL("/api/v1/globalsettings/"): view.get_global_settings,
+    URL("/api/v1/globalsettings/editar"): view.alterar_global_settings,
+    URL("/api/v1/turmas/get"): view.get_turmas,
+    URL("/api/v1/turmas/get_turma/:id"): view.obtem_turma_especifica,
+    URL("/api/v1/turmas/:id/editar"): view.editar_turma,
+    URL("/api/v1/grupos/get"): view.get_grupos,
+    URL("/api/v1/turmas/criar"): view.post_turma,
+    URL("/api/v1/turmas/excluir/:id"): view.api_v1_turmas_excluir,
 }
 
 

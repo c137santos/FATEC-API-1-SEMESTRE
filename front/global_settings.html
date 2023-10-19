@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
+        <link rel="stylesheet" href="style/custom.css">
+        <link rel="stylesheet" href="./style/index.css">
+        <title>Configurações Globais</title>
+    </head>
+    <header class="header">
+        <img src="./imagens/Logo.png" alt="logo">
+    </header>
+    <body>
+        <div class="card_global_settings">
+            <h1 class="texto_global_settings"> Quantidade de dias na sprint:</h1>
+            <h3 class="texto_global_settings" id="dias"></h3>
+            <h1 class="texto_global_settings"> Quantidade de sprints:</h1>
+            <h3 class="texto_global_settings" id="sprints"></h3>
+            <dialog id="favDialog">
+                <form method="dialog">
+                    <section>
+                        <label ><strong>Quantidade de dias:</strong></label>
+                        <input type="text" id="dias_edit">
+                        <label ><strong>Quantidade de sprints:</strong></label>
+                        <input type="text" id="sprints_edit">
+                    </section>
+                    <menu>
+                    <button id="cancel" type="reset">Cancelar</button>
+                    <button id="submit" type="submit">Confirmar</button>
+                    </menu>
+                </form>
+                </dialog>
+
+                <button id="updateDetails">Atualizar Configurações</button>
+        </div>
+        <div class="muleke">
+            <a href="index.html">
+                <img src="./imagens/mascote2.png" alt="mascote">
+            </a>
+        </div>
+    </body>
+</html>
+
+<script>
+getGlobalSettings()
+async function getGlobalSettings() {
+    try {
+        const response = await fetch(
+        "http://127.0.0.1:8080/api/v1/globalsettings/"
+        );
+        const globalSettings = await response.json();
+        mostraGlobalSettings(globalSettings)
+    } catch (error) {
+        console.error("Erro ao buscar dados da API -> ", error);
+        return null;
+    }
+}
+
+function mostraGlobalSettings(globalSettings) {
+    document.getElementById("dias").textContent=globalSettings.dias_sprint;
+    document.getElementById("sprints").textContent=globalSettings.quantidade_sprint;
+}
+
+function editGlobalSettings(){
+    dias_edit = document.getElementById('dias_edit').value
+    sprints_edit = document.getElementById('sprints_edit').value
+    alteracoes = {
+      "dias":dias_edit,
+      "sprints": sprints_edit
+    }
+    try {
+      fetch ('http://127.0.0.1:8080/api/v1/globalsettings/editar',{method: "POST", body:JSON.stringify(alteracoes)})
+      console.log('chamou o back')
+      } catch (error) {
+          console.error("Erro ao buscar dados da API -> ", error);
+      }
+}
+
+(function () {
+  var updateButton = document.getElementById("updateDetails");
+  var cancelButton = document.getElementById("cancel");
+  var favDialog = document.getElementById("favDialog");
+  var submitButton = document.getElementById("submit")
+
+  // O botão Update abre uma Dialog
+  updateButton.addEventListener("click", function () {
+    favDialog.showModal();
+  });
+  submitButton.addEventListener("click", function () {
+    editGlobalSettings();
+    favDialog.close();
+  });
+
+  // O botão cancelButtom fecha uma Dialog
+  cancelButton.addEventListener("click", function () {
+    favDialog.close();
+  });
+})();
+</script>

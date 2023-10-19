@@ -1,42 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
     />
     <link rel="stylesheet" href="style/custom.css" />
-    <title>Comunicação FrontEnd e Backend</title>
+    <link rel="stylesheet" href="./style/index.css" />
+
+    <title>Menu</title>
   </head>
+
   <body>
-    <button onclick="inicializando()">Busca textos do tipo HttpResponse</button>
-    <button onclick="testando_json_data()">Buscas json()</button>
-    <h1>testa os styles desse css</h1>
-    <label for="fname">First name:</label>
-    <input type="text" id="fname" name="fname" /><br /><br />
-    <label for="lname">Last name:</label>
-    <input type="text" id="lname" name="lname" /><br /><br />
-    <input type="submit" value="Submit" />
+    <header class="header">
+      <img src="./imagens/Logo.png" alt="logo" />
+    </header>
+
+    <div class="container">
+      <button id="turma" class="menu-button">
+        <a href="gerenciamento_turmas.html">Turma</a>
+      </button>
+      <button id="aluno" class="menu-button">
+        <a href="pagina-aluno.html">Aluno</a>
+        <!-- substituir página-aluno.html pela página correta. Fazer o mesmo no arquivo Java-->
+      </button>
+      <button id="grupos" class="menu-button">
+        <a href="pagina-grupos.html">Grupos</a>
+        <!-- substituir página-grupos.html pela página correta. Fazer o mesmo no arquivo Java-->
+      </button>
+      <button id="global-settings" class="menu-button">
+        <a href="global_settings.html">Global Settings</a>
+        <!-- substituir página-global-settings.html pela página correta. Fazer o mesmo no arquivo Java-->
+      </button>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="container">
+      <button class="action-button">Importar Alunos</button>
+      <button class="action-button">Exportar Relatórios</button>
+    </div>
+
+    <div class="muleke">
+      <a href="index.html">
+        <img src="./imagens/mascote2.png" alt="mascote" />
+      </a>
+    </div>
+
+    <script src="/front/scripts/index_script.js"></script>
   </body>
 </html>
-<script>
-  async function inicializando() {
-    try {
-      const response = await fetch("http://127.0.0.1:8080/"); // Substitua 'sua-rota-aqui' pela rota correta da sua API
-      const data = await response.text();
-      console.log("Capturado o text retornado " + data);
-    } catch (error) {
-      variavel = console.error("Erro ao buscar dados da API -> ", error);
-    }
-  }
-  async function testando_json_data() {
-    try {
-      const response = await fetch("http://127.0.0.1:8080/get_json"); // Substitua 'sua-rota-aqui' pela rota correta da sua API
-      debugger;
-      const data = await response.json();
-      console.log("Capturado o text retornado", data);
-    } catch (error) {
-      variavel = console.error("Erro ao buscar dados da API -> ", error);
-    }
-  }
-</script>

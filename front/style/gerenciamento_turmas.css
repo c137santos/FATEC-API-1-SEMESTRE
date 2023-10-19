@@ -1,57 +1,38 @@
+/* Estilos gerais para o corpo da página */
 body {
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
 }
 
+/* Estilos para o cabeçalho */
 .header {
-  background-color: #030b11;
-  text-align: left;
-  padding: 5px 0; /* Adicione espaçamento apenas na parte superior e inferior */
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-weight: bold;
-  font-size: 20px;
-  margin-left: 20px; /* Adicione espaçamento à esquerda */
-  color: #fff;
-}
-
-.dots {
-  font-size: 24px;
-  margin-right: 20px; /* Adicione espaçamento à direita */
-  color: #fff;
+  justify-content: center;
 }
 
 .title {
-  font-size: 30px;
-  color: #1a0b0b;
-  margin: 20px 60px;
-  text-align: center; /* Centralizar horizontalmente */
+  margin-top: 5px;
 }
 
+/* Estilos para o contêiner principal das turmas */
 .turma-container {
-  background-color: #f7f7f7;
+  width: 800px;
+  min-height: 300px;
+  max-height: 300px;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #680303; /* Adicione uma borda sutil */
+  border: 0.2px solid #cccccc23;
   border-radius: 5px;
-  width: 800px;
-  min-height: 400px;
-  max-height: 600px;
-  overflow-y: auto;
+  background-color: #f7f7f700;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: auto;
 }
 
+/* Estilos para o contêiner flexível das turmas */
 .flex-warp-container {
   width: 100%;
   display: flex;
@@ -61,40 +42,57 @@ body {
   gap: 13px;
 }
 
+/* Estilos para os quadrados representando as turmas */
 .turma-square {
   position: relative;
   width: calc(25% - 10px);
   height: 150px;
-  background-color: #e6d8d3;
+  background-color: #ffffff;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  padding: 10px; /* Adicione um preenchimento interno para o conteúdo */
+  box-sizing: border-box; /* Evita que o preenchimento adicione à largura/altura */
 }
 
+.turma-square:hover {
+  background-color: transparent;
+  box-shadow: 0 0 50px 20px rgb(154, 104, 241);
+}
+
+/* Estilos para parágrafos dentro dos quadrados das turmas */
 .turma-square p {
   font-size: 15px;
-  margin: 2px;
   font-weight: bold;
   color: #000000;
+  text-align: center; /* Centraliza o texto horizontalmente */
+  max-width: 90%; /* Limita a largura para evitar transbordamento */
+  margin: 5px 0; /* Espaçamento interno superior e inferior */
 }
 
+/* Estilos para o ícone de lixeira */
 .trash-icon {
   position: absolute;
   bottom: 5px;
   right: 5px;
-  width: 20px; /* Defina a largura desejada para o ícone */
-  height: 20px; /* Defina a altura desejada para o ícone */
-  fill: #fff; /* Defina a cor do ícone como branco ou a cor desejada */
-  cursor: pointer; /* Mudar o cursor para indicar que é clicável */
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
-.turma-square:hover {
-  background-color: #258cd1; /* Cor de fundo ao passar o mouse */
-  color: #fff; /* Cor do texto ao passar o mouse */
+
+/* Estilos para o ícone de lixeira */
+.edit-icon {
+  position: absolute;
+  bottom: 5px;
+  width: 25px;
+  height: 27px;
+  cursor: pointer;
 }
+
 
 /* Estilos para o modal */
 .modal {
@@ -108,42 +106,41 @@ body {
   z-index: 1;
 }
 
+/* Estilos para o conteúdo do modal */
 .modal-content {
-  background-color: #c5baba;
+  background-image: url("../imagens/Fundo.png"),
+    linear-gradient(90deg, #d24d5d 0%, #a952a3 30%, #9a68f1 100%);
   width: 40%;
-  height: 550px;
-  margin: 100px auto;
+  height: 530px;
+  margin: 20px auto;
   padding: 20px;
   border-radius: 5px;
   position: relative;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 24px;
-  cursor: pointer;
 }
 
 /* Estilos para o formulário e seus campos */
 .form-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .data-content {
   display: flex;
-  flex-direction: column; /* Alinhar os campos na horizontal */
+  flex-direction: column;
   align-items: center;
 }
 
 .input-field {
-  width: 220px;
+  width: 250px;
   padding: 2px;
   margin-bottom: 10px;
   border: 1px solid #2929cf;
   border-radius: 5px;
+}
+
+#titulo_modal {
+  margin-top: 5px;
 }
 
 h2 {
@@ -157,35 +154,109 @@ h3 {
 }
 
 /* Estilo para a lista de checkboxes */
-.mostra-grupos ul {
-  list-style-type: none; /* Remover marcadores de lista */
+ul {
+  background-color: #b1a5a517;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style-type: none;
   padding: 0;
-  height: 150px;
+  margin-top: 0;
+  margin-bottom: 5px;
+  width: 286px;
+  min-height: 160px;
+  max-height: 160px;
+  overflow-y: auto;
 }
 
-/* Estilo para cada item da lista (checkbox + label) */
-.mostra-grupos li {
-  display: flex; /* Usar flexbox para alinhar itens horizontalmente */
-  align-items: center; /* Centralizar verticalmente */
-  background-color: #942b2b; /* Fundo colorido */
-  padding: 5px; /* Espaçamento interno */
-  margin-bottom: 5px; /* Espaçamento entre itens */
+/* Estilo para cada item da lista checkbox e label */
+li {
+  background-color: #ece2e218;
+  display: flex;
+  border-radius: 5px;
+  width: 265px;
+  padding: 5px;
+  margin-bottom: 5px;
 }
 
-.mostra-grupos label {
-  display: flex; /* Usar flexbox para centralizar verticalmente */
-  justify-items: center;
-  align-items: center; /* Centralizar verticalmente o texto */
+li:hover {
+  background-color: transparent;
+  box-shadow: 0 0 20px 15px rgb(154, 104, 241);
 }
 
+.checkbox:checked + li {
+  background-color: transparent;
+  box-shadow: 0 0 5px 10px rgb(154, 104, 241);
+  cursor: pointer; /* Mostra o cursor de mão ao passar o mouse */
+}
 /* Estilo para o checkbox */
 .checkbox {
-  margin-right: 10px; /* Espaçamento entre o checkbox e o label */
+  margin-right: 85px;
 }
 
+label {
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Estilos para o botão de fechar o modal */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  font-size: 50px;
+  display: inline-block;
+  line-height: 10px;
+  cursor: pointer;
+}
+
+/* Estilos para o botão de criar turma */
 .submit-turma {
+  font-weight: 600;
   display: flex;
   justify-content: center;
   width: 150px;
   margin: 0 auto;
+  margin-top: 10px;
+}
+
+/* Estilos para a seção de confirmação */
+#confirmacaoContainer {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+#confirmacaoContainer span {
+  font-weight: 900;
+}
+
+#confirmacaoContainer p {
+  margin: 5px 0;
+}
+
+#confirmarButton {
+  margin-top: 25px;
+  background-color: #4caf50;
+}
+
+#confirmarButton:hover {
+  background-color: #45a04991;
+}
+
+#cancelarButton {
+  background-color: #ce1717;
+}
+
+#cancelarButton:hover {
+  background-color: #ce17179d;
 }
