@@ -6,7 +6,7 @@ from regra_de_negocio.service import (
 
 from regra_de_negocio.global_settings import read_global_settings, edit_global_settings
 from regra_de_negocio.gerenciador_turmas import busca_turmas, excluir_turma, editar_turma_svc
-from regra_de_negocio.gerenciador_grupos import buscando_grupos, excluindo_grupo
+from regra_de_negocio.gerenciador_grupos import buscando_grupos
 
 import json
 
