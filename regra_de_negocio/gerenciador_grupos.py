@@ -27,18 +27,3 @@ def _salvar_grupos(grupos):
         json.dump(grupos, f, indent=4)
 
 
-def excluindo_grupo(id):
-    grupos = buscando_grupos()
-    grupo_nome = (
-        None  # Inicializa o nome do grupo como None em caso de nao ser encontrado
-    )
-    id = str(id)  # transforma o ID em String para comparar com as chaves
-    if id in grupos.keys():  # keys retorna uma lista de strings com os ids
-        grupo_nome = grupos[id]["nome"]
-        grupos.pop(id)
-        _salvar_grupos(grupos)
-        print(f"Grupo {grupo_nome} deletado.")
-        return True
-    else:
-        print(f"Grupo {grupo_nome} não encontrado.")
-        return False
