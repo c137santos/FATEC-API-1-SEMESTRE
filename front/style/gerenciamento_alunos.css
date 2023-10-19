@@ -35,18 +35,16 @@ body {
 /* Estilos para o contêiner flexível dos alunos */
 .flex-warp-container {
   width: 100%;
+  height: 300px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
+  flex-direction: column;
+  justify-content: left;
   gap: 13px;
 }
 
 /* Estilos para os quadrados representando os alunos */
 .aluno-square {
-  position: relative;
-  width: calc(25% - 10px);
-  height: 150px;
+  height: 70px;
   background-color: #ffffff;
   border-radius: 5px;
   display: flex;
@@ -58,13 +56,13 @@ body {
   box-sizing: border-box; /* Evita que o preenchimento adicione à largura/altura */
 }
 
-.turma-square:hover {
+.aluno-square:hover {
   background-color: transparent;
   box-shadow: 0 0 50px 20px rgb(154, 104, 241);
 }
 
 /* Estilos para parágrafos dentro dos quadrados das turmas */
-.turma-square p {
+.aluno-square p {
   font-size: 15px;
   font-weight: bold;
   color: #000000;

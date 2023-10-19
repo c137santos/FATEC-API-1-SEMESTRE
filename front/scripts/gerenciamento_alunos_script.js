@@ -16,11 +16,17 @@ function exibirAlunos(alunosData) {
   for (const alunoId in alunosData) {
     if (alunosData.hasOwnProperty(alunoId)) {
       const aluno = alunosData[alunoId];
-    }
 
-    const alunoSquare = document.createElement("div");
-    alunoSquare.className = "alunos-square";
-    alunoSquare.id = `${alunoId}`;
+      const alunoSquare = document.createElement("div");
+      alunoSquare.className = "aluno-square";
+      alunoSquare.id = `${alunoId}`;
+
+      const nomeAluno = document.createElement("p");
+      nomeAluno.textContent = `${aluno.nome}`;
+
+      alunoSquare.appendChild(nomeAluno);
+      container.appendChild(alunoSquare);
+    }
   }
 }
 
