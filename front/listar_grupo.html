@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Grupo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style/custom.css" />
+    <link rel="stylesheet" href="style/gerenciamento_grupos.css"/>
+</head>
+<body class="bodyStyle">
+    <div id="main" class="mainStyle">
+        <h1>Listagem de Grupos</h1>
+    </div>
+    <script>
+        function criar_componente(id, grupo){
+            let div = document.getElementById("main")
+            let grupoDiv = document.createElement("div")
+            grupoDiv.setAttribute("class", "divGrupoStyle")
+        
+            let nomeGrupoDiv = document.createElement("div")
+            let rotuloNomeGrupo = document.createElement("strong")
+            rotuloNomeGrupo.textContent = "Nome do grupo:"
+            nomeGrupoDiv.appendChild(rotuloNomeGrupo)
+            let nomeGrupo = document.createElement("p")
+            nomeGrupo.textContent = grupo.nome
+            nomeGrupoDiv.appendChild(nomeGrupo)
+            
+            let nomeTurmaDiv = document.createElement("div")
+            let rotuloTurma = document.createElement("strong")
+            rotuloTurma.textContent = "Turma:"
+            nomeTurmaDiv.appendChild(rotuloTurma)
+            let nomeTurma = document.createElement("p")
+            nomeTurma.textContent = grupo.turma
+            nomeTurmaDiv.appendChild(nomeTurma)
+
+            let iconeDiv = document.createElement("div")
+            iconeDiv.setAttribute("class","divIconeStyle")
+
+            let iconeEdicao = document.createElement("i")
+            iconeEdicao.setAttribute("class", "iconeEdicaoStyle")
+            iconeEdicao.classList.add("fa", "fa-pencil", "iconeEdicaoStyle")
+            iconeEdicao.addEventListener("click", (evento) => {console.log(evento); alert("Adicione aqui a função de edição.")})
+            iconeDiv.appendChild(iconeEdicao)
+
+
+            // let separadorIcone = document.createElement("i")
+            // const separadorIconeAtributo = document.createAttribute("style")
+            // separadorIconeAtributo.value="padding:4px;"
+            // separadorIcone.setAttributeNode(separadorIconeAtributo)
+
+            // let separadorIconeEsquerda = document.createElement("i")
+            // const separadorIconeEsquerdaAtributo = document.createAttribute("style")
+            // separadorIconeEsquerdaAtributo.value="padding-left:65%;"
+            // separadorIconeEsquerda.setAttributeNode(separadorIconeEsquerdaAtributo)
+
+            let iconeRemocao = document.createElement("i")
+            iconeRemocao.setAttribute("class", "iconeRemocaoStyle")
+            iconeRemocao.classList.add("fa", "fa-trash", "iconeRemocaoStyle")
+            iconeRemocao.addEventListener("click", (evento) => {console.log(evento); alert("Remoção de grupo.")})
+            iconeDiv.appendChild(iconeRemocao)
+
+            // let separador = document.createElement("div")
+            // const separadorAtributo = document.createAttribute("style")
+            // separadorAtributo.value="padding:8px;"
+            // separador.setAttributeNode(separadorAtributo)
+            
+            grupoDiv.appendChild(nomeGrupoDiv)
+            grupoDiv.appendChild(nomeTurmaDiv)
+            grupoDiv.appendChild(iconeDiv)
+            //grupoDiv.appendChild(separadorIconeEsquerda)
+            // grupoDiv.appendChild(iconeEdicao)
+            //grupoDiv.appendChild(separadorIcone)
+            // grupoDiv.appendChild(iconeRemocao)
+            div.appendChild(grupoDiv)
+            //div.appendChild(separador)
+        }
+        
+        async function listar(){
+            let grupos = await get_grupos() //veio do backend fetch
+            for(id_grupo in grupos){
+                console.log(id_grupo)
+                criar_componente(id_grupo, grupos[id_grupo])
+            }
+        }
+
+        async function get_grupos() {
+            const resposta = await fetch (`http://localhost:8080/api/v1/grupos/listar`, {method: "GET"})
+            const grupos = await resposta.json()
+            console.log(grupos)
+            return grupos
+        }
+
+        function get_grupos_(){
+            return {
+                "1": {
+                    "turma": 1,
+                    "nome": "team bee"
+                },
+                "2": {
+                    "turma": 2,
+                    "nome": "team tatata"
+                },
+                "3": {
+                    "turma": 1,
+                    "nome": "team barbuleta"
+                },
+                "4": {
+                    "turma": 5,
+                    "nome": "strangers"
+                },
+                "5": {
+                    "turma": 5,
+                    "nome": "rider"
+                },
+                "6": {
+                    "turma": 4,
+                    "nome": "spies"
+                },
+                "7": {
+                    "turma": 0,
+                    "nome": "snowden"
+                },
+                "8": {
+                    "turma": 4,
+                    "nome": "last of us"
+                }
+            }
+        }
+
+        listar()
+    </script>
+</body>
+</html>

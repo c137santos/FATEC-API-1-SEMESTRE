@@ -59,7 +59,7 @@ def editar_turma(request, id):
     return JsonResponse({"mensagem": resultado})
 
 
-def get_grupos(request):
+def listar_grupos(request):
     grupos_data = buscando_grupos()
     return JsonResponse(grupos_data)
 
