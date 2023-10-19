@@ -14,7 +14,8 @@
         <h1>Listagem de Grupos</h1>
     </div>
     <script>
-        function criar_componente(id, grupo){
+        //A função criar_componente é responsável por criar dinamicamente um componente HTML com base nos dados de um grupo.
+        function criar_componente(id, grupo){     
             let div = document.getElementById("main")
             let grupoDiv = document.createElement("div")
             grupoDiv.setAttribute("class", "divGrupoStyle")
@@ -44,52 +45,36 @@
             iconeEdicao.addEventListener("click", (evento) => {console.log(evento); alert("Adicione aqui a função de edição.")})
             iconeDiv.appendChild(iconeEdicao)
 
-
-            // let separadorIcone = document.createElement("i")
-            // const separadorIconeAtributo = document.createAttribute("style")
-            // separadorIconeAtributo.value="padding:4px;"
-            // separadorIcone.setAttributeNode(separadorIconeAtributo)
-
-            // let separadorIconeEsquerda = document.createElement("i")
-            // const separadorIconeEsquerdaAtributo = document.createAttribute("style")
-            // separadorIconeEsquerdaAtributo.value="padding-left:65%;"
-            // separadorIconeEsquerda.setAttributeNode(separadorIconeEsquerdaAtributo)
-
             let iconeRemocao = document.createElement("i")
             iconeRemocao.setAttribute("class", "iconeRemocaoStyle")
             iconeRemocao.classList.add("fa", "fa-trash", "iconeRemocaoStyle")
             iconeRemocao.addEventListener("click", (evento) => {console.log(evento); alert("Remoção de grupo.")})
             iconeDiv.appendChild(iconeRemocao)
-
-            // let separador = document.createElement("div")
-            // const separadorAtributo = document.createAttribute("style")
-            // separadorAtributo.value="padding:8px;"
-            // separador.setAttributeNode(separadorAtributo)
             
             grupoDiv.appendChild(nomeGrupoDiv)
             grupoDiv.appendChild(nomeTurmaDiv)
             grupoDiv.appendChild(iconeDiv)
-            //grupoDiv.appendChild(separadorIconeEsquerda)
-            // grupoDiv.appendChild(iconeEdicao)
-            //grupoDiv.appendChild(separadorIcone)
-            // grupoDiv.appendChild(iconeRemocao)
             div.appendChild(grupoDiv)
-            //div.appendChild(separador)
         }
         
-        async function listar(){
-            let grupos = await get_grupos() //veio do backend fetch
+        //A função listar busca os grupos e cria os componentes. 
+        //A palavra-chave await é usada para aguardar a função get_grupos buscar os grupos antes de prosseguir.
+        async function listar(){    
+            let grupos = await get_grupos() 
             for(id_grupo in grupos){
                 console.log(id_grupo)
                 criar_componente(id_grupo, grupos[id_grupo])
             }
         }
 
-        async function get_grupos() {
-            const resposta = await fetch (`http://localhost:8080/api/v1/grupos/listar`, {method: "GET"})
+        //A função get_grupos busca os grupos na API backend.
+        //A palavra-chave await é usada para aguardar a resposta da API e, em seguida, converte a resposta para o formato JSON usando o método response.json().
+        //Os grupos buscados são então registrados no console e retornados.
+        async function get_grupos() {   
+            const resposta = await fetch (`http://localhost:8080/api/v1/grupos/listar`, {method: "GET"})    
+            console.log(grupos)     
             const grupos = await resposta.json()
-            console.log(grupos)
-            return grupos
+            return grupos   
         }
 
         function get_grupos_(){
