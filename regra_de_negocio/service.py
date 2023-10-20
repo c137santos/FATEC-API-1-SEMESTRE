@@ -1,5 +1,7 @@
 import json
 import regra_de_negocio.gerenciador_turmas as gt
+from regra_de_negocio.gerenciador_grupos import buscando_grupos
+
 
 
 def busca_dados_json():
