@@ -157,15 +157,18 @@ async function coletaDadosNovaTurma() {
   }
 
   // Formata a data para dia/mes/ano
-  const data = new Date(dataInicio);
-  const dia = data.getDate() + 1; // O dia começa em 1
-  const mes = data.getMonth() + 1; // Os meses em JavaScript começam de 0
-  const ano = data.getFullYear();
+
+const data = new Date(dataInicio);
+const dia = String(data.getDate()).padStart(2, '0'); // Garante que o dia tenha sempre 2 dígitos
+const mes = String(data.getMonth() + 1).padStart(2, '0'); // Garante que o mês tenha sempre 2 dígitos
+const ano = data.getFullYear();
+const dataFormatada = `${dia}/${mes}/${ano}`;
+
   if (ano < 1000 || ano > 9999) {
     alert("O ano deve ter exatamente 4 dígitos.");
     return;
   }
-  const dataFormatada = `${dia}/${mes}/${ano}`;
+  
 
   //captura grupos selecionados
   let gruposSelecionados = [];
