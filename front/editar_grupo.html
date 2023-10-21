@@ -5,42 +5,62 @@
   <meta name="viewport" content="width=device-width, inicial-scale-1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
   <link rel="stylesheet" href="style/custom.css">
+  <link rel="stylesheet" href="./style/editar_grupo.css">
   <title>PBLTex ::. Editar Grupo</title>
 </head>
-<body onload="preencher_campos_formulário(obter_id())">
+<body onload="preencher_campos_formulário(obter_id()); carregar_lista_aluno_turma(); carregar_lista_aluno_grupo();">
   <header class="header">
     <img src="./imagens/Logo.png" alt="logo">
   </header>
-
-  <div class="box">
-    <div name="main">
-      <div>
-      <h1>Formulário de Ediçao de Grupo</h1>
-      </div>
-    <div name="Fgrupo" style="padding-top: 34px;">
-      <div>
-        <label for="fgrupo"><strong>Nome do Grupo:</strong></label>
-        <input type="text" name="fgrupo" id="fgrupo">
-      </div>
-      <div>
-        <label for="fturma"><strong>Nome da Turma:</strong></label>
-        <input type="text" name="fturma" id="fturma">
-      </div>
-      <div>
-        <label for="fprofessor"><strong>Professor responsável:</strong></label>
-        <input type="text" name="fprofessor" id="fprofessor">
-      </div>
-      <div>
-        <label for="fdata"><strong>Data de Inicio:</strong></label>
-        <input type="date" name="fdata" id="fdata">
-      </div>
-      <div style="padding-top: 21px;">
-        <button onclick="requisitar_editar_grupo(obter_id())">Salvar</button>
-      </div>
+  <div>
+    <h1>Formulário de Ediçao de Grupo</h1>
   </div>
+
+  <div class="flex-container">
+    <div class="flex-item-center">
+      <div>
+        <h1>Formulário de Ediçao de Grupo</h1>
+      </div>
+    <div name="main">
+      <div name="Fgrupo" style="padding-top: 34px;">
+        <div>
+          <label for="fgrupo"><strong>Nome do Grupo:</strong></label>
+          <input type="text" name="fgrupo" id="fgrupo">
+        </div>
+        <div>
+          <label for="fnome"><strong>Nome da Turma:</strong></label>
+          <input type="text" name="fnome" id="fnome">
+        </div>
+        <div>
+          <label for="fprofessor"><strong>Professor responsável:</strong></label>
+          <input type="text" name="fprofessor" id="fprofessor">
+        </div>
+        <div>
+          <label for="fdata"><strong>Data de Inicio:</strong></label>
+          <input type="date" name="fdata" id="fdata">
+        </div>
+        <div style="padding-top: 21px;">
+          <button onclick="requisitar_editar_grupo(obter_id())">Salvar</button>
+        </div>
+      </div>
+    </div>
+    </div>
+        <div class="flex-item-left">
+        <div>
+          <label for="alunos"><strong>Alunos da Turma:</strong></label>
+          <select name="alunos" id="lista-alunos"></select>
+        </div>
+         <button onclick="adicioanr_aluno_grupo()">Adicionar Aluno</button>
+        </div>
+        <div class="flex-item-rigth">
+        <div>
+          <label for="alunos"><strong>Alunos do Grupo:</strong></label>
+          <select name="alunos" id="lista-alunos"></select>
+        </div>
+          <button ondblclick="remover_aluno_grupo()">Remover Aluno</button>
+          </div>
 </div>
-        <button>Adicionar Aluno</button> 
-</div>
+
 <script>
   /** Realiza o preenchimento inicial dos campos do formulario
   @param (string) id _ o identificador único do grupo.
@@ -49,7 +69,7 @@
     const grupo = await obter_grupo(id)
     if(turma){
       document.getElementById('fgrupo')['value'] = grupo["grupo"]
-      document.getElementById('fturma')['value'] = turma["turma"]
+      document.getElementById('fnome')['value'] = turma["nome"]
       document.getElementById('fprofessor')['value'] = turma["professor"]
       document.getElementById('fdata')['value'] = turma["data_de_inicio"]
     }
@@ -92,6 +112,74 @@ async function obter_grupo(id) {
   const mensagem = "Atenção! Os dados do grupo serão modificados.\nDeseja prosseguir com a edição?"
   return window.confirm(mensagem);
 }
+/** Carregar uma lista de alunos da turma que esta sendo editada
+ * 
+*/
+async function carregar_lista_aluno_turma() {
+    const turmaId = obter_id_turma();
+    const response = await fetch(`colocar rota turma/${turmaId}/alunos`); //criar uma rota para obter alunos d euma turma especifica
+    const alunos = await response.json();
+    const listaAlunos = document.getElementById(`lista-alunos`);
+    
+    alunos.array.forEach(aluno => {
+      const option = document.createElement(`option`);
+      option.value = aluno.id; // Substituir pelo identificador unico do aluno
+      option.text = aluno.nome; // caso o aluno tenha um atributo como `nome`
+      listaAlunos.appendChild(option);
+    });
+}
+/**Implementando Funcao para obter o id da turma que esta sendo editada
+ *  Obtem o ID da turma da URL e retorna
+*/
+function obter_id_turma() {
+  function obter_id_turma() {
+    const urlParams = new URLSearchParams(Window.location.search);
+    const turmaId = urlParams.get(`id`);
+    return turmaId;
+  }
+}
+async function adicioanr_aluno_grupo() {
+  const alunoId = document.getElementById(`lista-alunos`.value);
+  const turmaId = obter_id_turma();
+  const response = await fetch(`colocar rota de turmas / ${turmaId}/adicionarAluno?id=${alunoId}`, {method: `POST`});
+  const resultado = await response.json();
+  console.log(resultado.mensagem);
+}
+/** Implementando Funcao para obter o id do grupo que esta sendo editada
+ * Obtem o ID do grupo na URL e retorna
+*/
+async function carregar_lista_aluno_grupo(){
+  const grupoId = obter_id();
+  const response = await fetch(`colocar rota obter alunos do grupo/${grupoId}`);
+  const alunos = await response.json();
+
+  const listaAlunos =document.getElementById(`lista-alunos`);
+  alunos.forEach(aluno => {
+    const option = document.vreateElement(`option`);
+    option.value = aluno.id; // Substituir pelo identificador unico do aluno
+    option.text = aluno.nome;  // caso o aluno tenha um atributo como `nome`
+    listaAlunos.appendChild(option);
+  });
+}
+/**Funcao para excluir um aluno do grupo que esta sendo editado
+ * 
+*/
+async function excluir_aluno_grupo () {
+  const grupoid = obter_id ();
+  const alunoId = document.getElementById(`lista-alunos`).value;
+
+  const response = await fetch (`colocar rota excluir alunos do grupo/${grupoid}/${alunoId}`, {method: `DELETE`});
+  const resultado = await response.json();
+
+  // Atualizar a listagem apos a exclusao de alunos
+  if(resultado.sucesso) {
+    alert(resultado.mensagem);
+    const listaAlunos = document.getElementById(`lista-alunos`);
+    listaAlunos.innerHTML = ``;
+    await carregar_lista_aluno_grupo();
+  }
+  else{ alert (resultado.mensagem);}
+}
 </script>
     <div class="muleke">
       <a href="index.html">
@@ -100,8 +188,3 @@ async function obter_grupo(id) {
     </div>
 </body>
 </html>
-
-Precisp listar os alunos existentes na minha base Json;
-Preciso adicionar um aluno já esxistente na minha base Json ao Grupo quee stou editando;
-Preciso listar os alunos daquele grupo presentes na minha base json;
-Preciso remover os alunos existentesnauqele grupo.
