@@ -14,6 +14,22 @@ async function GetTurmas() {
   }
 }
 
+function requisitar_excluir_aluno(id) {
+  if (window.confirm("Atenção! O aluno será excluído.\nDeseja prosseguir?")) {
+    // Se o usuário confirmar, execute a exclusão do aluno
+    fetch(`URL_PARA_EXCLUIR_ALUNO/${id}`, { method: 'DELETE' })
+      .then(() => {
+        alert("Aluno excluído com sucesso.");
+        document.getElementById(id).remove(); // Remove o elemento HTML do aluno
+      })
+      .catch(error => {
+        console.error("Erro ao excluir o aluno: " + error);
+      });
+  }
+}
+
+
+
 // Função para exibir as turmas no DOM
 function exibirTurmas(turmadata) {
   const container = document.querySelector(".flex-warp-container");

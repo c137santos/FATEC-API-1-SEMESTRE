@@ -102,3 +102,33 @@ def excluir_turma(id):
         return True
     else:
         return False
+
+# Função para excluir um aluno por ID
+def excluir_aluno(id):
+    # Abrir o arquivo JSON que contém os dados dos alunos
+    with open("dados/alunos.json", "r", encoding="utf-8") as f:
+        alunos_data = json.load(f)
+
+    # Verificar se o ID do aluno existe no dicionário de alunos
+    if id in alunos_data:
+        # Remover o aluno do dicionário
+        aluno_removido = alunos_data.pop(id)
+
+        # Salvar as alterações de volta no arquivo JSON
+        with open("dados/alunos.json", "w", encoding="utf-8") as f:
+            json.dump(alunos_data, f, indent=4)
+
+        # Retornar o aluno removido como confirmação
+        return aluno_removido
+    else:
+        # Se o ID do aluno não existir, retornar None para indicar que não foi possível encontrar o aluno
+        return None
+
+# Exemplo de como usar a função para excluir um aluno pelo ID
+aluno_id_para_excluir = "123"  # Substitua "123" pelo ID do aluno que deseja excluir
+aluno_excluido = excluir_aluno(aluno_id_para_excluir)
+
+if aluno_excluido is not None:
+    print(f"Aluno excluído: {aluno_excluido}")
+else:
+    print("Aluno não encontrado ou não foi possível excluí-lo.")
