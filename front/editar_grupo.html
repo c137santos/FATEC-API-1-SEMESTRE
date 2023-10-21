@@ -12,9 +12,6 @@
   <header class="header">
     <img src="./imagens/Logo.png" alt="logo">
   </header>
-  <div>
-    <h1>Formulário de Ediçao de Grupo</h1>
-  </div>
 
   <div class="flex-container">
     <div class="flex-item-center">
@@ -82,7 +79,7 @@ async function requisitar_editar_grupo(id){
   if(decisao_usuario){
     const grupo = {
       "grupo" : document.getElementById('fgrupo')['value'],
-      "turma" : document.getElementById('fturma')['value'],
+      "nome" : document.getElementById('fnome')['value'],
       "professor" : document.getElementById('fprofessor')['value'],
       "data_de_inicio" : document.getElementById('fdata')['value']
     }
