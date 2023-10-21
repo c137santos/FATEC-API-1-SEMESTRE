@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, inicial-scale-1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
+  <link rel="stylesheet" href="style/custom.css">
+  <title>PBLTex ::. Editar Grupo</title>
+</head>
+<body onload="preencher_campos_formulário(obter_id())">
+  <header class="header">
+    <img src="./imagens/Logo.png" alt="logo">
+  </header>
+
+  <div class="box">
+    <div name="main">
+      <div>
+      <h1>Formulário de Ediçao de Grupo</h1>
+      </div>
+    <div name="Fgrupo" style="padding-top: 34px;">
+      <div>
+        <label for="fgrupo"><strong>Nome do Grupo:</strong></label>
+        <input type="text" name="fgrupo" id="fgrupo">
+      </div>
+      <div>
+        <label for="fturma"><strong>Nome da Turma:</strong></label>
+        <input type="text" name="fturma" id="fturma">
+      </div>
+      <div>
+        <label for="fprofessor"><strong>Professor responsável:</strong></label>
+        <input type="text" name="fprofessor" id="fprofessor">
+      </div>
+      <div>
+        <label for="fdata"><strong>Data de Inicio:</strong></label>
+        <input type="date" name="fdata" id="fdata">
+      </div>
+      <div style="padding-top: 21px;">
+        <button onclick="requisitar_editar_grupo(obter_id())">Salvar</button>
+      </div>
+  </div>
+</div>
+        <button>Adicionar Aluno</button> 
+</div>
+<script>
+  /** Realiza o preenchimento inicial dos campos do formulario
+  @param (string) id _ o identificador único do grupo.
+*/
+  async function preencher_campos_formulario(id){
+    const grupo = await obter_grupo(id)
+    if(turma){
+      document.getElementById('fgrupo')['value'] = grupo["grupo"]
+      document.getElementById('fturma')['value'] = turma["turma"]
+      document.getElementById('fprofessor')['value'] = turma["professor"]
+      document.getElementById('fdata')['value'] = turma["data_de_inicio"]
+    }
+  }
+  /** Realiza a submissão da edição da turma para o backend
+   * @param(string) id - o identificador do grupo.
+   */
+async function requisitar_editar_grupo(id){
+  const decisao_usuario = criar_modal_confirmacao_edicao();
+  if(decisao_usuario){
+    const grupo = {
+      "grupo" : document.getElementById('fgrupo')['value'],
+      "turma" : document.getElementById('fturma')['value'],
+      "professor" : document.getElementById('fprofessor')['value'],
+      "data_de_inicio" : document.getElementById('fdata')['value']
+    }
+    fetch (`substituir por rota${id}/`,{method: "POST", body:JSON.stringify(grupo)})
+    .then(() => window.location.href = 'editar_grupo.html?id=' + id)
+  }
+}
+/** Obtém o grupo pelo id
+ * *@param (string) id - identificador único do grupo
+ * *@returns(object) rertonará undefined ou um objeto
+ * */
+async function obter_grupo(id) {
+  const resposta = await fetch (`substituir por rota${id}`, {method: "POST"})
+      const grupo = await resposta.json()
+      console.log(grupo)
+      return grupo
+}
+/** Recupera o id do grupo presente como consulta na URL
+* @returns (string) id - o identificador único
+*/
+  function obter_id(){ return new URLSearchParams(window.location.search).get('id') }
+        
+/** Cria um modal para a confirmação do usuário
+* @return (boolean) resposta - decisão do usuário
+*/
+  function criar_modal_confirmar_edicao(){
+  const mensagem = "Atenção! Os dados do grupo serão modificados.\nDeseja prosseguir com a edição?"
+  return window.confirm(mensagem);
+}
+</script>
+    <div class="muleke">
+      <a href="index.html">
+      <img src="./imagens/mascote2.png" alt="mascote">
+    </a>
+    </div>
+</body>
+</html>
+
+Precisp listar os alunos existentes na minha base Json;
+Preciso adicionar um aluno já esxistente na minha base Json ao Grupo quee stou editando;
+Preciso listar os alunos daquele grupo presentes na minha base json;
+Preciso remover os alunos existentesnauqele grupo.
