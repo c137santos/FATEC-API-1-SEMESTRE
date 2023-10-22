@@ -47,14 +47,14 @@
           <label for="alunos"><strong>Alunos da Turma:</strong></label>
           <select name="alunos" id="lista-alunos"></select>
         </div>
-         <button onclick="adicioanr_aluno_grupo()">Adicionar Aluno</button>
+         <button onclick="adicionar_aluno_grupo()">Adicionar Aluno</button>
         </div>
         <div class="flex-item-rigth">
         <div>
           <label for="alunos"><strong>Alunos do Grupo:</strong></label>
           <select name="alunos" id="lista-alunos"></select>
         </div>
-          <button ondblclick="remover_aluno_grupo()">Remover Aluno</button>
+          <button onclick="remover_aluno_grupo()">Remover Aluno</button>
           </div>
 </div>
 
@@ -135,7 +135,7 @@ function obter_id_turma() {
     return turmaId;
   }
 }
-async function adicioanr_aluno_grupo() {
+async function adicionar_aluno_grupo() {
   const alunoId = document.getElementById(`lista-alunos`.value);
   const turmaId = obter_id_turma();
   const response = await fetch(`colocar rota de turmas / ${turmaId}/adicionarAluno?id=${alunoId}`, {method: `POST`});
@@ -161,7 +161,7 @@ async function carregar_lista_aluno_grupo(){
 /**Funcao para excluir um aluno do grupo que esta sendo editado
  * 
 */
-async function excluir_aluno_grupo () {
+async function remover_aluno_grupo () {
   const grupoid = obter_id ();
   const alunoId = document.getElementById(`lista-alunos`).value;
 
