@@ -12,51 +12,42 @@
   <header class="header">
     <img src="./imagens/Logo.png" alt="logo">
   </header>
-
-  <div class="flex-container">
-    <div class="flex-item-center">
+  <div>
+    <h1>Formulário de Ediçao de Grupo</h1>
+  </div>
+  <div name="main">
+    <div name="Fgrupo" style="padding-top: 34px;">
       <div>
-        <h1>Formulário de Ediçao de Grupo</h1>
+        <label for="fgrupo"><strong>Nome do Grupo:</strong></label>
+        <input type="text" name="fgrupo" id="fgrupo">
       </div>
-    <div name="main">
-      <div name="Fgrupo" style="padding-top: 34px;">
-        <div>
-          <label for="fgrupo"><strong>Nome do Grupo:</strong></label>
-          <input type="text" name="fgrupo" id="fgrupo">
-        </div>
-        <div>
-          <label for="fnome"><strong>Nome da Turma:</strong></label>
-          <input type="text" name="fnome" id="fnome">
-        </div>
-        <div>
-          <label for="fprofessor"><strong>Professor responsável:</strong></label>
-          <input type="text" name="fprofessor" id="fprofessor">
-        </div>
-        <div>
-          <label for="fdata"><strong>Data de Inicio:</strong></label>
-          <input type="date" name="fdata" id="fdata">
-        </div>
-        <div style="padding-top: 21px;">
-          <button onclick="requisitar_editar_grupo(obter_id())">Salvar</button>
-        </div>
+      <div>
+        <label for="fnome"><strong>Nome da Turma:</strong></label>
+        <input type="text" name="fnome" id="fnome">
+      </div>
+      <div>
+        <label for="fprofessor"><strong>Professor responsável:</strong></label>
+        <input type="text" name="fprofessor" id="fprofessor">
+      </div>
+      <div>
+        <label for="fdata"><strong>Data de Inicio:</strong></label>
+        <input type="date" name="fdata" id="fdata">
+      </div>
+      <div style="padding-top: 21px;">
+        <button onclick="requisitar_editar_grupo(obter_id())">Salvar</button>
       </div>
     </div>
-    </div>
-        <div class="flex-item-left">
-        <div>
-          <label for="alunos"><strong>Alunos da Turma:</strong></label>
-          <select name="alunos" id="lista-alunos"></select>
-        </div>
-         <button onclick="adicionar_aluno_grupo()">Adicionar Aluno</button>
-        </div>
-        <div class="flex-item-rigth">
-        <div>
-          <label for="alunos"><strong>Alunos do Grupo:</strong></label>
-          <select name="alunos" id="lista-alunos"></select>
-        </div>
-          <button onclick="remover_aluno_grupo()">Remover Aluno</button>
-          </div>
-</div>
+  </div>
+      <div>
+        <label for="alunos"><strong>Alunos da Turma:</strong></label>
+        <select name="alunos" id="lista-alunos"></select>
+      </div>
+        <button onclick="adicionar_aluno_grupo()">Adicionar Aluno</button>
+      <div>
+        <label for="alunos"><strong>Alunos do Grupo:</strong></label>
+        <select name="alunos" id="lista-alunos-grupo"></select>
+      </div>
+        <button onclick="remover_aluno_grupo()">Remover Aluno</button>
 
 <script>
   /** Realiza o preenchimento inicial dos campos do formulario
@@ -116,7 +107,7 @@ async function carregar_lista_aluno_turma() {
     const turmaId = obter_id_turma();
     const response = await fetch(`colocar rota turma/${turmaId}/alunos`); //criar uma rota para obter alunos d euma turma especifica
     const alunos = await response.json();
-    const listaAlunos = document.getElementById(`lista-alunos`);
+    const listaAlunos = document.getElementById(`lista-alunos-turma`);
     
     alunos.array.forEach(aluno => {
       const option = document.createElement(`option`);
@@ -136,7 +127,7 @@ function obter_id_turma() {
   }
 }
 async function adicionar_aluno_grupo() {
-  const alunoId = document.getElementById(`lista-alunos`.value);
+  const alunoId = document.getElementById(`lista-alunos-turma`.value);
   const turmaId = obter_id_turma();
   const response = await fetch(`colocar rota de turmas / ${turmaId}/adicionarAluno?id=${alunoId}`, {method: `POST`});
   const resultado = await response.json();
@@ -150,7 +141,7 @@ async function carregar_lista_aluno_grupo(){
   const response = await fetch(`colocar rota obter alunos do grupo/${grupoId}`);
   const alunos = await response.json();
 
-  const listaAlunos =document.getElementById(`lista-alunos`);
+  const listaAlunos =document.getElementById(`lista-alunos-turma`);
   alunos.forEach(aluno => {
     const option = document.vreateElement(`option`);
     option.value = aluno.id; // Substituir pelo identificador unico do aluno
@@ -163,7 +154,7 @@ async function carregar_lista_aluno_grupo(){
 */
 async function remover_aluno_grupo () {
   const grupoid = obter_id ();
-  const alunoId = document.getElementById(`lista-alunos`).value;
+  const alunoId = document.getElementById(`lista-alunos-grupo`).value;
 
   const response = await fetch (`colocar rota excluir alunos do grupo/${grupoid}/${alunoId}`, {method: `DELETE`});
   const resultado = await response.json();
@@ -171,7 +162,7 @@ async function remover_aluno_grupo () {
   // Atualizar a listagem apos a exclusao de alunos
   if(resultado.sucesso) {
     alert(resultado.mensagem);
-    const listaAlunos = document.getElementById(`lista-alunos`);
+    const listaAlunos = document.getElementById(`lista-alunos-grupo`);
     listaAlunos.innerHTML = ``;
     await carregar_lista_aluno_grupo();
   }
