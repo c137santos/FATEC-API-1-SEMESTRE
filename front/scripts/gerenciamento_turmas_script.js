@@ -2,7 +2,7 @@
 let turmaData;
 async function GetTurmas() {
   try {
-    const response = await fetch("http://127.0.0.1:8080/api/v1/turmas/get");
+    const response = await fetch("http://127.0.0.1:8080/api/v1/turmas/listar");
     turmaData = await response.json();
     console.log(turmaData);
 
@@ -72,7 +72,7 @@ async function showModal() {
   const modal = document.getElementById("myModal");
   modal.style.display = "block";
   try {
-    const response = await fetch("http://127.0.0.1:8080/api/v1/grupos/get");
+    const response = await fetch("http://127.0.0.1:8080/api/v1/grupos/listar");
     grupos_data = await response.json();
     console.log(grupos_data);
 
