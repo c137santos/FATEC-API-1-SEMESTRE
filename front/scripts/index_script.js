@@ -4,7 +4,7 @@ function redirecionarParaPagina(id) {
     } else if (id === 'aluno') {
         window.location.href = 'pagina-aluno.html';
     } else if (id === 'grupos') {
-        window.location.href = 'gerenciamento_grupos.html';
+        window.location.href = 'listar_grupo.html';
     } else if (id === 'global-settings') {
         window.location.href = 'global_settings.html';
     } else {
