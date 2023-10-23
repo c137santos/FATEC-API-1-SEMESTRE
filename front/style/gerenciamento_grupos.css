@@ -1,36 +1,48 @@
-.mainStyle {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.divGrupoStyle{
-    padding:21px;
-    margin:25px;
-    border:solid; 
-    border-radius:8px; 
-    background:rgba(255, 255, 255, 0.8);
-    width: 150px;
-    height: 150px;
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.mainStyle {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.divGrupoStyle {
+  padding: 21px;
+  margin: 25px;
+  border: solid;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  width: 150px;
+  height: 150px;
 }
 
 .divIconeStyle {
-    margin-top: -25px;
-    margin-left: 70px;
-  
+  margin-top: -25px;
+  margin-left: 70px;
 }
 
 .iconeEdicaoStyle {
-    padding:8px;
-    border:solid; 
-    border-radius:8px; 
-    background:#FFEB3B;
+  padding: 8px;
+  border: solid;
+  border-radius: 8px;
+  background: #ffeb3b;
 }
 
 .iconeRemocaoStyle {
-    padding:8px; 
-    border:solid; 
-    border-radius:8px; 
-    background:#FFC0CB;
-    margin-left: 8px;
+  padding: 8px;
+  border: solid;
+  border-radius: 8px;
+  background: #ffc0cb;
+  margin-left: 8px;
+  cursor: pointer;
 }
