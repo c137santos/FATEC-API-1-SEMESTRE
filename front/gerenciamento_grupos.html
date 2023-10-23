@@ -1,83 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento de Grupo</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style/custom.css" />
-    <link rel="stylesheet" href="style/gerenciamento_grupos.css"/>
-</head>
-<body class="bodyStyle">
-    <div id="main" class="mainStyle">
-        <h1>Listagem de Grupos</h1>
-    </div>
-    <script>
-        //A função criar_componente é responsável por criar dinamicamente um componente HTML com base nos dados de um grupo.
-        function criar_componente(id, grupo){     
-            let div = document.getElementById("main")
-            let grupoDiv = document.createElement("div")
-            grupoDiv.setAttribute("class", "divGrupoStyle")
-        
-            let nomeGrupoDiv = document.createElement("div")
-            let rotuloNomeGrupo = document.createElement("strong")
-            rotuloNomeGrupo.textContent = "Nome do grupo:"
-            nomeGrupoDiv.appendChild(rotuloNomeGrupo)
-            let nomeGrupo = document.createElement("p")
-            nomeGrupo.textContent = grupo.nome
-            nomeGrupoDiv.appendChild(nomeGrupo)
-            
-            let nomeTurmaDiv = document.createElement("div")
-            let rotuloTurma = document.createElement("strong")
-            rotuloTurma.textContent = "Turma:"
-            nomeTurmaDiv.appendChild(rotuloTurma)
-            let nomeTurma = document.createElement("p")
-            nomeTurma.textContent = grupo.turma
-            nomeTurmaDiv.appendChild(nomeTurma)
-
-            let iconeDiv = document.createElement("div")
-            iconeDiv.setAttribute("class","divIconeStyle")
-
-            let iconeEdicao = document.createElement("i")
-            iconeEdicao.setAttribute("class", "iconeEdicaoStyle")
-            iconeEdicao.classList.add("fa", "fa-pencil", "iconeEdicaoStyle")
-            iconeEdicao.addEventListener("click", (evento) => {console.log(evento); alert("Adicione aqui a função de edição.")})
-            iconeDiv.appendChild(iconeEdicao)
-
-            let iconeRemocao = document.createElement("i")
-            iconeRemocao.setAttribute("class", "iconeRemocaoStyle")
-            iconeRemocao.classList.add("fa", "fa-trash", "iconeRemocaoStyle")
-            iconeRemocao.addEventListener("click", (evento) => {console.log(evento); alert("Remoção de grupo.")})
-            iconeDiv.appendChild(iconeRemocao)
-            
-            grupoDiv.appendChild(nomeGrupoDiv)
-            grupoDiv.appendChild(nomeTurmaDiv)
-            grupoDiv.appendChild(iconeDiv)
-            div.appendChild(grupoDiv)
-        }
-        
-        //A função listar busca os grupos e cria os componentes. 
-        //A palavra-chave await é usada para aguardar a função get_grupos buscar os grupos antes de prosseguir.
-        async function listar(){    
-            let grupos = await get_grupos() 
-            for(id_grupo in grupos){
-                console.log(id_grupo)
-                criar_componente(id_grupo, grupos[id_grupo])
-            }
-        }
-
-        //A função get_grupos busca os grupos na API backend.
-        //A palavra-chave await é usada para aguardar a resposta da API e, em seguida, converte a resposta para o formato JSON usando o método response.json().
-        //Os grupos buscados são então registrados no console e retornados.
-        async function get_grupos() {   
-            const resposta = await fetch (`http://localhost:8080/api/v1/grupos/listar`, {method: "GET"})    
-            const grupos = await resposta.json()
-            console.log(grupos)
-            return grupos   
-        }
-
-        listar()
-    </script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gerenciamento de Grupo</title>
+        <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
+        />
+        <link rel="stylesheet" href="style/custom.css" />
+        <link rel="stylesheet" href="style/index.css">
+        <link rel="stylesheet" href="style/gerenciamento_grupos.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <header class="header">
+        <a href="index.html">
+        <img src="./imagens/Logo.png" alt="logo" />
+        </a>
+    </header>
+    <body>
+        <h1 class="texto-titulo">Listagem de Grupos</h1>
+        <div id="main" class="mainStyle">
+        </div>
+        <div class="muleke">
+            <a href="index.html">
+              <img src="./imagens/mascote2.png" alt="mascote" />
+            </a>
+        </div>
+    </body>
 </html>
+
+<script>
+    //A função criar_componente é responsável por criar dinamicamente um componente HTML com base nos dados de um grupo.
+    function criar_componente(id, grupo){     
+        let div = document.getElementById("main")
+        let grupoDiv = document.createElement("div")
+        grupoDiv.setAttribute("class", "divGrupoStyle")
+    
+        let nomeGrupoDiv = document.createElement("div")
+        let rotuloNomeGrupo = document.createElement("strong")
+        rotuloNomeGrupo.textContent = "Nome do grupo:"
+        nomeGrupoDiv.appendChild(rotuloNomeGrupo)
+        let nomeGrupo = document.createElement("p")
+        nomeGrupo.textContent = grupo.nome
+        nomeGrupoDiv.appendChild(nomeGrupo)
+        
+        let nomeTurmaDiv = document.createElement("div")
+        let rotuloTurma = document.createElement("strong")
+        rotuloTurma.textContent = "Turma:"
+        nomeTurmaDiv.appendChild(rotuloTurma)
+        let nomeTurma = document.createElement("p")
+        nomeTurma.textContent = grupo.turma
+        nomeTurmaDiv.appendChild(nomeTurma)
+
+        let iconeDiv = document.createElement("div")
+        iconeDiv.setAttribute("class","divIconeStyle")
+
+        let iconeEdicao = document.createElement("i")
+        iconeEdicao.setAttribute("class", "iconeEdicaoStyle")
+        iconeEdicao.classList.add("fa", "fa-pencil", "iconeEdicaoStyle")
+        iconeEdicao.addEventListener("click", (evento) => {console.log(evento); alert("Adicione aqui a função de edição.")})
+        iconeDiv.appendChild(iconeEdicao)
+
+
+        let iconeRemocao = document.createElement("i")
+        iconeRemocao.setAttribute("class", "iconeRemocaoStyle")
+        iconeRemocao.classList.add("fa", "fa-trash", "iconeRemocaoStyle")
+        iconeRemocao.addEventListener("click", (evento) => {console.log(evento); alert("Remoção de grupo.")})
+        iconeDiv.appendChild(iconeRemocao)
+        
+        grupoDiv.appendChild(nomeGrupoDiv)
+        grupoDiv.appendChild(nomeTurmaDiv)
+        grupoDiv.appendChild(iconeDiv)
+        div.appendChild(grupoDiv)
+    }
+    
+    //A função listar busca os grupos e cria os componentes. 
+    //A palavra-chave await é usada para aguardar a função get_grupos buscar os grupos antes de prosseguir.
+    async function listar(){    
+        let grupos = await get_grupos() 
+        for(id_grupo in grupos){
+            console.log(id_grupo)
+            criar_componente(id_grupo, grupos[id_grupo])
+        }
+    }
+
+    //A função get_grupos busca os grupos na API backend.
+    //A palavra-chave await é usada para aguardar a resposta da API e, em seguida, converte a resposta para o formato JSON usando o método response.json().
+    //Os grupos buscados são então registrados no console e retornados.
+    async function get_grupos() {   
+        const resposta = await fetch (`http://localhost:8080/api/v1/grupos/listar`, {method: "GET"})    
+        const grupos = await resposta.json()
+        console.log(grupos)
+        return grupos   
+    }
+
+    listar()
+</script>
