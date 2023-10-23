@@ -1,8 +1,7 @@
 import json
 
-
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
-def busca_turmas():
+def buscando_turmas():
     with open("dados/turmas.json", "r", encoding="utf-8") as f:
         turmas_data = json.load(f)
     return turmas_data
@@ -14,7 +13,7 @@ def _salvar_turmas(turmas):
     return True
 
 def editar_turma_svc(id, nome, professor, data_de_inicio):
-    turmas = busca_turmas()
+    turmas = buscando_turmas()
     if id in turmas.keys():
         turma = turmas[id]
         turma["nome"] = nome
@@ -37,7 +36,6 @@ def gerando_novoID(turmas):
     novo_id = str(maior_id + 1)
     return novo_id
 
-
 # Função para criar uma nova turma
 def criacao_turma(dados_nova_turma, grupos):
     """
@@ -48,7 +46,7 @@ def criacao_turma(dados_nova_turma, grupos):
     grupos: uma lista dos grupos que foram selecionados para perteceram a essa turma
     """
     dados_nova_turma_json = json.loads(dados_nova_turma)
-    turmas = busca_turmas()
+    turmas = buscando_turmas()
 
     nova_turma_id = gerando_novoID(turmas)
 
@@ -94,7 +92,7 @@ def criacao_turma(dados_nova_turma, grupos):
 
 
 def excluir_turma(id):
-    turmas = busca_turmas()
+    turmas = buscando_turmas()
     if id in turmas.keys():
         turmas.pop(id)
         _salvar_turmas(turmas)
