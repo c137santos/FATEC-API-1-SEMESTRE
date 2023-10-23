@@ -3,6 +3,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0px o0px;
 }
 
 /* Estilos para o cabeçalho */
@@ -20,10 +21,10 @@ body {
 /* Estilos para o contêiner principal dos alunos */
 .aluno-container {
   width: 900px;
-  height: 350px;
+  height: 330px;
   padding: 20px;
   padding-top: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 9px;
   border: 0.2px solid #ccc;
   border-radius: 5px;
   display: flex;
