@@ -1,7 +1,7 @@
 import json
 
 
-def busca_grupos():
+def buscando_grupos():
     with open("dados/grupos.json", "r", encoding="utf-8") as f:
         grupos_Data = json.load(f)
     return grupos_Data
@@ -13,7 +13,7 @@ def _salvar_grupos(grupos):
 
 
 def excluir_grupo(id):
-    grupos = busca_grupos()
+    grupos = buscando_grupos()
     grupo_nome = (
         None  # Inicializa o nome do grupo como None em caso de nao ser encontrado
     )

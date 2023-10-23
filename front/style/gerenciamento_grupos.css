@@ -1,0 +1,42 @@
+.bodyStyle {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainStyle {
+    width: 40%;
+}
+
+.divGrupoStyle{
+    padding:21px;
+    border:solid; 
+    border-radius:8px; 
+    background:rgba(255, 255, 255, 0.8);
+    margin-bottom: 21px;
+}
+
+.divIconeStyle {
+    padding-left: 70%;
+    padding-bottom: 8px;
+}
+
+.iconeEdicaoStyle {
+    padding:8px;
+    border:solid; 
+    border-radius:8px; 
+    background:#FFEB3B;
+}
+
+.iconeRemocaoStyle {
+    padding:8px; 
+    border:solid; 
+    border-radius:8px; 
+    background:#FFC0CB;
+    margin-left: 8px;
+}
+
+body {
+    background-color: red;
+}
