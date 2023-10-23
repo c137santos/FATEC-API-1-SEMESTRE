@@ -1,15 +1,3 @@
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.header {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 .mainStyle {
   display: flex;
   flex-direction: row;

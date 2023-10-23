@@ -8,6 +8,7 @@ def busca_dados_json():
         data = json.load(f)
         return data
 
+
 def cria_turma(dados_nova_turma):
     grupos = gerenciador_grupos.buscando_grupos()
     resposta = gerenciador_turmas.criacao_turma(dados_nova_turma, grupos)
