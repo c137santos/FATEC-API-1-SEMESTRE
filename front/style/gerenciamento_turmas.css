@@ -23,7 +23,8 @@ body {
   max-height: 300px;
   padding: 20px;
   margin-bottom: 20px;
-
+  border: 0.2px solid #cccccc23;
+  border-radius: 5px;
   background-color: #f7f7f700;
   display: flex;
   flex-direction: column;
@@ -82,7 +83,6 @@ body {
   cursor: pointer;
 }
 
-
 /* Estilos para o ícone de lixeira */
 .edit-icon {
   position: absolute;
@@ -91,7 +91,6 @@ body {
   height: 27px;
   cursor: pointer;
 }
-
 
 /* Estilos para o modal */
 .modal {
@@ -134,7 +133,7 @@ body {
   width: 250px;
   padding: 2px;
   margin-bottom: 10px;
-  border: 1px solid #2929cf;
+  border: 1px solid #ccc;
   border-radius: 5px;
 }
 
