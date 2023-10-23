@@ -11,14 +11,12 @@ async function GetAlunos() {
 }
 
 function exibirAlunos(alunosData) {
-  const container = document.querySelector(".flex-warp-container");
+  const container = document.querySelector(".corpo_tabela");
 
   for (const alunoId in alunosData) {
     if (alunosData.hasOwnProperty(alunoId)) {
       const aluno = alunosData[alunoId];
-
-      const studentContainer = document.createElement("div");
-      studentContainer.className = "student-container";
+      const RAaluno = alunosData[alunoId].RA;
 
       const alunoSquare = document.createElement("div");
       alunoSquare.className = "aluno-square";
@@ -29,27 +27,64 @@ function exibirAlunos(alunosData) {
       nomeAluno.textContent =
         aluno.nome.charAt(0).toUpperCase() + aluno.nome.slice(1);
 
-      alunoSquare.appendChild(nomeAluno);
-      container.appendChild(alunoSquare);
+      const alunoRA = document.createElement("p");
+      alunoRA.className = "alunoRA";
+      alunoRA.textContent = `${RAaluno}`;
 
       const [grupoNome, turmaNome] = buscaTurmaGrupo(alunoId);
       console.log(grupoNome, turmaNome);
-      const turmaElemento = document.createElement("p");
-      turmaElemento.className = "turma";
-      turmaElemento.textContent =
-        turmaNome.charAt(0).toUpperCase() + turmaNome.slice(1);
+
+      const turmaElemento = document.createElement("div");
+      turmaElemento.className = "turmas";
+      const turmaButton = document.createElement("button");
+      turmaButton.className = "turmasButton";
+      turmaButton.textContent = "Turmas";
+      turmaElemento.appendChild(turmaButton);
+      turmaButton.id = `${alunoId}`;
+      turmaButton.textContent = "Turmas";
+      turmaButton.id = `${alunoId}`;
+
+      const grupoElemento = document.createElement("div");
+      grupoElemento.className = "grupos";
+      const grupoButton = document.createElement("button");
+      grupoButton.className = "gruposButton";
+      grupoButton.textContent = "Grupos";
+      grupoElemento.appendChild(grupoButton);
+      grupoButton.id = `${alunoId}`;
+
+      const notaAluno = document.createElement("div");
+      notaAluno.className = "notas";
+      const notasButton = document.createElement("button");
+      notasButton.className = "notasButton";
+      notasButton.textContent = "Notas";
+      notaAluno.appendChild(notasButton);
+      notasButton.textContent = "Notas";
+      notasButton.id = `${alunoId}`;
+
+      const editar_excluir_alunos = document.createElement("div");
+      editar_excluir_alunos.className = "botoes_editar_excluir_alunos";
+      const editarAluno = document.createElement("img");
+      editarAluno.src = "../front/icon/edit-icon.svg";
+      editarAluno.alt = "Icone";
+      editarAluno.className = "edit-icon";
+      editar_excluir_alunos.appendChild(editarAluno);
+      editarAluno.id = `${alunoId}`;
+
+      // Cria um ícone de lixeira para deletar a turma
+      const excluirAluno = document.createElement("img");
+      excluirAluno.src = "../front/icon/trash-icon.svg";
+      excluirAluno.alt = "Ícone";
+      excluirAluno.className = "trash-icon";
+      editar_excluir_alunos.appendChild(excluirAluno);
+      excluirAluno.id = `${alunoId}`; // Adiciona o ID da turma ao ícone de deletar
+
+      alunoSquare.appendChild(nomeAluno);
+      alunoSquare.appendChild(alunoRA);
       alunoSquare.appendChild(turmaElemento);
-
-      const grupoElemento = document.createElement("p");
-      grupoElemento.className = "grupo";
-      grupoElemento.textContent =
-        grupoNome.charAt(0).toUpperCase() + grupoNome.slice(1);
       alunoSquare.appendChild(grupoElemento);
-
-      const acordeaoContent = document.createElement("div");
-      acordeaoContent.className = "acordeao-content";
-      acordeaoContent.style.display = "none";
-      container.appendChild(acordeaoContent);
+      alunoSquare.appendChild(notaAluno);
+      alunoSquare.appendChild(editar_excluir_alunos);
+      container.appendChild(alunoSquare);
 
       // Adicione notas e média ao acordeão
       const notas = notasEmedia[alunoId].notas.join(", ");
@@ -58,21 +93,12 @@ function exibirAlunos(alunosData) {
       const notasElemento = document.createElement("p");
       notasElemento.className = "notas";
       notasElemento.textContent = `Notas: ${notas}`;
-      acordeaoContent.appendChild(notasElemento);
 
       const mediaElemento = document.createElement("p");
       mediaElemento.className = "media";
       mediaElemento.textContent = `Média: ${media}`;
-      acordeaoContent.appendChild(mediaElemento);
 
       // Adicione um evento de clique para mostrar/ocultar o acordeão
-      alunoSquare.addEventListener("click", () => {
-        if (acordeaoContent.style.display === "none") {
-          acordeaoContent.style.display = "flex";
-        } else {
-          acordeaoContent.style.display = "none";
-        }
-      });
     }
   }
 }
@@ -93,6 +119,34 @@ const notasEmedia = {
 };
 
 function buscaTurmaGrupo(alunoId) {
+  const grupoAluno = {
+    1: {
+      // id aluno
+      grupo: 1, // id grupo
+    },
+    2: {
+      grupo: 2,
+    },
+    3: {
+      grupo: 2,
+    },
+  };
+
+  const grupos = {
+    1: {
+      // id grupo
+      turma: 1, //id turma
+      nome: "team bee",
+    },
+    2: {
+      turma: 2,
+      nome: "team tatata",
+    },
+    3: {
+      turma: 1,
+      nome: "team barbuleta",
+    },
+  };
   const turmas = {
     1: {
       // id turma
@@ -111,33 +165,6 @@ function buscaTurmaGrupo(alunoId) {
       data_de_inicio: "16/10/2023",
     },
   };
-  const grupos = {
-    1: {
-      // id grupo
-      turma: 1, //id turma
-      nome: "team bee",
-    },
-    2: {
-      turma: 2,
-      nome: "team tatata",
-    },
-    3: {
-      turma: 1,
-      nome: "team barbuleta",
-    },
-  };
-  const grupoAluno = {
-    1: {
-      // id aluno
-      grupo: 1, // id grupo
-    },
-    2: {
-      grupo: 2,
-    },
-    3: {
-      grupo: 2,
-    },
-  };
 
   if (alunoId in grupoAluno) {
     const grupoId = grupoAluno[alunoId].grupo;
@@ -146,7 +173,7 @@ function buscaTurmaGrupo(alunoId) {
       const turmaId = grupos[grupoId].turma;
       const turma = turmas[turmaId];
       if (turma) {
-        return [grupoNome, turma.nome]; // Retorna o nome da turma
+        return [grupoNome, turma.nome];
       }
     }
   }

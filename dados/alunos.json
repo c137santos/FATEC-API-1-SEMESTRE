@@ -1,11 +1,14 @@
 {
   "1": {
-    "nome": "Clara Santos"
+    "nome": "Clara Santos",
+    "RA": 1
   },
   "2": {
-    "nome": "Marcelo Tambalo"
+    "nome": "Marcelo Tambalo",
+    "RA": 2
   },
   "3": {
-    "nome": "Jenifer Lopez"
+    "nome": "Jenifer Lopez",
+    "RA": 3
   }
 }
