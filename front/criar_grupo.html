@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
+    <link rel="stylesheet" href="/front/style/criar_grupo.css">
+    <script src="/front/scripts/criar_grupo_script.js" defer></script>
+    <title>PBLTex ::.Criar Grupo</title>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html">
+            <img src="./imagens/Logo.png" alt="logo" />
+        </a>
+    </header>
+
+    <div class="container">
+        <h1>Formulário de Criação de Grupo</h1>
+        <form id="grupo-form">
+            <div>
+                <label for="nome-grupo">Nome do Grupo:</label>
+                <input type="text" id="nome-grupo" required>
+            </div>
+            <div>
+                <label for="selecionar-turma">Selecionar Turma:</label>
+                <select id="selecionar-turma" required>
+                    <!-- Opções de turma serão carregadas dinamicamente -->
+                </select>
+            </div>
+        </form>
+        <div>
+            <h3>Alunos na Turma</h3>
+            <ul id="alunos-na-turma">  
+                <!-- Lista de alunos da turma-->                   
+            </ul>
+        </div>           
+            <div class="alunos">
+                <div class="coluna">
+                    <h3>Alunos Sem Grupo</h3>
+                    <ul id="alunos-sem-grupo">
+                        <!-- Lista de alunos sem grupo -->
+                    </ul>
+                </div>
+                <div class="coluna">
+                    <h3>Alunos no Grupo</h3>
+                    <ul id="alunos-no-grupo">
+                        <!-- Lista de alunos no grupo -->
+                    </ul>
+
+            </div>
+        </div>
+        <div>
+            <button id="salvar-grupo">Salvar Grupo</button>
+            <button id="editar-grupo">Editar Grupo</button>
+        </div>
+    </div>
+    <script src="/front/scripts/gerenciamento_turmas_script.js"></script>
+
+    <!-- Mascote -->
+    <div class="muleke">
+        <a href="index.html">
+            <img src="./imagens/mascote2.png" alt="mascote" />
+        </a>
+    </div>
+</body>
+</html>
