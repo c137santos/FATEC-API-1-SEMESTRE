@@ -8,6 +8,7 @@ from regra_de_negocio.service import (
 
 from regra_de_negocio.global_settings import read_global_settings, edit_global_settings
 from regra_de_negocio.gerenciador_turmas import excluir_turma, editar_turma_svc
+from regra_de_negocio.gerenciador_grupos import obter_grupos_svc, listar_grupos_alunos_svc, editar_grupo_svc, adicionar_grupo_aluno_svc, remover_grupo_aluno_svc
 
 import json
 
@@ -72,3 +73,26 @@ def post_turma(request):
 def api_v1_turmas_excluir(request, id):
     resultado = excluir_turma(id)
     return JsonResponse({"mensagem": resultado})
+
+def obter_grupo(request,id):
+    resposta = obter_grupos_svc(id)
+    return JsonResponse(resposta)
+
+def listar_grupo_alunos(request,id):
+    resposta = listar_grupos_alunos_svc(id)
+    return JsonResponse(resposta)
+
+def editar_grupo(request, id):
+    grupo = json.loads(request.body)
+    resultado = editar_grupo_svc(
+        id, grupo["turma"], grupo["nome"]
+    )
+    return JsonResponse({"mensagem": resultado})
+
+def adicionar_grupo_alunos(request,id):
+    resposta = adicionar_grupo_aluno_svc(id)
+    return JsonResponse(resposta)
+
+def remover_grupo_alunos(request, aluno_id,grupo_id):
+    resposta = remover_grupo_aluno_svc (aluno_id,grupo_id)
+    return JsonResponse(resposta)

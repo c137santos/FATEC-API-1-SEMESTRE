@@ -5,33 +5,29 @@
   <meta name="viewport" content="width=device-width, inicial-scale-1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
   <link rel="stylesheet" href="style/custom.css">
-  <link rel="stylesheet" href="./style/editar_grupo.css">
+  <!-- <link rel="stylesheet" href="./style/editar_grupo.css"> -->
   <title>PBLTex ::. Editar Grupo</title>
 </head>
-<body onload="preencher_campos_formulário(obter_id()); carregar_lista_aluno_turma(); carregar_lista_aluno_grupo();">
+<body onload="preencher_campos_formulario(obter_id())">
   <header class="header">
     <img src="./imagens/Logo.png" alt="logo">
   </header>
   <div>
     <h1>Formulário de Ediçao de Grupo</h1>
   </div>
-  <div name="main">
-    <div name="Fgrupo" style="padding-top: 34px;">
+  <div>
+    <div>
+      <div>
+        Nome da Turma: <span id="fnome"></span>
+      </div>
+      <div>
+        Professor responsável: <span id="fprofessor"></span>
+      </div>
+    </div>
+    <div style="padding-top: 34px;">
       <div>
         <label for="fgrupo"><strong>Nome do Grupo:</strong></label>
         <input type="text" name="fgrupo" id="fgrupo">
-      </div>
-      <div>
-        <label for="fnome"><strong>Nome da Turma:</strong></label>
-        <input type="text" name="fnome" id="fnome">
-      </div>
-      <div>
-        <label for="fprofessor"><strong>Professor responsável:</strong></label>
-        <input type="text" name="fprofessor" id="fprofessor">
-      </div>
-      <div>
-        <label for="fdata"><strong>Data de Inicio:</strong></label>
-        <input type="date" name="fdata" id="fdata">
       </div>
       <div style="padding-top: 21px;">
         <button onclick="requisitar_editar_grupo(obter_id())">Salvar</button>
@@ -55,13 +51,25 @@
 */
   async function preencher_campos_formulario(id){
     const grupo = await obter_grupo(id)
-    if(turma){
-      document.getElementById('fgrupo')['value'] = grupo["grupo"]
-      document.getElementById('fnome')['value'] = turma["nome"]
-      document.getElementById('fprofessor')['value'] = turma["professor"]
-      document.getElementById('fdata')['value'] = turma["data_de_inicio"]
-    }
+    if(grupo){
+      document.getElementById('fgrupo')['value'] = grupo[`nome`]
+      const turma = await obter_turma(grupo["nome"])
+      if (turma){
+        document.getElementById('fnome')['innerText'] = turma[`nome`]
+        document.getElementById('fprofessor')['innerText'] = turma[`professor`]
+      }
   }
+}
+  /** Obtém uma turma pelo id
+         * @param {string} id - o identificador único da turma.
+         * @returns {object} retornará undefined ou um objeto contendo os atributos nome, professor e data_de_inicio.
+        */
+        async function obter_turma(id) {
+            const resposta = await fetch (`http://localhost:8080/api/v1/turmas/listar/${id}`, {method: "GET"})
+            const turma = await resposta.json()
+            console.log(turma)
+            return turma
+        }
   /** Realiza a submissão da edição da turma para o backend
    * @param(string) id - o identificador do grupo.
    */
@@ -83,7 +91,7 @@ async function requisitar_editar_grupo(id){
  * *@returns(object) rertonará undefined ou um objeto
  * */
 async function obter_grupo(id) {
-  const resposta = await fetch (`substituir por rota${id}`, {method: "POST"})
+  const resposta = await fetch (`http://localhost:8080/api/v1/grupos/obter/${id}`, {method: "GET"})
       const grupo = await resposta.json()
       console.log(grupo)
       return grupo
@@ -100,79 +108,70 @@ async function obter_grupo(id) {
   const mensagem = "Atenção! Os dados do grupo serão modificados.\nDeseja prosseguir com a edição?"
   return window.confirm(mensagem);
 }
-/** Carregar uma lista de alunos da turma que esta sendo editada
- * 
-*/
-async function carregar_lista_aluno_turma() {
-    const turmaId = obter_id_turma();
-    const response = await fetch(`colocar rota turma/${turmaId}/alunos`); //criar uma rota para obter alunos d euma turma especifica
-    const alunos = await response.json();
-    const listaAlunos = document.getElementById(`lista-alunos-turma`);
-    
-    alunos.array.forEach(aluno => {
-      const option = document.createElement(`option`);
-      option.value = aluno.id; // Substituir pelo identificador unico do aluno
-      option.text = aluno.nome; // caso o aluno tenha um atributo como `nome`
-      listaAlunos.appendChild(option);
-    });
-}
-/**Implementando Funcao para obter o id da turma que esta sendo editada
- *  Obtem o ID da turma da URL e retorna
-*/
-function obter_id_turma() {
-  function obter_id_turma() {
-    const urlParams = new URLSearchParams(Window.location.search);
-    const turmaId = urlParams.get(`id`);
-    return turmaId;
-  }
-}
-async function adicionar_aluno_grupo() {
-  const alunoId = document.getElementById(`lista-alunos-turma`.value);
-  const turmaId = obter_id_turma();
-  const response = await fetch(`colocar rota de turmas / ${turmaId}/adicionarAluno?id=${alunoId}`, {method: `POST`});
-  const resultado = await response.json();
-  console.log(resultado.mensagem);
-}
-/** Implementando Funcao para obter o id do grupo que esta sendo editada
- * Obtem o ID do grupo na URL e retorna
-*/
-async function carregar_lista_aluno_grupo(){
-  const grupoId = obter_id();
-  const response = await fetch(`colocar rota obter alunos do grupo/${grupoId}`);
-  const alunos = await response.json();
 
-  const listaAlunos =document.getElementById(`lista-alunos-turma`);
-  alunos.forEach(aluno => {
-    const option = document.vreateElement(`option`);
-    option.value = aluno.id; // Substituir pelo identificador unico do aluno
-    option.text = aluno.nome;  // caso o aluno tenha um atributo como `nome`
-    listaAlunos.appendChild(option);
-  });
-}
-/**Funcao para excluir um aluno do grupo que esta sendo editado
- * 
-*/
-async function remover_aluno_grupo () {
-  const grupoid = obter_id ();
-  const alunoId = document.getElementById(`lista-alunos-grupo`).value;
 
-  const response = await fetch (`colocar rota excluir alunos do grupo/${grupoid}/${alunoId}`, {method: `DELETE`});
-  const resultado = await response.json();
 
-  // Atualizar a listagem apos a exclusao de alunos
-  if(resultado.sucesso) {
-    alert(resultado.mensagem);
-    const listaAlunos = document.getElementById(`lista-alunos-grupo`);
-    listaAlunos.innerHTML = ``;
-    await carregar_lista_aluno_grupo();
-  }
-  else{ alert (resultado.mensagem);}
-}
+
+
+
+
+
+ //A função criar_componente é responsável por criar dinamicamente um componente HTML com base nos dados de um grupo.
+ function criar_componente(id, aluno){     
+            let div = document.getElementById("main")
+            let grupoDiv = document.createElement("div")
+            grupoDiv.setAttribute("class", "divGrupoStyle")
+        
+            let nomeGrupoDiv = document.createElement("div")
+            let rotuloNomeGrupo = document.createElement("strong")
+            rotuloNomeGrupo.textContent = "Nome do grupo:"
+            nomeGrupoDiv.appendChild(rotuloNomeGrupo)
+            let nomeGrupo = document.createElement("p")
+            nomeGrupo.textContent = grupo.nome
+            nomeGrupoDiv.appendChild(nomeGrupo)
+            
+            let nomeTurmaDiv = document.createElement("div")
+            let rotuloTurma = document.createElement("strong")
+            rotuloTurma.textContent = "Turma:"
+            nomeTurmaDiv.appendChild(rotuloTurma)
+            let nomeTurma = document.createElement("p")
+            nomeTurma.textContent = grupo.turma
+            nomeTurmaDiv.appendChild(nomeTurma)
+
+            let iconeDiv = document.createElement("div")
+            iconeDiv.setAttribute("class","divIconeStyle")
+
+            let iconeRemocao = document.createElement("i")
+            iconeRemocao.setAttribute("class", "iconeRemocaoStyle")
+            iconeRemocao.classList.add("fa", "fa-trash", "iconeRemocaoStyle")
+            iconeRemocao.addEventListener("click", (evento) => {console.log(evento); alert("Remoção de grupo.")})
+            iconeDiv.appendChild(iconeRemocao)
+            
+            grupoDiv.appendChild(nomeGrupoDiv)
+            grupoDiv.appendChild(nomeTurmaDiv)
+            grupoDiv.appendChild(iconeDiv)
+            div.appendChild(grupoDiv)
+        }
+        
+        //A função listar busca os grupos e cria os componentes. 
+        //A palavra-chave await é usada para aguardar a função get_grupos buscar os grupos antes de prosseguir.
+        async function listar(){    
+            let grupos = await get_grupos() 
+            for(id_grupo in grupos){
+                console.log(id_grupo)
+                criar_componente(id_grupo, grupos[id_grupo])
+            }
+        }
+
+        //A função get_grupos busca os grupos na API backend.
+        //A palavra-chave await é usada para aguardar a resposta da API e, em seguida, converte a resposta para o formato JSON usando o método response.json().
+        //Os grupos buscados são então registrados no console e retornados.
+        async function get_grupos() {   
+            const resposta = await fetch (`http://localhost:8080/api/v1/grupos/listar`, {method: "GET"})    
+            const grupos = await resposta.json()
+            console.log(grupos)
+            return grupos   
+        }
+
+        listar()
 </script>
-    <div class="muleke">
-      <a href="index.html">
-      <img src="./imagens/mascote2.png" alt="mascote">
-    </a>
-    </div>
-</body>
-</html>

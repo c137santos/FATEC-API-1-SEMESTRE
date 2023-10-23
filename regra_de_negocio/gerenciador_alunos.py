@@ -1,4 +1,4 @@
-def obter_alunos():
+def listar_alunos_svc():
     alunos = {}
     
     aluno1 = {}
