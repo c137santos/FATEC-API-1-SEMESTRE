@@ -78,7 +78,14 @@ def criacao_turma(dados_nova_turma):
 
     # Salve as alterações nos arquivos JSON
     _salvar_turmas(turmas)
+    _salvar_grupos(grupos)
     return resposta
+
+
+# Função para salvar grupos em um arquivo JSON
+def _salvar_grupos(grupos):
+    with open("dados/grupos.json", "w", encoding="utf-8") as f:
+        json.dump(grupos, f, indent=4)
 
 
 def excluir_turma(id):
