@@ -1,3 +1,9 @@
+from flask import Flask
+
+excluindo_alunos = Flask(__name)
+
+
+
 from wgsi import HttpResponse, JsonResponse
 from regra_de_negocio.service import (
     busca_dados_json,
@@ -72,3 +78,18 @@ def post_turma(request):
 def api_v1_turmas_excluir(request, id):
     resultado = excluir_turma(id)
     return JsonResponse({"mensagem": resultado})
+
+
+# Outras rotas do seu aplicativo
+
+@app.route('/api/alunos/excluir/<aluno_id>', methods=['DELETE'])
+def excluir_aluno(aluno_id):
+    global alunos
+    if aluno_id in alunos:
+        del alunos[aluno_id]
+        return jsonify({"message": "Aluno excluído com sucesso"})
+    else:
+        return jsonify({"error": "Aluno não encontrado"}, 404)
+
+if __name__ == '__main__':
+    app.run(debug=True)

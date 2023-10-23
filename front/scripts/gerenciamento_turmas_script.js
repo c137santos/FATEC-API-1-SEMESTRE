@@ -13,6 +13,22 @@ async function GetTurmas() {
     return null;
   }
 }
+// Função buscar alunos no servidor
+let alunoData;
+
+async function GetAlunos() {
+  try {
+    const response = await fetch("http://127.0.0.1:8080/api/v1/alunos/get");
+    alunoData = await response.json();
+    console.log(alunoData);
+
+    // Chama a função para exibir os alunos
+    exibirAlunos(alunoData);
+  } catch (error) {
+    console.error("Erro ao buscar dados da API de alunos -> ", error);
+    return null;
+  }
+}
 
 function requisitar_excluir_aluno(id) {
   if (window.confirm("Atenção! O aluno será excluído.\nDeseja prosseguir?")) {
