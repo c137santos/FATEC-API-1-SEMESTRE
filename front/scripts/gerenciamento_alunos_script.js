@@ -41,8 +41,6 @@ function exibirAlunos(alunosData) {
       turmaButton.textContent = "Turmas";
       turmaElemento.appendChild(turmaButton);
       turmaButton.id = `${alunoId}`;
-      turmaButton.textContent = "Turmas";
-      turmaButton.id = `${alunoId}`;
 
       const grupoElemento = document.createElement("div");
       grupoElemento.className = "grupos";
@@ -58,7 +56,6 @@ function exibirAlunos(alunosData) {
       notasButton.className = "notasButton";
       notasButton.textContent = "Notas";
       notaAluno.appendChild(notasButton);
-      notasButton.textContent = "Notas";
       notasButton.id = `${alunoId}`;
 
       const editar_excluir_alunos = document.createElement("div");
@@ -85,37 +82,32 @@ function exibirAlunos(alunosData) {
       alunoSquare.appendChild(notaAluno);
       alunoSquare.appendChild(editar_excluir_alunos);
       container.appendChild(alunoSquare);
-
-      // Adicione notas e média ao acordeão
-      const notas = notasEmedia[alunoId].notas.join(", ");
-      const media = notasEmedia[alunoId].media;
-
-      const notasElemento = document.createElement("p");
-      notasElemento.className = "notas";
-      notasElemento.textContent = `Notas: ${notas}`;
-
-      const mediaElemento = document.createElement("p");
-      mediaElemento.className = "media";
-      mediaElemento.textContent = `Média: ${media}`;
-
-      // Adicione um evento de clique para mostrar/ocultar o acordeão
     }
   }
 }
 
 const notasEmedia = {
-  1: {
-    notas: [8, 7, 9],
-    media: 8,
-  },
-  2: {
-    notas: [6, 7, 5],
-    media: 6,
-  },
-  3: {
-    notas: [9, 8, 8],
-    media: 8.3,
-  },
+  1: [
+    {
+      grupo: 1,
+      notas: [8, 7, 9],
+      media: 8,
+    },
+  ],
+  2: [
+    {
+      grupo: 2,
+      notas: [6, 7, 5],
+      media: 6,
+    },
+  ],
+  3: [
+    {
+      grupo: 2,
+      notas: [9, 8, 8],
+      media: 8.3,
+    },
+  ],
 };
 
 function buscaTurmaGrupo(alunoId) {
