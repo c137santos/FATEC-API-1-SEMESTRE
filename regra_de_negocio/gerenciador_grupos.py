@@ -8,3 +8,7 @@ def buscando_grupos():
     with open("dados/grupos.json", "r", encoding="utf-8") as f:
         grupos_Data = json.load(f)
     return grupos_Data
+
+def _salvar_grupos(grupos):
+    with open("dados/grupos.json", "w", encoding="utf-8") as f:
+        json.dump(grupos, f, indent=4)

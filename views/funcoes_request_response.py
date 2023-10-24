@@ -1,13 +1,11 @@
 from wgsi import HttpResponse, JsonResponse
 from regra_de_negocio.service import (
     busca_dados_json,
-    busca_turmas,
-    buscar_grupos,
-    cria_turma,
+    criacao_turma,
 )
 
 from regra_de_negocio.global_settings import read_global_settings, edit_global_settings
-from regra_de_negocio.gerenciador_turmas import excluir_turma, editar_turma_svc
+from regra_de_negocio.gerenciador_turmas import buscando_turmas, excluir_turma, editar_turma_svc
 from regra_de_negocio.gerenciador_grupos import buscando_grupos
 
 import json
@@ -42,12 +40,12 @@ def alterar_global_settings(request):
 
 
 def get_turmas(request):
-    turmas_data = busca_turmas()
+    turmas_data = buscando_turmas()
     return JsonResponse(turmas_data)
 
 
 def obtem_turma_especifica(request, id):
-    turmas_data = busca_turmas()
+    turmas_data = buscando_turmas()
     return JsonResponse(turmas_data[id])
 
 
@@ -64,9 +62,9 @@ def listar_grupos(request):
     return JsonResponse(grupos_data)
 
 
-def post_turma(request):
+def criar_turma(request):
     dados_nova_turma = request.body
-    resposta = cria_turma(dados_nova_turma)
+    resposta = criacao_turma(dados_nova_turma)
     return JsonResponse(resposta)
 
 

@@ -1,6 +1,7 @@
 import json
-import regra_de_negocio.gerenciador_turmas as gt
-from regra_de_negocio.gerenciador_grupos import buscando_grupos
+import regra_de_negocio.gerenciador_grupos as gerenciador_grupos
+import regra_de_negocio.gerenciador_turmas as gerenciador_turmas
+
 
 
 def busca_dados_json():
@@ -8,17 +9,9 @@ def busca_dados_json():
         data = json.load(f)
         return data
 
-
-def busca_turmas():  # retorna todas turmas
-    turmas_data = gt.busca_turmas()
-    return turmas_data
-
-
-def buscar_grupos():  # retorna todos os grupos
-    grupos_data = gt.buscando_grupos()
-    return grupos_data
-
-
-def cria_turma(dados_nova_turma):
-    resposta = gt.criacao_turma(dados_nova_turma)
+def criacao_turma(dados_nova_turma):
+    grupos = gerenciador_grupos.buscando_grupos()
+    resposta = gerenciador_turmas.criacao_turma(dados_nova_turma, grupos)
+    gerenciador_grupos._salvar_grupos(grupos)
     return resposta
+
