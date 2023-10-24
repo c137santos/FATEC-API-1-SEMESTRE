@@ -6,6 +6,16 @@
       "sprint": 1
     },
     {
+      "grupo": 1,
+      "valor": 8,
+      "sprint": 2
+    },
+    {
+      "grupo": 1,
+      "valor": 8,
+      "sprint": 3
+    },
+    {
       "grupo": 2,
       "valor": 6,
       "sprint": 2
@@ -24,5 +34,3 @@
     }
   ]
 }
-
-//a chave do dicionario é o id do aluno

@@ -119,6 +119,21 @@ function buscaTurmaGrupo(alunoId) {
         notas: [8, 7, 9],
         media: 8,
       },
+      {
+        grupo: 1,
+        valor: 8,
+        sprint: 2,
+      },
+      {
+        grupo: 1,
+        valor: 8,
+        sprint: 3,
+      },
+      {
+        grupo: 2,
+        valor: 6,
+        sprint: 2,
+      },
     ],
     2: [
       {
@@ -175,14 +190,14 @@ function buscaTurmaGrupo(alunoId) {
     if (grupoId in grupos) {
       const grupoNome = grupos[grupoId].nome;
       const turmaId = grupos[grupoId].turma;
-      const turma = turmas[turmaId];
-      if (turma) {
-        return [grupoNome, turma.nome];
-      }
+      const turmaNome = turmas[turmaId].nome;
+      return [grupoNome, turmaNome];
     }
   }
 
-  if (aluno in notasButton) return null;
+  if (alunoId in notasEmedia) {
+    if alunoId[grupo]
+  }
 }
 
 GetAlunos();
