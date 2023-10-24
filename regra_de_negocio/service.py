@@ -1,6 +1,6 @@
 import json
-import regra_de_negocio.gerenciador_grupos as gerenciador_grupos
-import regra_de_negocio.gerenciador_turmas as gerenciador_turmas
+from regra_de_negocio import gerenciador_grupos
+from regra_de_negocio import gerenciador_turmas
 
 
 
