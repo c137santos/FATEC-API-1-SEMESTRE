@@ -41,6 +41,7 @@ function exibirAlunos(alunosData) {
       turmaButton.textContent = "Turmas";
       turmaElemento.appendChild(turmaButton);
       turmaButton.id = `${alunoId}`;
+      turmaButton.
 
       const grupoElemento = document.createElement("div");
       grupoElemento.className = "grupos";
