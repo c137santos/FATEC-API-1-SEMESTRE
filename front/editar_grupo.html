@@ -54,7 +54,8 @@ lista_alunos_grupo(alunos_grupo)
     const grupo = await obter_grupo(id)
     if(grupo){
       document.getElementById('fgrupo')['value'] = grupo[`nome`]
-      const turma = await obter_turma(grupo["nome"])
+      console.log(grupo)
+      const turma = await obter_turma(grupo["turma"])
       if (turma){
         document.getElementById('fnome')['innerText'] = turma[`nome`]
         document.getElementById('fprofessor')['innerText'] = turma[`professor`]

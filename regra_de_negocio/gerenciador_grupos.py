@@ -1,7 +1,9 @@
 import json
 from regra_de_negocio.gerenciador_alunos import listar_alunos_svc
 
-# Listar grupos do Json
+#Função criada para fazer a leitura do arquivo grupos.json localizado na pasta "dados"
+#O módulo json é usado para carregar o conteúdo do arquivo JSON no objeto grupos_Data. O json.load() converte o JSON em um objeto Python
+#Retorno: conteúdo do arquivo como um objeto Python.
 def listar_grupos():
     with open("dados/grupos.json", "r", encoding="utf-8") as f:
         grupo_data = json.load(f)
@@ -51,7 +53,7 @@ def adicionar_grupo_aluno_svc(id, grupo_id):
     grupo_alunos = listar_grupos_alunos_svc()
     grupo_alunos[id] = {}
     grupo_alunos[id]["grupo"] = grupo_id
-    _salvar_grupo_alunos(grupo_alunos)
+    # _salvar_grupo_alunos(grupo_alunos)
     return True
 
 def remover_grupo_aluno_svc(aluno_id, grupo_id):
@@ -65,12 +67,5 @@ def remover_grupo_aluno_svc(aluno_id, grupo_id):
             grupo_alunos_manter[id] = grupo_aluno
         else:
             print("Removido!")
-    _salvar_grupo_alunos(grupo_alunos_manter)
+    # _salvar_grupo_alunos(grupo_alunos_manter)
 
-#Função criada para fazer a leitura do arquivo grupos.json localizado na pasta "dados"
-#O módulo json é usado para carregar o conteúdo do arquivo JSON no objeto grupos_Data. O json.load() converte o JSON em um objeto Python
-#Retorno: conteúdo do arquivo como um objeto Python.
-# def buscando_grupos():
-#     with open("dados/grupos.json", "r", encoding="utf-8") as f:
-#         grupos_Data = json.load(f)
-#     return grupos_Data
