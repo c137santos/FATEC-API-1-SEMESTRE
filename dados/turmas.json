@@ -3,10 +3,5 @@
         "nome": "ADS",
         "professor": "Nadalete",
         "data_de_inicio": "21/02/2023"
-    },
-    "5": {
-        "nome": "Turma Teste",
-        "professor": "Professora teste",
-        "data_de_inicio": "2023-10-11"
     }
 }

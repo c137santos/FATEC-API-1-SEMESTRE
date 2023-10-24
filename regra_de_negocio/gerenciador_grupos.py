@@ -66,3 +66,11 @@ def remover_grupo_aluno_svc(aluno_id, grupo_id):
         else:
             print("Removido!")
     _salvar_grupo_alunos(grupo_alunos_manter)
+
+#Função criada para fazer a leitura do arquivo grupos.json localizado na pasta "dados"
+#O módulo json é usado para carregar o conteúdo do arquivo JSON no objeto grupos_Data. O json.load() converte o JSON em um objeto Python
+#Retorno: conteúdo do arquivo como um objeto Python.
+def buscando_grupos():
+    with open("dados/grupos.json", "r", encoding="utf-8") as f:
+        grupos_Data = json.load(f)
+    return grupos_Data
