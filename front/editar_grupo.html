@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+S<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -39,13 +39,26 @@
         <select name="alunos" id="lista-alunos-turma"></select>
       </div>
         <button onclick="adicionar_aluno_grupo()">Adicionar Aluno</button>
-      <div>
+      <div id="alunos_grupo">
         <label for="alunos"><strong>Alunos do Grupo:</strong></label>
         <select name="alunos" id="lista-alunos-grupo"></select>
       </div>
         <button onclick="remover_aluno_grupo()">Remover Aluno</button>
 
 <script>
+  alunos_grupo = {
+    "nome":"ruth"
+  }
+  function lista_alunos_grupo(alunos_grupo){
+    debugger
+    for (let aluno in alunos_grupo){
+      let div_alunos_grupo =  document.getElementById("alunos_grupo")
+      let nome_alunos = document.createElement("p")
+      nome_alunos.textContent = aluno.nomr
+      div_alunos_grupo.appendChild(nome_alunos)
+    }
+  }
+lista_alunos_grupo(alunos_grupo)
   /** Realiza o preenchimento inicial dos campos do formulario
   @param (string) id _ o identificador único do grupo.
 */
@@ -73,18 +86,24 @@
   /** Realiza a submissão da edição da turma para o backend
    * @param(string) id - o identificador do grupo.
    */
-async function requisitar_editar_grupo(id){
-  const decisao_usuario = criar_modal_confirmacao_edicao();
+function requisitar_editar_grupos(id){
+  editaNomeGrupo(id)
+}
+
+async function editaNomeGrupo(id){
+  const decisao_usuario = true
+  //criar_modal_confirmacao_edicao();
   if(decisao_usuario){
+    console.log('passei')
     const grupo = {
-      "grupo" : document.getElementById('fgrupo')['value'],
       "nome" : document.getElementById('fnome')['value'],
-      "professor" : document.getElementById('fprofessor')['value'],
-      "data_de_inicio" : document.getElementById('fdata')['value']
+
     }
-    fetch (`substituir por rota${id}/`,{method: "POST", body:JSON.stringify(grupo)})
+    console.log(document.getElementById('fnome')['value'])
+    fetch (`https://localhost:8080/api/v1/grupo/editar:id${id}/`,{method: "POST", body:JSON.stringify(grupo)})
     .then(() => window.location.href = 'editar_grupo.html?id=' + id)
   }
+
 }
 /** Obtém o grupo pelo id
  * *@param (string) id - identificador único do grupo
@@ -115,7 +134,71 @@ async function obter_grupo(id) {
 
 
 
+// Função para buscar grupo no servidor
+let grupos_alunos;
+async function GetGruposAlunos() {
+  try {
+    const response = await fetch("http://127.0.0.1:8080/api/v1/grupoalunos/listar");
+    grupos_alunos = await response.json();
+    console.log(grupos_alunos);
 
+    // Chama a função para exibir as grupo
+    exibirGruposAlunos(grupos_alunos);
+  } catch (error) {
+    console.error("Erro ao buscar dados da API -> ", error);
+    return null;
+  }
+}
+
+function remover_aluno_grupo(id){
+  if(window.confirm("Atenção! O Aluno será excluído.\nDeseja prosseguir?")){
+    fetch(`http://localhost:8080/api/v1/grupoalunos/remover/:id${id}`,{method:'DELETE'}).then(document.getElementById(id).remove())
+  }  
+}
+
+// Função para exibir os alunos do grupo no DOM
+function exibirGruposAlunos(grupos_alunos) {
+  const container = document.querySelector(".flex-warp-container");
+  // Itera sobre os objetos do JSON e cria elementos HTML para cada aluno
+  for (const alunoId in grupos_alunos) {
+    if (grupos_alunos.hasOwnProperty(alunoId)) {
+      const grupo = grupos_alunos[alunoId];
+
+      // Cria um elemento div para representar uma aluno
+      const grupos = document.createElement("div");
+      grupoSquare.className = "turma-square";
+      grupoSquare.id = `${alunoId}`; // Adiciona o ID da aluno ao grupoSquare
+
+      // Cria um ícone de lixeira para deletar o aluno
+      const imagemIcon = document.createElement("img");
+      imagemIcon.src = "../front/icon/trash-icon.svg";
+      imagemIcon.alt = "Ícone";
+      imagemIcon.className = "trash-icon";
+      imagemIcon.id = `${alunoId}`; // Adiciona o ID da aluno ao ícone de deletar
+      imagemIcon.addEventListener("click",() =>remover_aluno_grupo(`${alunoId}`))
+
+      // Adiciona o ícone ao turmaSquare
+      turmaSquare.appendChild(imagemIcon);
+
+      // Adiciona o turmaSquare ao container
+      container.appendChild(grupoSquare);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
  //A função criar_componente é responsável por criar dinamicamente um componente HTML com base nos dados de um grupo.
  function criar_componente(id, aluno){     
             let div = document.getElementById("main")
@@ -174,4 +257,5 @@ async function obter_grupo(id) {
         }
 
         listar()
+*/
 </script>
