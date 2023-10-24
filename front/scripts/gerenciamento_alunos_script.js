@@ -41,7 +41,10 @@ function exibirAlunos(alunosData) {
       turmaButton.textContent = "Turmas";
       turmaElemento.appendChild(turmaButton);
       turmaButton.id = `${alunoId}`;
-      turmaButton.
+      turmaButton.addEventListener("click", (evento) => {
+        console.log(evento);
+        alert(`O aluno ${aluno.nome} pertecem a turma ${turmaNome}.`);
+      });
 
       const grupoElemento = document.createElement("div");
       grupoElemento.className = "grupos";
@@ -50,6 +53,10 @@ function exibirAlunos(alunosData) {
       grupoButton.textContent = "Grupos";
       grupoElemento.appendChild(grupoButton);
       grupoButton.id = `${alunoId}`;
+      grupoButton.addEventListener("click", (evento) => {
+        console.log(evento);
+        alert(`O aluno ${aluno.nome} pertecem ao grupo ${grupoNome}.`);
+      });
 
       const notaAluno = document.createElement("div");
       notaAluno.className = "notas";
@@ -58,6 +65,10 @@ function exibirAlunos(alunosData) {
       notasButton.textContent = "Notas";
       notaAluno.appendChild(notasButton);
       notasButton.id = `${alunoId}`;
+      notasButton.addEventListener("click", (evento) => {
+        console.log(evento);
+        alert(`O aluno ${aluno.nome} pertecem ao grupo ${grupoNome}.`);
+      });
 
       const editar_excluir_alunos = document.createElement("div");
       editar_excluir_alunos.className = "botoes_editar_excluir_alunos";
@@ -87,30 +98,6 @@ function exibirAlunos(alunosData) {
   }
 }
 
-const notasEmedia = {
-  1: [
-    {
-      grupo: 1,
-      notas: [8, 7, 9],
-      media: 8,
-    },
-  ],
-  2: [
-    {
-      grupo: 2,
-      notas: [6, 7, 5],
-      media: 6,
-    },
-  ],
-  3: [
-    {
-      grupo: 2,
-      notas: [9, 8, 8],
-      media: 8.3,
-    },
-  ],
-};
-
 function buscaTurmaGrupo(alunoId) {
   const grupoAluno = {
     1: {
@@ -123,6 +110,30 @@ function buscaTurmaGrupo(alunoId) {
     3: {
       grupo: 2,
     },
+  };
+
+  const notasEmedia = {
+    1: [
+      {
+        grupo: 1,
+        notas: [8, 7, 9],
+        media: 8,
+      },
+    ],
+    2: [
+      {
+        grupo: 2,
+        notas: [6, 7, 5],
+        media: 6,
+      },
+    ],
+    3: [
+      {
+        grupo: 2,
+        notas: [9, 8, 8],
+        media: 8.3,
+      },
+    ],
   };
 
   const grupos = {
@@ -170,7 +181,8 @@ function buscaTurmaGrupo(alunoId) {
       }
     }
   }
-  return null;
+
+  if (aluno in notasButton) return null;
 }
 
 GetAlunos();
