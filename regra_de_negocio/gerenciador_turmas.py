@@ -34,7 +34,7 @@ def gerando_novo_id(turmas):
     return novo_id
 
 # Função para criar uma nova turma
-def criacao_turma(dados_nova_turma, grupos):
+def criacao_turma(dados_nova_turma):
     """
     Dados da nova turma vem no seguinte formato:
     nome: nome da turma
@@ -58,30 +58,7 @@ def criacao_turma(dados_nova_turma, grupos):
     }
     turmas[nova_turma_id] = nova_turma
     turma_nome = turmas[nova_turma_id]["nome"]
-    resposta = {
-        "mensagem": f"Criação da turma {turma_nome.capitalize()} realizada com sucesso!",
-        "detalhes": [],
-    }
-
-    if len(dados_nova_turma_json["grupos"]) >= 1: #Se a lista vier com pelo menos 1 grupo
-        for idGrupo in dados_nova_turma_json["grupos"]: #Percorre a lista para pegar cada id
-            idGrupo = str( #Transforma o id em str para pode ser comparado com o grupos.json
-                idGrupo
-            )
-            print(f"ID do grupo a ser atualizado: {idGrupo}")
-            # Verifique se o ID do grupo existe nos grupos
-            if idGrupo in grupos: #pega esse id da lista e procura ele no grupos.json
-                print(f"Atualizando grupo {idGrupo} para turma {nova_turma_id}")
-                grupo_Nome = grupos[idGrupo]["nome"] #Pega o nome do grupo
-                grupos[idGrupo]["turma"] = int(nova_turma_id) # Atualize a propriedade "turma" do grupo com um valor inteiro
-                # Cria os detalhes de alterações nos grupos
-                resposta["detalhes"].append(
-                    f"Adicionado o grupo {grupo_Nome.capitalize()} a turma {turma_nome.capitalize()}"
-                ) # Nessa resposta por exemplo: pega o nome do grupo e o nome da turma para dizer que foi feito com sucesso a operacao
-            else:
-                resposta["detalhes"].append(
-                    f"id {grupo_Nome.capitalize()} não encontrado nos grupos"
-                )
+    resposta = f"Criação da turma {turma_nome.capitalize()} realizada com sucesso!"
 
     # Salve as alterações nos arquivos JSON
     _salvar_turmas(turmas)
