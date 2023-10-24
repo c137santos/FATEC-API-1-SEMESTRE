@@ -31,6 +31,7 @@ def _salvar_turmas(turmas):
         arquivo.write(dados)
     return True
 
+
 # Função para criar uma nova turma
 def criacao_turma(dados_nova_turma):
     dados_nova_turma_json = json.loads(dados_nova_turma)
