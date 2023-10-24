@@ -10,8 +10,9 @@ def listar_grupos():
         return grupo_data
 
 # Relaciona alunos pertencentes ao grupo que estou editando verificando o id do grupo ao id do aluno e retorna como lista
-def listar_grupos_alunos_svc():
-    with open("dados/grupos.json", "r", encoding="utf-8") as f:
+#retorna alunos do grupo
+def listar_grupos_alunos_svc(id):
+    with open("dados/alunos.json", "r", encoding="utf-8") as f:
         grupo_data = json.load(f)
         return grupo_data
 
@@ -53,7 +54,7 @@ def adicionar_grupo_aluno_svc(id, grupo_id):
     grupo_alunos = listar_grupos_alunos_svc()
     grupo_alunos[id] = {}
     grupo_alunos[id]["grupo"] = grupo_id
-    # _salvar_grupo_alunos(grupo_alunos)
+    _salvar_grupo_alunos(grupo_alunos)
     return True
 
 def remover_grupo_aluno_svc(aluno_id, grupo_id):
@@ -67,5 +68,14 @@ def remover_grupo_aluno_svc(aluno_id, grupo_id):
             grupo_alunos_manter[id] = grupo_aluno
         else:
             print("Removido!")
-    # _salvar_grupo_alunos(grupo_alunos_manter)
+    _salvar_grupo_alunos(grupo_alunos_manter)
+
+# Parâmetro: um dicionário onde cada turma é um par chave-valor
+# Retorna:
+#   True se a operação for bem sucedida
+def _salvar_grupo_alunos(grupo_alunos):
+    dados = json.dumps(grupo_alunos, indent=4)
+    with open("dados/grupo_alunos.json", "w", encoding="utf-8") as arquivo:
+        arquivo.write(dados)
+    return True
 
