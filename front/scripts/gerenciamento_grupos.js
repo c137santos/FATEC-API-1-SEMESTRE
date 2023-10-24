@@ -8,9 +8,7 @@ async function carregarDados() {
     try {
         const response = await fetch("http://127.0.0.1:8080/api/v1/turmas/listar");
         const listaTurmas = await response.json();
-        debugger
-        turmas = listaTurmas.turmas;
-        grupos = turmas.reduce((acc, turma) => acc.concat(turma.grupos), []);
+        turmas = listaTurmas
 
         // Preencher o select com as turmas
         preencherTurmasNoSelect();
@@ -22,13 +20,12 @@ async function carregarDados() {
 // Função para preencher o select com as turmas
 function preencherTurmasNoSelect() {
     const selectTurma = document.getElementById('selecionar-turma');
-
-    turmas.forEach(turma => {
+    for (let turma in turmas) {
         const option = document.createElement('option');
-        option.value = turma.id;
-        option.textContent = turma.nome;
+        option.value = turma
+        option.textContent = turmas[turma]['nome'];
         selectTurma.appendChild(option);
-    });
+    }
 
     // Adicione eventos para atualizar as listas de alunos
     selectTurma.addEventListener('change', function () {

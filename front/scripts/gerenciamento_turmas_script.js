@@ -1,6 +1,6 @@
 // Função para buscar turmas no servidor
-let turmaData;
 async function GetTurmas() {
+  let turmaData;
   try {
     const response = await fetch("http://127.0.0.1:8080/api/v1/turmas/listar");
     turmaData = await response.json();
@@ -44,14 +44,14 @@ function exibirTurmas(turmadata) {
       imagemIcon.alt = "Ícone";
       imagemIcon.className = "trash-icon";
       imagemIcon.id = `${turmaId}`; // Adiciona o ID da turma ao ícone de deletar
-      imagemIcon.addEventListener("click",() => requisitar_excluir_turma(`${turmaId}`))
+      imagemIcon.addEventListener("click", () => requisitar_excluir_turma(`${turmaId}`))
 
       const imagemIconEdit = document.createElement("img")
       imagemIconEdit.src = "../front/icon/edit-icon.svg"
-      imagemIconEdit.alt ="Icone"
+      imagemIconEdit.alt = "Icone"
       imagemIconEdit.className = "edit-icon"
       imagemIconEdit.id = `${turmaId}`;
-      imagemIconEdit.addEventListener("click",() => requisitar_editar_turma(`${turmaId}`))
+      imagemIconEdit.addEventListener("click", () => requisitar_editar_turma(`${turmaId}`))
 
       // Adiciona o ícone ao turmaSquare
       turmaSquare.appendChild(imagemIcon);
@@ -158,17 +158,17 @@ async function coletaDadosNovaTurma() {
 
   // Formata a data para dia/mes/ano
 
-const data = new Date(dataInicio);
-const dia = String(data.getDate()).padStart(2, '0'); // Garante que o dia tenha sempre 2 dígitos
-const mes = String(data.getMonth() + 1).padStart(2, '0'); // Garante que o mês tenha sempre 2 dígitos
-const ano = data.getFullYear();
-const dataFormatada = `${dia}/${mes}/${ano}`;
+  const data = new Date(dataInicio);
+  const dia = String(data.getDate()).padStart(2, '0'); // Garante que o dia tenha sempre 2 dígitos
+  const mes = String(data.getMonth() + 1).padStart(2, '0'); // Garante que o mês tenha sempre 2 dígitos
+  const ano = data.getFullYear();
+  const dataFormatada = `${dia}/${mes}/${ano}`;
 
   if (ano < 1000 || ano > 9999) {
     alert("O ano deve ter exatamente 4 dígitos.");
     return;
   }
-  
+
 
   //captura grupos selecionados
   let gruposSelecionados = [];
@@ -243,10 +243,10 @@ async function criarNovaTurma(novaTurmaData) {
   }
 }
 
-function requisitar_excluir_turma(id){
-  if(window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")){
-    fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`,{method:'DELETE'}).then(document.getElementById(id).remove())
-  }  
+function requisitar_excluir_turma(id) {
+  if (window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")) {
+    fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`, { method: 'DELETE' }).then(document.getElementById(id).remove())
+  }
 }
 
 
