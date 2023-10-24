@@ -21,6 +21,7 @@ def get_arquivos_json(request):
     dados = busca_dados_json()
     return JsonResponse(dados)
 
+
 def get_alunos(request):
     alunos_data = buscando_alunos()
     return JsonResponse(alunos_data)
