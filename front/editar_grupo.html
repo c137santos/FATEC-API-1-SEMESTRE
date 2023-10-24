@@ -1,4 +1,4 @@
-S<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -46,18 +46,6 @@ S<!DOCTYPE html>
         <button onclick="remover_aluno_grupo()">Remover Aluno</button>
 
 <script>
-  alunos_grupo = {
-    "nome":"ruth"
-  }
-  function lista_alunos_grupo(alunos_grupo){
-    debugger
-    for (let aluno in alunos_grupo){
-      let div_alunos_grupo =  document.getElementById("alunos_grupo")
-      let nome_alunos = document.createElement("p")
-      nome_alunos.textContent = aluno.nomr
-      div_alunos_grupo.appendChild(nome_alunos)
-    }
-  }
 lista_alunos_grupo(alunos_grupo)
   /** Realiza o preenchimento inicial dos campos do formulario
   @param (string) id _ o identificador único do grupo.
@@ -135,7 +123,7 @@ async function obter_grupo(id) {
 
 
 // Função para buscar grupo no servidor
-let grupos_alunos;
+
 async function GetGruposAlunos() {
   try {
     const response = await fetch("http://127.0.0.1:8080/api/v1/grupoalunos/listar");

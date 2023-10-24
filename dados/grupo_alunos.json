@@ -1,11 +1,14 @@
 {
   "1": {
-    "grupo": 1
+    "grupo": 1,
+    "aluno":1
   },
   "2": {
-    "grupo": 2
+    "grupo": 2,
+    "aluno":2
   },
   "3": {
-    "grupo": 2
+    "grupo": 2,
+    "aluno":3
   }
 }
