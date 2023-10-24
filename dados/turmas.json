@@ -3,5 +3,10 @@
         "nome": "ADS",
         "professor": "Nadalete",
         "data_de_inicio": "21/02/2023"
+    },
+    "2": {
+        "nome": "Banco de Dados",
+        "professor": "Sabbah",
+        "data_de_inicio": "23/10/2023"
     }
 }
