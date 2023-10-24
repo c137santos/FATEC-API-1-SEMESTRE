@@ -23,6 +23,7 @@ URLS = {
     URL("/api/v1/grupos/listar"): view.listar_grupos,
     URL("/api/v1/turmas/criar"): view.post_turma,
     URL("/api/v1/turmas/excluir/:id"): view.api_v1_turmas_excluir,
+    URL("/api/v1/grupos/excluir/:id"): view.excluir_grupo,
 }
 
 
