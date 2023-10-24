@@ -1,5 +1,5 @@
 import json
-import gerenciador_turmas
+from gerenciador_turmas import busca_turmas
 
 #Função criada para fazer a leitura do arquivo grupos.json localizado na pasta "dados"
 #O módulo json é usado para carregar o conteúdo do arquivo JSON no objeto grupos_Data. O json.load() converte o JSON em um objeto Python
@@ -16,7 +16,7 @@ def salva_grupo(novo_grupo):
 
 # Função para criar um novo grupo
 def criar_grupo(nome_grupo, id_turma):
-    turmas = gerenciador_turmas.busca_turmas()
+    turmas = busca_turmas()
     turma = None
     for t in turmas:
         if t['id'] == id_turma:
