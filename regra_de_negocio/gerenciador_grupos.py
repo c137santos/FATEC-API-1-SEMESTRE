@@ -1,29 +1,22 @@
 import json
+import gerenciador_turmas
 
 #Função criada para fazer a leitura do arquivo grupos.json localizado na pasta "dados"
 #O módulo json é usado para carregar o conteúdo do arquivo JSON no objeto grupos_Data. O json.load() converte o JSON em um objeto Python
 #Retorno: conteúdo do arquivo como um objeto Python.
 def buscando_grupos():
     with open("dados/grupos.json", "r", encoding="utf-8") as f:
-        grupos_Data = json.load(f)
-    return import json
-
-# Função para buscar informações sobre as turmas a partir de um arquivo JSON
-def busca_turmas():
-    with open("dados/criar_grupo.json", "r", encoding="utf-8") as file:
-        turmas = json.load(file)
-    return turmas
+        grupos_data = json.load(f)
+    return json
 
 # Função para salvar informações sobre as turmas em um arquivo JSON
-def salva_turmas(turmas):
-    with open("http://127.0.0.1:5500/dados/criar_grupo.json", "w", encoding="utf-8") as file:
-        json.dump(turmas, file, ensure_ascii=False, indent=4)
+def salva_grupo(novo_grupo):
+    with open("dados/grupos.json", "w", encoding="utf-8") as file:
+        json.dump(novo_grupo, file, ensure_ascii=False, indent=4)
 
 # Função para criar um novo grupo
 def criar_grupo(nome_grupo, id_turma):
-    turmas = busca_turmas()
-    
-    # Encontre a turma com base no id_turma
+    turmas = gerenciador_turmas.busca_turmas()
     turma = None
     for t in turmas:
         if t['id'] == id_turma:
@@ -32,20 +25,15 @@ def criar_grupo(nome_grupo, id_turma):
     
     if turma is None:
         raise ValueError('Turma não encontrada')
-    if any(grupo['nome'] == nome_grupo for grupo in turma['grupos']):
-        raise ValueError('Um grupo com o mesmo nome já existe nesta turma')
 
     # Crie um novo grupo com os dados fornecidos
     novo_grupo = {
         'nome': nome_grupo,
-        'alunos': [],
+        'turma': turma,
     }
-    
-    # Adicione o novo grupo à turma
-    turma['grupos'].append(novo_grupo)
 
-    # Atualize as informações das turmas no arquivo JSON
-    salva_turmas(turmas)
+    # Cria um Grupo
+    salva_grupo(novo_grupo)
 
 # Função para editar um grupo existente
 def editar_grupo(id_grupo, nome_grupo, id_turma):
