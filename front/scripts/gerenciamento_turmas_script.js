@@ -76,7 +76,7 @@ async function showModal() {
     grupos_data = await response.json();
     console.log(grupos_data);
 
-    const gruposSemTurmaList = document.getElementById("gruposSemTurmaList");
+    const gruposSemTurmaList = document.getElementById("http://127.0.0.1:8080/api/v1/grupos/semTurmaList");
 
     // Limpe a lista existente
     gruposSemTurmaList.innerHTML = "";
