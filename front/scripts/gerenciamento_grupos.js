@@ -1,5 +1,10 @@
+// Evento de carregamento da página
+document.addEventListener('DOMContentLoaded', async function () {
+    await carregarDados();
+//    trazendoAlunosDaTurma();
+});
+
 // Variáveis globais para armazenar o estado atual
-let turmas = [];
 let grupos = [];
 let alunosNoGrupo = [];
 
@@ -7,19 +12,21 @@ let alunosNoGrupo = [];
 async function carregarDados() {
     try {
         const response = await fetch("http://127.0.0.1:8080/api/v1/turmas/listar");
-        const listaTurmas = await response.json();
-        turmas = listaTurmas
-
+        const turmas = await response.json();
         // Preencher o select com as turmas
-        preencherTurmasNoSelect();
+        preencherTurmasNoSelect(turmas);
     } catch (error) {
         console.error(error);
     }
 }
 
 // Função para preencher o select com as turmas
-function preencherTurmasNoSelect() {
+function preencherTurmasNoSelect(turmas) {
     const selectTurma = document.getElementById('selecionar-turma');
+    const optionDefault = document.createElement('option')
+    optionDefault.value = -1
+    optionDefault.textContent = ''
+    selectTurma.appendChild(optionDefault)
     for (let turma in turmas) {
         const option = document.createElement('option');
         option.value = turma
@@ -28,19 +35,47 @@ function preencherTurmasNoSelect() {
     }
 
     // Adicione eventos para atualizar as listas de alunos
+
     selectTurma.addEventListener('change', function () {
         const turmaId = selectTurma.value;
-        preencherListaAlunos(turmaId); // Preencha a lista de todos os alunos
-        preencherAlunosSemGrupo(turmaId); // Preencha a lista de alunos sem grupo
+        const listaTodosAlunos = preencherListaAlunos(turmaId); // Preencha a lista de todos os alunos
+        preencherAlunosSemGrupo(turmaId, listaTodosAlunos); // Preencha a lista de alunos sem grupo
     });
+}
+
+
+async function preencherListaAlunos(idTurma) {
+    if( idTurma == -1) { return }
+    const response = await fetch(`http://127.0.0.1:8080/api/v1/alunos/listar/${idTurma}`)
+    const alunos = await response.json()
+    lugarParalistarTodosAlunos = document.getElementById('alunos-na-turma')
+
+    for (let aluno in alunos) {
+        const alunoElement = document.createElement('div')
+        alunoElement.textContent = alunos[aluno].nome
+        lugarParalistarTodosAlunos.appendChild(alunoElement)
+    }
+    return lugarParalistarTodosAlunos 
 }
 // Função para preencher a lista de alunos da turma que ainda não estão em nenhum grupo
 
-function preencherAlunosSemGrupo(turmaId) {
+async function preencherAlunosSemGrupo(turmaId, listaTodosAlunos) {
     const listaAlunosSemGrupo = document.getElementById('alunos-sem-grupo');
     listaAlunosSemGrupo.innerHTML = '';
+    
+    const response = await fetch('http://127.0.0.1:8080/api/v1/grupo/listar/alunosgrupos')
 
-    const turmaSelecionada = turmas.find(turma => turma.id === turmaId);
+    const gruposAlunos = response.json()
+    const alunoSemGrupo = {}
+    for (let grupoAluno in gruposAlunos) {
+        if (gruposAlunos[grupoAluno].aluno in gruposAlunos) {
+            return
+        }
+        alunoSemGrupo["id_aluno_sem_grupo"] = gruposAlunos[grupoAluno]
+    }
+
+    
+    // const turmaSelecionada = turmas.find(turma => turma.id === turmaId);//
 
     if (turmaSelecionada) {
         // Filtrar os alunos que não estão em nenhum grupo
@@ -56,10 +91,10 @@ function preencherAlunosSemGrupo(turmaId) {
         });
     }
 }
-
+/*
 // Função para atualizar a lista de alunos da turma selecionada
-function atualizarListaAlunosDaTurma() {
-    console.log('Função atualizarListaAlunosDaTurma foi chamada.');
+function trazendoAlunosDaTurma() {
+    console.log('Função trazendoAlunosDaTurma foi chamada.');
     const listaAlunosNaTurma = document.getElementById('alunos-na-turma');
     listaAlunosNaTurma.innerHTML = '';
 
@@ -77,7 +112,7 @@ function atualizarListaAlunosDaTurma() {
 }
 
 // Atualize a lista de alunos da turma quando uma turma for selecionada
-document.getElementById('selecionar-turma').addEventListener('change', atualizarListaAlunosDaTurma);
+document.getElementById('selecionar-turma').addEventListener('change', trazendoAlunosDaTurma);
 
 
 // Função para atualizar a lista de alunos nas colunas
@@ -110,11 +145,6 @@ function atualizarListasAlunos() {
     });
 }
 
-// Evento de carregamento da página
-document.addEventListener('DOMContentLoaded', async function () {
-    await carregarDados();
-    atualizarListaAlunosDaTurma();
-});
 
 // Evento de clique no botão "Salvar Grupo"
 document.getElementById('salvar-grupo').addEventListener('click', function () {
@@ -166,3 +196,5 @@ document.getElementById('buscar-aluno').addEventListener('input', function () {
         item.style.display = texto.includes(termoBusca) ? 'block' : 'none';
     });
 });
+
+*/
