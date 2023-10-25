@@ -88,6 +88,120 @@ for (let i = 1; i <= global.quantidade_sprint; i++) {
   cicloPeso.appendChild(label);
   cicloPeso.appendChild(input);
 }
+
+const alunos ={
+  1: {
+    nome: "Clara Santos"
+  },
+  2: {
+    nome: "Marcelo Tambalo"
+  },
+  3: {
+    nome: "TA RA RA RA"
+  }
+}
+function GetAlunos() {
+  const alunosData = [];
+
+  for (const alunoId in alunos) {
+    if (alunos.hasOwnProperty(alunoId)) {
+      const aluno = alunos[alunoId];
+      alunosData.push({ id: alunoId, nome: aluno.nome });
+    }
+  }
+  console.log(alunosData)
+  return alunosData;
+}
+
+function exibirAlunos(alunosData) {
+  const container = document.querySelector(".corpo_tabela");
+
+  for (const alunoId in alunosData) {
+    if (alunosData.hasOwnProperty(alunoId)) {
+      const aluno = alunosData[alunoId];
+      const RAaluno = aluno.id;
+
+      const alunoSquare = document.createElement("div");
+      alunoSquare.className = "aluno-square";
+      alunoSquare.id = `aluno-${aluno.id}`;
+
+      const nomeAluno = document.createElement("p");
+      nomeAluno.className = "aluno";
+      nomeAluno.textContent = aluno.nome.charAt(0).toUpperCase() + aluno.nome.slice(1);
+
+      const grupoNome = buscaGrupo(aluno.id);
+
+      const nomeGrupo = document.createElement("p");
+      nomeGrupo.className = "grupo";
+      nomeGrupo.textContent = `Grupo: ${grupoNome}`; // Inclui o nome do grupo
+
+      alunoSquare.appendChild(nomeAluno);
+      alunoSquare.appendChild(nomeGrupo);
+      container.appendChild(alunoSquare);
+    }
+  }
+}
+
+function buscaGrupo(alunoId) {
+  const grupoAluno = {
+    1: {
+      // id aluno
+      grupo: 1, // id grupo
+    },
+    2: {
+      grupo: 2,
+    },
+    3: {
+      grupo: 2,
+    },
+  };
+
+  const grupos = {
+    1: {
+      // id grupo
+      turma: 1, //id turma
+      nome: "team bee",
+    },
+    2: {
+      turma: 2,
+      nome: "team tatata",
+    },
+    3: {
+      turma: 1,
+      nome: "team barbuleta",
+    },
+  };
+  const turmas = {
+    1: {
+      // id turma
+      nome: "ADS",
+      professor: "Nadalete",
+      data_de_inicio: "21/02/2023",
+    },
+    2: {
+      nome: "Banco de dados",
+      professor: "Professora teste",
+      data_de_inicio: "2023-10-11",
+    },
+    3: {
+      nome: "Inteligencia Artifical",
+      professor: "Grugru",
+      data_de_inicio: "16/10/2023",
+    },
+  };
+
+  if (alunoId in grupoAluno) {
+    const grupoId = grupoAluno[alunoId].grupo;
+    if (grupoId in grupos) {
+      const grupoNome = grupos[grupoId].nome;
+      const turmaId = grupos[grupoId].turma;
+      const turmaNome = turmas[turmaId].nome;
+      return [grupoNome];
+    }
+  }
+}
+
+exibirAlunos(GetAlunos());
       </script>
   </body>
 </html>
