@@ -24,8 +24,10 @@
           <p>Nome turma: tal</p>
           <p>Nome professor: tal</p>
         </div>
-        <div class="info-ciclo">
-          <p>ciclo</p>
+        <div class="container-ciclos">
+          <p class="titulo-ciclos"><strong>Pesos Ciclos:</strong></p>
+          <div class="ciclo-peso"></div>
+        </div>
             
         </div>
     </div>
@@ -43,13 +45,49 @@
           </div>
       </div>
     </div>
-    <button class="submit-turma">Criar Aluno</button>
      <!-- Moleke -->
      <div class="muleke">
         <a href="index.html">
           <img src="./imagens/mascote2.png" alt="mascote" />
         </a>
       </div>
-      <script src="/front/scripts/gerenciamento_alunos_script.js"></script>
+      <script>
+        const global = { quantidade_sprint: 4, dias_sprint: 12 };
+
+const turmas = {
+  1: {
+    nome: "ADS",
+    professor: "Nadalete",
+    data_de_inicio: "21/02/2023",
+    p1: 2,
+    p2: 2,
+    p3: 2,
+    p4: 3,
+  },
+};
+
+const cicloPeso = document.querySelector(".ciclo-peso");
+for (let i = 1; i <= global.quantidade_sprint; i++) {
+  const label = document.createElement("label");
+  label.classList.add("ciclo");
+  label.htmlFor = `p${i}`;
+  label.innerHTML = `<strong>C${i}:</strong>`;
+
+  const input = document.createElement("input");
+  input.classList.add("peso");
+  input.type = "text";
+  input.name = `p${i}`;
+  input.id = `p${i}`;
+
+  // Preencha o valor do input com base no objeto turmas
+  const turma = turmas[1]; // Supondo que você está trabalhando com a turma 1
+  if (turma[`p${i}`] !== undefined) {
+    input.value = turma[`p${i}`];
+  }
+
+  cicloPeso.appendChild(label);
+  cicloPeso.appendChild(input);
+}
+      </script>
   </body>
 </html>

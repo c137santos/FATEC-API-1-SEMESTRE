@@ -48,15 +48,15 @@ body {
   background-color: #ccc;
 }
 
-.info-ciclo {
+.container-ciclos {
   display: flex;
   flex-direction: column;
   text-align: center;
   width: 300px;
   max-width: 300px;
-  height: 100px;
+  height: auto; /* Removendo altura fixa para acomodar várias linhas */
+  padding: 0px 5px;
   border-radius: 5px;
-  background-color: #ccc;
 }
 
 .ciclo-peso {
@@ -70,6 +70,11 @@ body {
   width: 60px; /* Largura dos rótulos */
   margin-right: 2px; /* Adiciona espaço entre os rótulos e os campos de entrada */
   font-weight: 500;
+}
+
+.titulo-ciclos {
+  margin-top: 0px;
+  margin-bottom: 5px;
 }
 
 .peso {
