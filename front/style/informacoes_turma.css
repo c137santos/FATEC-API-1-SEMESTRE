@@ -133,3 +133,10 @@ body {
   text-align: center;
   border-right: 1px solid #ccc;
 }
+
+.titulo_media {
+  border-right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
