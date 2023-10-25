@@ -8,8 +8,7 @@ from regra_de_negocio.service import (
 
 from regra_de_negocio.global_settings import read_global_settings, edit_global_settings
 from regra_de_negocio.gerenciador_turmas import excluir_turma, editar_turma_svc
-from regra_de_negocio.gerenciador_grupos import obter_grupos_svc, listar_grupo_alunos_svc, editar_grupo_svc, adicionar_grupo_aluno_svc, remover_grupo_aluno_svc
-from regra_de_negocio.gerenciador_grupos import buscando_grupos
+from regra_de_negocio.gerenciador_grupos import obter_grupos_svc, listar_grupo_alunos, editar_grupo_svc, adicionar_grupo_aluno_svc, remover_grupo_aluno_svc, buscando_grupos
 
 import json
 
@@ -80,7 +79,7 @@ def obter_grupo(request,id):
     return JsonResponse(resposta)
 
 def listar_grupo_alunos(request,id):
-    resposta = listar_grupo_alunos_svc(id)
+    resposta = listar_grupo_alunos(id)
     return JsonResponse(resposta)
 
 def editar_grupo(request, id):

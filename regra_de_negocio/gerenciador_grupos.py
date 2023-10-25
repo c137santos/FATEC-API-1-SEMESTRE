@@ -67,6 +67,15 @@ def remover_grupo_aluno_svc(aluno_id, grupo_id):
             print("Removido!")
     _salvar_grupo_alunos(grupo_alunos_manter)
 
+# Parâmetro: um dicionário onde cada turma é um par chave-valor
+# Retorna:
+#   True se a operação for bem sucedida
+def _salvar_grupo_alunos(grupo_alunos):
+    dados = json.dumps(grupo_alunos, indent=4)
+    with open("dados/grupo_alunos.json", "w", encoding="utf-8") as arquivo:
+        arquivo.write(dados)
+    return True
+
 #Função criada para fazer a leitura do arquivo grupos.json localizado na pasta "dados"
 #O módulo json é usado para carregar o conteúdo do arquivo JSON no objeto grupos_Data. O json.load() converte o JSON em um objeto Python
 #Retorno: conteúdo do arquivo como um objeto Python.
