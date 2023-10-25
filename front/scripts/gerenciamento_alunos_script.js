@@ -34,42 +34,6 @@ function exibirAlunos(alunosData) {
       const [grupoNome, turmaNome] = buscaTurmaGrupo(alunoId);
       console.log(grupoNome, turmaNome);
 
-      const turmaElemento = document.createElement("div");
-      turmaElemento.className = "turmas";
-      const turmaButton = document.createElement("button");
-      turmaButton.className = "turmasButton";
-      turmaButton.textContent = "Turmas";
-      turmaElemento.appendChild(turmaButton);
-      turmaButton.id = `${alunoId}`;
-      turmaButton.addEventListener("click", (evento) => {
-        console.log(evento);
-        alert(`O aluno ${aluno.nome} pertecem a turma ${turmaNome}.`);
-      });
-
-      const grupoElemento = document.createElement("div");
-      grupoElemento.className = "grupos";
-      const grupoButton = document.createElement("button");
-      grupoButton.className = "gruposButton";
-      grupoButton.textContent = "Grupos";
-      grupoElemento.appendChild(grupoButton);
-      grupoButton.id = `${alunoId}`;
-      grupoButton.addEventListener("click", (evento) => {
-        console.log(evento);
-        alert(`O aluno ${aluno.nome} pertecem ao grupo ${grupoNome}.`);
-      });
-
-      const notaAluno = document.createElement("div");
-      notaAluno.className = "notas";
-      const notasButton = document.createElement("button");
-      notasButton.className = "notasButton";
-      notasButton.textContent = "Notas";
-      notaAluno.appendChild(notasButton);
-      notasButton.id = `${alunoId}`;
-      notasButton.addEventListener("click", (evento) => {
-        console.log(evento);
-        alert(`O aluno ${aluno.nome} pertecem ao grupo ${grupoNome}.`);
-      });
-
       const editar_excluir_alunos = document.createElement("div");
       editar_excluir_alunos.className = "botoes_editar_excluir_alunos";
       const editarAluno = document.createElement("img");
@@ -89,9 +53,6 @@ function exibirAlunos(alunosData) {
 
       alunoSquare.appendChild(nomeAluno);
       alunoSquare.appendChild(alunoRA);
-      alunoSquare.appendChild(turmaElemento);
-      alunoSquare.appendChild(grupoElemento);
-      alunoSquare.appendChild(notaAluno);
       alunoSquare.appendChild(editar_excluir_alunos);
       container.appendChild(alunoSquare);
     }
@@ -110,45 +71,6 @@ function buscaTurmaGrupo(alunoId) {
     3: {
       grupo: 2,
     },
-  };
-
-  const notasEmedia = {
-    1: [
-      {
-        grupo: 1,
-        notas: [8, 7, 9],
-        media: 8,
-      },
-      {
-        grupo: 1,
-        valor: 8,
-        sprint: 2,
-      },
-      {
-        grupo: 1,
-        valor: 8,
-        sprint: 3,
-      },
-      {
-        grupo: 2,
-        valor: 6,
-        sprint: 2,
-      },
-    ],
-    2: [
-      {
-        grupo: 2,
-        notas: [6, 7, 5],
-        media: 6,
-      },
-    ],
-    3: [
-      {
-        grupo: 2,
-        notas: [9, 8, 8],
-        media: 8.3,
-      },
-    ],
   };
 
   const grupos = {
@@ -193,10 +115,6 @@ function buscaTurmaGrupo(alunoId) {
       const turmaNome = turmas[turmaId].nome;
       return [grupoNome, turmaNome];
     }
-  }
-
-  if (alunoId in notasEmedia) {
-    if alunoId[grupo]
   }
 }
 

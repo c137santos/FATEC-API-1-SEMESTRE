@@ -20,7 +20,7 @@ body {
 
 /* Estilos para o contêiner principal dos alunos */
 .aluno-container {
-  width: 900px;
+  width: 600px;
   height: 330px;
   padding: 20px;
   padding-top: 5px;
@@ -63,35 +63,22 @@ body {
   margin: 0;
   height: 40px;
   margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.aluno-square:hover {
+  background-color: transparent;
+  box-shadow: 0 0 50px 20px rgb(154, 104, 241);
 }
 
 .header-title,
 .aluno-square p,
 .aluno-square div {
-  width: 200px;
+  flex: 1;
   color: #000000;
   margin: 0;
   text-align: center;
   border-right: 1px solid #ccc;
-}
-
-.aluno-square p.alunoRA,
-.titulo_alunoRA {
-  width: 50px;
-}
-
-.aluno-square div.notas,
-.notas_alunos,
-.aluno-square div.botoes_editar_excluir_alunos,
-.editar_excluir_alunos {
-  width: 120px;
-}
-
-.turmasButton,
-.gruposButton,
-.notasButton {
-  padding: 5px;
-  background-color: #8a878783;
 }
 
 .aluno-square div.botoes_editar_excluir_alunos,
