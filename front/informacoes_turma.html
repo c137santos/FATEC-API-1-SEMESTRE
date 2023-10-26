@@ -191,11 +191,18 @@ function buscaGrupo(alunoId) {
   };
 
   if (alunoId in grupoAluno) {
-    const grupoId = grupoAluno[alunoId].grupo;
+    console.log(alunoId)
+    console.log(grupoAluno)
+    const grupoId = grupoAluno[alunoId].grupo
+    console.log(grupoId)
     if (grupoId in grupos) {
-      const grupoNome = grupos[grupoId].nome;
+      const grupoNome = grupos[grupoId].nome
+      console.log(grupoId)
+      console.log(grupoNome)
       const turmaId = grupos[grupoId].turma;
+      console.log(turmaId)
       const turmaNome = turmas[turmaId].nome;
+      console.log(turmaNome)
       return [grupoNome];
     }
   }
