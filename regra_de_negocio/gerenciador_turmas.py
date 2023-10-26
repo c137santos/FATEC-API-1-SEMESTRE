@@ -1,4 +1,5 @@
 import json
+from regra_de_negocio.gerenciador_ciclos import criar_ciclos_padrao
 from regra_de_negocio.gerenciador_grupos import buscando_grupos
 
 
@@ -47,6 +48,7 @@ def criacao_turma(dados_nova_turma):
         "data_de_inicio": dados_nova_turma_json[
             "dataInicio"
         ],  # Acesse a propriedade "dataInicio" do corpo
+        "ciclos": criar_ciclos_padrao()
     }
     turmas[turma_novo_id] = nova_turma
     turma_nome = turmas[turma_novo_id]["nome"]

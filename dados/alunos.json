@@ -1,11 +1,14 @@
 {
   "1": {
-    "nome": "Clara Santos"
+    "nome": "Clara Santos",
+    "fee": 9.0
   },
   "2": {
-    "nome": "Marcelo Tambalo"
+    "nome": "Marcelo Tambalo", 
+    "fee": 10.0
   },
   "3": {
-    "nome": "TA RA RA RA"
+    "nome": "TA RA RA RA",
+    "fee": 7.0
   }
 }

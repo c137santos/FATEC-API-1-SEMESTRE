@@ -2,6 +2,39 @@
     "1": {
         "nome": "ADS",
         "professor": "Nadalete",
-        "data_de_inicio": "21/02/2023"
+        "data_de_inicio": "21/02/2023",
+        "ciclos": {
+            "1": {
+                "peso": 1.0
+            },
+            "2": {
+                "peso": 2.0
+            },
+            "3": {
+                "peso": 3.0
+            },
+            "4": {
+                "peso": 4.0
+            }
+        }
+    },
+    "2": {
+        "nome": "Team Rocket",
+        "professor": "Jessy",
+        "data_de_inicio": "01/02/2000",
+        "ciclos": {
+            "1": {
+                "peso": 1.0
+            },
+            "2": {
+                "peso": 2.0
+            },
+            "3": {
+                "peso": 3.0
+            },
+            "4": {
+                "peso": 4.0
+            }
+        }
     }
 }
