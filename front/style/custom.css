@@ -44,9 +44,8 @@ header {
   width: 100vw;
   display: flex;
   justify-content: right;
-  /*alinhar à esquerda*/
   align-items: center;
-  height: 100px;
+
 }
 
 .header img {
