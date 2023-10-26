@@ -34,7 +34,7 @@ body {
 
 .muleke {
   background-color: transparent;
-  width: 150px;
+  width: 125px;
   position: fixed;
   bottom: 0;
   right: 0;
@@ -43,9 +43,8 @@ body {
 header {
   width: 100vw;
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items: center;
-
 }
 
 .header img {
