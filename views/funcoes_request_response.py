@@ -2,13 +2,16 @@ from wgsi import HttpResponse, JsonResponse
 from regra_de_negocio.service import (
     busca_dados_json,
     busca_turmas,
-    buscar_grupos,
     cria_turma,
 )
 
 from regra_de_negocio.global_settings import read_global_settings, edit_global_settings
 from regra_de_negocio.gerenciador_turmas import excluir_turma, editar_turma_svc
-from regra_de_negocio.gerenciador_grupos import buscando_grupos_svc, buscando_grupos_turma_especifica_svc, listando_aluno_grupo__svc
+from regra_de_negocio.gerenciador_grupos import (
+    buscando_grupos_svc,
+    buscando_grupos_turma_especifica_svc,
+    buscando_aluno_por_grupo_svc,
+)
 from regra_de_negocio.gerenciador_alunos import listando_alunos_da_turma
 
 import json
@@ -80,7 +83,8 @@ def listando_alunos(request, idTurma):
     resultado = listando_alunos_da_turma(idTurma)
     return JsonResponse(resultado)
 
-def listando_aluno_grupo_turma_especifica(request, id_turma):
-    ids_grupos_de_turmas = buscando_grupos_turma_especifica_svc(id_turma)
-    resultado = listando_aluno_grupo__svc(ids_grupos_de_turmas)
+
+def listando_aluno_grupo_turma_especifica(request, idTurma):
+    grupos_turma_especifica = buscando_grupos_turma_especifica_svc(idTurma)
+    resultado = buscando_aluno_por_grupo_svc(grupos_turma_especifica)
     return JsonResponse(resultado)

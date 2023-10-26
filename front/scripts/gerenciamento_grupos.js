@@ -36,9 +36,9 @@ function preencherTurmasNoSelect(turmas) {
 
     // Adicione eventos para atualizar as listas de alunos
 
-    selectTurma.addEventListener('change', function () {
+    selectTurma.addEventListener('change', async function () {
         const turmaId = selectTurma.value;
-        const listaTodosAlunos = preencherListaAlunos(turmaId); // Preencha a lista de todos os alunos
+        const listaTodosAlunos = await preencherListaAlunos(turmaId); // Preencha a lista de todos os alunos
         preencherAlunosSemGrupo(turmaId, listaTodosAlunos); // Preencha a lista de alunos sem grupo
     });
 }
@@ -55,7 +55,7 @@ async function preencherListaAlunos(idTurma) {
         alunoElement.textContent = aluno.nome
         lugarParalistarTodosAlunos.appendChild(alunoElement)
     }
-    return lugarParalistarTodosAlunos 
+    return alunos 
 }
 // Função para preencher a lista de alunos da turma que ainda não estão em nenhum grupo
 
@@ -63,34 +63,20 @@ async function preencherAlunosSemGrupo(turmaId, listaTodosAlunos) {
     const listaAlunosSemGrupo = document.getElementById('alunos-sem-grupo');
     listaAlunosSemGrupo.innerHTML = '';
     
-    const response = await fetch('http://127.0.0.1:8080/api/v1/grupo/listar/alunosgrupos')
+    const response = await fetch(`http://127.0.0.1:8080/api/v1/grupo/listar/alunosgrupos/${turmaId}`)
 
-    const gruposAlunos = await response.json()
-    const alunoSemGrupo = {}
-    for (const grupoAluno of Object.values(gruposAlunos)) {
-        if (gruposAlunos[grupoAluno].aluno in gruposAlunos) {
-            return
-        }
-        alunoSemGrupo["id_aluno_sem_grupo"] = gruposAlunos[grupoAluno]
-    }
+    const listaAlunosEmGrupos = await response.json()
+    debugger
+    const alunosSemGrupo = Object.keys(listaTodosAlunos).filter(id => !listaAlunosEmGrupos.includes(Number(id)))
 
-    
-    // const turmaSelecionada = turmas.find(turma => turma.id === turmaId);//
-
-    if (turmaSelecionada) {
-        // Filtrar os alunos que não estão em nenhum grupo
-        const alunosSemGrupo = turmaSelecionada.alunos.filter(aluno => !aluno.grupo);
-        debugger
-
-        alunosSemGrupo.forEach(aluno => {
-            const listItem = document.createElement('li');
-            listItem.textContent = aluno.nome;
-            listItem.dataset.id = aluno.id; // Para referência futura
-            listItem.addEventListener('click', moverAluno);
-            listaAlunosSemGrupo.appendChild(listItem);
+    alunosSemGrupo.forEach(aluno => {
+        const listItem = document.createElement('li');
+        listItem.textContent = aluno.nome;
+        listItem.dataset.id = aluno.id; // Para referência futura
+        listItem.addEventListener('click', moverAluno);
+        listaAlunosSemGrupo.appendChild(listItem);
         });
     }
-}
 /*
 // Função para atualizar a lista de alunos da turma selecionada
 function trazendoAlunosDaTurma() {

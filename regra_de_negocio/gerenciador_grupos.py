@@ -9,21 +9,34 @@ def buscando_grupos_svc():
         grupos_data = json.load(f)
     return grupos_data
 
+
 def buscando_grupo_alunos():
     with open("dados/grupo_alunos.json", "r", encoding="utf-8") as f:
         grupos_alunos = json.load(f)
-    return grupos_alunos 
+    return grupos_alunos
+
 
 def buscando_grupos_turma_especifica_svc(id_turma):
     todos_grupos = buscando_grupos_svc()
-    grupos_filtrados = [grupo for grupo in todos_grupos if grupo["turma"] == id_turma]
+    id_turma = int(id_turma)
+    grupos_filtrados = {
+        chave: grupo
+        for chave, grupo in todos_grupos.items()
+        if grupo["turma"] == id_turma
+    }
     return grupos_filtrados
 
-def listando_aluno_grupo_svc(ids_grupos_de_turmas):
+
+def buscando_aluno_por_grupo_svc(grupos_turma_especifica):
     grupos_alunos = buscando_grupo_alunos()
-    alunos = []
-    [alunos.append(grupo_aluno["aluno"]) for grupo_aluno in grupos_alunos if grupo_aluno["grupo"] in ids_grupos_de_turmas]
-    return grupos_alunos
+    lista_grupo_especifico = list(map(int, grupos_turma_especifica))
+    alunos_grupo_turma = alunos_grupo_turma = [
+        grupo_aluno["aluno"]
+        for grupo_aluno in grupos_alunos.values()
+        if grupo_aluno["grupo"] in lista_grupo_especifico
+    ]
+    return alunos_grupo_turma
+
 
 # Função para salvar informações sobre as turmas em um arquivo JSON
 def salva_grupo(novo_grupo):
