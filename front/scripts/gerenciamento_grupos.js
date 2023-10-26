@@ -50,9 +50,9 @@ async function preencherListaAlunos(idTurma) {
     const alunos = await response.json()
     lugarParalistarTodosAlunos = document.getElementById('alunos-na-turma')
 
-    for (let aluno in alunos) {
+    for (const aluno of Object.values(alunos)) {
         const alunoElement = document.createElement('div')
-        alunoElement.textContent = alunos[aluno].nome
+        alunoElement.textContent = aluno.nome
         lugarParalistarTodosAlunos.appendChild(alunoElement)
     }
     return lugarParalistarTodosAlunos 
@@ -65,9 +65,9 @@ async function preencherAlunosSemGrupo(turmaId, listaTodosAlunos) {
     
     const response = await fetch('http://127.0.0.1:8080/api/v1/grupo/listar/alunosgrupos')
 
-    const gruposAlunos = response.json()
+    const gruposAlunos = await response.json()
     const alunoSemGrupo = {}
-    for (let grupoAluno in gruposAlunos) {
+    for (const grupoAluno of Object.values(gruposAlunos)) {
         if (gruposAlunos[grupoAluno].aluno in gruposAlunos) {
             return
         }

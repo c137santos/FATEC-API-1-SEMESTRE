@@ -4,14 +4,25 @@ import json
 # Função criada para fazer a leitura do arquivo grupos.json localizado na pasta "dados"
 # O módulo json é usado para carregar o conteúdo do arquivo JSON no objeto grupos_Data. O json.load() converte o JSON em um objeto Python
 # Retorno: conteúdo do arquivo como um objeto Python.
-def buscando_grupos():
+def buscando_grupos_svc():
     with open("dados/grupos.json", "r", encoding="utf-8") as f:
         grupos_data = json.load(f)
     return grupos_data
 
-def listando_aluno_grupo_svc():
+def buscando_grupo_alunos():
     with open("dados/grupo_alunos.json", "r", encoding="utf-8") as f:
         grupos_alunos = json.load(f)
+    return grupos_alunos 
+
+def buscando_grupos_turma_especifica_svc(id_turma):
+    todos_grupos = buscando_grupos_svc()
+    grupos_filtrados = [grupo for grupo in todos_grupos if grupo["turma"] == id_turma]
+    return grupos_filtrados
+
+def listando_aluno_grupo_svc(ids_grupos_de_turmas):
+    grupos_alunos = buscando_grupo_alunos()
+    alunos = []
+    [alunos.append(grupo_aluno["aluno"]) for grupo_aluno in grupos_alunos if grupo_aluno["grupo"] in ids_grupos_de_turmas]
     return grupos_alunos
 
 # Função para salvar informações sobre as turmas em um arquivo JSON

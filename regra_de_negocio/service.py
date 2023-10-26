@@ -1,6 +1,6 @@
 import json
 import regra_de_negocio.gerenciador_turmas as gt
-from regra_de_negocio.gerenciador_grupos import buscando_grupos
+from regra_de_negocio.gerenciador_grupos import buscando_grupos_svc
 
 
 def busca_dados_json():
@@ -15,7 +15,7 @@ def busca_turmas():  # retorna todas turmas
 
 
 def buscar_grupos():  # retorna todos os grupos
-    grupos_data = gt.buscando_grupos()
+    grupos_data = gt.buscando_grupos_svc()
     return grupos_data
 
 
