@@ -33,7 +33,7 @@ def _salvar_turmas(turmas):
 
 # Função para criar uma nova turma
 def criacao_turma(dados_nova_turma):
-    dados_nova_turma_json = json.loads(dados_nova_turma)
+    dados_nova_turma_json = dados_nova_turma
     turmas = busca_turmas()
 
     turma_novo_id = str(len(turmas) + 1)

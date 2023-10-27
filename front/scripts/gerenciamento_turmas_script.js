@@ -65,48 +65,11 @@ function exibirTurmas(turmadata) {
 
 const addTurmaButton = document.querySelector(".add-turma-button");
 addTurmaButton.addEventListener("click", showModal);
-let grupos_data;
 
 // Função para mostrar o modal
 async function showModal() {
   const modal = document.getElementById("myModal");
   modal.style.display = "block";
-  try {
-    const response = await fetch("http://127.0.0.1:8080/api/v1/grupos/listar");
-    grupos_data = await response.json();
-    console.log(grupos_data);
-
-    const gruposSemTurmaList = document.getElementById("gruposSemTurmaList");
-
-    // Limpe a lista existente
-    gruposSemTurmaList.innerHTML = "";
-
-    for (const grupo in grupos_data) {
-      if (grupos_data.hasOwnProperty(grupo) && grupos_data[grupo].turma == 0) {
-        const grupoNome = grupos_data[grupo].nome;
-
-        // Criar um checkbox para cada grupo
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.id = grupo; // ID único para cada checkbox
-        checkbox.classList = "checkbox";
-
-        // Criar uma label para o checkbox
-        const label = document.createElement("label");
-        label.setAttribute("for", checkbox.id);
-        label.textContent =
-          grupoNome.charAt(0).toUpperCase() + grupoNome.slice(1);
-
-        // Adicionar o checkbox e a label à lista
-        const listItem = document.createElement("li");
-        listItem.appendChild(checkbox);
-        listItem.appendChild(label);
-        gruposSemTurmaList.appendChild(listItem);
-      }
-    }
-  } catch (error) {
-    console.error("Erro ao buscar grupos sem turmas: " + error);
-  }
 }
 
 // Função para fechar o modal
@@ -170,25 +133,11 @@ const dataFormatada = `${dia}/${mes}/${ano}`;
   }
   
 
-  //captura grupos selecionados
-  let gruposSelecionados = [];
-  const checkboxes = document.querySelectorAll(".checkbox");
-  checkboxes.forEach((checkbox) => {
-    if (checkbox.checked) {
-      gruposSelecionados.push(checkbox.id);
-    }
-  });
-
-  const nomeGruposSelecionados = gruposSelecionados.map((id) => {
-    return grupos_data[id].nome;
-  });
-
   // Construir o objeto de turma
   const novaTurmaData = {
     nome: turmaNome,
     professor: professor,
     dataInicio: dataFormatada,
-    grupos: gruposSelecionados,
   };
 
   // Exiba a div de confirmação
@@ -199,8 +148,6 @@ const dataFormatada = `${dia}/${mes}/${ano}`;
   document.getElementById("turmaNomeConfirmacao").textContent = turmaNome;
   document.getElementById("professorConfirmacao").textContent = professor;
   document.getElementById("dataInicioConfirmacao").textContent = dataFormatada;
-  document.getElementById("gruposSelecionadosConfirmacao").textContent =
-    nomeGruposSelecionados.join(", ");
 
   //aciona evento para enviar os dados da turma que sera criada para o back end
   const confirmarButton = document.getElementById("confirmarButton");

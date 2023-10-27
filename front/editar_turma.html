@@ -40,10 +40,10 @@
         async function preencher_campos_formulario(id){
             const turma = await obter_turma(id)
             if(turma){
+                const dataFormatada = turma["data_de_inicio"].split('/').reverse().join('-');
                 document.getElementById('fnome')['value'] = turma["nome"]
                 document.getElementById('fprofessor')['value'] = turma["professor"]
-    
-                document.getElementById('fdata')['value'] = turma["data_de_inicio"]
+                document.getElementById('fdata')['value'] = dataFormatada
             } else {
                 alert("Falha ao preencher os campos do formulário!\nA turma não foi encontrada.")
             }

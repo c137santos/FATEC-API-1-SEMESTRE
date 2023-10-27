@@ -6,7 +6,6 @@ from regra_de_negocio.service import (
 
 from regra_de_negocio.global_settings import read_global_settings, edit_global_settings
 from regra_de_negocio.gerenciador_turmas import excluir_turma_svc, editar_turma_svc
-from regra_de_negocio.gerenciador_grupos import buscando_grupos
 
 import json
 
@@ -48,13 +47,8 @@ def editar_turma(request, id):
     return JsonResponse({"mensagem": resultado})
 
 
-def listar_grupos(request):
-    grupos_data = buscando_grupos()
-    return JsonResponse(grupos_data)
-
-
-def post_turma(request):
-    dados_nova_turma = request.body
+def criar_turma(request):
+    dados_nova_turma = json.loads(request.body)
     resposta = cria_turma(dados_nova_turma)
     return JsonResponse(resposta)
 
