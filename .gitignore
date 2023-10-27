@@ -165,3 +165,9 @@ cython_debug/
 
 #Ignorando o banco 
 dados/
+.dados/
+dados/aluno_turma.json
+dados/alunos.json
+dados/ciclo.json
+dados/notas.json
+dados/turmas.json

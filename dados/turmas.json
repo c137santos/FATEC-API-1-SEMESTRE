@@ -19,15 +19,4 @@
         "data_de_inicio": "04/11/2023",
         "quantidade": 4,
         "duracao": 7
-    },
-    "4": {
-        "nome": "Turma",
-        "professor": "Turminha",
-        "data_de_inicio": "16/10/2023"
-    },
-    "5": {
-        "nome": "Nova Data",
-        "professor": "Data",
-        "data_de_inicio": "25/10/2023"
-    }
-}
+    }}
