@@ -1,5 +1,5 @@
 import json
-from regra_de_negocio.gerenciador_grupos import buscando_grupos
+from regra_de_negocio.gerenciador_grupos import buscando_grupos_svc
 
 
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
@@ -36,7 +36,7 @@ def _salvar_turmas(turmas):
 def criacao_turma(dados_nova_turma):
     dados_nova_turma_json = json.loads(dados_nova_turma)
     turmas = busca_turmas()
-    grupos = buscando_grupos()
+    grupos = buscando_grupos_svc()
 
     turma_novo_id = str(len(turmas) + 1)
 

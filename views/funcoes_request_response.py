@@ -1,4 +1,4 @@
-from wgsi import HttpResponse, JsonResponse
+from wgsi import JsonResponse
 from regra_de_negocio.service import (
     busca_turmas,
     cria_turma,
