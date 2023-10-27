@@ -19,8 +19,7 @@ URLS = {
     URL("/api/v1/turmas/listar"): view.get_turmas,
     URL("/api/v1/turmas/listar/:id"): view.obtem_turma_especifica,
     URL("/api/v1/turmas/editar/:id"): view.editar_turma,
-    URL("/api/v1/grupos/listar"): view.listar_grupos,
-    URL("/api/v1/turmas/criar"): view.post_turma,
+    URL("/api/v1/turmas/criar"): view.criar_turma,
     URL("/api/v1/turmas/excluir/:id"): view.excluir_turma,
 }
 
