@@ -1,25 +1,14 @@
 from wgsi import HttpResponse, JsonResponse
 from regra_de_negocio.service import (
-    busca_dados_json,
     busca_turmas,
-    buscar_grupos,
     cria_turma,
 )
 
 from regra_de_negocio.global_settings import read_global_settings, edit_global_settings
-from regra_de_negocio.gerenciador_turmas import excluir_turma, editar_turma_svc
+from regra_de_negocio.gerenciador_turmas import excluir_turma_svc, editar_turma_svc
 from regra_de_negocio.gerenciador_grupos import buscando_grupos
 
 import json
-
-
-def hola_mundinho(request):
-    return HttpResponse("Olá Mundo")
-
-
-def get_arquivos_json(request):
-    dados = busca_dados_json()
-    return JsonResponse(dados)
 
 
 def edit_aluno(request, id):
@@ -70,6 +59,6 @@ def post_turma(request):
     return JsonResponse(resposta)
 
 
-def api_v1_turmas_excluir(request, id):
-    resultado = excluir_turma(id)
+def excluir_turma(request, id):
+    resultado = excluir_turma_svc(id)
     return JsonResponse({"mensagem": resultado})

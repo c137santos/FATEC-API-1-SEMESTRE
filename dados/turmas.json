@@ -2,6 +2,22 @@
     "1": {
         "nome": "ADS",
         "professor": "Nadalete",
-        "data_de_inicio": "21/02/2023"
+        "data_de_inicio": "21/02/2023",
+        "quantidade": 4,
+        "duracao": 7
+    },
+    "2": {
+        "nome": "Logica",
+        "professor": "Nadallete",
+        "data_de_inicio": "27/10/2023",
+        "quantidade": 4,
+        "duracao": 7
+    },
+    "3": {
+        "nome": "logica",
+        "professor": "Nadallete",
+        "data_de_inicio": "27/10/2023",
+        "quantidade": 4,
+        "duracao": 7
     }
 }

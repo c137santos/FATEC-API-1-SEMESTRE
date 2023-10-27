@@ -31,6 +31,7 @@ def _salvar_turmas(turmas):
         arquivo.write(dados)
     return True
 
+
 # Função para criar uma nova turma
 def criacao_turma(dados_nova_turma):
     dados_nova_turma_json = json.loads(dados_nova_turma)
@@ -88,7 +89,7 @@ def _salvar_grupos(grupos):
         json.dump(grupos, f, indent=4)
 
 
-def excluir_turma(id):
+def excluir_turma_svc(id):
     turmas = busca_turmas()
     if id in turmas.keys():
         turmas.pop(id)
