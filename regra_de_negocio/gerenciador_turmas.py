@@ -1,5 +1,4 @@
 import json
-from regra_de_negocio.gerenciador_grupos import buscando_grupos
 
 
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
@@ -36,7 +35,6 @@ def _salvar_turmas(turmas):
 def criacao_turma(dados_nova_turma):
     dados_nova_turma_json = json.loads(dados_nova_turma)
     turmas = busca_turmas()
-    grupos = buscando_grupos()
 
     turma_novo_id = str(len(turmas) + 1)
 
@@ -56,37 +54,9 @@ def criacao_turma(dados_nova_turma):
         "detalhes": [],
     }
 
-    if len(dados_nova_turma_json["grupos"]) >= 1:
-        for idGrupo in dados_nova_turma_json["grupos"]:
-            idGrupo = str(
-                idGrupo
-            )  # transforma o inteiro da lista em str para comparar com as chaves
-            print(f"ID do grupo a ser atualizado: {idGrupo}")
-            # Verifique se o ID do grupo existe nos grupos
-            if idGrupo in grupos:
-                print(f"Atualizando grupo {idGrupo} para turma {turma_novo_id}")
-                grupo_Nome = grupos[idGrupo]["nome"]
-                # Atualize a propriedade "turma" com um valor inteiro
-                grupos[idGrupo]["turma"] = int(turma_novo_id)
-                # Cria os detalhes de alterações nos grupos
-                resposta["detalhes"].append(
-                    f"Adicionado o grupo {grupo_Nome.capitalize()} a turma {turma_nome.capitalize()}"
-                )
-            else:
-                resposta["detalhes"].append(
-                    f"id {grupo_Nome.capitalize()} não encontrado nos grupos"
-                )
-
     # Salve as alterações nos arquivos JSON
     _salvar_turmas(turmas)
-    _salvar_grupos(grupos)
     return resposta
-
-
-# Função para salvar grupos em um arquivo JSON
-def _salvar_grupos(grupos):
-    with open("dados/grupos.json", "w", encoding="utf-8") as f:
-        json.dump(grupos, f, indent=4)
 
 
 def excluir_turma_svc(id):
