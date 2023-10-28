@@ -11,11 +11,11 @@ def listar_ciclos_por_id_turma(id_turma):
     if not id_turma:
         return {}
     try:
-        id_turma_textual = str(id_turma)
+        id_turma_str = str(id_turma)
         ciclos = listar_ciclos()
         ciclos_encontrados = {}
         for id_ciclo in ciclos.keys():
-            if id_turma_textual == ciclos[id_ciclo]["id_turma"]:
+            if id_turma_str == ciclos[id_ciclo]["id_turma"]:
                 ciclos_encontrados[id_ciclo] = ciclos[id_ciclo]
         return ciclos_encontrados
     except:
@@ -23,10 +23,10 @@ def listar_ciclos_por_id_turma(id_turma):
     
 def obter_ciclo(id_ciclo):
     try:
-        id_ciclo_textual = str(id_ciclo)
+        id_ciclo_str = str(id_ciclo)
         ciclos = listar_ciclos()
-        if id_ciclo_textual in ciclos.keys():
-            return ciclos[id_ciclo_textual]
+        if id_ciclo_str in ciclos.keys():
+            return ciclos[id_ciclo_str]
         else:
             return None
     except:

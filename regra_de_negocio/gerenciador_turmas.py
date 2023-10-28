@@ -31,19 +31,10 @@ def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
         return False
 
 # Função para criar uma nova turma
-def criacao_turma(dados_nova_turma):
-    dados_nova_turma_json = dados_nova_turma
+def criacao_turma(nova_turma):
     turmas = busca_turmas()
-
     id_nova_turma = _obter_novo_id_turma()
-
-    nova_turma = {
-        "nome": dados_nova_turma_json["nome"],  # Acesse a propriedade "nome" do corpo
-        "professor": dados_nova_turma_json["professor"],  # Acesse a propriedade "professor" do corpo
-        "data_de_inicio": dados_nova_turma_json["dataInicio"],  # Acesse a propriedade "dataInicio" do corpo
-        "duracao_ciclo": dados_nova_turma_json["duracaoCiclo"],
-        "quantidade_ciclos": 4 if dados_nova_turma["quantidade_ciclos"] <= 0 else dados_nova_turma["quantidade_ciclos"],
-    }
+    nova_turma["quantidade_ciclos"] = 4
     turmas[id_nova_turma] = nova_turma
     turma_nome = turmas[id_nova_turma]["nome"]
     resposta = {
@@ -77,7 +68,8 @@ def _salvar_turmas(turmas):
 
 def _obter_novo_id_turma():
     ids_numericos = []
-    for id_textual in busca_turmas.keys():
+    turmas = busca_turmas()
+    for id_textual in turmas.keys():
         id_inteiro = int(id_textual)
         ids_numericos.append(id_inteiro)
     id_max_inteiro = max(ids_numericos)

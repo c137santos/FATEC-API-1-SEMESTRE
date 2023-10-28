@@ -8,18 +8,18 @@ from datetime import datetime
 import datetime as dt
 
 def calcular_fee(id_aluno, id_turma):
-    notas_por_turma_aluno = listar_notas_por_id_turma_id_aluno(id_aluno, id_turma)
+    turma = obter_turma(id_turma)
+    notas_por_turma_aluno = listar_notas_por_turma_aluno(id_aluno, id_turma)
+    soma_das_notas = 0.0
     fee = 0.0
     for id_nota in notas_por_turma_aluno:
         # ð ?????
         ciclo = obter_ciclo(notas_por_turma_aluno[id_nota]["id_ciclo"])
         peso_nota = ciclo["peso_nota"]
         valor = notas_por_turma_aluno[id_nota]["valor"]
-        fee = fee + (peso_nota * valor)
+        soma_das_notas += (peso_nota * valor)
     if len(notas_por_turma_aluno) > 0:
-        fee = fee / float(len(notas_por_turma_aluno))
-    else:
-        fee = 0.0
+        fee = soma_das_notas / float(turma["quantidade_ciclos"])
     return fee
 
 def listar_notas():
@@ -34,10 +34,12 @@ def listar_notas_por_id_turma(notas, id_turma):
     if not id_turma:
         return {}
     try:
-        id_turma_textual = str(id_turma)
+        id_turma_str = str(id_turma)
         notas_encontradas = {}
         for id_nota in notas.keys():
-            if id_turma_textual == notas[id_nota]["id_turma"]:
+            if id_turma_str == notas[id_nota]["id_turma"]:
+                if notas[id_nota]["fee"]: #se for a média, pula
+                    continue
                 notas_encontradas[id_nota] = notas[id_nota]
         return notas_encontradas
     except:
@@ -47,10 +49,12 @@ def listar_notas_por_id_aluno(notas, id_aluno):
     if not id_aluno:
         return {}
     try:
-        id_turma_textual = str(id_aluno)
+        id_turma_str = str(id_aluno)
         notas_encontradas = {}
         for id_nota in notas.keys():
-            if id_turma_textual == notas[id_nota]["id_aluno"]:
+            if id_turma_str == notas[id_nota]["id_aluno"]:
+                if notas[id_nota]["fee"]:
+                    continue
                 notas_encontradas[id_nota] = notas[id_nota]
         return notas_encontradas
     except:
@@ -60,21 +64,23 @@ def listar_notas_por_id_ciclo(notas, id_ciclo):
     if not id_ciclo:
         return {}
     try:
-        id_turma_textual = str(id_ciclo)
+        id_turma_str = str(id_ciclo)
         notas_encontradas = {}
         for id_nota in notas.keys():
-            if id_turma_textual == notas[id_nota]["id_ciclo"]:
+            if id_turma_str == notas[id_nota]["id_ciclo"]:
+                if notas[id_nota]["fee"]:
+                    continue
                 notas_encontradas[id_nota] = notas[id_nota]
         return notas_encontradas
     except:
         return {}
 
-def listar_notas_por_id_turma_id_aluno(id_turma, id_aluno):
+def listar_notas_por_turma_aluno(id_turma, id_aluno):
     if not id_turma or not id_aluno:
         return {}
     try:
         notas = listar_notas()
-        notas_por_turma = listar_notas_por_id_turma(notas, id_turma)    
+        notas_por_turma = listar_notas_por_id_turma(notas, id_turma)  
         notas_por_turma_aluno = listar_notas_por_id_aluno(notas_por_turma, id_aluno)
         return notas_por_turma_aluno
     except:
@@ -85,8 +91,9 @@ def adicionar_nota(nova_nota):
         notas = listar_notas()
         novo_id_nota = _obter_novo_id_nota()
         notas[novo_id_nota] = nova_nota
-        return _salvar_notas(nova_nota)
+        return _salvar_notas(notas)
     except:
+        print("exception")
         return False
 
 def editar_nota(id_nota_atualizada, nota_atualizada):
@@ -117,7 +124,7 @@ def remover_nota(id_nota):
 
 # Essa função verifica se já existe nota dentro de um ciclo
 def verificar_existencia_nota_por_ciclo(nota):
-    notas = listar_notas_por_id_turma_id_aluno(nota["id_turma"],nota["id_aluno"])
+    notas = listar_notas_por_turma_aluno(nota["id_turma"],nota["id_aluno"])
     notas_por_ciclo = listar_notas_por_id_ciclo(notas, nota["id_ciclo"])
     return len(notas_por_ciclo) != 0
     # Formas alternativas:
@@ -129,8 +136,9 @@ def verificar_existencia_nota_por_ciclo(nota):
 
 def _obter_novo_id_nota():
     ids_numericos = []
-    for id_textual in listar_notas.keys():
-        id_inteiro = int(id_textual)
+    notas = listar_notas()
+    for id_str in notas.keys():
+        id_inteiro = int(id_str)
         ids_numericos.append(id_inteiro)
     id_max_inteiro = max(ids_numericos)
     novo_id = str(id_max_inteiro + 1)
