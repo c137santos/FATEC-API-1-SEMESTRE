@@ -14,7 +14,7 @@ def _salvar_turmas(turmas):
     return True
 
 def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
-    turmas = busca_turmas()
+    turmas = buscando_turmas()
     if id in turmas.keys():
         turma = turmas[id]
         turma["nome"] = nome
@@ -29,16 +29,48 @@ def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
 # Retorna:
 #   True se a operação for bem sucedida
 
-def gerando_novo_id(turmas):
+turmass =  {
+    "1": {
+        "nome": "Logica",
+        "professor": "Nadallete",
+        "data_de_inicio": "2023-01-24",
+        "duracao_ciclo": "10",
+        "quantidade_ciclos": "4"
+    },
+    "2": {
+        "nome": "ADS",
+        "professor": "Goretti",
+        "data_de_inicio": "2023-10-25",
+        "duracao_ciclo": "11",
+        "quantidade_ciclos": "4"
+    },
+    "3": {
+        "nome": "vai vai",
+        "professor": "aaa",
+        "data_de_inicio": "27/10/2023",
+        "duracao_ciclo": "15",
+        "quantidade_ciclos": 4
+    }
+}
+
+def gerando_novo_id(turmass):
     """Percorre as chaves do objeto json e procura o maior valor entre elas, 
     soma esse valor com 1 e retorna o novo ID"""
-    novo_id = str(max(int(id) for id in turmas.keys()) + 1)
+    lista_ids = []
+    for id in turmass.keys():
+        id = int(id)
+        lista_ids.append(id)
+    novo_id = max(lista_ids) + 1
+    novo_id = str(novo_id)
+
     return novo_id
+
+gerando_novo_id(turmass)
 
 # Função para criar uma nova turma
 def criacao_turma(dados_nova_turma):
     dados_nova_turma_json = dados_nova_turma
-    turmas = busca_turmas()
+    turmas = buscando_turmas()
 
     nova_turma_id = gerando_novo_id(turmas)
 
@@ -53,8 +85,8 @@ def criacao_turma(dados_nova_turma):
         "duracao_ciclo": dados_nova_turma_json["duracaoCiclo"],
         "quantidade_ciclos": 4,
     }
-    turmas[turma_novo_id] = nova_turma
-    turma_nome = turmas[turma_novo_id]["nome"]
+    turmas[nova_turma_id] = nova_turma
+    turma_nome = turmas[nova_turma_id]["nome"]
     resposta = {
         "mensagem": f"Criação da turma {turma_nome.capitalize()} realizada com sucesso!",
         "detalhes": [],
@@ -66,7 +98,7 @@ def criacao_turma(dados_nova_turma):
 
 
 def excluir_turma_svc(id):
-    turmas = busca_turmas()
+    turmas = buscando_turmas()
     if id in turmas.keys():
         turmas.pop(id)
         _salvar_turmas(turmas)

@@ -1,6 +1,6 @@
 from wgsi import JsonResponse
 from regra_de_negocio.service import (
-    busca_turmas,
+    buscando_turmas,
     cria_turma,
 )
 
