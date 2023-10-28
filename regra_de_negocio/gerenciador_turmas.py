@@ -1,4 +1,5 @@
 import json
+from regra_de_negocio.service import gerando_novo_id
 
 
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
@@ -28,20 +29,6 @@ def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
 # Parâmetro: um dicionário onde cada turma é um par chave-valor
 # Retorna:
 #   True se a operação for bem sucedida
-
-
-
-def gerando_novo_id(turmas):
-    """Percorre as chaves do objeto json e procura o maior valor entre elas, 
-    soma esse valor com 1 e retorna o novo ID"""
-    lista_ids = []
-    for id in turmas.keys():
-        id = int(id)
-        lista_ids.append(id)
-    novo_id = max(lista_ids) + 1
-    novo_id = str(novo_id)
-
-    return novo_id
 
 # Função para criar uma nova turma
 def criacao_turma(dados_nova_turma):
