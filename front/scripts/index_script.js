@@ -20,7 +20,3 @@ document.getElementById('aluno').addEventListener('click', function() {
     redirecionarParaPagina('aluno');
 });
 
-
-document.getElementById('global-settings').addEventListener('click', function() {
-    redirecionarParaPagina('global-settings');
-});
