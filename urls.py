@@ -14,8 +14,6 @@ def URL(pattern):
 
 URLS = {
     URL("/api/v1/alunos/atualizar/:id"): view.edit_aluno,
-    URL("/api/v1/globalsettings/"): view.get_global_settings,
-    URL("/api/v1/globalsettings/editar"): view.alterar_global_settings,
     URL("/api/v1/turmas/listar"): view.get_turmas,
     URL("/api/v1/turmas/listar/:id"): view.obtem_turma_especifica,
     URL("/api/v1/turmas/editar/:id"): view.editar_turma,

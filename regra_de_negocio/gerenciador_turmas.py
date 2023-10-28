@@ -48,6 +48,7 @@ def criacao_turma(dados_nova_turma):
             "dataInicio"
         ],  # Acesse a propriedade "dataInicio" do corpo
         "duracao_ciclo": dados_nova_turma_json["duracaoCiclo"],
+        "quantidade_ciclos": 4,
     }
     turmas[turma_novo_id] = nova_turma
     turma_nome = turmas[turma_novo_id]["nome"]
