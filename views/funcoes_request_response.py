@@ -42,7 +42,11 @@ def obtem_turma_especifica(request, id):
 def editar_turma(request, id):
     turma = json.loads(request.body)
     resultado = editar_turma_svc(
-        id, turma["nome"], turma["professor"], turma["data_de_inicio"]
+        id,
+        turma["nome"],
+        turma["professor"],
+        turma["data_de_inicio"],
+        turma["duracao_ciclo"],
     )
     return JsonResponse({"mensagem": resultado})
 

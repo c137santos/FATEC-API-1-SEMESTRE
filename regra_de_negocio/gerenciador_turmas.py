@@ -8,13 +8,14 @@ def busca_turmas():
     return turmas_data
 
 
-def editar_turma_svc(id, nome, professor, data_de_inicio):
+def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
     turmas = busca_turmas()
     if id in turmas.keys():
         turma = turmas[id]
         turma["nome"] = nome
         turma["professor"] = professor
         turma["data_de_inicio"] = data_de_inicio
+        turma["duracao_ciclo"] = duracao_ciclo
         _salvar_turmas(turmas)
         return True
     else:
@@ -46,6 +47,7 @@ def criacao_turma(dados_nova_turma):
         "data_de_inicio": dados_nova_turma_json[
             "dataInicio"
         ],  # Acesse a propriedade "dataInicio" do corpo
+        "duracao_ciclo": dados_nova_turma_json["duracaoCiclo"],
     }
     turmas[turma_novo_id] = nova_turma
     turma_nome = turmas[turma_novo_id]["nome"]

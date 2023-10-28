@@ -91,6 +91,7 @@ async function coletaDadosNovaTurma() {
   const turmaNome = document.getElementById("turmaNome").value;
   const professor = document.getElementById("professor").value;
   const dataInicio = document.getElementById("dataInicio").value;
+  const duracaoCiclo = document.getElementById("duracaoCiclo").value;
   console.log(dataInicio);
 
   const regex = /^[A-Za-z\s]*$/;
@@ -118,6 +119,10 @@ async function coletaDadosNovaTurma() {
     alert("A Data de início é obrigatório.");
     return;
   }
+  if (duracaoCiclo === "") {
+    alert("A duração de ciclos, em dias, é obrigatório.");
+    return;
+  }
 
   // Formata a data para dia/mes/ano
 
@@ -138,6 +143,7 @@ const dataFormatada = `${dia}/${mes}/${ano}`;
     nome: turmaNome,
     professor: professor,
     dataInicio: dataFormatada,
+    duracaoCiclo: duracaoCiclo
   };
 
   // Exiba a div de confirmação
@@ -148,6 +154,7 @@ const dataFormatada = `${dia}/${mes}/${ano}`;
   document.getElementById("turmaNomeConfirmacao").textContent = turmaNome;
   document.getElementById("professorConfirmacao").textContent = professor;
   document.getElementById("dataInicioConfirmacao").textContent = dataFormatada;
+  document.getElementById("duracaoCicloConfirmacao").textContent = duracaoCiclo;
 
   //aciona evento para enviar os dados da turma que sera criada para o back end
   const confirmarButton = document.getElementById("confirmarButton");

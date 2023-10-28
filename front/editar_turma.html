@@ -27,6 +27,12 @@
             <div>
                 <label for="fdata"><strong>Data de início:</strong></label>
                 <input type="date" name="fdata" id="fdata">
+                <!-- TODO: Fazer com que aceitem apenas datas futuras -->
+            </div>
+            <div>
+                <label for="fduracaosCiclo"><strong>Duração dos ciclos Sprint</strong></label>
+                <input type="number" name="fduracaosCiclo" id="fduracaosCiclo">
+                <!-- TODO: Fazer com que aceitem apenas números positivos -->
             </div>
             <div style="padding-top: 21px;">
                 <button onclick="requisitar_editar_turma(obter_id())">Editar</button>
@@ -44,6 +50,7 @@
                 document.getElementById('fnome')['value'] = turma["nome"]
                 document.getElementById('fprofessor')['value'] = turma["professor"]
                 document.getElementById('fdata')['value'] = dataFormatada
+                document.getElementById('fduracaosCiclo')['value'] = parseInt(turma["duracao_ciclo"])
             } else {
                 alert("Falha ao preencher os campos do formulário!\nA turma não foi encontrada.")
             }
@@ -57,9 +64,10 @@
                 const turma = {
                     "nome" : document.getElementById('fnome')['value'],
                     "professor" : document.getElementById('fprofessor')['value'],
-                    "data_de_inicio" : document.getElementById('fdata')['value']
+                    "data_de_inicio" : document.getElementById('fdata')['value'],
+                    "duracao_ciclo": document.getElementById('fduracaosCiclo')['value']
                 }
-                fetch (`http://localhost:8080/api/v1/turmas/editar/${id}/`,{method: "POST", body:JSON.stringify(turma)})
+                fetch (`http://localhost:8080/api/v1/turmas/editar/${id}`,{method: "POST", body:JSON.stringify(turma)})
                     .then(() => window.location.href = 'editar_turma.html?id=' + id)
             }
         }
