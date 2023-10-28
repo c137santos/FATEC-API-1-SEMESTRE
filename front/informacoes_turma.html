@@ -47,126 +47,123 @@
           <img src="./imagens/mascote2.png" alt="mascote" />
         </a>
       </div>
-      <script>
-        const global = { quantidade_sprint: 4, dias_sprint: 12 };
+  <script>
+    const turmas = {
+      1: {
+        nome: "ADS",
+        professor: "Nadalete",
+        data_de_inicio: "21/02/2023",
+      },
+    };
 
-const turmas = {
-  1: {
-    nome: "ADS",
-    professor: "Nadalete",
-    data_de_inicio: "21/02/2023",
-  },
-};
-
-const ciclo_peso = {
-  '1': { ciclo: 1, peso: 1 },
-  '2': { ciclo: 2, peso: 2 },
-  '3': { ciclo: 3, peso: 3 },
-  '4': { ciclo: 4, peso: 4 }
-}
-
-const cicloPeso = document.querySelector(".ciclo-peso");
-for (const chave in ciclo_peso) {
-  if (ciclo_peso.hasOwnProperty(chave)) {
-    const pesoData = ciclo_peso[chave];
-
-    const NomeCiclo = document.createElement("span");
-    NomeCiclo.className = "ciclo";
-    NomeCiclo.innerHTML = `C${pesoData.ciclo}:`;
-
-    const PesoCiclo = document.createElement("span");
-    PesoCiclo.className = "peso";
-    PesoCiclo.textContent = pesoData.peso;
-
-    cicloPeso.appendChild(NomeCiclo);
-    cicloPeso.appendChild(PesoCiclo);
-  }
-}
-
-const alunos = {
-  1: {
-    nome: "Clara Santos"
-  }
-}
-function GetAlunos() {
-  const alunosData = [];
-
-  for (const alunoId in alunos) {
-    if (alunos.hasOwnProperty(alunoId)) {
-      const aluno = alunos[alunoId];
-      alunosData.push({ id: alunoId, nome: aluno.nome });
+    const ciclo_peso = {
+      '1': { ciclo: 1, peso: 1 },
+      '2': { ciclo: 2, peso: 2 },
+      '3': { ciclo: 3, peso: 3 },
+      '4': { ciclo: 4, peso: 4 }
     }
-  }
-  console.log(alunosData)
-  return alunosData;
-}
 
-ciclo_nota = {
-  1: { id_ciclo: 1, valor: 6.5 },
-  2: { id_ciclo: 2, valor: 8.5 },
-  4: { id_ciclo: 3, valor: 7.5 },
-  5: { id_ciclo: 4, valor: 9.5 },
-};
+    const cicloPeso = document.querySelector(".ciclo-peso");
+    for (const chave in ciclo_peso) {
+      if (ciclo_peso.hasOwnProperty(chave)) {
+        const pesoData = ciclo_peso[chave];
 
-function exibirAlunos(alunosData) {
-  const container = document.querySelector(".corpo_tabela");
+        const NomeCiclo = document.createElement("span");
+        NomeCiclo.className = "ciclo";
+        NomeCiclo.innerHTML = `C${pesoData.ciclo}:`;
 
-  for (const alunoId in alunosData) {
-    if (alunosData.hasOwnProperty(alunoId)) {
-      const aluno = alunosData[alunoId];
-      const RAaluno = aluno.id;
+        const PesoCiclo = document.createElement("span");
+        PesoCiclo.className = "peso";
+        PesoCiclo.textContent = pesoData.peso;
 
-      const alunoSquare = document.createElement("div");
-      alunoSquare.className = "aluno-square";
-      alunoSquare.id = `${aluno.id}`;
+        cicloPeso.appendChild(NomeCiclo);
+        cicloPeso.appendChild(PesoCiclo);
+      }
+    }
 
-      const nomeAluno = document.createElement("p");
-      nomeAluno.className = "aluno";
-      nomeAluno.textContent = aluno.nome.charAt(0).toUpperCase() + aluno.nome.slice(1);
+    const alunos = {
+      1: {
+        nome: "Clara Santos"
+      }
+    }
+    function GetAlunos() {
+      const alunosData = [];
 
-      alunoSquare.appendChild(nomeAluno);
-
-      // Crie um campo "nota" para cada aluno
-      const campoNota = document.createElement("div");
-      campoNota.className = "campoNota";
-
-      for (const cicloId in ciclo_nota) {
-        if (ciclo_nota.hasOwnProperty(cicloId)) {
-          const id_ciclo = ciclo_nota[cicloId].id_ciclo;
-          const valorNota = ciclo_nota[cicloId].valor;
-
-          const InputNotas = document.createElement("input");
-          InputNotas.className = "valor";
-          InputNotas.type = "number";
-          InputNotas.value = valorNota;
-          InputNotas.id = id_ciclo;
-
-          // Verifique se a nota já foi atribuída para torná-la somente leitura
-          if (CicloAberto(id_ciclo)) {
-            InputNotas.setAttribute("readonly", true);
-          }
-
-          campoNota.appendChild(InputNotas);
+      for (const alunoId in alunos) {
+        if (alunos.hasOwnProperty(alunoId)) {
+          const aluno = alunos[alunoId];
+          alunosData.push({ id: alunoId, nome: aluno.nome });
         }
       }
-      alunoSquare.appendChild(campoNota);
-
-      const mediaAluno = document.createElement("div");
-          mediaAluno.className = "media";
-          mediaAluno.type = "number";
-          mediaAluno.innerHTML = "Media"
-          alunoSquare.appendChild(mediaAluno)
-      container.appendChild(alunoSquare);
+      console.log(alunosData)
+      return alunosData;
     }
-  }
-}
+
+    ciclo_nota = {
+      1: { id_ciclo: 1, valor: 6.5 },
+      2: { id_ciclo: 2, valor: 8.5 },
+      4: { id_ciclo: 3, valor: 7.5 },
+      5: { id_ciclo: 4, valor: 9.5 },
+    };
+
+    function exibirAlunos(alunosData) {
+      const container = document.querySelector(".corpo_tabela");
+
+      for (const alunoId in alunosData) {
+        if (alunosData.hasOwnProperty(alunoId)) {
+          const aluno = alunosData[alunoId];
+          const RAaluno = aluno.id;
+
+          const alunoSquare = document.createElement("div");
+          alunoSquare.className = "aluno-square";
+          alunoSquare.id = `${aluno.id}`;
+
+          const nomeAluno = document.createElement("p");
+          nomeAluno.className = "aluno";
+          nomeAluno.textContent = aluno.nome.charAt(0).toUpperCase() + aluno.nome.slice(1);
+
+          alunoSquare.appendChild(nomeAluno);
+
+          // Crie um campo "nota" para cada aluno
+          const campoNota = document.createElement("div");
+          campoNota.className = "campoNota";
+
+          for (const cicloId in ciclo_nota) {
+            if (ciclo_nota.hasOwnProperty(cicloId)) {
+              const id_ciclo = ciclo_nota[cicloId].id_ciclo;
+              const valorNota = ciclo_nota[cicloId].valor;
+
+              const InputNotas = document.createElement("input");
+              InputNotas.className = "valor";
+              InputNotas.type = "number";
+              InputNotas.value = valorNota;
+              InputNotas.id = id_ciclo;
+
+              // Verifique se a nota já foi atribuída para torná-la somente leitura
+              if (CicloAberto(id_ciclo)) {
+                InputNotas.setAttribute("readonly", true);
+              }
+              campoNota.appendChild(InputNotas);
+            }
+          }
+          alunoSquare.appendChild(campoNota);
+
+          const mediaAluno = document.createElement("div");
+              mediaAluno.className = "media";
+              mediaAluno.type = "number";
+              mediaAluno.innerHTML = "Media"
+              alunoSquare.appendChild(mediaAluno)
+          container.appendChild(alunoSquare);
+        }
+      }
+    }
 
 
-function CicloAberto(id_ciclo) {
-  return true
-}
+    function CicloAberto(id_ciclo) {
+      return true
+    }
 
-exibirAlunos(GetAlunos());
-      </script>
+    exibirAlunos(GetAlunos());
+  </script>
   </body>
 </html>
