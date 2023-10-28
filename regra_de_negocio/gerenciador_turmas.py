@@ -29,43 +29,19 @@ def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
 # Retorna:
 #   True se a operação for bem sucedida
 
-turmass =  {
-    "1": {
-        "nome": "Logica",
-        "professor": "Nadallete",
-        "data_de_inicio": "2023-01-24",
-        "duracao_ciclo": "10",
-        "quantidade_ciclos": "4"
-    },
-    "2": {
-        "nome": "ADS",
-        "professor": "Goretti",
-        "data_de_inicio": "2023-10-25",
-        "duracao_ciclo": "11",
-        "quantidade_ciclos": "4"
-    },
-    "3": {
-        "nome": "vai vai",
-        "professor": "aaa",
-        "data_de_inicio": "27/10/2023",
-        "duracao_ciclo": "15",
-        "quantidade_ciclos": 4
-    }
-}
 
-def gerando_novo_id(turmass):
+
+def gerando_novo_id(turmas):
     """Percorre as chaves do objeto json e procura o maior valor entre elas, 
     soma esse valor com 1 e retorna o novo ID"""
     lista_ids = []
-    for id in turmass.keys():
+    for id in turmas.keys():
         id = int(id)
         lista_ids.append(id)
     novo_id = max(lista_ids) + 1
     novo_id = str(novo_id)
 
     return novo_id
-
-gerando_novo_id(turmass)
 
 # Função para criar uma nova turma
 def criacao_turma(dados_nova_turma):
