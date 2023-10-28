@@ -146,7 +146,7 @@ async function coletaDadosNovaTurma() {
     nome: turmaNome,
     professor: professor,
     dataInicio: dataFormatada,
-    duracaoCiclo: duracaoCiclo
+    duracaoCiclo: duracaoCiclo,
   };
 
   // Exiba a div de confirmação
@@ -174,6 +174,10 @@ function closeConfirmacao() {
   confirmacaoContainer.style.display = "none";
 }
 
+function mostrarCampoPeso() {
+  const quantidadeCiclos = document.getElementById("quantidadeCiclo").value;
+}
+
 //Função para enviar as informações da nova turma em formato de string para o back end
 async function criarNovaTurma(novaTurmaData) {
   try {
@@ -188,7 +192,7 @@ async function criarNovaTurma(novaTurmaData) {
       const mensagem = resposta.mensagem;
       const detalhes = resposta.detalhes;
       alert("Resposta do servidor:\n" + mensagem + "\n" + detalhes.join("\n"));
-      window.location.href = 'gerenciamento_turmas.html'
+      window.location.href = "gerenciamento_turmas.html";
     } else {
       // Lida com erros de resposta, se houver
       console.error("Erro ao criar a turma: ", response.statusText);
@@ -198,10 +202,12 @@ async function criarNovaTurma(novaTurmaData) {
   }
 }
 
-function requisitar_excluir_turma(id){
-  if(window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")){
-    fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`,{method:'POST'}).then(document.getElementById(id).remove())
-  }  
+function requisitar_excluir_turma(id) {
+  if (window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")) {
+    fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`, {
+      method: "POST",
+    }).then(document.getElementById(id).remove());
+  }
 }
 
 function requisitar_editar_turma(id) {

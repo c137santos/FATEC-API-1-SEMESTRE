@@ -1,12 +1,12 @@
-import regra_de_negocio.gerenciador_turmas as gt
+from regra_de_negocio import gerenciador_turmas
 
 
-def busca_turmas():  # retorna todas turmas
-    turmas_data = gt.busca_turmas()
+def buscando_turmas():  # retorna todas turmas
+    turmas_data = gerenciador_turmas.buscando_turmas()
     return turmas_data
 
 
 def cria_turma(dados_nova_turma):
-    resposta = gt.criacao_turma(dados_nova_turma)
+    resposta = gerenciador_turmas.criacao_turma(dados_nova_turma)
     return resposta
 

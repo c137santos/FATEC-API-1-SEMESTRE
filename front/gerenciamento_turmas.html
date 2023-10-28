@@ -8,7 +8,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
     />
-    <link rel="stylesheet" href="style/custom.css">
+    <link rel="stylesheet" href="style/custom.css" />
     <link rel="stylesheet" href="style/gerenciamento_turmas.css" />
   </head>
   <header class="header">
@@ -43,6 +43,9 @@
             <label for="duracaoCiclo">Duracao Ciclos em dias:</label>
             <input type="number" id="duracaoCiclo" class="input-field" />
             <!-- TODO: Fazer com que aceitem apenas números positivos -->
+
+            <label for="quantidadeCiclo">Quantidade de ciclos:</label>
+            <input type="number" id="quantidadeCiclo" class="input-field" oninput="mostrarCampoPeso()" />
           </div>
           <button class="submit-turma">Criar turma</button>
 
@@ -52,7 +55,10 @@
             <p>Nome da Turma: <span id="turmaNomeConfirmacao"></span></p>
             <p>Professor: <span id="professorConfirmacao"></span></p>
             <p>Data de Início: <span id="dataInicioConfirmacao"></span></p>
-            <p>Duração dos ciclos em dias: <span id="duracaoCicloConfirmacao"></span></p>
+            <p>
+              Duração dos ciclos em dias:
+              <span id="duracaoCicloConfirmacao"></span>
+            </p>
             <button id="confirmarButton" type="submit">Confirmar</button>
             <button id="cancelarButton">Cancelar</button>
           </div>
