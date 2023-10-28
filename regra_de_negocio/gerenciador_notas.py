@@ -24,7 +24,7 @@ def calcular_fee(id_aluno, id_turma):
 
 def listar_notas():
     try:
-        with open("dados/notas.json", "r", encoding="utf-8") as f:
+        with open("dados/teste/notas.json", "r", encoding="utf-8") as f:
             notas = json.load(f)
             return notas
     except:
@@ -136,10 +136,10 @@ def _obter_novo_id_nota():
     novo_id = str(id_max_inteiro + 1)
     return novo_id
 
-def _salvar_notas(ciclos):
+def _salvar_notas(notas):
     try:
-        dados = json.dumps(ciclos, indent=4)
-        with open("dados/notas.json", "w", encoding="utf-8") as f:
+        dados = json.dumps(notas, indent=4)
+        with open("dados/teste/notas.json", "w", encoding="utf-8") as f:
             f.write(dados)
             return True
     except:

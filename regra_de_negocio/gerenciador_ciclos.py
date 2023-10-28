@@ -2,7 +2,7 @@ import json
     
 def listar_ciclos():
     try:
-        with open("dados/ciclos.json", "r", encoding="utf-8") as f:
+        with open("dados/teste/ciclos.json", "r", encoding="utf-8") as f:
             return json.load(f)
     except:
         return {}
@@ -56,7 +56,7 @@ def _obter_novo_id_ciclo():
 def _salvar_ciclos(ciclos):
     try:
         dados = json.dumps(ciclos, indent=4)
-        with open("dados/ciclos.json", "w", encoding="utf-8") as f:
+        with open("dados/teste/ciclos.json", "w", encoding="utf-8") as f:
             f.write(dados)
             return True
     except:

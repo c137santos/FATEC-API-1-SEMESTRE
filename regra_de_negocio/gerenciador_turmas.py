@@ -1,9 +1,8 @@
 import json
 
-
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
 def busca_turmas():
-    with open("dados/turmas.json", "r", encoding="utf-8") as f:
+    with open("dados/teste/turmas.json", "r", encoding="utf-8") as f:
         turmas_data = json.load(f)
     return turmas_data
 
@@ -72,7 +71,7 @@ def excluir_turma_svc(id):
 #   True se a operação for bem sucedida
 def _salvar_turmas(turmas):
     dados = json.dumps(turmas, indent=4)
-    with open("dados/turmas.json", "w", encoding="utf-8") as arquivo:
+    with open("dados/teste/turmas.json", "w", encoding="utf-8") as arquivo:
         arquivo.write(dados)
     return True
 
