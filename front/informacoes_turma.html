@@ -18,7 +18,6 @@
       </a>
     </header>
   <body>
-    <h1 class="titulo">Informações turma:</h1>
     <div class="container-info">
         <div class="info-turma">
           <p>Nome turma: tal</p>
@@ -32,18 +31,15 @@
         </div>
     </div>
     <div class="aluno-container">
-      <div class="table-container">
-        <p>Ciclo aberto para nota: x</p>
+        <p class="aviso_ciclo_aberto">Ciclo aberto para nota: x</p>
         <div class="header-container">
-          <div class="header-title titulo_nome_alunos">Nome</div>
-          <div class="header-title titulo_grupo">Grupo</div>
+          <div class="header-title titulo_alunos">Nome</div>
           <div class="header-title titulo_notas">Notas</div>
           <div class="header-title titulo_media">Media</div>
         </div>
           <div class="corpo_tabela">
             <!-- Os Alunos serão adicionadas automaticamente aqui -->
           </div>
-      </div>
     </div>
      <!-- Moleke -->
      <div class="muleke">
@@ -66,38 +62,34 @@ const turmas = {
   },
 };
 
-const cicloPeso = document.querySelector(".ciclo-peso");
-for (let i = 1; i <= global.quantidade_sprint; i++) {
-  const label = document.createElement("label");
-  label.classList.add("ciclo");
-  label.htmlFor = `p${i}`;
-  label.innerHTML = `<strong>C${i}:</strong>`;
-
-  const input = document.createElement("input");
-  input.classList.add("peso");
-  input.type = "text";
-  input.name = `p${i}`;
-  input.id = `p${i}`;
-
-  // Preencha o valor do input com base no objeto turmas
-  const turma = turmas[1]; // Supondo que você está trabalhando com a turma 1
-  if (turma[`p${i}`] !== undefined) {
-    input.value = turma[`p${i}`];
-  }
-
-  cicloPeso.appendChild(label);
-  cicloPeso.appendChild(input);
+const ciclo_peso = {
+  '1': { ciclo: 1, peso: 1 },
+  '2': { ciclo: 2, peso: 2 },
+  '3': { ciclo: 3, peso: 3 },
+  '4': { ciclo: 4, peso: 4 }
 }
 
-const alunos ={
+const cicloPeso = document.querySelector(".ciclo-peso");
+for (const chave in ciclo_peso) {
+  if (ciclo_peso.hasOwnProperty(chave)) {
+    const pesoData = ciclo_peso[chave];
+
+    const NomeCiclo = document.createElement("span");
+    NomeCiclo.className = "ciclo";
+    NomeCiclo.innerHTML = `C${pesoData.ciclo}:`;
+
+    const PesoCiclo = document.createElement("span");
+    PesoCiclo.className = "peso";
+    PesoCiclo.textContent = pesoData.peso;
+
+    cicloPeso.appendChild(NomeCiclo);
+    cicloPeso.appendChild(PesoCiclo);
+  }
+}
+
+const alunos = {
   1: {
     nome: "Clara Santos"
-  },
-  2: {
-    nome: "Marcelo Tambalo"
-  },
-  3: {
-    nome: "TA RA RA RA"
   }
 }
 function GetAlunos() {
@@ -113,6 +105,13 @@ function GetAlunos() {
   return alunosData;
 }
 
+ciclo_nota = {
+  1: { id_ciclo: 1, valor: 6.5 },
+  2: { id_ciclo: 2, valor: 8.5 },
+  4: { id_ciclo: 3, valor: 7.5 },
+  5: { id_ciclo: 4, valor: 9.5 },
+};
+
 function exibirAlunos(alunosData) {
   const container = document.querySelector(".corpo_tabela");
 
@@ -123,89 +122,52 @@ function exibirAlunos(alunosData) {
 
       const alunoSquare = document.createElement("div");
       alunoSquare.className = "aluno-square";
-      alunoSquare.id = `aluno-${aluno.id}`;
+      alunoSquare.id = `${aluno.id}`;
 
       const nomeAluno = document.createElement("p");
       nomeAluno.className = "aluno";
       nomeAluno.textContent = aluno.nome.charAt(0).toUpperCase() + aluno.nome.slice(1);
 
-      const grupoNome = buscaGrupo(aluno.id);
-
-      const nomeGrupo = document.createElement("p");
-      nomeGrupo.className = "grupo";
-      nomeGrupo.textContent = `Grupo: ${grupoNome}`; // Inclui o nome do grupo
-
       alunoSquare.appendChild(nomeAluno);
-      alunoSquare.appendChild(nomeGrupo);
+
+      // Crie um campo "nota" para cada aluno
+      const campoNota = document.createElement("div");
+      campoNota.className = "campoNota";
+
+      for (const cicloId in ciclo_nota) {
+        if (ciclo_nota.hasOwnProperty(cicloId)) {
+          const id_ciclo = ciclo_nota[cicloId].id_ciclo;
+          const valorNota = ciclo_nota[cicloId].valor;
+
+          const InputNotas = document.createElement("input");
+          InputNotas.className = "valor";
+          InputNotas.type = "number";
+          InputNotas.value = valorNota;
+          InputNotas.id = id_ciclo;
+
+          // Verifique se a nota já foi atribuída para torná-la somente leitura
+          if (CicloAberto(id_ciclo)) {
+            InputNotas.setAttribute("readonly", true);
+          }
+
+          campoNota.appendChild(InputNotas);
+        }
+      }
+      alunoSquare.appendChild(campoNota);
+
+      const mediaAluno = document.createElement("div");
+          mediaAluno.className = "media";
+          mediaAluno.type = "number";
+          mediaAluno.innerHTML = "Media"
+          alunoSquare.appendChild(mediaAluno)
       container.appendChild(alunoSquare);
     }
   }
 }
 
-function buscaGrupo(alunoId) {
-  const grupoAluno = {
-    1: {
-      // id aluno
-      grupo: 1, // id grupo
-    },
-    2: {
-      grupo: 2,
-    },
-    3: {
-      grupo: 2,
-    },
-  };
 
-  const grupos = {
-    1: {
-      // id grupo
-      turma: 1, //id turma
-      nome: "team bee",
-    },
-    2: {
-      turma: 2,
-      nome: "team tatata",
-    },
-    3: {
-      turma: 1,
-      nome: "team barbuleta",
-    },
-  };
-  const turmas = {
-    1: {
-      // id turma
-      nome: "ADS",
-      professor: "Nadalete",
-      data_de_inicio: "21/02/2023",
-    },
-    2: {
-      nome: "Banco de dados",
-      professor: "Professora teste",
-      data_de_inicio: "2023-10-11",
-    },
-    3: {
-      nome: "Inteligencia Artifical",
-      professor: "Grugru",
-      data_de_inicio: "16/10/2023",
-    },
-  };
-
-  if (alunoId in grupoAluno) {
-    console.log(alunoId)
-    console.log(grupoAluno)
-    const grupoId = grupoAluno[alunoId].grupo
-    console.log(grupoId)
-    if (grupoId in grupos) {
-      const grupoNome = grupos[grupoId].nome
-      console.log(grupoId)
-      console.log(grupoNome)
-      const turmaId = grupos[grupoId].turma;
-      console.log(turmaId)
-      const turmaNome = turmas[turmaId].nome;
-      console.log(turmaNome)
-      return [grupoNome];
-    }
-  }
+function CicloAberto(id_ciclo) {
+  return true
 }
 
 exibirAlunos(GetAlunos());

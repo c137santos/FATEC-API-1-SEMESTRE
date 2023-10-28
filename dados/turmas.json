@@ -1,7 +1,12 @@
 {
-    "1": {
-        "nome": "ADS",
-        "professor": "Nadalete",
-        "data_de_inicio": "21/02/2023"
+    "1":{
+        "nome":"Team Bee",
+        "professor":"Nadalete",
+        "data_de_inicio":"21/02/2023"
+    },
+    "2":{
+        "nome":"Team Rocket",
+        "professor":"Walmir",
+        "data_de_inicio":"21/02/2000"
     }
 }

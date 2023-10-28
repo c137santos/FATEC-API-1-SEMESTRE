@@ -18,9 +18,60 @@ body {
   justify-content: center;
 }
 
+.container-info {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Alinha os elementos no topo do contêiner */
+  width: 600px;
+  margin-bottom: 20px;
+}
+
+.info-turma {
+  width: 200px;
+  height: 90px;
+  background-color: #ccc;
+}
+
+.container-ciclos {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 300px;
+  max-width: 300px;
+  height: 90px;
+  padding: 0px 5px;
+  border-radius: 5px;
+  background-color: #ccc;
+}
+
+.titulo-ciclos {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.ciclo-peso {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ciclo {
+  display: flex;
+  align-items: center;
+  font-weight: 200;
+  margin-right: 2px;
+}
+
+.peso {
+  border: 1px solid #0000000c;
+  padding: 5px;
+  margin-right: 10px; /* Adiciona espaço ao redor dos pesos para separá-los dos rótulos (ciclos) */
+}
+
 /* Estilos para o contêiner principal dos alunos */
 .aluno-container {
-  width: 600px;
+  width: 550px;
   height: 330px;
   padding: 20px;
   padding-top: 5px;
@@ -33,64 +84,10 @@ body {
   overflow-y: auto;
 }
 
-.container-info {
-  margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start; /* Alinha os elementos no topo do contêiner */
-  width: 600px;
-  margin-bottom: 20px;
-}
-
-.info-turma {
-  width: 200px;
-  height: 100px;
-  background-color: #ccc;
-}
-
-.container-ciclos {
-  display: flex;
-  flex-direction: column;
+.aviso_ciclo_aberto {
   text-align: center;
-  width: 300px;
-  max-width: 300px;
-  height: auto; /* Removendo altura fixa para acomodar várias linhas */
-  padding: 0px 5px;
-  border-radius: 5px;
-  background-color: #ccc;
-}
-
-.ciclo-peso {
-  display: flex;
-  justify-content: center; /* Centraliza horizontalmente o conteúdo */
-  align-items: center;
-  flex-wrap: wrap; /* Permite que os elementos sejam distribuídos em várias linhas se necessário */
-}
-
-.ciclo {
-  width: 60px; /* Largura dos rótulos */
-  margin-right: 2px; /* Adiciona espaço entre os rótulos e os campos de entrada */
-  font-weight: 500;
-}
-
-.titulo-ciclos {
-  margin-top: 0px;
+  margin-top: 2px;
   margin-bottom: 5px;
-}
-
-.peso {
-  width: 30px; /* Largura dos campos de entrada de peso */
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-/* Estilos para a tabela */
-.table-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
 }
 
 .header-container {
@@ -127,16 +124,44 @@ body {
 .header-title,
 .aluno-square p,
 .aluno-square div {
-  flex: 1;
   color: #000000;
   margin: 0;
   text-align: center;
   border-right: 1px solid #ccc;
 }
 
-.titulo_media {
+.header-title.titulo_alunos,
+.aluno-square .aluno {
+  width: 150px;
+}
+
+.titulo_notas,
+.campoNota {
+  align-items: center;
+  width: auto; /* Use "auto" para que o campo se ajuste ao conteúdo */
+  min-width: 280px; /* Defina um tamanho mínimo para evitar que fique muito pequeno */
+  border-right: 1px solid #ccc; /* Adicione uma borda à direita */
+  padding: 0 10px; /* Adicione algum espaçamento interno para melhor aparência */
+}
+
+.titulo_media,
+div.media {
+  width: 100px;
   border-right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.campoNota {
+  display: flex;
+  flex-direction: row;
+}
+
+.valor {
+  width: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+  padding: 0px;
 }
