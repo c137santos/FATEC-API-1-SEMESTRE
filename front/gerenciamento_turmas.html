@@ -38,6 +38,11 @@
 
             <label for="dataInicio">Data de início:</label>
             <input type="date" id="dataInicio" class="input-field" />
+            <!-- TODO: Fazer com que aceitem apenas datas futuras -->
+
+            <label for="duracaoCiclo">Duracao Ciclos em dias:</label>
+            <input type="number" id="duracaoCiclo" class="input-field" />
+            <!-- TODO: Fazer com que aceitem apenas números positivos -->
           </div>
           <button class="submit-turma">Criar turma</button>
 
@@ -47,6 +52,7 @@
             <p>Nome da Turma: <span id="turmaNomeConfirmacao"></span></p>
             <p>Professor: <span id="professorConfirmacao"></span></p>
             <p>Data de Início: <span id="dataInicioConfirmacao"></span></p>
+            <p>Duração dos ciclos em dias: <span id="duracaoCicloConfirmacao"></span></p>
             <button id="confirmarButton" type="submit">Confirmar</button>
             <button id="cancelarButton">Cancelar</button>
           </div>
