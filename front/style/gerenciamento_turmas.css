@@ -5,12 +5,6 @@ body {
   align-items: center;
 }
 
-/* Estilos para o cabeçalho */
-.header {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
 
 .title {
   margin-top: 5px;

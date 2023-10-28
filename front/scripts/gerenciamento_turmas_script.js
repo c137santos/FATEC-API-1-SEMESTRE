@@ -69,48 +69,11 @@ function exibirTurmas(turmadata) {
 
 const addTurmaButton = document.querySelector(".add-turma-button");
 addTurmaButton.addEventListener("click", showModal);
-let grupos_data;
 
 // Função para mostrar o modal
 async function showModal() {
   const modal = document.getElementById("myModal");
   modal.style.display = "block";
-  try {
-    const response = await fetch("http://127.0.0.1:8080/api/v1/grupos/listar");
-    grupos_data = await response.json();
-    console.log(grupos_data);
-
-    const gruposSemTurmaList = document.getElementById("gruposSemTurmaList");
-
-    // Limpe a lista existente
-    gruposSemTurmaList.innerHTML = "";
-
-    for (const grupo in grupos_data) {
-      if (grupos_data.hasOwnProperty(grupo) && grupos_data[grupo].turma == 0) {
-        const grupoNome = grupos_data[grupo].nome;
-
-        // Criar um checkbox para cada grupo
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.id = grupo; // ID único para cada checkbox
-        checkbox.classList = "checkbox";
-
-        // Criar uma label para o checkbox
-        const label = document.createElement("label");
-        label.setAttribute("for", checkbox.id);
-        label.textContent =
-          grupoNome.charAt(0).toUpperCase() + grupoNome.slice(1);
-
-        // Adicionar o checkbox e a label à lista
-        const listItem = document.createElement("li");
-        listItem.appendChild(checkbox);
-        listItem.appendChild(label);
-        gruposSemTurmaList.appendChild(listItem);
-      }
-    }
-  } catch (error) {
-    console.error("Erro ao buscar grupos sem turmas: " + error);
-  }
 }
 
 // Função para fechar o modal
@@ -132,6 +95,7 @@ async function coletaDadosNovaTurma() {
   const turmaNome = document.getElementById("turmaNome").value;
   const professor = document.getElementById("professor").value;
   const dataInicio = document.getElementById("dataInicio").value;
+  const duracaoCiclo = document.getElementById("duracaoCiclo").value;
   console.log(dataInicio);
 
   const regex = /^[A-Za-z\s]*$/;
@@ -159,6 +123,10 @@ async function coletaDadosNovaTurma() {
     alert("A Data de início é obrigatório.");
     return;
   }
+  if (duracaoCiclo === "") {
+    alert("A duração de ciclos, em dias, é obrigatório.");
+    return;
+  }
 
   // Formata a data para dia/mes/ano
 
@@ -173,25 +141,12 @@ async function coletaDadosNovaTurma() {
     return;
   }
 
-  //captura grupos selecionados
-  let gruposSelecionados = [];
-  const checkboxes = document.querySelectorAll(".checkbox");
-  checkboxes.forEach((checkbox) => {
-    if (checkbox.checked) {
-      gruposSelecionados.push(checkbox.id);
-    }
-  });
-
-  const nomeGruposSelecionados = gruposSelecionados.map((id) => {
-    return grupos_data[id].nome;
-  });
-
   // Construir o objeto de turma
   const novaTurmaData = {
     nome: turmaNome,
     professor: professor,
     dataInicio: dataFormatada,
-    grupos: gruposSelecionados,
+    duracaoCiclo: duracaoCiclo
   };
 
   // Exiba a div de confirmação
@@ -202,8 +157,7 @@ async function coletaDadosNovaTurma() {
   document.getElementById("turmaNomeConfirmacao").textContent = turmaNome;
   document.getElementById("professorConfirmacao").textContent = professor;
   document.getElementById("dataInicioConfirmacao").textContent = dataFormatada;
-  document.getElementById("gruposSelecionadosConfirmacao").textContent =
-    nomeGruposSelecionados.join(", ");
+  document.getElementById("duracaoCicloConfirmacao").textContent = duracaoCiclo;
 
   //aciona evento para enviar os dados da turma que sera criada para o back end
   const confirmarButton = document.getElementById("confirmarButton");
@@ -231,7 +185,10 @@ async function criarNovaTurma(novaTurmaData) {
     // Verifica se a resposta da solicitação está OK (status 200)
     if (response.ok) {
       const resposta = await response.json();
-      alert("Resposta do servidor:\n" + resposta);
+      const mensagem = resposta.mensagem;
+      const detalhes = resposta.detalhes;
+      alert("Resposta do servidor:\n" + mensagem + "\n" + detalhes.join("\n"));
+      window.location.href = 'gerenciamento_turmas.html'
     } else {
       // Lida com erros de resposta, se houver
       console.error("Erro ao criar a turma: ", response.statusText);
@@ -241,12 +198,10 @@ async function criarNovaTurma(novaTurmaData) {
   }
 }
 
-function requisitar_excluir_turma(id) {
-  if (window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")) {
-    fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`, {
-      method: "DELETE",
-    }).then(document.getElementById(id).remove());
-  }
+function requisitar_excluir_turma(id){
+  if(window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")){
+    fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`,{method:'POST'}).then(document.getElementById(id).remove())
+  }  
 }
 
 function requisitar_editar_turma(id) {

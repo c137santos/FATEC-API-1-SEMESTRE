@@ -1,28 +1,37 @@
 {
-    "1": [
+    "1":
         {
-            "grupo": 1,
+            "id_aluno": 1,
+            "id_ciclo": 1,
             "valor": 8,
-            "sprint": 1
+            "FEE": false
         },
+    "2":
         {
-            "grupo": 2,
-            "valor": 6,
-            "sprint": 2
-        }
-    ],
-    "2": [
-        {
-            "grupo": 1,
-            "valor": 8,
-            "sprint": 1
+            "id_aluno": 1,
+            "id_ciclo": 2,
+            "valor": 10,
+            "FEE": false
         },
+    "3":
         {
-            "grupo": 1,
-            "valor": 6,
-            "sprint": 2
+            "id_aluno": 1,
+            "id_ciclo": 3,
+            "valor": 9,
+            "FEE": false
+        },
+    "4":
+        {
+            "id_aluno": 1,
+            "id_ciclo": 4,
+            "valor": 7,
+            "FEE": false
+        },
+    "5":
+        {
+            "id_aluno": 1,
+            "id_ciclo": 5,
+            "valor": 8.5,
+            "FEE": true
         }
-    ]
-}
-
-//a chave do dicionario é o id do aluno
+    }

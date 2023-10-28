@@ -1,5 +1,6 @@
 import json
 
+
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
 def buscando_turmas():
     with open("dados/turmas.json", "r", encoding="utf-8") as f:
@@ -12,13 +13,14 @@ def _salvar_turmas(turmas):
         arquivo.write(dados)
     return True
 
-def editar_turma_svc(id, nome, professor, data_de_inicio):
-    turmas = buscando_turmas()
+def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
+    turmas = busca_turmas()
     if id in turmas.keys():
         turma = turmas[id]
         turma["nome"] = nome
         turma["professor"] = professor
         turma["data_de_inicio"] = data_de_inicio
+        turma["duracao_ciclo"] = duracao_ciclo
         _salvar_turmas(turmas)
         return True
     else:
@@ -35,15 +37,8 @@ def gerando_novo_id(turmas):
 
 # Função para criar uma nova turma
 def criacao_turma(dados_nova_turma):
-    """
-    Dados da nova turma vem no seguinte formato:
-    nome: nome da turma
-    professor: nome professor
-    data_de_inicio: data selecionada
-    grupos: uma lista dos grupos que foram selecionados para perteceram a essa turma
-    """
-    dados_nova_turma_json = json.loads(dados_nova_turma)
-    turmas = buscando_turmas()
+    dados_nova_turma_json = dados_nova_turma
+    turmas = busca_turmas()
 
     nova_turma_id = gerando_novo_id(turmas)
 
@@ -55,17 +50,23 @@ def criacao_turma(dados_nova_turma):
         "data_de_inicio": dados_nova_turma_json[
             "dataInicio"
         ],  # Acesse a propriedade "dataInicio" do corpo
+        "duracao_ciclo": dados_nova_turma_json["duracaoCiclo"],
+        "quantidade_ciclos": 4,
     }
-    turmas[nova_turma_id] = nova_turma
-    turma_nome = turmas[nova_turma_id]["nome"]
-    resposta = f"Criação da turma {turma_nome.capitalize()} realizada com sucesso!"
+    turmas[turma_novo_id] = nova_turma
+    turma_nome = turmas[turma_novo_id]["nome"]
+    resposta = {
+        "mensagem": f"Criação da turma {turma_nome.capitalize()} realizada com sucesso!",
+        "detalhes": [],
+    }
 
     # Salve as alterações nos arquivos JSON
     _salvar_turmas(turmas)
     return resposta
 
-def excluir_turma(id):
-    turmas = buscando_turmas()
+
+def excluir_turma_svc(id):
+    turmas = busca_turmas()
     if id in turmas.keys():
         turmas.pop(id)
         _salvar_turmas(turmas)

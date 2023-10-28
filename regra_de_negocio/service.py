@@ -1,15 +1,12 @@
-import json
-from regra_de_negocio import gerenciador_grupos
-from regra_de_negocio import gerenciador_turmas
+import regra_de_negocio.gerenciador_turmas as gt
 
 
+def busca_turmas():  # retorna todas turmas
+    turmas_data = gt.busca_turmas()
+    return turmas_data
 
-def busca_dados_json():
-    with open("dados/alunos.json", "r") as f:
-        data = json.load(f)
-        return data
 
-def criacao_turma(dados_nova_turma):
-    resposta = gerenciador_turmas.criacao_turma(dados_nova_turma)
+def cria_turma(dados_nova_turma):
+    resposta = gt.criacao_turma(dados_nova_turma)
     return resposta
 
