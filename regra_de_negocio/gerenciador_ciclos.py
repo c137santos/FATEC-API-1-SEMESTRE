@@ -20,14 +20,25 @@ def listar_ciclos_por_id_turma(id_turma):
         return ciclos_encontrados
     except:
         return {}
+    
+def obter_ciclo(id_ciclo):
+    try:
+        id_ciclo_textual = str(id_ciclo)
+        ciclos = listar_ciclos()
+        if id_ciclo_textual in ciclos.keys():
+            return ciclos[id_ciclo_textual]
+        else:
+            return None
+    except:
+        return None
 
 def adicionar_ciclo(ciclo):
     try:
         ciclos = listar_ciclos()
         ciclos_por_id_turma = listar_ciclos_por_id_turma(ciclo["id_turma"])
-        numero_ciclo = len(ciclos_por_id_turma) + 1
-        novo_id_ciclo = _obter_novo_id_ciclo()
+        numero_ciclo = len(ciclos_por_id_turma) + 1 # em caso de remoção de ciclo, alterar essa linha ou tratar na remoção
         ciclo["numero_ciclo"] = numero_ciclo
+        novo_id_ciclo = _obter_novo_id_ciclo()
         ciclos[novo_id_ciclo] = ciclo
         return _salvar_ciclos(ciclos)
     except:

@@ -7,6 +7,16 @@ def busca_turmas():
         turmas_data = json.load(f)
     return turmas_data
 
+def obter_turma(id_turma):
+    try:
+        turmas = busca_turmas()
+        id_turma_textual = str(id_turma)
+        if id_turma_textual in turmas.keys():
+            return obter_turma[id_turma_textual]
+        else:
+            return None
+    except:
+        return None
 
 def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
     turmas = busca_turmas()
@@ -26,20 +36,22 @@ def criacao_turma(dados_nova_turma):
     dados_nova_turma_json = dados_nova_turma
     turmas = busca_turmas()
 
-    turma_novo_id = _obter_novo_id_turma()
+    id_nova_turma = _obter_novo_id_turma()
 
     nova_turma = {
         "nome": dados_nova_turma_json["nome"],  # Acesse a propriedade "nome" do corpo
         "professor": dados_nova_turma_json["professor"],  # Acesse a propriedade "professor" do corpo
         "data_de_inicio": dados_nova_turma_json["dataInicio"],  # Acesse a propriedade "dataInicio" do corpo
         "duracao_ciclo": dados_nova_turma_json["duracaoCiclo"],
-        "quantidade_ciclos": 4,
+        "quantidade_ciclos": 4 if dados_nova_turma["quantidade_ciclos"] <= 0 else dados_nova_turma["quantidade_ciclos"],
     }
-    turmas[turma_novo_id] = nova_turma
-    turma_nome = turmas[turma_novo_id]["nome"]
+    turmas[id_nova_turma] = nova_turma
+    turma_nome = turmas[id_nova_turma]["nome"]
     resposta = {
         "mensagem": f"Criação da turma {turma_nome.capitalize()} realizada com sucesso!",
         "detalhes": [],
+        "nova_turma": nova_turma,
+        "id_nova_turma": id_nova_turma
     }
 
     # Salve as alterações nos arquivos JSON
