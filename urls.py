@@ -14,13 +14,26 @@ def URL(pattern):
 
 URLS = {
     URL("/api/v1/alunos/atualizar/:id"): view.edit_aluno,
+    
     URL("/api/v1/turmas/listar"): view.get_turmas,
     URL("/api/v1/turmas/listar/:id"): view.obtem_turma_especifica,
     URL("/api/v1/turmas/editar/:id"): view.editar_turma,
     URL("/api/v1/turmas/criar"): view.criar_turma,
     URL("/api/v1/turmas/excluir/:id"): view.excluir_turma,
-}
+    
+    URL("/api/v1/ciclos/listar"): view.listar_ciclos,
+    URL("/api/v1/ciclos/listar/:id_turma"): view.listar_ciclos_por_id_turma,
+    URL("/api/v1/ciclos/criar"): view.criar_ciclo,
+    # editar ciclo e remover ciclo serão implementados ao final
 
+    URL("/api/v1/notas/listar"): view.listar_notas,
+    URL("/api/v1/notas/listar/:id_turma/:id_aluno"): view.listar_notas_por_id_turma_id_aluno,
+    URL("/api/v1/notas/turma/listar/:id"): view.listar_notas_por_id_turma,
+    URL("/api/v1/notas/aluno/listar/:id"): view.listar_notas_por_id_aluno,
+    URL("/api/v1/notas/criar"): view.criar_nota,
+    URL("/api/v1/notas/editar/:id"): view.editar_nota,
+    URL("/api/v1/notas/excluir/:id"): view.excluir_nota,
+}
 
 def url_match(path):
     for pattern, view_func in URLS.items():
