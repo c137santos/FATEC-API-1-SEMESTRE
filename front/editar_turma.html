@@ -34,6 +34,11 @@
                 <input type="number" name="fduracaosCiclo" id="fduracaosCiclo">
                 <!-- TODO: Fazer com que aceitem apenas números positivos -->
             </div>
+            <div>
+                <label for="fquantidadeCiclo"><strong>Duração dos ciclos Sprint</strong></label>
+                <p name="fquantidadeCiclo" id="fquantidadeCiclo" ></p>
+                <!-- TODO: Fazer com que aceitem apenas números positivos -->
+            </div>
             <div style="padding-top: 21px;">
                 <button onclick="requisitar_editar_turma(obter_id())">Editar</button>
             </div>
@@ -51,6 +56,9 @@
                 document.getElementById('fprofessor')['value'] = turma["professor"]
                 document.getElementById('fdata')['value'] = dataFormatada
                 document.getElementById('fduracaosCiclo')['value'] = parseInt(turma["duracao_ciclo"])
+                document.getElementById('fquantidadeCiclo').style.backgroundColor = "white";
+                document.getElementById('fquantidadeCiclo').innerText = turma["quantidade_ciclos"];
+                // TODO, melhorar o fquantidadeciclo do CSS disso aqui
             } else {
                 alert("Falha ao preencher os campos do formulário!\nA turma não foi encontrada.")
             }

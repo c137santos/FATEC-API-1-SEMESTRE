@@ -20,10 +20,3 @@ document.getElementById('aluno').addEventListener('click', function() {
     redirecionarParaPagina('aluno');
 });
 
-document.getElementById('grupos').addEventListener('click', function() {
-    redirecionarParaPagina('grupos');
-});
-
-document.getElementById('global-settings').addEventListener('click', function() {
-    redirecionarParaPagina('global-settings');
-});
