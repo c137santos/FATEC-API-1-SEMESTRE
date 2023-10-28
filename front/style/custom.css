@@ -25,7 +25,10 @@ body {
     linear-gradient(90deg, #d24d5d 0%, #a952a3 30%, #9a68f1 100%);
   background-color: rgb(206, 76, 101);
   background-size: cover;
-  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  background-position: auto;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   padding: 0;
