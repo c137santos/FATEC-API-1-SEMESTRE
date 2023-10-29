@@ -44,6 +44,10 @@ const renderizarAluno = (aluno) => {
   const quadrado = document.createElement("div");
   quadrado.className = "quadrado";
 
+  const labelRa = document.createElement("p");
+  labelRa.textContent = aluno.RA;
+  quadrado.appendChild(labelRa);
+
   const labelNome = document.createElement("p");
   labelNome.textContent = aluno.nome;
   quadrado.appendChild(labelNome);
