@@ -9,7 +9,7 @@
     href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
     />
     <link rel="stylesheet" href="style/custom.css">
-    <link rel="stylesheet" href="style/gerenciamento_turmas.css" />
+    <link rel="stylesheet" href="style/gerenciamento_aluno.css">
   </head>
   <header class="header">
     <img src="./imagens/Logo.png" alt="logo" />
@@ -19,6 +19,11 @@
     <div id="aluno-container" class="divAlunos">
     </div>
   </body>
+  <div class="muleke">
+    <a href="index.html">
+      <img src="./imagens/mascote2.png" alt="mascote" />
+    </a>
+  </div>
 </html>
 <script>
 getInfoAlunos()
@@ -61,37 +66,3 @@ const mostraAlunos = (alunos) => {
     }
 }
 </script>
-
-<style>
-.divAlunos {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.quadrado {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  margin: 3px;
-  background-color: #ffffff;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 10px; /* Adicione um preenchimento interno para o conteúdo */
-} 
-
-.quadrado:hover {
-  background-color: transparent;
-  box-shadow: 0 0 50px 20px rgb(154, 104, 241);
-}
-
-/* Estilos para parágrafos dentro dos quadrados das turmas */
-.quadrado p {
-  font-size: 15px;
-  color: #000000;
-  text-align: center; /* Centraliza o texto horizontalmente */
-  max-width: 90%; /* Limita a largura para evitar transbordamento */
-  margin: 5px; /* Espaçamento interno superior e inferior */
-}
-</style>
