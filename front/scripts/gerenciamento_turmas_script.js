@@ -221,7 +221,7 @@ function requisitar_editar_turma(id) {
 }
 
 function requisitar_informacoes_turma(id) {
-  window.location.href = "informacoes_turma.html/id=" + id;
+  window.location.href = "informacoes_turma.html?id=" + id;
 }
 
 GetTurmas();
