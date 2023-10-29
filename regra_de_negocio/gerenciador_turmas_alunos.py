@@ -1,13 +1,14 @@
-
 import json
 
 from regra_de_negocio.gerenciador_alunos import listar_alunos
 from regra_de_negocio.gerenciador_turmas import busca_turmas
 
+
 def listar_turmas_alunos():
     with open("dados/turmas_alunos.json", "r", encoding="utf-8") as f:
         turmas_alunos = json.load(f)
         return turmas_alunos
+
 
 # Essa função retorna todos os alunos de uma turma
 def listar_alunos_turma(id_turma):
@@ -21,8 +22,11 @@ def listar_alunos_turma(id_turma):
         turma_aluno = turmas_alunos[id_turmas_alunos]
         if turma_aluno["id_turma"] == id_turma_str:
             if turma_aluno["id_aluno"] in alunos.keys():
-                alunos_da_turma[turma_aluno["id_aluno"]] = alunos[turma_aluno["id_aluno"]]
+                alunos_da_turma[turma_aluno["id_aluno"]] = alunos[
+                    turma_aluno["id_aluno"]
+                ]
     return alunos_da_turma
+
 
 # Essa função retorna todas as turmas que um aluno frequenta
 def listar_turmas_aluno(id_aluno):
@@ -36,9 +40,12 @@ def listar_turmas_aluno(id_aluno):
         turma_aluno = turmas_alunos[id_turmas_alunos]
         if turma_aluno["id_aluno"] == id_aluno_str:
             if turma_aluno["id_turma"] in turmas.keys():
-                turmas_do_aluno[turma_aluno["id_turma"]] = turmas[turma_aluno["id_turma"]]
+                turmas_do_aluno[turma_aluno["id_turma"]] = turmas[
+                    turma_aluno["id_turma"]
+                ]
     return turmas_do_aluno
-    
+
+
 def adicionar_turma_aluno(turma_aluno):
     if not turma_aluno:
         return False
@@ -61,6 +68,7 @@ def remover_turma_aluno(id_turma_aluno):
     else:
         return False
 
+
 def _obter_novo_id_turmas_alunos():
     ids_numericos = []
     for id_str in listar_turmas_alunos.keys():
@@ -69,6 +77,7 @@ def _obter_novo_id_turmas_alunos():
     id_max_int = max(ids_numericos)
     novo_id = str(id_max_int + 1)
     return novo_id
+
 
 def _salvar_turmas_alunos(turmas_alunos):
     dados = json.dumps(turmas_alunos, indent=4)

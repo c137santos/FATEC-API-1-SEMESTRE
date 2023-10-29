@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciamento de Alunos</title>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
+    />
+    <link rel="stylesheet" href="style/custom.css">
+    <link rel="stylesheet" href="style/gerenciamento_turmas.css" />
+  </head>
+  <header class="header">
+    <img src="./imagens/Logo.png" alt="logo" />
+  </header>
+  <body>
+    <h1 class="texto-titulo">Gerenciamento de Alunos</h1>
+    <div id="aluno-container" class="divAlunos">
+    </div>
+  </body>
+</html>
+<script>
+getInfoAlunos()
+async function getInfoAlunos() {
+    try {
+        const response = await fetch(
+        "http://127.0.0.1:8080/api/v1/alunos/listar"
+        );
+        const alunos = await response.json();
+        mostraAlunos(alunos)
+    } catch (error) {
+        console.error("Erro ao buscar dados da API -> ", error);
+        return null;
+    }
+}
+
+const renderizarAluno = (aluno) => {
+  const quadrado = document.createElement("div");
+  quadrado.className = "quadrado";
+
+  const labelNome = document.createElement("p");
+  labelNome.textContent = aluno.nome;
+  quadrado.appendChild(labelNome);
+
+  const labelSexo = document.createElement("p");
+  labelSexo.textContent = aluno.sexo;
+  quadrado.appendChild(labelSexo);
+
+  const labelIdade = document.createElement("p");
+  labelIdade.textContent = aluno.data_nascimento;
+  quadrado.appendChild(labelIdade);
+
+  alunos = document.getElementById("aluno-container")
+  alunos.appendChild(quadrado);
+};
+
+const mostraAlunos = (alunos) => {
+    for (const id in alunos) {
+      renderizarAluno(alunos[id]);
+    }
+}
+</script>
+
+<style>
+.divAlunos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.quadrado {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin: 3px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px; /* Adicione um preenchimento interno para o conteúdo */
+} 
+
+.quadrado:hover {
+  background-color: transparent;
+  box-shadow: 0 0 50px 20px rgb(154, 104, 241);
+}
+
+/* Estilos para parágrafos dentro dos quadrados das turmas */
+.quadrado p {
+  font-size: 15px;
+  color: #000000;
+  text-align: center; /* Centraliza o texto horizontalmente */
+  max-width: 90%; /* Limita a largura para evitar transbordamento */
+  margin: 5px; /* Espaçamento interno superior e inferior */
+}
+</style>
