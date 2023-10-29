@@ -94,7 +94,7 @@ async function coletaDadosNovaTurma() {
   const duracaoCiclo = document.getElementById("duracaoCiclo").value;
   console.log(dataInicio);
 
-  const regex = /^[A-Za-z\s]*$/;
+  const regex = /^[a-zA-Z \s]*$/;
   for (let id in turmaData) {
     if (turmaData[id].nome == turmaNome) {
       alert("O Nome da Turma já existe.");
@@ -126,25 +126,29 @@ async function coletaDadosNovaTurma() {
 
   // Formata a data para dia/mes/ano
 
-const data = new Date(dataInicio);
-const dia = String(data.getDate()).padStart(2, '0'); // Garante que o dia tenha sempre 2 dígitos
-const mes = String(data.getMonth() + 1).padStart(2, '0'); // Garante que o mês tenha sempre 2 dígitos
-const ano = data.getFullYear();
-const dataFormatada = `${dia}/${mes}/${ano}`;
+  const data = new Date(dataInicio);
+  const dia = String(data.getDate()).padStart(2, '0'); // Garante que o dia tenha sempre 2 dígitos
+  const mes = String(data.getMonth() + 1).padStart(2, '0'); // Garante que o mês tenha sempre 2 dígitos
+  const ano = data.getFullYear();
+  // const dataFormatada = `${dia}/${mes}/${ano}`;
 
   if (ano < 1000 || ano > 9999) {
     alert("O ano deve ter exatamente 4 dígitos.");
     return;
   }
   
+  const dataFormatada = dataInicio.split('-').reverse().join('/');
 
   // Construir o objeto de turma
   const novaTurmaData = {
     nome: turmaNome,
     professor: professor,
-    dataInicio: dataFormatada,
-    duracaoCiclo: duracaoCiclo
+    data_de_inicio: dataFormatada,
+    duracao_ciclo: duracaoCiclo,
+    quantidade_ciclos: 4
   };
+
+  console.log(novaTurmaData)
 
   // Exiba a div de confirmação
   const confirmacaoContainer = document.getElementById("confirmacaoContainer");
