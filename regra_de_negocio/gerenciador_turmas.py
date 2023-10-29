@@ -2,19 +2,16 @@ import json
 
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
 def busca_turmas():
-    with open("dados/teste/turmas.json", "r", encoding="utf-8") as f:
+    with open("dados/turmas.json", "r", encoding="utf-8") as f:
         turmas_data = json.load(f)
     return turmas_data
 
 def obter_turma(id_turma):
-    try:
-        turmas = busca_turmas()
-        id_turma_textual = str(id_turma)
-        if id_turma_textual in turmas.keys():
-            return obter_turma[id_turma_textual]
-        else:
-            return None
-    except:
+    turmas = busca_turmas()
+    id_turma_str = str(id_turma)
+    if id_turma_str in turmas.keys():
+        return turmas[id_turma_str]
+    else:
         return None
 
 def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
@@ -62,16 +59,16 @@ def excluir_turma_svc(id):
 #   True se a operação for bem sucedida
 def _salvar_turmas(turmas):
     dados = json.dumps(turmas, indent=4)
-    with open("dados/teste/turmas.json", "w", encoding="utf-8") as arquivo:
+    with open("dados/turmas.json", "w", encoding="utf-8") as arquivo:
         arquivo.write(dados)
-    return True
+        return True
 
 def _obter_novo_id_turma():
     ids_numericos = []
     turmas = busca_turmas()
-    for id_textual in turmas.keys():
-        id_inteiro = int(id_textual)
-        ids_numericos.append(id_inteiro)
-    id_max_inteiro = max(ids_numericos)
-    novo_id = str(id_max_inteiro + 1)
+    for id_str in turmas.keys():
+        id_int = int(id_str)
+        ids_numericos.append(id_int)
+    id_max_int = max(ids_numericos)
+    novo_id = str(id_max_int + 1)
     return novo_id

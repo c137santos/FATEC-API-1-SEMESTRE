@@ -107,6 +107,10 @@ def listar_notas_por_id_aluno(request, id_aluno):
         notas_por_aluno[id_nota]["edicao_habilitada"] = gerenciador_notas.verificar_edicao_habilitada(notas_por_aluno,id_nota)
     return JsonResponse(notas_por_aluno)
 
+def obter_fee_turma_aluno(request, id_turma, id_aluno):
+    fee = gerenciador_notas.obter_fee_turma_aluno(id_turma, id_aluno)
+    return JsonResponse(fee)
+
 def criar_turmas_alunos(request):
     turma_aluno = json.loads(request.body)
     resultado = gerenciador_turmas_alunos.adicionar_turma_aluno(turma_aluno)
