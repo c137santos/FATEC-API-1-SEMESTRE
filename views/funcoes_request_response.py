@@ -6,12 +6,6 @@ from regra_de_negocio.service import (
 
 from regra_de_negocio.gerenciador_turmas import excluir_turma_svc, editar_turma_svc
 
-from regra_de_negocio import (
-    gerenciador_ciclos,
-    gerenciador_notas,
-    gerenciador_turmas_alunos,
-)
-
 import regra_de_negocio.gerenciador_ciclos as gerenciador_ciclos
 import regra_de_negocio.gerenciador_notas as gerenciador_notas
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
