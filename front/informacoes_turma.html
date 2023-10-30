@@ -11,13 +11,15 @@
     />
     <link rel="stylesheet" href="style/custom.css" />
   </head>
-  <body>
+  <body onload="preencher_info_turma(obter_id())">
     <header class="header">
       <a href="index.html">
         <img src="./imagens/Logo.png" alt="logo" />
       </a>
     </header>
-  <body onload="preencher_info_turma(obter_id())">
+    <button id="turma" class="menu-button">
+      <a href="gerenciamento_turmas.html">Turma</a>
+    </button>
     <div class="container-info">
         <div class="info-turma">
           <p class="fnomeTurma"></p>
