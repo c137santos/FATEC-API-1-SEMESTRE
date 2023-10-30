@@ -13,6 +13,12 @@ body {
   justify-content: center;
 }
 
+.menu-button a {
+  text-decoration: none;
+  justify-content: left;
+  /*Retira sublinhados de links*/
+}
+
 .titulo {
   margin-top: 5px;
   justify-content: center;
@@ -159,6 +165,7 @@ div.media {
 }
 
 .valor {
+  background-color: rgb(90, 236, 188);
   width: 50px;
   margin-left: 10px;
   margin-right: 10px;
