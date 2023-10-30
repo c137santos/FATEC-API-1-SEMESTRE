@@ -14,10 +14,10 @@ def editar_aluno_svc(id, alunos_editar):
         aluno["nome"] = (
             alunos_editar["nome"] if alunos_editar["nome"] else aluno["nome"]
         )
-        aluno["data_de_nascimento"] = (
-            alunos_editar["data_de_nascimento"]
-            if alunos_editar["data_de_nascimento"]
-            else aluno["data_de_nascimento"]
+        aluno["data_nascimento"] = (
+            alunos_editar["data_nascimento"]
+            if alunos_editar["data_nascimento"]
+            else aluno["data_nascimento"]
         )
         aluno["sexo"] = (
             alunos_editar["sexo"] if alunos_editar["sexo"] else aluno["sexo"]
