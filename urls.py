@@ -43,6 +43,7 @@ URLS = {
         "/api/v1/turmas_alunos/listar_turmas_do_aluno/:id_aluno"
     ): view.listar_turmas_aluno,
     URL("/api/v1/alunos/listar"): view.listar_alunos,
+     URL("/api/v1/alunos/criar"): view.criar_aluno,
 }
 
 

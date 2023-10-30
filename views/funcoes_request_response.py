@@ -19,6 +19,10 @@ import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 
 import json
 
+def criar_aluno(request):
+    novo_aluno = json.loads(request.body)
+    gerenciador_alunos.criar_aluno(novo_aluno)
+    return JsonResponse({"message":"Aluno criado"})
 
 def listar_alunos(request):
     alunos_data = gerenciador_alunos.listar_alunos()
