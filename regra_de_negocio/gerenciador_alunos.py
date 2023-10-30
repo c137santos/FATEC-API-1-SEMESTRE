@@ -13,7 +13,7 @@ def criar_aluno(novo_aluno):
         "nome": novo_aluno["nome"],
         "data_nascimento": novo_aluno["data_nascimento"],
         "sexo": novo_aluno["sexo"],
-        "RA": id_novo_aluno
+        "RA": int(id_novo_aluno)
     }
 
     alunos[id_novo_aluno] = aluno
