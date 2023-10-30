@@ -129,25 +129,20 @@ async function editarAluno(RA) {
         "data_nascimento": dataNascimento
     }
 
-    const response = await backEditarALuno(aluno_editado)
-
-    if (response) {
-      modal.close();
-    } else {
-      console.error("Erro ao editar aluno -> ", response);
-    }
+    const response = await backEditarAluno(aluno_editado)
+    modal.close();
     });
 }
 
-function backEditarALuno(aluno_editado){
+async function backEditarAluno(aluno_editado){
     try {
-      fetch (`http://127.0.0.1:8080/api/v1/alunos/editar/${aluno_editado.RA}`,{method: "POST", body:JSON.stringify(aluno_editado)})
-      } catch (error) {
+      const response = await fetch (`http://127.0.0.1:8080/api/v1/alunos/editar/${aluno_editado.RA}`,{method: "PUT", body:JSON.stringify(aluno_editado)})
+      return response.status === 200
+      }catch (error) {
           console.error("Erro ao buscar dados da API -> ", error);
+          return false
       }
 }
 //ta dando um erro de uncaught in promise não faço idéia o que isso quer dizer
-
-
 
 </script>

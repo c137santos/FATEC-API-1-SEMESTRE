@@ -19,13 +19,14 @@ import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 
 import json
 
-
 def listar_alunos(request):
     alunos_data = gerenciador_alunos.listar_alunos()
     return JsonResponse(alunos_data)
 
 
 def editar_aluno(request, id):
+    aluno = json.loads(request.body)
+    gerenciador_alunos.editar_aluno_svc(id, aluno)
     return JsonResponse({"message": f"Editando o aluno com ID {id}."})
 
 
