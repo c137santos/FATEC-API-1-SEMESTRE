@@ -6,6 +6,7 @@ def listar_alunos():
         alunos = json.load(f)
     return alunos
 
+
 def apagar_aluno(id):
     alunos = listar_alunos()
     if id in alunos.keys():
@@ -14,6 +15,7 @@ def apagar_aluno(id):
         return True
     else:
         return False
+
 
 def _salvar_alunos(alunos):
     dados = json.dumps(alunos, indent=4)

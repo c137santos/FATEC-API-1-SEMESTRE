@@ -19,9 +19,12 @@ import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 
 import json
 
+
 def deletar_aluno(request, id):
     gerenciador_alunos.apagar_aluno(id)
     return JsonResponse({"message": f"Deletado o aluno com ID {id}."})
+
+
 def listar_alunos(request):
     alunos_data = gerenciador_alunos.listar_alunos()
     return JsonResponse(alunos_data)
