@@ -51,6 +51,9 @@
         async function preencher_info_turma(id){
           const turma = await obter_turma(id)
           const PesoCiclo = await listar_ciclos_turma(id)
+          const alunos = await listar_alunos_turma(id)
+          const notasAlunos = await listar_notas_alunos(id)
+          await exibirAlunos(alunos, notasAlunos)
           console.log(turma["nome"])
           console.log(turma.professor)
           if (turma){
@@ -72,15 +75,29 @@
 
               cicloPeso.appendChild(NomeCiclo);
               cicloPeso.appendChild(PesoNota);
-              }
-              }
             }
+          }
+        }
 
         async function listar_ciclos_turma(id){
           const response = await fetch (`http://localhost:8080/api/v1/ciclos/listar/${id}`, {method: "GET"})
           const PesoCiclo = await response.json()
           console.log(PesoCiclo)
           return PesoCiclo
+        }
+
+        async function listar_alunos_turma(id) {
+          const response = await fetch (`http://localhost:8080/api/v1/turmas_alunos/listar_alunos_da_turma/${id}`, {method: "GET"})
+          const alunos = await response.json()
+          console.log(alunos)
+          return alunos
+        }
+
+        async function listar_notas_alunos(id) {
+          const response = await fetch (`http://localhost:8080/api/v1/notas/turma/listar/${id}`, {method: "GET"})
+          const notasAlunos = await response.json()
+          console.log(notasAlunos)
+          return notasAlunos
         }
 
         async function obter_turma(id) {
@@ -95,63 +112,69 @@
         }
 
 
-        function exibirAlunos(alunosData) {
+        function exibirAlunos(alunos, notasAlunos) {
           const container = document.querySelector(".corpo_tabela");
 
-          for (const alunoId in alunosData) {
-            if (alunosData.hasOwnProperty(alunoId)) {
-              const aluno = alunosData[alunoId];
-              const RAaluno = aluno.id;
+          for (const chave in alunos) {
+            if (alunos.hasOwnProperty(chave)) {
+              const aluno = alunos[chave];
+              const nomeAluno = aluno.nome;
+              const alunoId = aluno.RA;
 
               const alunoSquare = document.createElement("div");
               alunoSquare.className = "aluno-square";
-              alunoSquare.id = `${aluno.id}`;
+              alunoSquare.id = `${alunoId}`;
 
-              const nomeAluno = document.createElement("p");
-              nomeAluno.className = "aluno";
-              nomeAluno.textContent = aluno.nome.charAt(0).toUpperCase() + aluno.nome.slice(1);
+              const elementoNomeAluno = document.createElement("p");
+              elementoNomeAluno.className = "aluno";
+              elementoNomeAluno.textContent = nomeAluno.charAt(0).toUpperCase() + nomeAluno.slice(1);
 
-              alunoSquare.appendChild(nomeAluno);
+              alunoSquare.appendChild(elementoNomeAluno);
 
-              // Crie um campo "nota" para cada aluno
               const campoNota = document.createElement("div");
               campoNota.className = "campoNota";
 
-              for (const cicloId in ciclo_nota) {
-                if (ciclo_nota.hasOwnProperty(cicloId)) {
-                  const id_ciclo = ciclo_nota[cicloId].id_ciclo;
-                  const valorNota = ciclo_nota[cicloId].valor;
+              for (const notaChave in notasAlunos) {
+                if (notasAlunos.hasOwnProperty(notaChave)) {
+                  const notaAluno = notasAlunos[notaChave];
+                  const notaAlunoId = notaAluno.id_aluno;
+                  const id_ciclo = notaAluno.id_ciclo;
+                  const valorNota = notaAluno.valor;
 
-                  const InputNotas = document.createElement("input");
-                  InputNotas.className = "valor";
-                  InputNotas.type = "number";
-                  InputNotas.value = valorNota;
-                  InputNotas.id = id_ciclo;
+                  if (notaAlunoId == alunoId) {
+                    const InputNotas = document.createElement("input");
+                    InputNotas.className = "valor";
+                    InputNotas.type = "number";
+                    InputNotas.value = valorNota;
+                    InputNotas.id = id_ciclo;
 
-                  // Verifique se a nota já foi atribuída para torná-la somente leitura
-                  if (CicloAberto(id_ciclo)) {
-                    InputNotas.setAttribute("readonly", true);
+                    // Verifique se a nota já foi atribuída para torná-la somente leitura
+                    if (CicloAberto(id_ciclo)) {
+                      InputNotas.setAttribute("readonly", true);
+                    }
+
+                    campoNota.appendChild(InputNotas);
                   }
-
-                  campoNota.appendChild(InputNotas);
                 }
               }
-              alunoSquare.appendChild(campoNota);
-
-              const mediaAluno = document.createElement("div");
-                  mediaAluno.className = "media";
-                  mediaAluno.type = "number";
-                  mediaAluno.innerHTML = "Media"
-                  alunoSquare.appendChild(mediaAluno)
-              container.appendChild(alunoSquare);
+                alunoSquare.appendChild(campoNota);
+                const mediaAluno = document.createElement("div");
+                mediaAluno.className = "media";
+                mediaAluno.type = "number";
+                mediaAluno.innerHTML = "Media"
+                alunoSquare.appendChild(mediaAluno)
+                container.appendChild(alunoSquare);
             }
           }
         }
 
-
+        // Função que verifica se o ciclo está aberto
         function CicloAberto(id_ciclo) {
-          return true
+          // Implemente a lógica aqui para verificar se o ciclo está aberto
+          // Retorne true se estiver aberto, caso contrário, retorne false
+          return true; // Altere a lógica de acordo com a sua necessidade
         }
+
 
         exibirAlunos(getAlunos());
       </script>
