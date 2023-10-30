@@ -49,6 +49,7 @@ def listar_notas():
         notas = json.load(f)
         return notas
 
+
 def filtrar_notas_por_id_turma_svc(notas, id_turma):
     if not id_turma:
         return {}
@@ -92,7 +93,7 @@ def listar_notas_por_turma_aluno(id_turma, id_aluno):
     if not id_turma or not id_aluno:
         return {}
     notas = listar_notas()
-    notas_por_turma = filtrar_notas_por_id_turma_svc(notas, id_turma)  
+    notas_por_turma = filtrar_notas_por_id_turma_svc(notas, id_turma)
     notas_por_turma_aluno = listar_notas_por_id_aluno(notas_por_turma, id_aluno)
     return notas_por_turma_aluno
 
@@ -171,6 +172,7 @@ def verificar_edicao_habilitada(notas, id_nota):
     #     return False
     return True
 
+
 # def _obter_prazo_insercao_nota(ciclo, id_turma, notas):
 
 #     # numero_ciclo = ciclo["numero_ciclo"]
@@ -181,4 +183,3 @@ def verificar_edicao_habilitada(notas, id_nota):
 #     #     if ciclo_iteracao["numero_ciclo"] <= numero_ciclo:
 #     #         prazo_insercao_nota += ciclo_iteracao["duracao"]
 #     # return prazo_insercao_nota + 1 # o +1 é o dia seguinte do requisito
-

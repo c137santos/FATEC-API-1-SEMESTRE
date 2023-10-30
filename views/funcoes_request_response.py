@@ -108,6 +108,7 @@ def listar_notas_por_id_turma_id_aluno(request, id_turma, id_aluno):
     print(notas)
     return JsonResponse(notas)
 
+
 def filtrar_notas_por_id_turma(request, id_turma):
     notas = gerenciador_notas.listar_notas()
     notas_por_turma = gerenciador_notas.filtrar_notas_por_id_turma_svc(notas, id_turma)
