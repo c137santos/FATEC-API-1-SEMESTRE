@@ -1,10 +1,11 @@
 import json
-    
+
+
 def listar_ciclos():
     with open("dados/ciclos.json", "r", encoding="utf-8") as f:
         return json.load(f)
 
- 
+
 def listar_ciclos_por_id_turma(id_turma):
     if not id_turma:
         return {}
@@ -15,7 +16,8 @@ def listar_ciclos_por_id_turma(id_turma):
         if id_turma_str == ciclos[id_ciclo]["id_turma"]:
             ciclos_encontrados[id_ciclo] = ciclos[id_ciclo]
     return ciclos_encontrados
-    
+
+
 def obter_ciclo(id_ciclo):
     id_ciclo_str = str(id_ciclo)
     ciclos = listar_ciclos()
@@ -23,6 +25,7 @@ def obter_ciclo(id_ciclo):
         return ciclos[id_ciclo_str]
     else:
         return None
+
 
 def obter_ultimo_ciclo_por_id_turma(id_turma):
     id_turma_str = str(id_turma)
@@ -39,12 +42,15 @@ def obter_ultimo_ciclo_por_id_turma(id_turma):
             if ultimo_ciclo["numero_ciclo"] > ciclos[id_ciclo]["numero_ciclo"]:
                 ultimo_ciclo = ciclos[id_ciclo]["numero_ciclo"]
                 id_ultimo_ciclo = id_ciclo
-        return id_ultimo_ciclo, ultimo_ciclo  
+        return id_ultimo_ciclo, ultimo_ciclo
+
 
 def adicionar_ciclo(ciclo):
     ciclos = listar_ciclos()
     ciclos_por_id_turma = listar_ciclos_por_id_turma(ciclo["id_turma"])
-    numero_ciclo = len(ciclos_por_id_turma) + 1 # em caso de remoção de ciclo, alterar essa linha ou tratar na remoção
+    numero_ciclo = (
+        len(ciclos_por_id_turma) + 1
+    )  # em caso de remoção de ciclo, alterar essa linha ou tratar na remoção
     ciclo["numero_ciclo"] = numero_ciclo
     novo_id_ciclo = _obter_novo_id_ciclo()
     ciclos[novo_id_ciclo] = ciclo
@@ -59,6 +65,7 @@ def _obter_novo_id_ciclo():
     id_max_int = max(ids_numericos)
     novo_id = str(id_max_int + 1)
     return novo_id
+
 
 def _salvar_ciclos(ciclos):
     dados = json.dumps(ciclos, indent=4)

@@ -1,16 +1,19 @@
-
 import json
 
-from regra_de_negocio.gerenciador_ciclos import obter_ciclo, obter_ultimo_ciclo_por_id_turma
+from regra_de_negocio.gerenciador_ciclos import (
+    obter_ciclo,
+    obter_ultimo_ciclo_por_id_turma,
+)
 from regra_de_negocio.gerenciador_turmas import obter_turma
 
 from datetime import datetime
 import datetime as dt
 
-def _calcular_fee_turma_aluno(id_turma,id_aluno):
+
+def _calcular_fee_turma_aluno(id_turma, id_aluno):
     id_aluno_str = str(id_aluno)
     id_turma_str = str(id_turma)
-    turma = obter_turma(id_turma_str)
+    obter_turma(id_turma_str)
     notas_por_turma_aluno = listar_notas_por_turma_aluno(id_aluno_str, id_turma_str)
     soma_das_notas = 0.0
     soma_dos_pesos = 0.0
@@ -18,12 +21,13 @@ def _calcular_fee_turma_aluno(id_turma,id_aluno):
         ciclo = obter_ciclo(notas_por_turma_aluno[id_nota]["id_ciclo"])
         peso_nota = ciclo["peso_nota"]
         valor = notas_por_turma_aluno[id_nota]["valor"]
-        soma_das_notas += (peso_nota * valor)
+        soma_das_notas += peso_nota * valor
         soma_dos_pesos += peso_nota
     if len(notas_por_turma_aluno) > 0:
         return soma_das_notas / float(soma_dos_pesos)
     else:
         return 0.0
+
 
 # Essa função é responsável por recuperar um fee
 def obter_fee_turma_aluno(id_turma, id_aluno):
@@ -39,6 +43,7 @@ def obter_fee_turma_aluno(id_turma, id_aluno):
     # todo: remover o fee antigo quando já existir e criar no banco
     return nova_nota
 
+
 def listar_notas():
     with open("dados/notas.json", "r", encoding="utf-8") as f:
         notas = json.load(f)
@@ -51,10 +56,11 @@ def filtrar_notas_por_id_turma_svc(notas, id_turma):
     notas_encontradas = {}
     for id_nota in notas.keys():
         if id_turma_str == notas[id_nota]["id_turma"]:
-            if notas[id_nota]["fee"]: #se for a média, pula
+            if notas[id_nota]["fee"]:  # se for a média, pula
                 continue
             notas_encontradas[id_nota] = notas[id_nota]
     return notas_encontradas
+
 
 def listar_notas_por_id_aluno(notas, id_aluno):
     if not id_aluno:
@@ -67,7 +73,8 @@ def listar_notas_por_id_aluno(notas, id_aluno):
                 continue
             notas_encontradas[id_nota] = notas[id_nota]
     return notas_encontradas
-    
+
+
 def listar_notas_por_id_ciclo(notas, id_ciclo):
     if not id_ciclo:
         return {}
@@ -89,12 +96,13 @@ def listar_notas_por_turma_aluno(id_turma, id_aluno):
     notas_por_turma_aluno = listar_notas_por_id_aluno(notas_por_turma, id_aluno)
     return notas_por_turma_aluno
 
-    
+
 def adicionar_nota(nova_nota):
     notas = listar_notas()
     novo_id_nota = _obter_novo_id_nota()
     notas[novo_id_nota] = nova_nota
     return _salvar_notas(notas)
+
 
 def editar_nota(id_nota_atualizada, nota_atualizada):
     if not nota_atualizada:
@@ -107,7 +115,7 @@ def editar_nota(id_nota_atualizada, nota_atualizada):
     else:
         return False
 
-    
+
 def remover_nota(id_nota):
     id_nota_str = str(id_nota)
     notas = listar_notas()
@@ -120,9 +128,10 @@ def remover_nota(id_nota):
 
 # Essa função verifica se já existe nota dentro de um ciclo
 def verificar_existencia_nota_por_ciclo(nota):
-    notas = listar_notas_por_turma_aluno(nota["id_turma"],nota["id_aluno"])
+    notas = listar_notas_por_turma_aluno(nota["id_turma"], nota["id_aluno"])
     notas_por_ciclo = listar_notas_por_id_ciclo(notas, nota["id_ciclo"])
     return len(notas_por_ciclo) != 0
+
 
 def _obter_novo_id_nota():
     ids_numericos = []
@@ -133,6 +142,7 @@ def _obter_novo_id_nota():
     id_max_int = max(ids_numericos)
     novo_id = str(id_max_int + 1)
     return novo_id
+
 
 def _salvar_notas(notas):
     dados = json.dumps(notas, indent=4)
