@@ -26,5 +26,33 @@
     "id_ciclo": "4",
     "valor": 9.5,
     "fee": false
+  },
+  "5": {
+    "id_turma": "1",
+    "id_aluno": "2",
+    "id_ciclo": "1",
+    "valor": 9.5,
+    "fee": false
+  },
+  "6": {
+    "id_turma": "1",
+    "id_aluno": "2",
+    "id_ciclo": "2",
+    "valor": 0,
+    "fee": false
+  },
+  "7": {
+    "id_turma": "1",
+    "id_aluno": "2",
+    "id_ciclo": "3",
+    "valor": 0,
+    "fee": false
+  },
+  "8": {
+    "id_turma": "1",
+    "id_aluno": "2",
+    "id_ciclo": "4",
+    "valor": 0,
+    "fee": false
   }
 }
