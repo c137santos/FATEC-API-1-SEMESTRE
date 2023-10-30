@@ -2,12 +2,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100vh;
   }
 
 .divAlunos {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 75%;
 }
 
 .quadrado {
