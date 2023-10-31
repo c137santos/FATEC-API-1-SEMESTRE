@@ -9,11 +9,28 @@ from regra_de_negocio.gerenciador_turmas import excluir_turma_svc, editar_turma_
 import regra_de_negocio.gerenciador_ciclos as gerenciador_ciclos
 import regra_de_negocio.gerenciador_notas as gerenciador_notas
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
+import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 
 import json
 
+def criar_aluno(request):
+    novo_aluno = json.loads(request.body)
+    gerenciador_alunos.criar_aluno(novo_aluno)
+    return JsonResponse({"message":"Aluno criado"})
+
+def deletar_aluno(request, id):
+    gerenciador_alunos.apagar_aluno(id)
+    return JsonResponse({"message": f"Deletado o aluno com ID {id}."})
+
+
+def listar_alunos(request):
+    alunos_data = gerenciador_alunos.listar_alunos()
+    return JsonResponse(alunos_data)
+
 
 def editar_aluno(request, id):
+    aluno = json.loads(request.body)
+    gerenciador_alunos.editar_aluno_svc(id, aluno)
     return JsonResponse({"message": f"Editando o aluno com ID {id}."})
 
 
@@ -92,9 +109,7 @@ def excluir_nota(request, id_nota):
 def listar_notas(request):
     notas = gerenciador_notas.listar_notas()
     for id_nota in notas:
-        notas[id_nota][
-            "edicao_habilitada"
-        ] = gerenciador_notas.verificar_edicao_habilitada(notas, id_nota)
+        notas[id_nota]["edicao_habilitada"] = gerenciador_notas.verificar_edicao_habilitada(notas, id_nota)
     return JsonResponse(notas)
 
 
