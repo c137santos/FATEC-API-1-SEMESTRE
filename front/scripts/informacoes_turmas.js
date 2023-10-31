@@ -4,8 +4,6 @@ async function preencher_info_turma(id) {
   const alunos = await listar_alunos_turma(id);
   const notasAlunos = await listar_notas_alunos(id);
 
-  console.log(turma["nome"]);
-  console.log(turma.professor);
   if (turma) {
     const nomeTurmaElement = document.querySelector(".fnomeTurma");
     const nomeProfessorElement = document.querySelector(".fnomeProfessor");
@@ -22,34 +20,37 @@ async function preencher_info_turma(id) {
       const PesoNota = document.createElement("span");
       PesoNota.className = "peso";
       PesoNota.textContent = pesoData.peso_nota;
-
+      PesoNota.id = `pesoCiclo=${pesoData.numero_ciclo}`;
       cicloPeso.appendChild(NomeCiclo);
       cicloPeso.appendChild(PesoNota);
     }
-    exibirAlunos(alunos, notasAlunos);
+    // Chama a função para iniciar a criação do componentes dos alunos
+    exibirAlunos(alunos, notasAlunos, cicloPeso);
   }
 }
 
-function exibirAlunos(alunos, notasAlunos, PesoCiclo) {
+function exibirAlunos(alunos, notasAlunos, cicloPeso) {
   const container = document.querySelector(".corpo_tabela");
 
   for (const chave in alunos) {
     if (alunos.hasOwnProperty(chave)) {
       const aluno = alunos[chave];
-      const alunoSquare = criarComponenteAluno(aluno, notasAlunos);
+      const nomeAluno = aluno.nome; // Pega o nome do aluno
+      const alunoId = chave; // A chave do objeto aluno é o seu ID
+      console.log(`id do aluno: ${alunoId}`);
+      //Chama a função para criar o alunoSquare de cada aluno
+      const alunoSquare = criarComponenteAluno(alunoId, nomeAluno, notasAlunos);
       container.appendChild(alunoSquare);
-      adicionarMediaAoAluno(aluno.RA, notasAlunos, PesoCiclo);
+      //Chama a função para criar o campo de media de cada aluno
+      adicionarMediaAoAluno(alunoId, notasAlunos, cicloPeso);
     }
   }
 }
 
-function criarComponenteAluno(aluno, notasAlunos) {
-  const nomeAluno = aluno.nome;
-  const alunoId = aluno.RA;
-
+function criarComponenteAluno(alunoId, nomeAluno, notasAlunos) {
   const alunoSquare = document.createElement("div");
   alunoSquare.className = "aluno-square";
-  alunoSquare.id = `${alunoId}`;
+  alunoSquare.id = `alunoId=${alunoId}`;
 
   const elementoNomeAluno = document.createElement("p");
   elementoNomeAluno.className = "aluno";
@@ -58,22 +59,31 @@ function criarComponenteAluno(aluno, notasAlunos) {
 
   alunoSquare.appendChild(elementoNomeAluno);
 
+  // Chama a função para criar campo de notas para cada aluno
+  const campoNota = criarCampoNota(alunoId, notasAlunos);
+  alunoSquare.appendChild(campoNota);
+
+  return alunoSquare;
+}
+
+function criarCampoNota(alunoId, notasAlunos) {
   const campoNota = document.createElement("div");
   campoNota.className = "campoNota";
 
   for (const notaChave in notasAlunos) {
     if (notasAlunos.hasOwnProperty(notaChave)) {
       const notaAluno = notasAlunos[notaChave];
-      const notaAlunoId = notaAluno.id_aluno;
+      const id_turma = notaAluno.id_turma;
+      const id_aluno = notaAluno.id_aluno;
       const id_ciclo = notaAluno.id_ciclo;
       const valorNota = notaAluno.valor;
 
-      if (notaAlunoId == alunoId) {
+      if (id_aluno == alunoId) {
         const InputNotas = document.createElement("input");
         InputNotas.className = "valor";
         InputNotas.type = "number";
         InputNotas.value = valorNota;
-        InputNotas.id = id_ciclo;
+        InputNotas.id = `id_turma=${id_turma},id_aluno=${id_aluno},id_ciclo=${id_ciclo}`;
 
         if (valorNota == 0) {
           InputNotas.value = "";
@@ -88,16 +98,16 @@ function criarComponenteAluno(aluno, notasAlunos) {
       }
     }
   }
-  alunoSquare.appendChild(campoNota);
 
-  return alunoSquare;
+  return campoNota;
 }
 
 function adicionarMediaAoAluno(alunoId, notasAlunos, PesoCiclo) {
-  const alunoSquare = document.getElementById(`${alunoId}`);
+  const alunoSquare = document.getElementById(`alunoId=${alunoId}`);
   const mediaAluno = document.createElement("div");
   mediaAluno.className = "media";
-  mediaAluno.textContent = "Média";
+  mediaAluno.textContent = "media";
+  mediaAluno.id = `mediaAlunoId=${alunoId}`;
 
   alunoSquare.appendChild(mediaAluno);
 }
