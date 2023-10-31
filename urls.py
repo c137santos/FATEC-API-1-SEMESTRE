@@ -26,8 +26,7 @@ URLS = {
     URL("/api/v1/notas/listar"): view.listar_notas,
   
     URL("/api/v1/notas/listar/:id_turma/:id_aluno"): view.listar_notas_por_id_turma_id_aluno,
-    URL("/api/v1/notas/turma/listar/:id_turma"): view.listar_notas_por_id_turma,
-
+    URL("/api/v1/notas/turma/listar/:id_turma"): view.filtrar_notas_por_id_turma,
     URL("/api/v1/notas/aluno/listar/:id_aluno"): view.listar_notas_por_id_aluno,
     URL("/api/v1/notas/criar"): view.criar_nota,
     URL("/api/v1/notas/editar/:id_nota"): view.editar_nota,
