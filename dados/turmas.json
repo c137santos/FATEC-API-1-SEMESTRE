@@ -1,12 +1,23 @@
 {
     "1": {
-        "nome": "ADS",
-        "professor": "Nadalete",
-        "data_de_inicio": "21/02/2023"
+        "nome": "Logica",
+        "professor": "Nadallete",
+        "data_de_inicio": "24/10/2023",
+        "duracao_ciclo": 10,
+        "quantidade_ciclos": 4
     },
-    "5": {
-        "nome": "Turma Teste",
-        "professor": "Professora teste",
-        "data_de_inicio": "2023-10-11"
+    "2": {
+        "nome": "ADS",
+        "professor": "Goretti",
+        "data_de_inicio": "22/10/2023",
+        "duracao_ciclo": 11,
+        "quantidade_ciclos": 4
+    },
+    "3": {
+        "nome": "vai vai",
+        "professor": "aaa",
+        "data_de_inicio": "27/10/2023",
+        "duracao_ciclo": 15,
+        "quantidade_ciclos": 4
     }
 }

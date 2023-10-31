@@ -26,6 +26,9 @@ function exibirTurmas(turmadata) {
       const turmaSquare = document.createElement("div");
       turmaSquare.className = "turma-square";
       turmaSquare.id = `${turmaId}`; // Adiciona o ID da turma ao turmaSquare
+      turmaSquare.addEventListener("click", () =>
+        requisitar_informacoes_turma(`${turmaId}`)
+      );
 
       // Cria elementos de parágrafo para o nome da turma e nome do professor
       const nomeTurma = document.createElement("p");
@@ -44,14 +47,20 @@ function exibirTurmas(turmadata) {
       imagemIcon.alt = "Ícone";
       imagemIcon.className = "trash-icon";
       imagemIcon.id = `${turmaId}`; // Adiciona o ID da turma ao ícone de deletar
-      imagemIcon.addEventListener("click",() => requisitar_excluir_turma(`${turmaId}`))
+      imagemIcon.addEventListener("click", (event) => {
+        event.stopPropagation();
+        requisitar_excluir_turma(`${turmaId}`);
+      });
 
-      const imagemIconEdit = document.createElement("img")
-      imagemIconEdit.src = "../front/icon/edit-icon.svg"
-      imagemIconEdit.alt ="Icone"
-      imagemIconEdit.className = "edit-icon"
+      const imagemIconEdit = document.createElement("img");
+      imagemIconEdit.src = "../front/icon/edit-icon.svg";
+      imagemIconEdit.alt = "Icone";
+      imagemIconEdit.className = "edit-icon";
       imagemIconEdit.id = `${turmaId}`;
-      imagemIconEdit.addEventListener("click",() => requisitar_editar_turma(`${turmaId}`))
+      imagemIconEdit.addEventListener("click", (event) => {
+        event.stopPropagation();
+        requisitar_editar_turma(`${turmaId}`);
+      });
 
       // Adiciona o ícone ao turmaSquare
       turmaSquare.appendChild(imagemIcon);
@@ -65,48 +74,11 @@ function exibirTurmas(turmadata) {
 
 const addTurmaButton = document.querySelector(".add-turma-button");
 addTurmaButton.addEventListener("click", showModal);
-let grupos_data;
 
 // Função para mostrar o modal
 async function showModal() {
   const modal = document.getElementById("myModal");
   modal.style.display = "block";
-  try {
-    const response = await fetch("http://127.0.0.1:8080/api/v1/grupos/listar");
-    grupos_data = await response.json();
-    console.log(grupos_data);
-
-    const gruposSemTurmaList = document.getElementById("gruposSemTurmaList");
-
-    // Limpe a lista existente
-    gruposSemTurmaList.innerHTML = "";
-
-    for (const grupo in grupos_data) {
-      if (grupos_data.hasOwnProperty(grupo) && grupos_data[grupo].turma == 0) {
-        const grupoNome = grupos_data[grupo].nome;
-
-        // Criar um checkbox para cada grupo
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.id = grupo; // ID único para cada checkbox
-        checkbox.classList = "checkbox";
-
-        // Criar uma label para o checkbox
-        const label = document.createElement("label");
-        label.setAttribute("for", checkbox.id);
-        label.textContent =
-          grupoNome.charAt(0).toUpperCase() + grupoNome.slice(1);
-
-        // Adicionar o checkbox e a label à lista
-        const listItem = document.createElement("li");
-        listItem.appendChild(checkbox);
-        listItem.appendChild(label);
-        gruposSemTurmaList.appendChild(listItem);
-      }
-    }
-  } catch (error) {
-    console.error("Erro ao buscar grupos sem turmas: " + error);
-  }
 }
 
 // Função para fechar o modal
@@ -128,6 +100,7 @@ async function coletaDadosNovaTurma() {
   const turmaNome = document.getElementById("turmaNome").value;
   const professor = document.getElementById("professor").value;
   const dataInicio = document.getElementById("dataInicio").value;
+  const duracaoCiclo = document.getElementById("duracaoCiclo").value;
   console.log(dataInicio);
 
   const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/;
@@ -155,38 +128,36 @@ async function coletaDadosNovaTurma() {
     alert("A Data de início é obrigatório.");
     return;
   }
+  if (duracaoCiclo === "") {
+    alert("A duração de ciclos, em dias, é obrigatório.");
+    return;
+  }
 
   // Formata a data para dia/mes/ano
+
   const data = new Date(dataInicio);
-  const dia = data.getDate() + 1; // O dia começa em 1
-  const mes = data.getMonth() + 1; // Os meses em JavaScript começam de 0
+  const dia = String(data.getDate()).padStart(2, "0"); // Garante que o dia tenha sempre 2 dígitos
+  const mes = String(data.getMonth() + 1).padStart(2, "0"); // Garante que o mês tenha sempre 2 dígitos
   const ano = data.getFullYear();
+  // const dataFormatada = `${dia}/${mes}/${ano}`;
+
   if (ano < 1000 || ano > 9999) {
     alert("O ano deve ter exatamente 4 dígitos.");
     return;
   }
-  const dataFormatada = `${dia}/${mes}/${ano}`;
 
-  //captura grupos selecionados
-  let gruposSelecionados = [];
-  const checkboxes = document.querySelectorAll(".checkbox");
-  checkboxes.forEach((checkbox) => {
-    if (checkbox.checked) {
-      gruposSelecionados.push(checkbox.id);
-    }
-  });
-
-  const nomeGruposSelecionados = gruposSelecionados.map((id) => {
-    return grupos_data[id].nome;
-  });
+  const dataFormatada = dataInicio.split("-").reverse().join("/");
 
   // Construir o objeto de turma
   const novaTurmaData = {
     nome: turmaNome,
     professor: professor,
-    dataInicio: dataFormatada,
-    grupos: gruposSelecionados,
+    data_de_inicio: dataFormatada,
+    duracao_ciclo: duracaoCiclo,
+    quantidade_ciclos: 4,
   };
+
+  console.log(novaTurmaData);
 
   // Exiba a div de confirmação
   const confirmacaoContainer = document.getElementById("confirmacaoContainer");
@@ -196,8 +167,7 @@ async function coletaDadosNovaTurma() {
   document.getElementById("turmaNomeConfirmacao").textContent = turmaNome;
   document.getElementById("professorConfirmacao").textContent = professor;
   document.getElementById("dataInicioConfirmacao").textContent = dataFormatada;
-  document.getElementById("gruposSelecionadosConfirmacao").textContent =
-    nomeGruposSelecionados.join(", ");
+  document.getElementById("duracaoCicloConfirmacao").textContent = duracaoCiclo;
 
   //aciona evento para enviar os dados da turma que sera criada para o back end
   const confirmarButton = document.getElementById("confirmarButton");
@@ -217,13 +187,10 @@ function closeConfirmacao() {
 //Função para enviar as informações da nova turma em formato de string para o back end
 async function criarNovaTurma(novaTurmaData) {
   try {
-    const response = await fetch(
-      `http://127.0.0.1:8080/api/v1/turmas/criar`,
-      {
-        method: "POST",
-        body: JSON.stringify(novaTurmaData),
-      }
-    );
+    const response = await fetch(`http://127.0.0.1:8080/api/v1/turmas/criar`, {
+      method: "POST",
+      body: JSON.stringify(novaTurmaData),
+    });
 
     // Verifica se a resposta da solicitação está OK (status 200)
     if (response.ok) {
@@ -231,6 +198,7 @@ async function criarNovaTurma(novaTurmaData) {
       const mensagem = resposta.mensagem;
       const detalhes = resposta.detalhes;
       alert("Resposta do servidor:\n" + mensagem + "\n" + detalhes.join("\n"));
+      window.location.href = "gerenciamento_turmas.html";
     } else {
       // Lida com erros de resposta, se houver
       console.error("Erro ao criar a turma: ", response.statusText);
@@ -240,16 +208,20 @@ async function criarNovaTurma(novaTurmaData) {
   }
 }
 
-function requisitar_excluir_turma(id){
-  if(window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")){
-    fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`,{method:'DELETE'}).then(document.getElementById(id).remove())
-  }  
+function requisitar_excluir_turma(id) {
+  if (window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")) {
+    fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`, {
+      method: "POST",
+    }).then(document.getElementById(id).remove());
+  }
 }
-
 
 function requisitar_editar_turma(id) {
-  window.location.href = 'editar_turma.html?id=' + id;
+  window.location.href = "editar_turma.html?id=" + id;
 }
 
+function requisitar_informacoes_turma(id) {
+  window.location.href = "informacoes_turma.html?id=" + id;
+}
 
 GetTurmas();

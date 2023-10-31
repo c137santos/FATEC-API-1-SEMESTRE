@@ -4,20 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gerenciamento de Turma</title>
-    <link rel="stylesheet" href="../front/style/gerenciamento_turmas.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
     />
-    <link rel="stylesheet" href="style/custom.css" />
+    <link rel="stylesheet" href="style/custom.css">
+    <link rel="stylesheet" href="style/gerenciamento_turmas.css" />
   </head>
+  <header class="header">
+    <img src="./imagens/Logo.png" alt="logo" />
+  </header>
   <body>
-    <header class="header">
-      <a href="index.html">
-        <img src="./imagens/Logo.png" alt="logo" />
-      </a>
-    </header>
-    <h1 class="title">Gerenciamento de Turmas:</h1>
+    <h1 class="texto-titulo">Gerenciamento de Turmas:</h1>
     <div class="turma-container">
       <div class="flex-warp-container">
         <!-- As turmas serão adicionadas automaticamente aqui -->
@@ -40,11 +38,12 @@
 
             <label for="dataInicio">Data de início:</label>
             <input type="date" id="dataInicio" class="input-field" />
+            <!-- TODO: Fazer com que aceitem apenas datas futuras -->
+
+            <label for="duracaoCiclo">Duracao Ciclos em dias:</label>
+            <input type="number" id="duracaoCiclo" class="input-field" />
+            <!-- TODO: Fazer com que aceitem apenas números positivos -->
           </div>
-          <h3>Grupos:</h3>
-          <ul id="gruposSemTurmaList">
-            <!-- Grupos serão adicionados automaticamente aqui -->
-          </ul>
           <button class="submit-turma">Criar turma</button>
 
           <!-- Modal de confirmação -->
@@ -53,10 +52,7 @@
             <p>Nome da Turma: <span id="turmaNomeConfirmacao"></span></p>
             <p>Professor: <span id="professorConfirmacao"></span></p>
             <p>Data de Início: <span id="dataInicioConfirmacao"></span></p>
-            <p>
-              Grupos Selecionados:
-              <span id="gruposSelecionadosConfirmacao"></span>
-            </p>
+            <p>Duração dos ciclos em dias: <span id="duracaoCicloConfirmacao"></span></p>
             <button id="confirmarButton" type="submit">Confirmar</button>
             <button id="cancelarButton">Cancelar</button>
           </div>
