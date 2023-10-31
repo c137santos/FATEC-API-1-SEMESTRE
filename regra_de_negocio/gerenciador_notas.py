@@ -51,7 +51,7 @@ def listar_notas():
         return notas
 
 
-def listar_notas_por_id_turma(notas, id_turma):
+def filtrar_notas_por_id_turma_svc(notas, id_turma):
     if not id_turma:
         return {}
     id_turma_str = str(id_turma)
@@ -94,7 +94,7 @@ def listar_notas_por_turma_aluno(id_turma, id_aluno):
     if not id_turma or not id_aluno:
         return {}
     notas = listar_notas()
-    notas_por_turma = listar_notas_por_id_turma(notas, id_turma)
+    notas_por_turma = filtrar_notas_por_id_turma_svc(notas, id_turma)
     notas_por_turma_aluno = listar_notas_por_id_aluno(notas_por_turma, id_aluno)
     return notas_por_turma_aluno
 
