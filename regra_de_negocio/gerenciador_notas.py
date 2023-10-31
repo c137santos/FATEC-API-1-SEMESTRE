@@ -166,8 +166,8 @@ def verificar_edicao_habilitada(notas, id_nota):
         data_inicial_insercao_nota = datetime.strptime(
             data_inicio, formato_data
         ) + dt.timedelta(days=prazo_insercao_nota)
-        data_final_insercao_nota = (
-            data_inicial_insercao_nota + dt.timedelta(days=ciclo["prazo_insercao_nota"])
+        data_final_insercao_nota = data_inicial_insercao_nota + dt.timedelta(
+            days=ciclo["prazo_insercao_nota"]
         )
         data_atual = datetime.now()
         if (

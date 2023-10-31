@@ -13,10 +13,12 @@ import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 
 import json
 
+
 def criar_aluno(request):
     novo_aluno = json.loads(request.body)
     gerenciador_alunos.criar_aluno(novo_aluno)
-    return JsonResponse({"message":"Aluno criado"})
+    return JsonResponse({"message": "Aluno criado"})
+
 
 def deletar_aluno(request, id):
     gerenciador_alunos.apagar_aluno(id)
@@ -109,7 +111,9 @@ def excluir_nota(request, id_nota):
 def listar_notas(request):
     notas = gerenciador_notas.listar_notas()
     for id_nota in notas:
-        notas[id_nota]["edicao_habilitada"] = gerenciador_notas.verificar_edicao_habilitada(notas, id_nota)
+        notas[id_nota][
+            "edicao_habilitada"
+        ] = gerenciador_notas.verificar_edicao_habilitada(notas, id_nota)
     return JsonResponse(notas)
 
 
