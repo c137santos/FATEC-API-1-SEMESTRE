@@ -6,6 +6,16 @@ def listar_alunos():
         alunos = json.load(f)
     return alunos
 
+
+def apagar_aluno(id):
+    alunos = listar_alunos()
+    if id in alunos.keys():
+        alunos.pop(id)
+        _salvar_alunos(alunos)
+        return True
+    else:
+        return False
+
 def criar_aluno(novo_aluno):
     alunos = listar_alunos()
     id_novo_aluno = _novo_id_aluno()
@@ -25,7 +35,6 @@ def _salvar_alunos(alunos):
     with open("dados/alunos.json", "w", encoding="utf-8") as arquivo:
         arquivo.write(dados)
         return True
-
 
 def _novo_id_aluno():
     ids_numericos = []

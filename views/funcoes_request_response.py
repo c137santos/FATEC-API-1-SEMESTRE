@@ -18,6 +18,11 @@ def criar_aluno(request):
     gerenciador_alunos.criar_aluno(novo_aluno)
     return JsonResponse({"message":"Aluno criado"})
 
+def deletar_aluno(request, id):
+    gerenciador_alunos.apagar_aluno(id)
+    return JsonResponse({"message": f"Deletado o aluno com ID {id}."})
+
+
 def listar_alunos(request):
     alunos_data = gerenciador_alunos.listar_alunos()
     return JsonResponse(alunos_data)

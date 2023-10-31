@@ -78,6 +78,14 @@ const renderizarAluno = (aluno) => {
   quadrado.appendChild(labelIdade);
 
   alunos = document.getElementById("aluno-container")
+
+  const imagemIconEdit = document.createElement("img")
+      imagemIconEdit.src = "../front/icon/trash-icon.svg"
+      imagemIconEdit.alt ="Icone"
+      imagemIconEdit.className = "trash-icon"
+      imagemIconEdit.id = `delete${aluno.RA}`;
+      imagemIconEdit.addEventListener("click", () => deleteAluno(`${aluno.RA}`))
+      quadrado.appendChild(imagemIconEdit);
   alunos.appendChild(quadrado);
 };
 
@@ -87,6 +95,13 @@ const mostraAlunos = (alunos) => {
     }
 }
 
+const deleteAluno = (RA) => {
+  try {
+      fetch (`http://127.0.0.1:8080/api/v1/alunos/deletar/${RA}`,{method: "POST"})
+      console.log('chamou o deletar')
+      } catch (error) {
+          console.error("Erro ao buscar dados da API -> ", error);
+      }
 var favDialog = document.getElementById("favDialog");
 var botaoNovoAluno = document.getElementById("buttonNovoAluno");
 var submitButton = document.getElementById("submit");
@@ -99,6 +114,7 @@ submitButton.addEventListener("click", function () {
     criarNovoAluno();
     favDialog.close();
   });
+}
 
 const criarNovoAluno = () => {
     nomeNovo = document.getElementById('nomeNovoALuno').value
