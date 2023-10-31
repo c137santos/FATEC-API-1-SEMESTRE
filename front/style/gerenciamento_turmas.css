@@ -253,3 +253,21 @@ label {
 #cancelarButton:hover {
   background-color: #ce17179d;
 }
+
+#fturma {
+  padding-top: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+#fquantidadeCiclo {
+  border-radius: 5px;
+  padding: 3%;
+}
+
+#fsublegenda {
+  padding: 0;
+  margin: 0;
+  font-size: 11px
+}

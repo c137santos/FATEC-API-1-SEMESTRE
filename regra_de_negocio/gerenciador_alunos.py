@@ -11,10 +11,11 @@ def editar_aluno_svc(id, alunos_editar):
     alunos = listar_alunos()
     if id in alunos.keys():
         aluno = alunos[id]
-        aluno["nome"] =  alunos_editar["nome"]
+        aluno["nome"] = alunos_editar["nome"]
         aluno["data_nascimento"] = alunos_editar["data_nascimento"]
         aluno["sexo"] = alunos_editar["sexo"]
         _salvar_alunos(alunos)
+
 
 def apagar_aluno(id):
     alunos = listar_alunos()
@@ -25,6 +26,7 @@ def apagar_aluno(id):
     else:
         return False
 
+
 def criar_aluno(novo_aluno):
     alunos = listar_alunos()
     id_novo_aluno = _novo_id_aluno()
@@ -32,7 +34,7 @@ def criar_aluno(novo_aluno):
         "nome": novo_aluno["nome"],
         "data_nascimento": novo_aluno["data_nascimento"],
         "sexo": novo_aluno["sexo"],
-        "RA": int(id_novo_aluno)
+        "RA": int(id_novo_aluno),
     }
 
     alunos[id_novo_aluno] = aluno
@@ -44,6 +46,7 @@ def _salvar_alunos(alunos):
     with open("dados/alunos.json", "w", encoding="utf-8") as arquivo:
         arquivo.write(dados)
         return True
+
 
 def _novo_id_aluno():
     ids_numericos = []
