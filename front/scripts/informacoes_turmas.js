@@ -89,7 +89,7 @@ function criarCampoNota(alunoId, notasAlunos) {
           InputNotas.value = "";
         }
 
-        // Verifique se a nota já foi atribuída para torná-la somente leitura
+        //Verifica se a nota esta aberta para edição
         if (CicloAberto(id_ciclo)) {
           InputNotas.setAttribute("readonly", true);
         }
@@ -98,8 +98,16 @@ function criarCampoNota(alunoId, notasAlunos) {
       }
     }
   }
-
   return campoNota;
+}
+
+// Função que verifica se o ciclo está aberto
+function CicloAberto(id_ciclo) {
+  if (id_ciclo == 4) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 function adicionarMediaAoAluno(alunoId, notasAlunos, PesoCiclo) {
@@ -112,10 +120,11 @@ function adicionarMediaAoAluno(alunoId, notasAlunos, PesoCiclo) {
   alunoSquare.appendChild(mediaAluno);
 }
 
-// Função que verifica se o ciclo está aberto
-function CicloAberto(id_ciclo) {
-  return true;
-}
+// async function requisitar_editar_nota() {
+//                 const requisicao_editar_nota = {
+
+//                 }
+// }
 
 async function listar_ciclos_turma(id) {
   const response = await fetch(
