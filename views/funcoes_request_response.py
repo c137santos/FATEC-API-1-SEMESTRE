@@ -29,6 +29,8 @@ def listar_alunos(request):
 
 
 def editar_aluno(request, id):
+    aluno = json.loads(request.body)
+    gerenciador_alunos.editar_aluno_svc(id, aluno)
     return JsonResponse({"message": f"Editando o aluno com ID {id}."})
 
 

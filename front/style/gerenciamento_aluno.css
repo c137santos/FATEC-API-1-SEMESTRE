@@ -37,6 +37,17 @@ max-width: 90%;
 margin: 5px;
 }
 
+.edit-icon {
+  position: absolute;
+  margin-right: 10px;
+  bottom: 1px;
+  width: 29px;
+  height: 31px;
+  cursor: pointer;
+  right: 5px;
+   margin-right: 20px;
+  }
+  
 .trash-icon {
   position: absolute;
   bottom: 5px;

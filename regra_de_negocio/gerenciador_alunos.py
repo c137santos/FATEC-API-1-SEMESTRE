@@ -7,6 +7,15 @@ def listar_alunos():
     return alunos
 
 
+def editar_aluno_svc(id, alunos_editar):
+    alunos = listar_alunos()
+    if id in alunos.keys():
+        aluno = alunos[id]
+        aluno["nome"] =  alunos_editar["nome"]
+        aluno["data_nascimento"] = alunos_editar["data_nascimento"]
+        aluno["sexo"] = alunos_editar["sexo"]
+        _salvar_alunos(alunos)
+
 def apagar_aluno(id):
     alunos = listar_alunos()
     if id in alunos.keys():
