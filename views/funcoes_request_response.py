@@ -107,9 +107,7 @@ def excluir_nota(request, id_nota):
 def listar_notas(request):
     notas = gerenciador_notas.listar_notas()
     for id_nota in notas:
-        notas[id_nota][
-            "edicao_habilitada"
-        ] = gerenciador_notas.verificar_edicao_habilitada(notas, id_nota)
+        notas[id_nota]["edicao_habilitada"] = gerenciador_notas.verificar_edicao_habilitada(notas, id_nota)
     return JsonResponse(notas)
 
 
