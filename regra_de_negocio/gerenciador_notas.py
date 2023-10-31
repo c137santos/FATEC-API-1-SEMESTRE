@@ -1,6 +1,7 @@
 import json
 
 from regra_de_negocio.gerenciador_ciclos import (
+    listar_ciclos_por_id_turma,
     obter_ciclo,
     obter_ultimo_ciclo_por_id_turma,
 )
@@ -166,7 +167,7 @@ def verificar_edicao_habilitada(notas, id_nota):
             data_inicio, formato_data
         ) + dt.timedelta(days=prazo_insercao_nota)
         data_final_insercao_nota = (
-            data_inicial_insercao_nota + ciclo["prazo_insercao_nota"]
+            data_inicial_insercao_nota + dt.timedelta(days=ciclo["prazo_insercao_nota"])
         )
         data_atual = datetime.now()
         if (
@@ -182,7 +183,7 @@ def verificar_edicao_habilitada(notas, id_nota):
 
 def _obter_prazo_insercao_nota(ciclo, id_turma):
     id_turma_str = str(id_turma)
-    ciclos = listar_notas_por_id_turma(id_turma_str)
+    ciclos = listar_ciclos_por_id_turma(id_turma_str)
     numero_ciclo = ciclo["numero_ciclo"]
     prazo_insercao_nota = 0
     for id_ciclo in ciclos.keys():

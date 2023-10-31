@@ -24,9 +24,7 @@ URLS = {
     # URL("/api/v1/ciclos/criar"): view.criar_ciclo,
     # editar ciclo e remover ciclo serão implementados ao final
     URL("/api/v1/notas/listar"): view.listar_notas,
-    URL(
-        "/api/v1/notas/listar/:id_turma/:id_aluno"
-    ): view.listar_notas_por_id_turma_id_aluno,
+    URL("/api/v1/notas/listar/:id_turma/:id_aluno"): view.listar_notas_por_id_turma_id_aluno,
     URL("/api/v1/notas/turma/listar/:id_turma"): view.listar_notas_por_id_turma,
     URL("/api/v1/notas/aluno/listar/:id_aluno"): view.listar_notas_por_id_aluno,
     URL("/api/v1/notas/criar"): view.criar_nota,
@@ -36,12 +34,8 @@ URLS = {
     URL("/api/v1/turmas_alunos/criar"): view.criar_turmas_alunos,
     URL("/api/v1/turmas_alunos/remover/:id"): view.remover_turmas_alunos,
     URL("/api/v1/turmas_alunos/listar"): view.listar_turmas_alunos,
-    URL(
-        "/api/v1/turmas_alunos/listar_alunos_da_turma/:id_turma"
-    ): view.listar_alunos_turma,
-    URL(
-        "/api/v1/turmas_alunos/listar_turmas_do_aluno/:id_aluno"
-    ): view.listar_turmas_aluno,
+    URL("/api/v1/turmas_alunos/listar_alunos_da_turma/:id_turma"): view.listar_alunos_turma,
+    URL("/api/v1/turmas_alunos/listar_turmas_do_aluno/:id_aluno"): view.listar_turmas_aluno,
 }
 
 
