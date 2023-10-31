@@ -9,8 +9,14 @@ from regra_de_negocio.gerenciador_turmas import excluir_turma_svc, editar_turma_
 import regra_de_negocio.gerenciador_ciclos as gerenciador_ciclos
 import regra_de_negocio.gerenciador_notas as gerenciador_notas
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
+import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 
 import json
+
+
+def listar_alunos(request):
+    alunos_data = gerenciador_alunos.listar_alunos()
+    return JsonResponse(alunos_data)
 
 
 def editar_aluno(request, id):

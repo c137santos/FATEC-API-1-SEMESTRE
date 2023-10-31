@@ -1,0 +1,38 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vh;
+  }
+
+.divAlunos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 75%;
+}
+
+.quadrado {
+width: 100%;
+display: flex;
+flex-direction: row;
+position: relative;
+margin: 3px;
+background-color: #ffffff;
+border-radius: 5px;
+cursor: pointer;
+padding: 10px;
+} 
+
+.quadrado:hover {
+background-color: transparent;
+box-shadow: 0 0 50px 20px rgb(154, 104, 241);
+}
+
+.quadrado p {
+font-size: 15px;
+color: #000000;
+text-align: center;
+max-width: 90%;
+margin: 5px;
+}
