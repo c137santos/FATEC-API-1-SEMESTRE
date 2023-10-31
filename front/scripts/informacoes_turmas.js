@@ -89,7 +89,7 @@ function criarCampoNota(alunoId, notasAlunos) {
           InputNotas.value = "";
         }
 
-        // Verifique se a nota já foi atribuída para torná-la somente leitura
+        //Verifica se a nota esta aberta para edição
         if (CicloAberto(id_ciclo)) {
           InputNotas.setAttribute("readonly", true);
         }
