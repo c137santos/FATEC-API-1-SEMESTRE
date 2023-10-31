@@ -13,6 +13,15 @@ import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 
 import json
 
+def criar_aluno(request):
+    novo_aluno = json.loads(request.body)
+    gerenciador_alunos.criar_aluno(novo_aluno)
+    return JsonResponse({"message":"Aluno criado"})
+
+def deletar_aluno(request, id):
+    gerenciador_alunos.apagar_aluno(id)
+    return JsonResponse({"message": f"Deletado o aluno com ID {id}."})
+
 
 def listar_alunos(request):
     alunos_data = gerenciador_alunos.listar_alunos()
@@ -117,9 +126,9 @@ def listar_notas_por_id_turma_id_aluno(request, id_turma, id_aluno):
     return JsonResponse(notas)
 
 
-def listar_notas_por_id_turma(request, id_turma):
+def filtrar_notas_por_id_turma(request, id_turma):
     notas = gerenciador_notas.listar_notas()
-    notas_por_turma = gerenciador_notas.listar_notas_por_id_turma(notas, id_turma)
+    notas_por_turma = gerenciador_notas.filtrar_notas_por_id_turma_svc(notas, id_turma)
     for id_nota in notas_por_turma:
         notas_por_turma[id_nota][
             "edicao_habilitada"

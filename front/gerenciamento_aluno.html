@@ -16,6 +16,7 @@
   </header>
   <body>
     <h1 class="texto-titulo">Gerenciamento de Alunos</h1>
+    <button id="buttonNovoAluno">Criar novo aluno</button>
     <div id="aluno-container" class="divAlunos">
     </div>
   </body>
@@ -24,6 +25,22 @@
       <img src="./imagens/mascote2.png" alt="mascote" />
     </a>
   </div>
+  <dialog id="favDialog">
+    <form method="dialog">
+        <section>
+            <label ><strong>Nome:</strong></label>
+            <input type="text" id="nomeNovoALuno">
+            <label ><strong>Sexo:</strong></label>
+            <input type="text" id="sexoNovoAluno">
+            <label ><strong>Data de nascimento:</strong></label>
+            <input type="date" id="dataNascNovoAluno">
+        </section>
+        <menu>
+        <button id="submit" type="submit">Confirmar</button>
+        </menu>
+    </form>
+    </dialog>
+
 </html>
 <script>
 getInfoAlunos()
@@ -70,6 +87,15 @@ const renderizarAluno = (aluno) => {
       imagemIconEdit.id = `${aluno.RA}`;
       imagemIconEdit.addEventListener("click", () => editarAluno(`${aluno.RA}`))
       quadrado.appendChild(imagemIconEdit);
+
+
+  const imagemIconDelete = document.createElement("img")
+    imagemIconDelete.src = "../front/icon/trash-icon.svg"
+    imagemIconDelete.alt ="Icone"
+    imagemIconDelete.className = "trash-icon"
+    imagemIconDelete.id = `delete${aluno.RA}`;
+    imagemIconDelete.addEventListener("click", () => deleteAluno(`${aluno.RA}`))
+      quadrado.appendChild(imagemIconDelete);
   alunos.appendChild(quadrado);
 };
 
@@ -136,7 +162,6 @@ async function editarAluno(RA) {
 }
 
 async function backEditarAluno(aluno_editado){
-  console.log("aluno_ed")
     try {
       const response = await fetch (`http://127.0.0.1:8080/api/v1/alunos/editar/${aluno_editado.RA}`,{method: "POST", body:JSON.stringify(aluno_editado)})
       return response.status === 200
@@ -146,4 +171,43 @@ async function backEditarAluno(aluno_editado){
       }
 }
 
+const deleteAluno = (RA) => {
+  try {
+      fetch (`http://127.0.0.1:8080/api/v1/alunos/deletar/${RA}`,{method: "POST"})
+      console.log('chamou o deletar')
+      } catch (error) {
+          console.error("Erro ao buscar dados da API -> ", error);
+      }
+var favDialog = document.getElementById("favDialog");
+var botaoNovoAluno = document.getElementById("buttonNovoAluno");
+var submitButton = document.getElementById("submit");
+
+botaoNovoAluno.addEventListener("click", function () {
+    favDialog.showModal();
+  });
+
+submitButton.addEventListener("click", function () {
+    criarNovoAluno();
+    favDialog.close();
+  });
+}
+
+const criarNovoAluno = () => {
+    nomeNovo = document.getElementById('nomeNovoALuno').value
+    sexoNovo = document.getElementById('sexoNovoAluno').value
+    dataNascNova = document.getElementById('dataNascNovoAluno').value
+
+    const alunoNovo = {
+        "nome":nomeNovo,
+        "sexo": sexoNovo,
+        "data_nascimento":dataNascNova
+    }
+    try {
+      fetch ('http://127.0.0.1:8080/api/v1/alunos/criar',{method: "POST", body:JSON.stringify(alunoNovo)})
+      console.log('chamou o back')
+      } catch (error) {
+          console.error("Erro ao buscar dados da API -> ", error);
+      }
+
+}
 </script>
