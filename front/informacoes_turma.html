@@ -81,7 +81,7 @@
           }
         }
 
-        function exibirAlunos(alunos, notasAlunos) {
+        async function exibirAlunos(alunos, notasAlunos) {
           const container = document.querySelector(".corpo_tabela");
 
           for (const chave in alunos) {
@@ -134,7 +134,7 @@
                 const mediaAluno = document.createElement("div");
                 mediaAluno.className = "media";
                 mediaAluno.type = "number";
-                mediaAluno.innerHTML = "Media"
+                mediaAluno.innerHTML = await obter_fee_turma_aluno(obter_id(),alunoId)
                 alunoSquare.appendChild(mediaAluno)
                 container.appendChild(alunoSquare);
             }
@@ -144,6 +144,12 @@
         // Função que verifica se o ciclo está aberto
         function CicloAberto(id_ciclo) {
           return true; 
+        }
+
+        async function obter_fee_turma_aluno(id_turma, id_aluno){
+          const response = await fetch (`http://localhost:8080/api/v1/notas/fee/obter/${id_turma}/${id_aluno}`, {method: "GET"})
+          const fee = await response.json()
+          return fee ? fee.valor : 0.0
         }
 
         async function listar_ciclos_turma(id){
@@ -177,6 +183,7 @@
         //        /** Recupera o id da turma presente como consulta na URL
         //  * @returns {string} id - o identificador único
         }
+
       </script>
   </body>
 </html>

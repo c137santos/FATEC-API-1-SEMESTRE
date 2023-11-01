@@ -14,15 +14,14 @@ import datetime as dt
 def _calcular_fee_turma_aluno(id_turma, id_aluno):
     id_aluno_str = str(id_aluno)
     id_turma_str = str(id_turma)
-    obter_turma(id_turma_str)
-    notas_por_turma_aluno = listar_notas_por_turma_aluno(id_aluno_str, id_turma_str)
+    notas_por_turma_aluno = listar_notas_por_turma_aluno(id_turma_str, id_aluno_str)
     soma_das_notas = 0.0
     soma_dos_pesos = 0.0
     for id_nota in notas_por_turma_aluno:
         ciclo = obter_ciclo(notas_por_turma_aluno[id_nota]["id_ciclo"])
         peso_nota = ciclo["peso_nota"]
         valor = notas_por_turma_aluno[id_nota]["valor"]
-        soma_das_notas += peso_nota * valor
+        soma_das_notas += (peso_nota * valor)
         soma_dos_pesos += peso_nota
     if len(notas_por_turma_aluno) > 0:
         return soma_das_notas / float(soma_dos_pesos)
@@ -67,10 +66,10 @@ def filtrar_notas_por_id_turma_svc(notas, id_turma):
 def listar_notas_por_id_aluno(notas, id_aluno):
     if not id_aluno:
         return {}
-    id_turma_str = str(id_aluno)
+    id_aluno_str = str(id_aluno)
     notas_encontradas = {}
     for id_nota in notas.keys():
-        if id_turma_str == notas[id_nota]["id_aluno"]:
+        if id_aluno_str == notas[id_nota]["id_aluno"]:
             if notas[id_nota]["fee"]:
                 continue
             notas_encontradas[id_nota] = notas[id_nota]
@@ -80,15 +79,14 @@ def listar_notas_por_id_aluno(notas, id_aluno):
 def listar_notas_por_id_ciclo(notas, id_ciclo):
     if not id_ciclo:
         return {}
-    id_turma_str = str(id_ciclo)
+    id_ciclo_str = str(id_ciclo)
     notas_encontradas = {}
     for id_nota in notas.keys():
-        if id_turma_str == notas[id_nota]["id_ciclo"]:
+        if id_ciclo_str == notas[id_nota]["id_ciclo"]:
             if notas[id_nota]["fee"]:
                 continue
             notas_encontradas[id_nota] = notas[id_nota]
     return notas_encontradas
-
 
 def listar_notas_por_turma_aluno(id_turma, id_aluno):
     if not id_turma or not id_aluno:
