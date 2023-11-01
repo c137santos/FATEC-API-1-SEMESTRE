@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="aluno-container">
-        <p class="aviso_ciclo_aberto">Ciclo aberto para nota: x</p>
+        <p id="aviso_ciclo_aberto"></p>
         <div class="header-container">
           <div class="header-title titulo_alunos">Nome</div>
           <div class="header-title titulo_notas">Notas</div>
@@ -49,9 +49,8 @@
           <img src="./imagens/mascote2.png" alt="mascote" />
         </a>
       </div>
+      <button onclick="requisitar_editar_nota()">Editar nota</button>
     <script src="/front/scripts/informacoes_turmas.js">
-      // definir ID do campo nota.
-      // Agrupar dados para funcao de calculo de media.
       // verificar com o caio qual e se existe uma rota no back que faça a insersao de nota.
       // liberar insercao de notas dentro da janela de tempo.
     </script>

@@ -74,6 +74,8 @@ def listar_notas_por_id_aluno(notas, id_aluno):
             if notas[id_nota]["fee"]:
                 continue
             notas_encontradas[id_nota] = notas[id_nota]
+            print("notas encontradas:")
+            print (notas_encontradas)
     return notas_encontradas
 
 
@@ -153,9 +155,10 @@ def _salvar_notas(notas):
         return True
 
 
+from datetime import datetime
+
 def verificar_edicao_habilitada(notas, id_nota):
     id_nota_str = str(id_nota)
-    notas = listar_notas()
     nota = notas[id_nota_str]
     ciclo = obter_ciclo(nota["id_ciclo"])
     turma = obter_turma(nota["id_turma"])
@@ -172,6 +175,7 @@ def verificar_edicao_habilitada(notas, id_nota):
             return False
     else:
         return False
+
 
 
 def _obter_prazo_insercao_nota(ciclo, id_turma):
