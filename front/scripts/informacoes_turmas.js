@@ -84,13 +84,10 @@ function criarCampoNota(alunoId, notasAlunos) {
         InputNotas.className = "valor";
         InputNotas.type = "number";
         InputNotas.value = valorNota;
-        InputNotas.id = `id_turma=${id_turma},id_aluno=${id_aluno},id_ciclo=${id_ciclo}`;
+        InputNotas.id = `id_turma=${id_turma}, = id_aluno=${id_aluno},id_ciclo=${id_ciclo}`;
+
         if (cicloAberto == false) {
           InputNotas.setAttribute("readonly", true);
-          console.log(id_ciclo);
-        } else {
-          console.log("ciclos abertos:");
-          console.log(id_ciclo);
         }
 
         campoNota.appendChild(InputNotas);
@@ -108,6 +105,30 @@ function adicionarMediaAoAluno(alunoId, notasAlunos, PesoCiclo) {
   mediaAluno.id = `mediaAlunoId=${alunoId}`;
 
   alunoSquare.appendChild(mediaAluno);
+}
+
+function requisitar_editar_nota() {
+  const notasEditaveis = document.querySelectorAll(".valor:not([readonly])");
+
+  if (notasEditaveis.length > 0) {
+    notasEditaveis.forEach((nota) => {
+      const id_turma = nota.id.split("id_turma=")[1].split(",")[0];
+      const id_aluno = nota.id.split("id_aluno=")[1].split(",")[0];
+      const id_ciclo = nota.id.split("id_ciclo=")[1];
+      const valor = nota.value;
+
+      const requestBody = {
+        id_turma: id_turma,
+        id_aluno: id_aluno,
+        id_ciclo: id_ciclo,
+        valor: valor,
+      };
+
+      console.log(requestBody);
+    });
+  } else {
+    console.log("Nenhuma nota editável encontrada.");
+  }
 }
 
 async function listar_ciclos_turma(id) {
