@@ -74,8 +74,6 @@ def listar_notas_por_id_aluno(notas, id_aluno):
             if notas[id_nota]["fee"]:
                 continue
             notas_encontradas[id_nota] = notas[id_nota]
-            print("notas encontradas:")
-            print (notas_encontradas)
     return notas_encontradas
 
 

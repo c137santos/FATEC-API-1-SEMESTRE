@@ -114,34 +114,6 @@ function adicionarMediaAoAluno(alunoId, notasAlunos, PesoCiclo) {
   alunoSquare.appendChild(mediaAluno);
 }
 
-function requisitar_editar_nota() {
-  const notasEditaveis = document.querySelectorAll(".valor:not([readonly])");
-  const requestBody = []; // Crie um objeto para conter as informações de notas
-
-  if (notasEditaveis.length > 0) {
-    notasEditaveis.forEach((nota) => {
-      const id_turma = nota.id.split("id_turma=")[1].split(",")[0];
-      const id_aluno = nota.id.split("id_aluno=")[1].split(",")[0];
-      const id_ciclo = nota.id.split("id_ciclo=")[1];
-      const valor = nota.value;
-      const valorOriginal = nota.dataset.ValorOriginal;
-
-      if (valor !== valorOriginal) {
-        requestBody.push({
-          id_aluno: id_aluno,
-          id_turma: id_turma,
-          id_ciclo: id_ciclo,
-          valor: valor,
-        });
-      }
-    });
-    const requestBodyJSON = JSON.stringify(requestBody);
-    console.log(requestBodyJSON);
-  } else {
-    console.log("Nenhuma nota editável encontrada.");
-  }
-}
-
 async function listar_ciclos_turma(id) {
   const response = await fetch(
     `http://localhost:8080/api/v1/ciclos/listar/${id}`,
