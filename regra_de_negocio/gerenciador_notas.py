@@ -161,16 +161,11 @@ def verificar_edicao_habilitada(notas, id_nota):
     turma = obter_turma(nota["id_turma"])
     if ciclo and turma:
         data_inicio = turma["data_de_inicio"]
-        print(f"data de inicio do ciclo: {data_inicio}")
         formato_data = "%d/%m/%Y"
         prazo_insercao_nota = _obter_prazo_insercao_nota(ciclo, nota["id_turma"])
-        print(f"prazo: {prazo_insercao_nota}")
         data_inicial_insercao_nota = datetime.strptime(data_inicio, formato_data) + dt.timedelta(days=prazo_insercao_nota)
-        print(f"data inicial: {data_inicial_insercao_nota}")
         data_final_insercao_nota = data_inicial_insercao_nota + dt.timedelta(days=ciclo["prazo_insercao_nota"])
-        print(f"data final: {data_final_insercao_nota}")
         data_atual = datetime.now()
-        print(f"data atual: {data_atual}")
         if data_inicial_insercao_nota <= data_atual <= data_final_insercao_nota:
             return True
         else:
