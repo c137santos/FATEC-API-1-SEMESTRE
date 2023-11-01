@@ -24,6 +24,7 @@ async function preencher_info_turma(id) {
       cicloPeso.appendChild(NomeCiclo);
       cicloPeso.appendChild(PesoNota);
     }
+
     // Chama a função para iniciar a criação do componentes dos alunos
     exibirAlunos(alunos, notasAlunos, cicloPeso);
   }
@@ -37,7 +38,6 @@ function exibirAlunos(alunos, notasAlunos, cicloPeso) {
       const aluno = alunos[chave];
       const nomeAluno = aluno.nome; // Pega o nome do aluno
       const alunoId = chave; // A chave do objeto aluno é o seu ID
-      console.log(`id do aluno: ${alunoId}`);
       //Chama a função para criar o alunoSquare de cada aluno
       const alunoSquare = criarComponenteAluno(alunoId, nomeAluno, notasAlunos);
       container.appendChild(alunoSquare);
@@ -76,6 +76,7 @@ function criarCampoNota(alunoId, notasAlunos) {
       const id_turma = notaAluno.id_turma;
       const id_aluno = notaAluno.id_aluno;
       const id_ciclo = notaAluno.id_ciclo;
+      const cicloAberto = notaAluno.edicao_habilitada;
       const valorNota = notaAluno.valor;
 
       if (id_aluno == alunoId) {
@@ -84,14 +85,12 @@ function criarCampoNota(alunoId, notasAlunos) {
         InputNotas.type = "number";
         InputNotas.value = valorNota;
         InputNotas.id = `id_turma=${id_turma},id_aluno=${id_aluno},id_ciclo=${id_ciclo}`;
-
-        if (valorNota == 0) {
-          InputNotas.value = "";
-        }
-
-        //Verifica se a nota esta aberta para edição
-        if (CicloAberto(id_ciclo)) {
+        if (cicloAberto == false) {
           InputNotas.setAttribute("readonly", true);
+          console.log(id_ciclo);
+        } else {
+          console.log("ciclos abertos:");
+          console.log(id_ciclo);
         }
 
         campoNota.appendChild(InputNotas);
@@ -99,15 +98,6 @@ function criarCampoNota(alunoId, notasAlunos) {
     }
   }
   return campoNota;
-}
-
-// Função que verifica se o ciclo está aberto
-function CicloAberto(id_ciclo) {
-  if (id_ciclo == 4) {
-    return false;
-  } else {
-    return true;
-  }
 }
 
 function adicionarMediaAoAluno(alunoId, notasAlunos, PesoCiclo) {
@@ -119,12 +109,6 @@ function adicionarMediaAoAluno(alunoId, notasAlunos, PesoCiclo) {
 
   alunoSquare.appendChild(mediaAluno);
 }
-
-// async function requisitar_editar_nota() {
-//                 const requisicao_editar_nota = {
-
-//                 }
-// }
 
 async function listar_ciclos_turma(id) {
   const response = await fetch(
