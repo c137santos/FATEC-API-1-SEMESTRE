@@ -33,7 +33,7 @@ def listar_turmas_aluno(id_aluno):
     if not id_aluno:
         return {}
     turmas_alunos = listar_turmas_alunos()
-    turmas = busca_turmas()
+    turmas = buscar_turmas()
     id_aluno_str = str(id_aluno)
     turmas_do_aluno = {}
     for id_turmas_alunos in turmas_alunos.keys():
