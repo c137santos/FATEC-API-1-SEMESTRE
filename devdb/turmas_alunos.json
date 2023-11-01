@@ -8,39 +8,19 @@
     "id_aluno": "2"
   },
   "3": {
-    "id_turma": "3",
-    "id_aluno": "3"
-  },
-  "8": {
     "id_turma": "2",
     "id_aluno": "1"
   },
-  "9": {
-    "id_turma": "3",
-    "id_aluno": "1"
-  },
-  "10": {
+  "4": {
     "id_turma": "1",
     "id_aluno": "2"
   },
-  "11": {
-    "id_turma": "2",
-    "id_aluno": "2"
-  },
-  "12": {
-    "id_turma": "3",
-    "id_aluno": "2"
-  },
-  "13": {
+  "6": {
     "id_turma": "1",
     "id_aluno": "3"
   },
-  "14": {
+  "7": {
     "id_turma": "2",
-    "id_aluno": "3"
-  },
-  "15": {
-    "id_turma": "3",
     "id_aluno": "3"
   }
 }

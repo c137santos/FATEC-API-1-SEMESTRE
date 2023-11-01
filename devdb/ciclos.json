@@ -70,11 +70,3 @@
         "prazo_insercao_nota":5
     }
 }
-
-"1": {
-    "id_turma": "1",
-    "id_aluno": "1",
-    "id_ciclo": "1",
-    "valor": 6.5,
-    "fee": false
-    },
