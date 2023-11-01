@@ -54,6 +54,7 @@ function criarComponenteAluno(alunoId, nomeAluno, notasAlunos) {
 
   const elementoNomeAluno = document.createElement("p");
   elementoNomeAluno.className = "aluno";
+  elementoNomeAluno.id = `${alunoId}`;
   elementoNomeAluno.textContent =
     nomeAluno.charAt(0).toUpperCase() + nomeAluno.slice(1);
 
@@ -73,6 +74,7 @@ function criarCampoNota(alunoId, notasAlunos) {
   for (const notaChave in notasAlunos) {
     if (notasAlunos.hasOwnProperty(notaChave)) {
       const notaAluno = notasAlunos[notaChave];
+      const id_nota = notaChave;
       const id_turma = notaAluno.id_turma;
       const id_aluno = notaAluno.id_aluno;
       const id_ciclo = notaAluno.id_ciclo;
@@ -83,9 +85,9 @@ function criarCampoNota(alunoId, notasAlunos) {
         const InputNotas = document.createElement("input");
         InputNotas.className = "valor";
         InputNotas.type = "number";
-        InputNotas.step = "0.01";
+        InputNotas.step = "0.5";
         InputNotas.value = valorNota;
-        InputNotas.id = `id_turma=${id_turma},id_aluno=${id_aluno},id_ciclo=${id_ciclo}`;
+        InputNotas.id = `id_nota=${id_nota},id_turma=${id_turma},id_aluno=${id_aluno},id_ciclo=${id_ciclo}`;
 
         if (cicloAberto === true) {
           const aviso_ciclo_aberto =
@@ -114,12 +116,18 @@ function adicionarMediaAoAluno(alunoId, notasAlunos, PesoCiclo) {
   alunoSquare.appendChild(mediaAluno);
 }
 
-function requisitar_editar_nota() {
+async function editarNota() {
+  const alunos = await listar_alunos_turma(obter_id());
+  requisitar_editar_nota(alunos);
+}
+
+function requisitar_editar_nota(alunos) {
   const notasEditaveis = document.querySelectorAll(".valor:not([readonly])");
-  const requestBody = []; // Crie um objeto para conter as informações de notas
+  const requestBody = {};
 
   if (notasEditaveis.length > 0) {
     notasEditaveis.forEach((nota) => {
+      const id_nota = nota.id.split("id_nota=")[1].split(",")[0];
       const id_turma = nota.id.split("id_turma=")[1].split(",")[0];
       const id_aluno = nota.id.split("id_aluno=")[1].split(",")[0];
       const id_ciclo = nota.id.split("id_ciclo=")[1];
@@ -127,19 +135,46 @@ function requisitar_editar_nota() {
       const valorOriginal = nota.dataset.ValorOriginal;
 
       if (valor !== valorOriginal) {
-        requestBody.push({
-          id_aluno: id_aluno,
+        requestBody[id_nota] = {
           id_turma: id_turma,
+          id_aluno: id_aluno,
           id_ciclo: id_ciclo,
           valor: valor,
-        });
+        };
       }
     });
-    const requestBodyJSON = JSON.stringify(requestBody);
-    console.log(requestBodyJSON);
+    const decisao_usuario = criar_modal_confirmar_edicao(requestBody, alunos);
+    if (decisao_usuario) {
+      fetch(`http://localhost:8080/api/v1/notas/editar`, {
+        method: "POST",
+        body: JSON.stringify(requestBody),
+      });
+    }
   } else {
     console.log("Nenhuma nota editável encontrada.");
   }
+}
+
+function criar_modal_confirmar_edicao(requestBody, alunos) {
+  let mensagem =
+    "Atenção! Os seguintes detalhes das notas serão modificados:\n\n";
+
+  for (const idNota in requestBody) {
+    if (requestBody.hasOwnProperty(idNota)) {
+      const nota = requestBody[idNota];
+      const id_aluno = requestBody[idNota].id_aluno;
+      if (id_aluno in alunos) {
+        const aluno = alunos[id_aluno];
+        mensagem += `Aluno: ${aluno.nome},`;
+      }
+      mensagem += ` Ciclo: ${nota.id_ciclo},`;
+      mensagem += ` Valor: ${nota.valor}\n\n`;
+    }
+  }
+
+  mensagem += "Deseja prosseguir com a edição?";
+
+  return window.confirm(mensagem);
 }
 
 async function listar_ciclos_turma(id) {

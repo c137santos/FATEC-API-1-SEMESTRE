@@ -97,9 +97,10 @@ def criar_nota(request):
         return JsonResponse({"mensagem": False})
 
 
-def editar_nota(request, id_nota):
-    nota_atualizada = json.loads(request.body)
-    resultado = gerenciador_notas.editar_nota(id_nota, nota_atualizada)
+def editar_nota(request):
+    notas_atualizada = json.loads(request.body)
+    print(notas_atualizada)
+    resultado = gerenciador_notas.editar_nota(notas_atualizada)
     return JsonResponse({"mensagem": resultado})
 
 
@@ -135,9 +136,6 @@ def filtrar_notas_por_id_turma(request, id_turma):
         notas_por_turma[id_nota][
             "edicao_habilitada"
         ] = gerenciador_notas.verificar_edicao_habilitada(notas_por_turma, id_nota)
-        print(notas_por_turma[id_nota][
-            "edicao_habilitada"
-        ])
     return JsonResponse(notas_por_turma)
 
 

@@ -74,8 +74,7 @@ def listar_notas_por_id_aluno(notas, id_aluno):
             if notas[id_nota]["fee"]:
                 continue
             notas_encontradas[id_nota] = notas[id_nota]
-            print("notas encontradas:")
-            print (notas_encontradas)
+
     return notas_encontradas
 
 
@@ -108,16 +107,17 @@ def adicionar_nota(nova_nota):
     return _salvar_notas(notas)
 
 
-def editar_nota(id_nota_atualizada, nota_atualizada):
-    if not nota_atualizada:
+def editar_nota(notas_atualizada):
+    if not notas_atualizada:
         return False
     notas = listar_notas()
-    id_nota_atualizada_str = str(id_nota_atualizada)
-    if id_nota_atualizada_str in notas.keys():
-        notas[id_nota_atualizada_str] = nota_atualizada
-        return _salvar_notas(notas)
-    else:
-        return False
+    for id_nota in notas_atualizada:
+        id_nota_atualizada_str = str(id_nota)
+        if id_nota_atualizada_str in notas.keys():
+            notas[id_nota_atualizada_str]["valor"] = float(notas_atualizada[id_nota_atualizada_str]["valor"])
+        else:
+            return False
+    return _salvar_notas(notas)
 
 
 def remover_nota(id_nota):
