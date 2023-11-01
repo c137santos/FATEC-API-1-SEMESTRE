@@ -109,6 +109,7 @@ function adicionarMediaAoAluno(alunoId, notasAlunos, PesoCiclo) {
 
 function requisitar_editar_nota() {
   const notasEditaveis = document.querySelectorAll(".valor:not([readonly])");
+  const requestBody = []; // Crie um objeto para conter as informações de notas
 
   if (notasEditaveis.length > 0) {
     notasEditaveis.forEach((nota) => {
@@ -117,15 +118,16 @@ function requisitar_editar_nota() {
       const id_ciclo = nota.id.split("id_ciclo=")[1];
       const valor = nota.value;
 
-      const requestBody = {
-        id_turma: id_turma,
+      // Adicione as informações de notas ao objeto requestBody
+      requestBody.push({
         id_aluno: id_aluno,
+        id_turma: id_turma,
         id_ciclo: id_ciclo,
         valor: valor,
-      };
-
-      console.log(requestBody);
+      });
     });
+    const requestBodyJSON = JSON.stringify(requestBody);
+    console.log(requestBodyJSON); // O requestBody agora contém todas as informações das notas
   } else {
     console.log("Nenhuma nota editável encontrada.");
   }
