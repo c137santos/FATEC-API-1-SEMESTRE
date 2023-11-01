@@ -8,11 +8,15 @@ def buscando_turmas():
         turmas_data = json.load(f)
     return turmas_data
 
-def _salvar_turmas(turmas):
-    dados = json.dumps(turmas, indent=4)
-    with open("dados/turmas.json", "w", encoding="utf-8") as arquivo:
-        arquivo.write(dados)
-    return True
+
+def obter_turma(id_turma):
+    turmas = buscando_turmas()
+    id_turma_str = str(id_turma)
+    if id_turma_str in turmas.keys():
+        return turmas[id_turma_str]
+    else:
+        return None
+
 
 def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
     turmas = buscando_turmas()
@@ -26,9 +30,7 @@ def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
         return True
     else:
         return False
-# Parâmetro: um dicionário onde cada turma é um par chave-valor
-# Retorna:
-#   True se a operação for bem sucedida
+
 
 # Função para criar uma nova turma
 def criacao_turma(dados_nova_turma):
@@ -53,6 +55,8 @@ def criacao_turma(dados_nova_turma):
     resposta = {
         "mensagem": f"Criação da turma {turma_nome.capitalize()} realizada com sucesso!",
         "detalhes": [],
+        "nova_turma": nova_turma,
+        "id_nova_turma": nova_turma_id,
     }
 
     # Salve as alterações nos arquivos JSON
@@ -68,3 +72,24 @@ def excluir_turma_svc(id):
         return True
     else:
         return False
+
+
+# Parâmetro: um dicionário onde cada turma é um par chave-valor
+# Retorna:
+#   True se a operação for bem sucedida
+def _salvar_turmas(turmas):
+    dados = json.dumps(turmas, indent=4)
+    with open("dados/turmas.json", "w", encoding="utf-8") as arquivo:
+        arquivo.write(dados)
+        return True
+
+
+def _obter_novo_id_turma():
+    ids_numericos = []
+    turmas = busca_turmas()
+    for id_str in turmas.keys():
+        id_int = int(id_str)
+        ids_numericos.append(id_int)
+    id_max_int = max(ids_numericos)
+    novo_id = str(id_max_int + 1)
+    return novo_id

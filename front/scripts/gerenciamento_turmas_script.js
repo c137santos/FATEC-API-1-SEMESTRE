@@ -26,6 +26,9 @@ function exibirTurmas(turmadata) {
       const turmaSquare = document.createElement("div");
       turmaSquare.className = "turma-square";
       turmaSquare.id = `${turmaId}`; // Adiciona o ID da turma ao turmaSquare
+      turmaSquare.addEventListener("click", () =>
+        requisitar_informacoes_turma(`${turmaId}`)
+      );
 
       // Cria elementos de parágrafo para o nome da turma e nome do professor
       const nomeTurma = document.createElement("p");
@@ -44,18 +47,20 @@ function exibirTurmas(turmadata) {
       imagemIcon.alt = "Ícone";
       imagemIcon.className = "trash-icon";
       imagemIcon.id = `${turmaId}`; // Adiciona o ID da turma ao ícone de deletar
-      imagemIcon.addEventListener("click", () =>
-        requisitar_excluir_turma(`${turmaId}`)
-      );
+      imagemIcon.addEventListener("click", (event) => {
+        event.stopPropagation();
+        requisitar_excluir_turma(`${turmaId}`);
+      });
 
       const imagemIconEdit = document.createElement("img");
       imagemIconEdit.src = "../front/icon/edit-icon.svg";
       imagemIconEdit.alt = "Icone";
       imagemIconEdit.className = "edit-icon";
       imagemIconEdit.id = `${turmaId}`;
-      imagemIconEdit.addEventListener("click", () =>
-        requisitar_editar_turma(`${turmaId}`)
-      );
+      imagemIconEdit.addEventListener("click", (event) => {
+        event.stopPropagation();
+        requisitar_editar_turma(`${turmaId}`);
+      });
 
       // Adiciona o ícone ao turmaSquare
       turmaSquare.appendChild(imagemIcon);
@@ -98,7 +103,7 @@ async function coletaDadosNovaTurma() {
   const duracaoCiclo = document.getElementById("duracaoCiclo").value;
   console.log(dataInicio);
 
-  const regex = /^[A-Za-z\s]*$/;
+  const regex = /^[a-zA-Z \s]*$/;
   for (let id in turmaData) {
     if (turmaData[id].nome == turmaNome) {
       alert("O Nome da Turma já existe.");
@@ -134,20 +139,25 @@ async function coletaDadosNovaTurma() {
   const dia = String(data.getDate()).padStart(2, "0"); // Garante que o dia tenha sempre 2 dígitos
   const mes = String(data.getMonth() + 1).padStart(2, "0"); // Garante que o mês tenha sempre 2 dígitos
   const ano = data.getFullYear();
-  const dataFormatada = `${dia}/${mes}/${ano}`;
+  // const dataFormatada = `${dia}/${mes}/${ano}`;
 
   if (ano < 1000 || ano > 9999) {
     alert("O ano deve ter exatamente 4 dígitos.");
     return;
   }
 
+  const dataFormatada = dataInicio.split("-").reverse().join("/");
+
   // Construir o objeto de turma
   const novaTurmaData = {
     nome: turmaNome,
     professor: professor,
-    dataInicio: dataFormatada,
-    duracaoCiclo: duracaoCiclo,
+    data_de_inicio: dataFormatada,
+    duracao_ciclo: duracaoCiclo,
+    quantidade_ciclos: 4,
   };
+
+  console.log(novaTurmaData);
 
   // Exiba a div de confirmação
   const confirmacaoContainer = document.getElementById("confirmacaoContainer");
@@ -212,6 +222,10 @@ function requisitar_excluir_turma(id) {
 
 function requisitar_editar_turma(id) {
   window.location.href = "editar_turma.html?id=" + id;
+}
+
+function requisitar_informacoes_turma(id) {
+  window.location.href = "informacoes_turma.html?id=" + id;
 }
 
 GetTurmas();

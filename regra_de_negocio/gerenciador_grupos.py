@@ -8,3 +8,4 @@ def buscando_grupos():
         grupos_Data = json.load(f)
     return grupos_Data
 
+
