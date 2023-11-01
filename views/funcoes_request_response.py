@@ -1,8 +1,6 @@
 from wgsi import JsonResponse
-from regra_de_negocio.service import (
-    buscando_turmas,
-    cria_turma,
-)
+import regra_de_negocio.service as service
+
 
 from regra_de_negocio.gerenciador_turmas import excluir_turma_svc, editar_turma_svc
 
@@ -35,12 +33,12 @@ def editar_aluno(request, id):
 
 
 def listar_turmas(request):
-    turmas_data = buscando_turmas()
+    turmas_data = service.buscar_turmas()
     return JsonResponse(turmas_data)
 
 
 def obter_turma(request, id):
-    turmas_data = buscando_turmas()
+    turmas_data = service.buscar_turmas()
     return JsonResponse(turmas_data[id])
 
 
@@ -59,7 +57,7 @@ def editar_turma(request, id):
 def criar_turma(request):
     nova_turma = json.loads(request.body)
     print(nova_turma)
-    resposta = cria_turma(nova_turma)
+    resposta = service.criar_turma(nova_turma)
     for i in range(resposta["nova_turma"]["quantidade_ciclos"]):
         gerenciador_ciclos.adicionar_ciclo(resposta["id_nova_turma"])
     return JsonResponse(resposta)

@@ -1,7 +1,7 @@
 import json
 
 from regra_de_negocio.gerenciador_alunos import listar_alunos
-from regra_de_negocio.gerenciador_turmas import busca_turmas
+from regra_de_negocio.gerenciador_turmas import buscar_turmas
 
 
 def listar_turmas_alunos():
