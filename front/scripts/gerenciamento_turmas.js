@@ -103,7 +103,7 @@ async function coletaDadosNovaTurma() {
   const duracaoCiclo = document.getElementById("duracaoCiclo").value;
   console.log(dataInicio);
 
-  const regex = /^[a-zA-Z \s]*$/;
+  const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/;
   for (let id in turmaData) {
     if (turmaData[id].nome == turmaNome) {
       alert("O Nome da Turma já existe.");
