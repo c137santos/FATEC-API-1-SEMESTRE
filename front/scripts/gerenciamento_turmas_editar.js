@@ -24,7 +24,7 @@ async function requisitar_editar_turma(id){
             "data_de_inicio" : dataFormatada,
             "duracao_ciclo": document.getElementById('fduracaosCiclo')['value']
         }
-        fetch (`http://localhost:8080/api/v1/notas/editar/${id}`,{method: "POST", body:JSON.stringify(turma)})
+        fetch (`http://localhost:8080/api/v1/turmas/editar/${id}`,{method: "POST", body:JSON.stringify(turma)})
             .then(() => window.location.href = 'editar_turma.html?id=' + id)
     }
 }
