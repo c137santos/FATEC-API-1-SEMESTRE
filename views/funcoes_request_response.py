@@ -135,6 +135,9 @@ def filtrar_notas_por_id_turma(request, id_turma):
         notas_por_turma[id_nota][
             "edicao_habilitada"
         ] = gerenciador_notas.verificar_edicao_habilitada(notas_por_turma, id_nota)
+        print(notas_por_turma[id_nota][
+            "edicao_habilitada"
+        ])
     return JsonResponse(notas_por_turma)
 
 

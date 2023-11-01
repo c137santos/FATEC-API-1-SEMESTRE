@@ -83,10 +83,17 @@ function criarCampoNota(alunoId, notasAlunos) {
         const InputNotas = document.createElement("input");
         InputNotas.className = "valor";
         InputNotas.type = "number";
+        InputNotas.step = "0.01";
         InputNotas.value = valorNota;
-        InputNotas.id = `id_turma=${id_turma}, = id_aluno=${id_aluno},id_ciclo=${id_ciclo}`;
+        InputNotas.id = `id_turma=${id_turma},id_aluno=${id_aluno},id_ciclo=${id_ciclo}`;
 
-        if (cicloAberto == false) {
+        if (cicloAberto === true) {
+          const aviso_ciclo_aberto =
+            document.getElementById("aviso_ciclo_aberto");
+          aviso_ciclo_aberto.textContent = `Ciclo aberto para nota: ${id_ciclo}`;
+          InputNotas.dataset.ValorOriginal = valorNota;
+          InputNotas.removeAttribute("readonly");
+        } else {
           InputNotas.setAttribute("readonly", true);
         }
 
@@ -117,16 +124,19 @@ function requisitar_editar_nota() {
       const id_aluno = nota.id.split("id_aluno=")[1].split(",")[0];
       const id_ciclo = nota.id.split("id_ciclo=")[1];
       const valor = nota.value;
-    
-      requestBody.push({
-        id_aluno: id_aluno,
-        id_turma: id_turma,
-        id_ciclo: id_ciclo,
-        valor: valor,
-      });
+      const valorOriginal = nota.dataset.ValorOriginal;
+
+      if (valor !== valorOriginal) {
+        requestBody.push({
+          id_aluno: id_aluno,
+          id_turma: id_turma,
+          id_ciclo: id_ciclo,
+          valor: valor,
+        });
+      }
     });
     const requestBodyJSON = JSON.stringify(requestBody);
-    console.log(requestBodyJSON); // O requestBody agora contém todas as informações das notas
+    console.log(requestBodyJSON);
   } else {
     console.log("Nenhuma nota editável encontrada.");
   }
