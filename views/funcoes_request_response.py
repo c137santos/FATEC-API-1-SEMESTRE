@@ -4,6 +4,7 @@ import regra_de_negocio.service as service
 
 from regra_de_negocio.gerenciador_turmas import excluir_turma_svc, editar_turma_svc
 
+import regra_de_negocio.gerenciador_turmas as gerenciador_turmas
 import regra_de_negocio.gerenciador_ciclos as gerenciador_ciclos
 import regra_de_negocio.gerenciador_notas as gerenciador_notas
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
@@ -33,12 +34,12 @@ def editar_aluno(request, id):
 
 
 def listar_turmas(request):
-    turmas_data = service.buscar_turmas()
+    turmas_data = gerenciador_turmas.buscar_turmas()
     return JsonResponse(turmas_data)
 
 
 def obter_turma(request, id):
-    turmas_data = service.buscar_turmas()
+    turmas_data = gerenciador_turmas.buscar_turmas()
     return JsonResponse(turmas_data[id])
 
 

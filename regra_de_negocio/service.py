@@ -1,13 +1,7 @@
 from regra_de_negocio import gerenciador_turmas
 
-
-def buscar_turmas():  # retorna todas turmas
-    turmas_data = gerenciador_turmas.buscar_turmas()
-    return turmas_data
-
-
 def criar_turma(dados_nova_turma):
-    turmas = buscar_turmas()
+    turmas = gerenciador_turmas.buscar_turmas()
     nova_turma_id = gerando_novo_id_svc(turmas)
     resposta = gerenciador_turmas.criacao_turma(dados_nova_turma, nova_turma_id, turmas)
     return resposta
