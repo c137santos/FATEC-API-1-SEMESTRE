@@ -35,7 +35,7 @@ def editar_aluno(request, id):
 
 
 def listar_turmas(request):
-    turmas_data = busca_turmas()
+    turmas_data = buscando_turmas()
     return JsonResponse(turmas_data)
 
 
