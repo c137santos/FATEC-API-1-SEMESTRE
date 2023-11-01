@@ -1,6 +1,6 @@
 :root {
   --background-alt: #f7f7f7;
-  --selection: #9e9e9e;
+  --selection: hsl(0, 0%, 100%);
   --text-main: #363636;
   --text-bright: #000;
   --text-muted: #70777f;
