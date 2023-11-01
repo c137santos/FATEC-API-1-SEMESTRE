@@ -1,0 +1,20 @@
+{
+  "1": {
+      "nome": "Clara Santos",
+      "RA": 1,
+      "data_nascimento": "2023-10-10",
+      "sexo": "Nao-binario"
+  },
+  "2": {
+      "nome": "Marcelo Tambalo",
+      "RA": 2,
+      "data_nascimento": "1994-11-04",
+      "sexo": ""
+  },
+  "3": {
+      "nome": "Lucas Nadalete",
+      "RA": 3,
+      "data_nascimento": "1888-11-04",
+      "sexo": "Golfinho"
+  }
+}

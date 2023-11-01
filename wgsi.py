@@ -114,8 +114,11 @@ def retorna_response(environ, start_response):
     start_response(response.status, list(response.headers.items()))
     return response
 
+def ajusta_banco():
+    ...
 
 if __name__ == "__main__":
+    ajusta_banco()
     print("🚀 Servidor HTTP rodando! 🚀 \n Acesse o servidor em: 127.0.0.1:8080")
     server = make_server("127.0.0.1", 8080, retorna_response)
     server.serve_forever()
