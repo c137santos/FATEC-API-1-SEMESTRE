@@ -117,8 +117,7 @@ function requisitar_editar_nota() {
       const id_aluno = nota.id.split("id_aluno=")[1].split(",")[0];
       const id_ciclo = nota.id.split("id_ciclo=")[1];
       const valor = nota.value;
-
-      // Adicione as informações de notas ao objeto requestBody
+    
       requestBody.push({
         id_aluno: id_aluno,
         id_turma: id_turma,
