@@ -13,6 +13,8 @@ async function GetTurmas() {
           `http://127.0.0.1:8080/api/v1/ciclos_detalhes/listar/turma/${turmaId}`
         );
         const ciclosInfo = await responseCiclos.json();
+        // Modelo do ciclosInfo para uma turma com ciclo 1 aberto, se nao tiver vem como null
+        // {"data_final_ciclo": "2023-11-04 00:00:00", "ciclo_atual": 2, "ciclo_aberto_para_nota": 1}
         ciclosData[turmaId] = ciclosInfo;
       }
     }
@@ -24,7 +26,6 @@ async function GetTurmas() {
   }
 }
 
-// Adicione esta função para formatar a data
 function formatarData(data) {
   return new Date(data).toLocaleDateString("pt-BR");
 }
