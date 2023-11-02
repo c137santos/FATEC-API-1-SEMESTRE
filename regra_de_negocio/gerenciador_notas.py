@@ -154,9 +154,6 @@ def _salvar_notas(notas):
         f.write(dados)
         return True
 
-
-from datetime import datetime
-
 def verificar_edicao_habilitada(notas, id_nota):
     id_nota_str = str(id_nota)
     nota = notas[id_nota_str]
