@@ -15,7 +15,7 @@ async function GetTurmas() {
 }
 
 async function listar_alunos_turma(id) {
-  const response = await fetch (`http://localhost:8080/api/v1/turmas_alunos/listar_alunos_da_turma/${id}`, {method: "GET"})
+  const response = await fetch (`http://localhost:8080/api/v1/turmas_alunos/listar_alunos_da_turma/${id}`)
   const alunos = await response.json()
   return alunos
 }
