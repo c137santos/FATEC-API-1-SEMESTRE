@@ -78,7 +78,7 @@ function exibirTurmas(turmadata, ciclosData) {
 
         if (cicloAbertoParaNota) {
           const cicloAbertoNotaParagrafo = document.createElement("p");
-          cicloAbertoNotaParagrafo.textContent = `Ciclo Aberto para Notas: ${cicloAbertoParaNota}`;
+          cicloAbertoNotaParagrafo.textContent = `Ciclo aberto: ${cicloAbertoParaNota}`;
           turmaSquare.appendChild(cicloAbertoNotaParagrafo);
         }
       }
