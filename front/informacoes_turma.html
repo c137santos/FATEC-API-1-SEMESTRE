@@ -81,7 +81,7 @@
               PesoNota.id = `peso${id_ciclo}`
               PesoNota.value = pesoData.peso_nota;
               PesoNota.addEventListener("keypress", (e) => { 
-                if(e.keyCode === 13){
+                if(e.key === 'Enter'){
                   requisitar_salvar_ciclo_peso() 
                 }
               });
