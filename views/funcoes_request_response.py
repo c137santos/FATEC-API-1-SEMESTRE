@@ -134,6 +134,10 @@ def filtrar_notas_por_id_turma(request, id_turma):
         ] = gerenciador_notas.verificar_edicao_habilitada(notas_por_turma, id_nota)
     return JsonResponse(notas_por_turma)
 
+def listar_detalhes_ciclos_por_id_turma(request, id_turma):
+    turma = gerenciador_turmas.obter_turma(id_turma)
+    resposta = gerenciador_ciclos.detalhesCicloTurma(turma)
+    return JsonResponse(resposta)
 
 def listar_notas_por_id_aluno(request, id_aluno):
     notas = gerenciador_notas.listar_notas()
