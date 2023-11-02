@@ -45,9 +45,7 @@ def criacao_turma(dados_nova_turma, nova_turma_id, turmas):
         "data_de_inicio": dados_nova_turma_json[
             "data_de_inicio"
         ],  # Acesse a propriedade "dataInicio" do corpo
-        "duracao_ciclo": dados_nova_turma_json[
-            "duracao_ciclo"
-        ],
+        "duracao_ciclo": dados_nova_turma_json["duracao_ciclo"],
         "quantidade_ciclos": dados_nova_turma_json["quantidade_ciclos"],
     }
 
@@ -57,7 +55,7 @@ def criacao_turma(dados_nova_turma, nova_turma_id, turmas):
         "mensagem": f"Criação da turma {turma_nome.capitalize()} realizada com sucesso!",
         "nova_turma": nova_turma,
         "id_nova_turma": nova_turma_id,
-        "quantidade_ciclos":quantidade_ciclos,
+        "quantidade_ciclos": quantidade_ciclos,
     }
 
     # Salve as alterações nos arquivos JSON
@@ -83,4 +81,3 @@ def _salvar_turmas(turmas):
     with open("dados/turmas.json", "w", encoding="utf-8") as arquivo:
         arquivo.write(dados)
         return True
-

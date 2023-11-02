@@ -43,11 +43,12 @@ def obter_ultimo_ciclo_por_id_turma(id_turma):
                 ultimo_ciclo = ciclos[id_ciclo]["numero_ciclo"]
                 id_ultimo_ciclo = id_ciclo
         return id_ultimo_ciclo, ultimo_ciclo
-    
+
+
 def criar_ciclo_turma(duracao_ciclo, nova_turma_id, quantidade_ciclos):
     """duracao_ciclo = int
-        nova_turma_id = str
-        quantidade_ciclos = int
+    nova_turma_id = str
+    quantidade_ciclos = int
     """
     ciclos = listar_ciclos()
     nova_turma_id_str = str(nova_turma_id)
@@ -55,17 +56,16 @@ def criar_ciclo_turma(duracao_ciclo, nova_turma_id, quantidade_ciclos):
         peso_nota = float(ciclo + 1)
         numero_ciclo = ciclo + 1
         novo_ciclo = {
-        "id_turma":nova_turma_id_str,
-        "duracao":duracao_ciclo,
-        "peso_nota":peso_nota,
-        "numero_ciclo":numero_ciclo,
-        "prazo_insercao_nota":5
-        } 
+            "id_turma": nova_turma_id_str,
+            "duracao": duracao_ciclo,
+            "peso_nota": peso_nota,
+            "numero_ciclo": numero_ciclo,
+            "prazo_insercao_nota": 5,
+        }
         novo_id_ciclo = _obter_novo_id_ciclo()
         ciclos[novo_id_ciclo] = novo_ciclo
         _salvar_ciclos(ciclos)
-    return 
-
+    return
 
 
 def adicionar_ciclo(ciclo):
@@ -78,6 +78,7 @@ def adicionar_ciclo(ciclo):
     novo_id_ciclo = _obter_novo_id_ciclo()
     ciclos[novo_id_ciclo] = ciclo
     return _salvar_ciclos(ciclos)
+
 
 def _obter_novo_id_ciclo():
     ciclos = listar_ciclos()
@@ -95,7 +96,6 @@ def _salvar_ciclos(ciclos):
     with open("dados/ciclos.json", "w", encoding="utf-8") as f:
         f.write(dados)
     return True
-
 
 
 # def _verificar_duplicidade(id_ciclo, ciclo, ciclos):
