@@ -45,10 +45,12 @@ body {
   text-align: center;
   width: 300px;
   max-width: 300px;
-  height: 90px;
+  height: 100px;
   padding: 0px 5px;
+  border: solid;
+  border-width: 1px;
   border-radius: 5px;
-  background-color: #ccc;
+  border-color: #ccc
 }
 
 .titulo-ciclos {
@@ -67,10 +69,13 @@ body {
   align-items: center;
   font-weight: 200;
   margin-right: 2px;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .peso {
   border: 1px solid #0000000c;
+  width: 7%;
   padding: 5px;
   margin-right: 10px; /* Adiciona espaço ao redor dos pesos para separá-los dos rótulos (ciclos) */
 }
@@ -171,4 +176,19 @@ div.media {
   margin-right: 10px;
   text-align: center;
   padding: 0px;
+}
+
+.btn-salvar-ciclo-peso {
+  width: 29px;
+  align-self: flex-end;
+  border: solid;
+  border-radius: 4px;
+  border-width: 1px;
+  border-color: rgba(184, 20, 255, 0.968);
+  background-color: rgb(243, 237, 245);
+}
+
+.btn-salvar-ciclo-peso:hover {
+  background-color: rgb(251, 179, 197);
+  cursor:pointer;
 }
