@@ -101,6 +101,7 @@ async function coletaDadosNovaTurma() {
   const professor = document.getElementById("professor").value;
   const dataInicio = document.getElementById("dataInicio").value;
   const duracaoCiclo = document.getElementById("duracaoCiclo").value;
+  const quantidadeCiclo = document.getElementById("quantidadeCiclo").value;
   console.log(dataInicio);
 
   const regex = /^[a-zA-Z \s]*$/;
@@ -154,7 +155,7 @@ async function coletaDadosNovaTurma() {
     professor: professor,
     data_de_inicio: dataFormatada,
     duracao_ciclo: duracaoCiclo,
-    quantidade_ciclos: 4,
+    quantidade_ciclos: quantidadeCiclo,
   };
 
   console.log(novaTurmaData);

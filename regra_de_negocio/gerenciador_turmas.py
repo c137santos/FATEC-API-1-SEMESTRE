@@ -1,5 +1,6 @@
 import json
 
+
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
 def buscar_turmas():
     with open("dados/turmas.json", "r", encoding="utf-8") as f:
@@ -33,29 +34,35 @@ def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
 # Função para criar uma nova turma
 def criacao_turma(dados_nova_turma, nova_turma_id, turmas):
     dados_nova_turma_json = dados_nova_turma
+    duracao_ciclo = int(dados_nova_turma_json["duracao_ciclo"])
+    quantidade_ciclos = int(dados_nova_turma_json["quantidade_ciclos"])
+
     nova_turma = {
         "nome": dados_nova_turma_json["nome"],  # Acesse a propriedade "nome" do corpo
         "professor": dados_nova_turma_json[
             "professor"
         ],  # Acesse a propriedade "professor" do corpo
         "data_de_inicio": dados_nova_turma_json[
-            "dataInicio"
+            "data_de_inicio"
         ],  # Acesse a propriedade "dataInicio" do corpo
-        "duracao_ciclo": dados_nova_turma_json["duracaoCiclo"],
-        "quantidade_ciclos": 4,
+        "duracao_ciclo": dados_nova_turma_json[
+            "duracao_ciclo"
+        ],
+        "quantidade_ciclos": dados_nova_turma_json["quantidade_ciclos"],
     }
+
     turmas[nova_turma_id] = nova_turma
     turma_nome = turmas[nova_turma_id]["nome"]
     resposta = {
         "mensagem": f"Criação da turma {turma_nome.capitalize()} realizada com sucesso!",
-        "detalhes": [],
         "nova_turma": nova_turma,
         "id_nova_turma": nova_turma_id,
+        "quantidade_ciclos":quantidade_ciclos,
     }
 
     # Salve as alterações nos arquivos JSON
     _salvar_turmas(turmas)
-    return resposta
+    return resposta, quantidade_ciclos, duracao_ciclo
 
 
 def excluir_turma_svc(id):
@@ -77,13 +84,3 @@ def _salvar_turmas(turmas):
         arquivo.write(dados)
         return True
 
-
-def _obter_novo_id_turma():
-    ids_numericos = []
-    turmas = buscar_turmas()
-    for id_str in turmas.keys():
-        id_int = int(id_str)
-        ids_numericos.append(id_int)
-    id_max_int = max(ids_numericos)
-    novo_id = str(id_max_int + 1)
-    return novo_id
