@@ -119,10 +119,6 @@
                     InputNotas.type = "number";
                     InputNotas.value = valorNota;
                     InputNotas.id = id_ciclo;
-
-                    if(valorNota == 0) {
-                     InputNotas.value= ""
-                    }
                       
                     // Verifique se a nota já foi atribuída para torná-la somente leitura
                     if (CicloAberto(id_ciclo)) {
