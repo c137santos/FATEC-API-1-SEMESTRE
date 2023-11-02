@@ -65,7 +65,7 @@ def criar_ciclo_turma(duracao_ciclo, nova_turma_id, quantidade_ciclos):
         novo_id_ciclo = _obter_novo_id_ciclo()
         ciclos[novo_id_ciclo] = novo_ciclo
         _salvar_ciclos(ciclos)
-    return
+    return True
 
 
 def adicionar_ciclo(ciclo):
