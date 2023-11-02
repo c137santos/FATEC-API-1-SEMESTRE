@@ -18,25 +18,32 @@
   <body>
     <div class="form-container">
       <div id="turmaForm" class="data-content">
-        <label for="turmaNome">Nome da turma:</label>
-        <input type="text" id="turmaNome" class="input-field" />
+        <diV class="inputs">
+          <label for="turmaNome">Nome da turma:</label>
+          <input type="text" id="turmaNome" class="input-field" />
+        </diV>
+        <div class="inputs">
+          <label for="professor">Professor responsável:</label>
+          <input type="text" id="professor" class="input-field" />
+        </div>
 
-        <label for="professor">Professor responsável:</label>
-        <input type="text" id="professor" class="input-field" />
-
-        <label for="dataInicio">Data de início:</label>
-        <input type="date" id="dataInicio" class="input-field" />
+        <div class="inputs">
+          <label for="dataInicio">Data de início:</label>
+          <input type="date" id="dataInicio" class="input-field" />
+        </div>
         <!-- TODO: Fazer com que aceitem apenas datas futuras -->
 
-        <label for="duracaoCiclo">Duracao Ciclos em dias:</label>
-        <input type="number" id="duracaoCiclo" class="input-field" />
-        <!-- TODO: Fazer com que automaticamente apenas números positivos -->
-        <p>
-          Adicionar alunos na turma:
-        </p>
-        <div id="listarAlunos">
-          
+        <div class="inputs">
+          <label for="duracaoCiclo">Duracao Ciclos em dias:</label>
+          <input type="number" id="duracaoCiclo" class="input-field" />
         </div>
+        <!-- TODO: Fazer com que automaticamente apenas números positivos -->
+      </div>
+      <div id="listarAlunos">
+        <h3 class="texto-titulo">
+          Adicionar alunos na turma:
+        </h3>
+        
       </div>
       <button class="submit-turma">Criar turma</button>
 
@@ -53,5 +60,10 @@
       </div>
     </div>
   </body>
+  <div class="muleke">
+    <a href="index.html">
+        <img src="./imagens/mascote2.png" alt="mascote">
+    </a>
+</div>
 </html>
 <script src="/front/scripts/gerenciamento_turmas_criar.js"></script>

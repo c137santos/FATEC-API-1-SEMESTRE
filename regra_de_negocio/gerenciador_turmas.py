@@ -34,12 +34,10 @@ def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
 # Função para criar uma nova turma
 def criacao_turma(nova_turma):
     from regra_de_negocio.gerenciador_turmas_alunos import adicionar_turma_aluno
+
     id_nova_turma = _obter_novo_id_turma()
     for alunos in nova_turma["alunos_adicionados"]:
-        turma_aluno={
-            "id_turma": id_nova_turma,
-            "id_aluno": alunos["RA"]
-        },
+        turma_aluno = ({"id_turma": id_nova_turma, "id_aluno": alunos["RA"]},)
         adicionar_turma_aluno(turma_aluno)
     nova_turma.pop("alunos_adicionados", None)
     turmas = busca_turmas()

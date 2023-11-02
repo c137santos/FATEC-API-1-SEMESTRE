@@ -1,4 +1,11 @@
 // Função para buscar turmas no servidor
+const criarTurmaButton = document.querySelector(".add-turma-button");
+criarTurmaButton.addEventListener("click", levaPaginaEditar);
+
+function levaPaginaEditar(){
+  window.location.href = "http://127.0.0.1:5500/front/criar_turma.html";
+}
+
 let turmaData;
 async function GetTurmas() {
   try {

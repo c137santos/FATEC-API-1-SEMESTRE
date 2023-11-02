@@ -1,6 +1,7 @@
 const criarTurmaButton = document.querySelector(".submit-turma");
 criarTurmaButton.addEventListener("click", coletaDadosNovaTurma);
 
+
 async function coletaDadosNovaTurma() {
   const turmaNome = document.getElementById("turmaNome").value;
   const professor = document.getElementById("professor").value;
@@ -59,29 +60,9 @@ async function coletaDadosNovaTurma() {
   };
   console.log(novaTurmaData);
 
-  // Exiba a div de confirmação
-  const confirmacaoContainer = document.getElementById("confirmacaoContainer");
-  confirmacaoContainer.style.display = "block";
+  criarNovaTurma(novaTurmaData);
+  window.location.href = "http://127.0.0.1:5500/front/gerenciamento_turmas.html";
 
-  // Preencha os detalhes da turma na div de confirmação
-  document.getElementById("turmaNomeConfirmacao").textContent = turmaNome;
-  document.getElementById("professorConfirmacao").textContent = professor;
-  document.getElementById("dataInicioConfirmacao").textContent = dataFormatada;
-  document.getElementById("duracaoCicloConfirmacao").textContent = duracaoCiclo;
-
-  //aciona evento para enviar os dados da turma que sera criada para o back end
-  const confirmarButton = document.getElementById("confirmarButton");
-  confirmarButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    console.log(novaTurmaData);
-    criarNovaTurma(novaTurmaData);
-  });
-}
-
-// Fechar modal de confirmação de criação
-function closeConfirmacao() {
-  const confirmacaoContainer = document.getElementById("confirmacaoContainer");
-  confirmacaoContainer.style.display = "none";
 }
 
 //Função para enviar as informações da nova turma em formato de string para o back end
@@ -127,6 +108,8 @@ async function listarAlunos(){
 function addAlunosPossiveis(alunos) {
     const divListarAlunos = document.getElementById("listarAlunos");
     for (const aluno in alunos) {
+      const divOrganiza = document.createElement("div") 
+      divOrganiza.className = "divsNomes" 
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.name = alunos[aluno].RA;
@@ -134,8 +117,9 @@ function addAlunosPossiveis(alunos) {
       const label = document.createElement("label");
       label.textContent = alunos[aluno].nome;
       label.htmlFor = alunos[aluno].RA;
-      divListarAlunos.appendChild(checkbox);
-      divListarAlunos.appendChild(label);
+      divOrganiza.appendChild(checkbox);
+      divOrganiza.appendChild(label);
+      divListarAlunos.appendChild(divOrganiza);
     }
   }
 
