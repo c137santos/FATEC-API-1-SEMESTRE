@@ -43,7 +43,6 @@ body {
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-
   align-items: center;
   cursor: pointer;
   padding: 10px; /* Adicione um preenchimento interno para o conteúdo */
