@@ -83,7 +83,30 @@ function exibirTurmas(turmadata, ciclosData) {
         }
       }
 
-      // ... Seu código para os ícones e outros elementos continua aqui
+      // Cria um ícone de lixeira para deletar a turma
+      const imagemIcon = document.createElement("img");
+      imagemIcon.src = "../front/icon/trash-icon.svg";
+      imagemIcon.alt = "Ícone";
+      imagemIcon.className = "trash-icon";
+      imagemIcon.id = `${turmaId}`; // Adiciona o ID da turma ao ícone de deletar
+      imagemIcon.addEventListener("click", (event) => {
+        event.stopPropagation();
+        requisitar_excluir_turma(`${turmaId}`);
+      });
+
+      const imagemIconEdit = document.createElement("img");
+      imagemIconEdit.src = "../front/icon/edit-icon.svg";
+      imagemIconEdit.alt = "Icone";
+      imagemIconEdit.className = "edit-icon";
+      imagemIconEdit.id = `${turmaId}`;
+      imagemIconEdit.addEventListener("click", (event) => {
+        event.stopPropagation();
+        requisitar_editar_turma(`${turmaId}`);
+      });
+
+      // Adiciona o ícone ao turmaSquare
+      turmaSquare.appendChild(imagemIcon);
+      turmaSquare.appendChild(imagemIconEdit);
 
       // Adiciona o turmaSquare ao container
       container.appendChild(turmaSquare);
