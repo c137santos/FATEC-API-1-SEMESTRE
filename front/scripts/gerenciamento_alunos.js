@@ -26,9 +26,9 @@ const renderizarAluno = (aluno) => {
   labelNome.textContent = aluno.nome;
   quadrado.appendChild(labelNome);
   
-  const labelSexo = document.createElement("p");
-  labelSexo.textContent = aluno.sexo;
-  quadrado.appendChild(labelSexo);
+  const labelGenero = document.createElement("p");
+  labelGenero.textContent = aluno.genero;
+  quadrado.appendChild(labelGenero);
 
   const labelIdade = document.createElement("p");
   labelIdade.textContent = aluno.data_nascimento;
@@ -79,13 +79,13 @@ async function editarAluno(RA) {
   formulario.appendChild(aluno_label);
   formulario.appendChild(inputNome);
 
-  const aluno_sexo = document.createElement("p");
-  aluno_sexo.textContent = "Sexo";
-  const inputSexo = document.createElement("input");
-  inputSexo.type = "text";
-  inputSexo.value = aluno.sexo;
-  formulario.appendChild(aluno_sexo);
-  formulario.appendChild(inputSexo);
+  const aluno_genero = document.createElement("p");
+  aluno_genero.textContent = "Genero";
+  const inputGenero = document.createElement("input");
+  inputGenero.type = "text";
+  inputGenero.value = aluno.genero;
+  formulario.appendChild(aluno_genero);
+  formulario.appendChild(inputGenero);
 
 
   const aluno_nasc = document.createElement("p");
@@ -109,13 +109,13 @@ async function editarAluno(RA) {
   buttonSalvar.addEventListener("click", async () => {
     // Obter os valores do formulário
     const nome = inputNome.value;
-    const sexo = inputSexo.value;
+    const genero = inputGenero.value;
     const dataNascimento = inputDataNascimento.value;
 
     const aluno_editado = {
         "RA": RA,
         "nome": nome,
-        "sexo": sexo,
+        "genero": genero,
         "data_nascimento": dataNascimento
     }
 
@@ -158,13 +158,13 @@ submitButton.addEventListener("click", function () {
 
 const criarNovoAluno = () => {
     nomeNovo = document.getElementById('nomeNovoALuno').value
-    sexoNovo = document.getElementById('sexoNovoAluno').value
+    generoNovo = document.getElementById('generoNovoAluno').value
     dataNascNova = document.getElementById('dataNascNovoAluno').value
 
     const alunoNovo = {
-        "nome":nomeNovo,
-        "sexo": sexoNovo,
-        "data_nascimento":dataNascNova
+        "nome": nomeNovo,
+        "genero": generoNovo,
+        "data_nascimento": dataNascNova
     }
     try {
       fetch ('http://127.0.0.1:8080/api/v1/alunos/criar',{method: "POST", body:JSON.stringify(alunoNovo)})
