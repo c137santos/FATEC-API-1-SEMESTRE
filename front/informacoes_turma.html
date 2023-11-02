@@ -17,9 +17,7 @@
         <img src="./imagens/Logo.png" alt="logo" />
       </a>
     </header>_
-    <button id="turma" class="menu-button">
-      <a href="gerenciamento_turmas.html">Turma</a>
-    </button>
+
     <div class="container-info">
         <div class="info-turma">
           <h3>Informações da Turma</h3>
@@ -32,14 +30,14 @@
           <p class="fquantidadeAlunos" id="fquantidadeAlunos"></p>
         </div>
         <div class="container-ciclos">
-          <p class="titulo-ciclos"><strong>Pesos Ciclos:</strong></p>
+          <p class="titulo-ciclos"><strong>Pesos dos Ciclos:</strong></p>
           <div class="ciclo-peso"></div>
         </div>
             
         </div>
     </div>
     <div class="aluno-container">
-        <p class="aviso_ciclo_aberto">Ciclo aberto para nota: x</p>
+        <div class="aviso_ciclo_aberto"><p class="aviso_ciclo_aberto"><strong><h3> Aberto para Nota: x</h3></strong></p></div>
         <div class="header-container">
           <div class="header-title titulo_alunos">Nome</div>
           <div class="header-title titulo_notas">Notas</div>
@@ -49,6 +47,11 @@
             <!-- Os Alunos serão adicionadas automaticamente aqui -->
           </div>
     </div>
+
+    <button id="turma" class="menu-button">
+      <a href="gerenciamento_turmas.html">Voltar para lista de Turmas</a>
+    </button>
+
      <!-- Moleke -->
      <div class="muleke">
         <a href="index.html">
@@ -124,10 +127,6 @@
                     InputNotas.type = "number";
                     InputNotas.value = valorNota;
                     InputNotas.id = id_ciclo;
-
-                    if(valorNota == 0) {
-                     InputNotas.value= ""
-                    }
                       
                     // Verifique se a nota já foi atribuída para torná-la somente leitura
                     if (CicloAberto(id_ciclo)) {
