@@ -22,8 +22,12 @@
     </button>
     <div class="container-info">
         <div class="info-turma">
-          <p class="fnomeTurma"></p>
-          <p class="fnomeProfessor"></p>
+          <label for="fnomeTurma">Nome da Turma:</label>
+          <input class="fnomeTurma" type="text" id="fnomeTurma" disabled />
+          <label for="fnomeProfessor">Nome do Professor:</label>
+          <input class="fnomeProfessor" type="text" id="fnomeProfessor" disabled />
+          <label for="fnomeProfessor">Quantidade de Alunos:</label>
+          <input class="fquantidadeAlunos" type="text" id="fquantidadeAlunos" disabled />
         </div>
         <div class="container-ciclos">
           <p class="titulo-ciclos"><strong>Pesos Ciclos:</strong></p>
@@ -61,9 +65,11 @@
           if (turma){
             const nomeTurmaElement = document.querySelector('.fnomeTurma');
             const nomeProfessorElement = document.querySelector('.fnomeProfessor');
+            const quantidadeAlunosElement = document.querySelector('.fquantidadeAlunos');
             const cicloPeso = document.querySelector(".ciclo-peso");
-            nomeTurmaElement.textContent = 'Nome turma: ' + turma["nome"];
-            nomeProfessorElement.textContent = 'Nome professor: ' + turma["professor"];
+            nomeTurmaElement.value = turma["nome"];
+            nomeProfessorElement.value = turma["professor"];
+            quantidadeAlunosElement.value = alunos ? Object.keys(alunos).length : 0;
             for (let chave in PesoCiclo){
               const pesoData = PesoCiclo[chave];
 

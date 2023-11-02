@@ -34,9 +34,11 @@ body {
 }
 
 .info-turma {
-  width: 200px;
-  height: 90px;
+  padding: 8px;
+  width: 236px;
+  height: 206px;
   background-color: #ccc;
+  border-radius: 5px;
 }
 
 .container-ciclos {

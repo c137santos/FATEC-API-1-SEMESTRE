@@ -7,15 +7,21 @@ async function GetTurmas() {
     console.log(turmaData);
 
     // Chama a função para exibir as turmas
-    exibirTurmas(turmaData);
+    await exibirTurmas(turmaData);
   } catch (error) {
     console.error("Erro ao buscar dados da API -> ", error);
     return null;
   }
 }
 
+async function listar_alunos_turma(id) {
+  const response = await fetch (`http://localhost:8080/api/v1/turmas_alunos/listar_alunos_da_turma/${id}`, {method: "GET"})
+  const alunos = await response.json()
+  return alunos
+}
+
 // Função para exibir as turmas no DOM
-function exibirTurmas(turmadata) {
+async function exibirTurmas(turmadata) {
   const container = document.querySelector(".flex-warp-container");
   // Itera sobre os objetos do JSON e cria elementos HTML para cada turma
   for (const turmaId in turmadata) {
@@ -37,9 +43,14 @@ function exibirTurmas(turmadata) {
       const nomeProfessor = document.createElement("p");
       nomeProfessor.textContent = `Professor: ${turma.professor}`;
 
+      const alunos = await listar_alunos_turma(turmaId);
+      const quantidadeAlunos = document.createElement("p");
+      quantidadeAlunos.textContent = `Alunos: ${alunos ? Object.keys(alunos).length : 0}`;
+
       // Adiciona os parágrafos ao turmaSquare
       turmaSquare.appendChild(nomeTurma);
       turmaSquare.appendChild(nomeProfessor);
+      turmaSquare.appendChild(quantidadeAlunos);
 
       // Cria um ícone de lixeira para deletar a turma
       const imagemIcon = document.createElement("img");
