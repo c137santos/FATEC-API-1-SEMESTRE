@@ -6,17 +6,8 @@ body {
   margin: 0px o0px;
 }
 
-/* Estilos para o cabeçalho */
-.header {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.menu-button a {
-  text-decoration: none;
-  justify-content: left;
-  /*Retira sublinhados de links*/
+.menu-button {
+  text-decoration:none
 }
 
 .titulo {
@@ -36,19 +27,20 @@ body {
 .info-turma {
   width: 200px;
   height: 90px;
-  background-color: #ccc;
+  background-color: transparent;
 }
 
 .container-ciclos {
   display: flex;
   flex-direction: column;
   text-align: center;
+  justify-content: center;
   width: 300px;
   max-width: 300px;
   height: 90px;
   padding: 0px 5px;
   border-radius: 5px;
-  background-color: #ccc;
+  background-color: white;
 }
 
 .titulo-ciclos {
@@ -60,29 +52,31 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  font-weight: bold;
 }
 
 .ciclo {
   display: flex;
   align-items: center;
   font-weight: 200;
-  margin-right: 2px;
+  font-weight: bold;
+  text-decoration: underline 
 }
 
+
 .peso {
-  border: 1px solid #0000000c;
   padding: 5px;
-  margin-right: 10px; /* Adiciona espaço ao redor dos pesos para separá-los dos rótulos (ciclos) */
+  margin-right: 15px; /* Adiciona espaço ao redor dos pesos para separá-los dos rótulos (ciclos) */
 }
 
 /* Estilos para o contêiner principal dos alunos */
 .aluno-container {
+  overflow-x: hidden;
   width: 550px;
   height: 330px;
   padding: 20px;
   padding-top: 5px;
   margin-bottom: 9px;
-  border: 0.2px solid #ccc;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -102,7 +96,6 @@ body {
   display: flex;
   align-items: center;
   padding: 5px;
-  border: 1px solid #ccc;
   font-weight: bold;
   font-size: initial;
   margin-bottom: 5px;
@@ -114,9 +107,7 @@ body {
   display: flex;
   background-color: #f5f5f5;
   box-sizing: border-box;
-  border-radius: 5px;
   padding: 5px;
-  margin: 0;
   height: 40px;
   margin-bottom: 5px;
   cursor: pointer;
@@ -162,6 +153,7 @@ div.media {
 .campoNota {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .valor {
