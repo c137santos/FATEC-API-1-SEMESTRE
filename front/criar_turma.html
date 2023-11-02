@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciamento de Turma</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
+    />
+    <link rel="stylesheet" href="style/custom.css">
+    <link rel="stylesheet" href="style/criar_turma.css"/>
+  </head>
+  <header class="header">
+    <img src="./imagens/Logo.png" alt="logo" />
+  </header>
+  </head>
+  <body>
+    <div class="form-container">
+      <div id="turmaForm" class="data-content">
+        <label for="turmaNome">Nome da turma:</label>
+        <input type="text" id="turmaNome" class="input-field" />
+
+        <label for="professor">Professor responsável:</label>
+        <input type="text" id="professor" class="input-field" />
+
+        <label for="dataInicio">Data de início:</label>
+        <input type="date" id="dataInicio" class="input-field" />
+        <!-- TODO: Fazer com que aceitem apenas datas futuras -->
+
+        <label for="duracaoCiclo">Duracao Ciclos em dias:</label>
+        <input type="number" id="duracaoCiclo" class="input-field" />
+        <!-- TODO: Fazer com que automaticamente apenas números positivos -->
+        <p>
+          Adicionar alunos na turma:
+        </p>
+        <div id="listarAlunos">
+          
+        </div>
+      </div>
+      <button class="submit-turma">Criar turma</button>
+
+      <div id="confirmacaoContainer" style="display: none">
+        <p><strong>Confirme os dados da turma:</strong></p>
+        <p>Nome da Turma: <span id="turmaNomeConfirmacao"></span></p>
+        <p>Professor: <span id="professorConfirmacao"></span></p>
+        <p>Data de Início: <span id="dataInicioConfirmacao"></span></p>
+        <p>
+          Duração dos ciclos em dias: <span id="duracaoCicloConfirmacao"></span>
+        </p>
+        <button id="confirmarButton" type="submit">Confirmar</button>
+        <button id="cancelarButton">Cancelar</button>
+      </div>
+    </div>
+  </body>
+</html>
+<script src="/front/scripts/gerenciamento_turmas_criar.js"></script>
