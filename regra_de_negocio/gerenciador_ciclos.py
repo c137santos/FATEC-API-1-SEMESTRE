@@ -74,13 +74,13 @@ def editar_ciclo(id_ciclo, ciclo_atualizado):
 
 def _obter_novo_id_ciclo():
     ids_numericos = []
-    for id_str in listar_ciclos.keys():
+    ciclos = listar_ciclos()
+    for id_str in ciclos.keys():
         id_int = int(id_str)
         ids_numericos.append(id_int)
     id_max_int = max(ids_numericos)
     novo_id = str(id_max_int + 1)
     return novo_id
-
 
 def _salvar_ciclos(ciclos):
     dados = json.dumps(ciclos, indent=4)
