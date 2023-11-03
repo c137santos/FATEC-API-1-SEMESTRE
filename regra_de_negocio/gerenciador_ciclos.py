@@ -79,6 +79,21 @@ def adicionar_ciclo(ciclo):
     ciclos[novo_id_ciclo] = ciclo
     return _salvar_ciclos(ciclos)
 
+def editar_ciclo(id_ciclo, ciclo_atualizado):
+    try:
+        id_ciclo_str = str(id_ciclo)
+        ciclos = listar_ciclos()
+        if id_ciclo_str in ciclos.keys():
+            ciclos[id_ciclo]["id_turma"] = ciclo_atualizado["id_turma"]
+            ciclos[id_ciclo]["duracao"] = int(ciclo_atualizado["duracao"])
+            ciclos[id_ciclo]["peso_nota"] = float(ciclo_atualizado["peso_nota"])
+            ciclos[id_ciclo]["numero_ciclo"] = int(ciclo_atualizado["numero_ciclo"])
+            ciclos[id_ciclo]["prazo_insercao_nota"] = int(ciclo_atualizado["prazo_insercao_nota"])
+            return _salvar_ciclos(ciclos)
+        else:
+            raise KeyError("Ciclo não encontrado.")
+    except KeyError as e:
+        return f"Falha na edição: {str(e)}"
 
 def _obter_novo_id_ciclo():
     ciclos = listar_ciclos()

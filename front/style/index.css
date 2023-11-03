@@ -32,9 +32,18 @@ body {
     text-decoration: none;
     /*Retira sublinhados de links*/
     color: inherit;
-    width: 100%;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+/* Adicione um estilo para a tag <img> dentro do botão .menu-button */
+.menu-button img {
+    width: 50px; /* Defina a largura da imagem conforme desejado */
+    height: 50px; /* Defina a altura da imagem conforme desejado */
+    margin-bottom: 10px; /* Adicione espaço entre a imagem e o texto */
+}
+
 
 /*Height e Width garantem que o link ocupe o espaço completo do botão*/
 
@@ -44,7 +53,7 @@ body {
     color: black;
     border: 2px solid transparent;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 20px;
     width: min-content;
     border-width: 30px;
     /* Defina a largura da borda desejada, por exemplo, 5 pixels */
@@ -60,4 +69,12 @@ body {
     background-color: transparent;
     box-shadow: 0 0 50px 20px rgb(154, 104, 241);
     /* Adiciona um brilho quando o botão é hover */
+}
+
+.turma-icon {
+    margin-top: 20px;
+}
+
+.aluno-icon {
+    margin-top: 20px;
 }
