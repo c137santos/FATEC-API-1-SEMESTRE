@@ -58,10 +58,14 @@ async function exibirTurmas(turmadata) {
         alunos ? Object.keys(alunos).length : 0
       }`;
 
+      const dataInicioTurma = document.createElement("p");
+      dataInicioTurma.textContent = `Data de Início: ${turma.data_de_inicio}`;
+
       // Adiciona os parágrafos ao turmaSquare
       turmaSquare.appendChild(nomeTurma);
       turmaSquare.appendChild(nomeProfessor);
       turmaSquare.appendChild(quantidadeAlunos);
+      turmaSquare.appendChild(dataInicioTurma);
 
       // Cria um ícone de lixeira para deletar a turma
       const imagemIcon = document.createElement("img");

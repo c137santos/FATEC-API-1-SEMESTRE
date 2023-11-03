@@ -27,7 +27,7 @@ body {
 .info-turma {
   padding: 8px;
   width: 236px;
-  height: 315px;
+  height: 390px;
   background-color: whitesmoke;
   border-radius: 5px;
 }
@@ -36,15 +36,20 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
-  justify-content: center;
+  justify-content: left;
   width: 300px;
   max-width: 300px;
-  height: 100px;
+  height: 80px;
   padding: 0px 5px;
-  border: solid;
-  border-width: 1px;
+  background: whitesmoke;
+}
+
+.info-ciclos {
+  padding: 8px;
+  width: 312px;
+  height: 180px;
+  background-color: whitesmoke;
   border-radius: 5px;
-  border-color: #ccc
 }
 
 .titulo-ciclos {
@@ -55,7 +60,7 @@ body {
 .ciclo-peso {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start ;
   font-weight: bold;
 }
 
@@ -187,4 +192,11 @@ div.media {
 .btn-salvar-ciclo-peso:hover {
   background-color: rgb(251, 179, 197);
   cursor:pointer;
+}
+
+.container-btn-salvar-ciclo {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: left;
 }

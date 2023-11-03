@@ -9,20 +9,29 @@ async function preencher_info_turma(id) {
     const nomeProfessorElement = document.querySelector(".fnomeProfessor");
     const cicloPeso = document.querySelector(".ciclo-peso");
     const quantidadeAlunosElement = document.getElementById('fquantidadeAlunos');
-    nomeTurmaElement.textContent = "Nome turma: " + turma["nome"];
-    nomeProfessorElement.textContent = "Nome professor: " + turma["professor"];
-    quantidadeAlunosElement.innerHTML = alunos ? Object.keys(alunos).length : 0;
+    const dataInicioElement = document.getElementById('fdataInicio');
+    nomeTurmaElement.textContent = turma["nome"];
+    nomeProfessorElement.textContent = turma["professor"];
+    quantidadeAlunosElement.innerText = alunos ? Object.keys(alunos).length : 0;
+    dataInicioElement.innerText = turma["data_de_inicio"];
     for (let chave in PesoCiclo) {
       const pesoData = PesoCiclo[chave];
-
-      const NomeCiclo = document.createElement("span");
+      const NomeCiclo = document.createElement("label");
       NomeCiclo.className = "ciclo";
+      NomeCiclo.htmlFor = `pesoCiclo=${chave}`
       NomeCiclo.innerHTML = `C${pesoData.numero_ciclo}:`;
 
-      const PesoNota = document.createElement("span");
+      const PesoNota = document.createElement("input");
       PesoNota.className = "peso";
-      PesoNota.textContent = pesoData.peso_nota;
-      PesoNota.id = `pesoCiclo=${pesoData.numero_ciclo}`;
+      PesoNota.id = `pesoCiclo=${chave}`
+      PesoNota.value = pesoData.peso_nota;
+
+      PesoNota.addEventListener("keypress", (e) => { 
+        if(e.key === 'Enter'){
+          requisitar_salvar_ciclo_peso() 
+        }
+      });
+
       cicloPeso.appendChild(NomeCiclo);
       cicloPeso.appendChild(PesoNota);
     }
@@ -182,8 +191,7 @@ function criar_modal_confirmar_edicao(requestBody, alunos) {
 
 async function listar_ciclos_turma(id) {
   const response = await fetch(
-    `http://localhost:8080/api/v1/ciclos/listar/${id}`,
-    { method: "GET" }
+    `http://localhost:8080/api/v1/ciclos/listar/${id}`
   );
   const PesoCiclo = await response.json();
   console.log(PesoCiclo);
@@ -192,8 +200,7 @@ async function listar_ciclos_turma(id) {
 
 async function listar_alunos_turma(id) {
   const response = await fetch(
-    `http://localhost:8080/api/v1/turmas_alunos/listar_alunos_da_turma/${id}`,
-    { method: "GET" }
+    `http://localhost:8080/api/v1/turmas_alunos/listar_alunos_da_turma/${id}`
   );
   const alunos = await response.json();
   console.log(alunos);
@@ -202,8 +209,7 @@ async function listar_alunos_turma(id) {
 
 async function listar_notas_alunos(id) {
   const response = await fetch(
-    `http://localhost:8080/api/v1/notas/turma/listar/${id}`,
-    { method: "GET" }
+    `http://localhost:8080/api/v1/notas/turma/listar/${id}`
   );
   const notasAlunos = await response.json();
   console.log(notasAlunos);
@@ -212,8 +218,7 @@ async function listar_notas_alunos(id) {
 
 async function obter_turma(id) {
   const resposta = await fetch(
-    `http://localhost:8080/api/v1/turmas/listar/${id}`,
-    { method: "GET" }
+    `http://localhost:8080/api/v1/turmas/listar/${id}`
   );
   const turma = await resposta.json();
   console.log(turma);
@@ -223,4 +228,23 @@ function obter_id() {
   return new URLSearchParams(window.location.search).get("id");
   //        /** Recupera o id da turma presente como consulta na URL
   //  * @returns {string} id - o identificador único
+}
+
+async function requisitar_salvar_ciclo_peso(){
+  if(!confirm("Essa operação afetará o FEE dos alunos.\nDeseja prosseguir mesmo assim?")){
+    return
+  }
+  console.log("Editando os ciclos...")
+  const turma_id = obter_id()
+  const ciclos = await listar_ciclos_turma(turma_id)
+  for(var id_ciclo in ciclos){
+    console.log(`Salvando o ciclo ${id_ciclo}`)
+    elementoCiclo = document.getElementById(`pesoCiclo=${id_ciclo}`)
+    ciclo = ciclos[id_ciclo]
+    ciclo["peso_nota"] = elementoCiclo.value
+    console.log(ciclo)
+    res = await fetch(`http://localhost:8080/api/v1/ciclos/editar/${id_ciclo}`,{method:"POST", body:JSON.stringify(ciclo)})
+    console.log(res)
+  }
+  location.reload()
 }
