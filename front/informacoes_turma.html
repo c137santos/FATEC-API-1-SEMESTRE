@@ -17,17 +17,16 @@
         <img src="./imagens/Logo.png" alt="logo" />
       </a>
     </header>_
-    <button id="turma" class="menu-button">
-      <a href="gerenciamento_turmas.html">Turma</a>
-    </button>
+
     <div class="container-info">
         <div class="info-turma">
-          <p class="fnomeTurma"></p>
-          <p class="fnomeProfessor"></p>
+          <strong><p class="fnomeTurma"></p></strong>
+          <strong><p class="fnomeProfessor"></p></strong>
         </div>
         <div class="container-ciclos">
-          <p class="titulo-ciclos"><strong>Pesos Ciclos:</strong></p>
+          <p class="titulo-ciclos"><strong>Pesos dos Ciclos:</strong></p>
           <div class="ciclo-peso"></div>
+          <img class="btn-salvar-ciclo-peso" src="../front/icon/save-icon.svg" alt="salvar" onclick="requisitar_salvar_ciclo_peso()">
         </div>
             
         </div>
@@ -43,6 +42,11 @@
             <!-- Os Alunos serão adicionadas automaticamente aqui -->
           </div>
     </div>
+
+    <button id="turma" class="menu-button">
+      <a href="gerenciamento_turmas.html">Voltar para lista de Turmas</a>
+    </button>
+
      <!-- Moleke -->
      <div class="muleke">
         <a href="index.html">

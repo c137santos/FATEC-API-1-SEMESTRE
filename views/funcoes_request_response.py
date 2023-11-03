@@ -87,6 +87,10 @@ def listar_ciclos_por_id_turma(request, id_turma):
     ciclos = gerenciador_ciclos.listar_ciclos_por_id_turma(id_turma)
     return JsonResponse(ciclos)
 
+def editar_ciclo(request, id_ciclo):
+    ciclo = json.loads(request.body)
+    resultado = gerenciador_ciclos.editar_ciclo(id_ciclo, ciclo)
+    return JsonResponse({"mensagem":resultado})
 
 def criar_nota(request):
     nova_nota = json.loads(request.body)
