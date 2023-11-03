@@ -15,19 +15,20 @@ async function preencher_info_turma(id) {
     quantidadeAlunosElement.innerHTML = alunos ? Object.keys(alunos).length : 0;
     for (let chave in PesoCiclo) {
       const pesoData = PesoCiclo[chave];
+      id_ciclo = chave
 
       const NomeCiclo = document.createElement("span");
       NomeCiclo.className = "ciclo";
       NomeCiclo.innerHTML = `C${pesoData.numero_ciclo}:`;
-      NomeCiclo.id = `${chave}`;
+      NomeCiclo.id = `${id_ciclo}`;
 
       const PesoNota = document.createElement("input");
       PesoNota.className = "peso";
       PesoNota.value = pesoData.peso_nota;
-      PesoNota.id = `${chave}`;
+      PesoNota.id = `${id_ciclo}`;
       PesoNota.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
-          requisitar_salvar_ciclo_peso(chave);
+          requisitar_salvar_ciclo_peso();
         }
       });
       cicloPeso.appendChild(NomeCiclo);
