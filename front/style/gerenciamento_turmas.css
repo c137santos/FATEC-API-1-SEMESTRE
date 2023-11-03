@@ -38,7 +38,7 @@ body {
 .turma-square {
   position: relative;
   width: calc(25% - 10px);
-  height: 180px;
+  height: 220px;
   background-color: #ffffff;
   border-radius: 5px;
   display: flex;

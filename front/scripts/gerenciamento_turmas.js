@@ -2,7 +2,7 @@
 const criarTurmaButton = document.querySelector(".add-turma-button");
 criarTurmaButton.addEventListener("click", levaPaginaEditar);
 
-function levaPaginaEditar(){
+function levaPaginaEditar() {
   window.location.href = "http://127.0.0.1:5500/front/criar_turma.html";
 }
 
@@ -34,9 +34,11 @@ async function GetTurmas() {
 }
 
 async function listar_alunos_turma(id) {
-  const response = await fetch (`http://localhost:8080/api/v1/turmas_alunos/listar_alunos_da_turma/${id}`)
-  const alunos = await response.json()
-  return alunos
+  const response = await fetch(
+    `http://localhost:8080/api/v1/turmas_alunos/listar_alunos_da_turma/${id}`
+  );
+  const alunos = await response.json();
+  return alunos;
 }
 
 function formatarData(data) {
@@ -44,7 +46,7 @@ function formatarData(data) {
 }
 
 // Função para exibir as turmas no DOM
-async function exibirTurmas(turmadata) {
+async function exibirTurmas(turmadata, ciclosData) {
   const container = document.querySelector(".flex-warp-container");
   // Itera sobre os objetos do JSON e cria elementos HTML para cada turma
   for (const turmaId in turmadata) {
@@ -69,7 +71,9 @@ async function exibirTurmas(turmadata) {
 
       const alunos = await listar_alunos_turma(turmaId);
       const quantidadeAlunos = document.createElement("p");
-      quantidadeAlunos.textContent = `Alunos: ${alunos ? Object.keys(alunos).length : 0}`;
+      quantidadeAlunos.textContent = `Alunos: ${
+        alunos ? Object.keys(alunos).length : 0
+      }`;
 
       // Adiciona os parágrafos ao turmaSquare
       turmaSquare.appendChild(nomeTurma);
