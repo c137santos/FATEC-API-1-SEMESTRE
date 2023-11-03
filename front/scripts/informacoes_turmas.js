@@ -8,7 +8,8 @@ async function preencher_info_turma(id) {
     const nomeTurmaElement = document.querySelector(".fnomeTurma");
     const nomeProfessorElement = document.querySelector(".fnomeProfessor");
     const cicloPeso = document.querySelector(".ciclo-peso");
-    const quantidadeAlunosElement = document.getElementById('fquantidadeAlunos');
+    const quantidadeAlunosElement =
+      document.getElementById("fquantidadeAlunos");
     nomeTurmaElement.textContent = "Nome turma: " + turma["nome"];
     nomeProfessorElement.textContent = "Nome professor: " + turma["professor"];
     quantidadeAlunosElement.innerHTML = alunos ? Object.keys(alunos).length : 0;
@@ -18,11 +19,17 @@ async function preencher_info_turma(id) {
       const NomeCiclo = document.createElement("span");
       NomeCiclo.className = "ciclo";
       NomeCiclo.innerHTML = `C${pesoData.numero_ciclo}:`;
+      NomeCiclo.id = `${chave}`;
 
-      const PesoNota = document.createElement("span");
+      const PesoNota = document.createElement("input");
       PesoNota.className = "peso";
-      PesoNota.textContent = pesoData.peso_nota;
-      PesoNota.id = `pesoCiclo=${pesoData.numero_ciclo}`;
+      PesoNota.value = pesoData.peso_nota;
+      PesoNota.id = `${chave}`;
+      PesoNota.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          requisitar_salvar_ciclo_peso(chave);
+        }
+      });
       cicloPeso.appendChild(NomeCiclo);
       cicloPeso.appendChild(PesoNota);
     }
@@ -82,7 +89,6 @@ function criarCampoNota(alunoId, notasAlunos) {
       const id_ciclo = notaAluno.id_ciclo;
       const cicloAberto = notaAluno.edicao_habilitada;
       const valorNota = notaAluno.valor;
-      
 
       if (id_aluno == alunoId) {
         const InputNotas = document.createElement("input");
@@ -223,4 +229,30 @@ function obter_id() {
   return new URLSearchParams(window.location.search).get("id");
   //        /** Recupera o id da turma presente como consulta na URL
   //  * @returns {string} id - o identificador único
+}
+
+async function requisitar_salvar_ciclo_peso() {
+  if (
+    !confirm(
+      "Essa operação afetará o FEE dos alunos.\nDeseja prosseguir mesmo assim?"
+    )
+  ) {
+    return;
+  }
+  console.log("Editando os ciclos...");
+  const turma_id = obter_id();
+  const ciclos = await listar_ciclos_turma(turma_id);
+  for (var id_ciclo in ciclos) {
+    console.log(`Salvando o ciclo ${id_ciclo}`);
+    elementoCiclo = document.getElementById(`peso${id_ciclo}`);
+    ciclo = ciclos[id_ciclo];
+    ciclo["peso_nota"] = elementoCiclo.value;
+    console.log(ciclo);
+    res = await fetch(
+      `http://localhost:8080/api/v1/ciclos/editar/${id_ciclo}`,
+      { method: "POST", body: JSON.stringify(ciclo) }
+    );
+    console.log(res);
+  }
+  location.reload();
 }
