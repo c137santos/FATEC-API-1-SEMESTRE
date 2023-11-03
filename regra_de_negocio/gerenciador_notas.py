@@ -7,8 +7,7 @@ from regra_de_negocio.gerenciador_ciclos import (
 )
 from regra_de_negocio.gerenciador_turmas import obter_turma
 
-from datetime import datetime
-import datetime as dt
+from datetime import datetime, timedelta
 
 
 def _calcular_fee_turma_aluno(id_turma, id_aluno):
@@ -74,6 +73,7 @@ def listar_notas_por_id_aluno(notas, id_aluno):
             if notas[id_nota]["fee"]:
                 continue
             notas_encontradas[id_nota] = notas[id_nota]
+
     return notas_encontradas
 
 
@@ -106,16 +106,17 @@ def adicionar_nota(nova_nota):
     return _salvar_notas(notas)
 
 
-def editar_nota(id_nota_atualizada, nota_atualizada):
-    if not nota_atualizada:
+def editar_nota(notas_atualizada):
+    if not notas_atualizada:
         return False
     notas = listar_notas()
-    id_nota_atualizada_str = str(id_nota_atualizada)
-    if id_nota_atualizada_str in notas.keys():
-        notas[id_nota_atualizada_str] = nota_atualizada
-        return _salvar_notas(notas)
-    else:
-        return False
+    for id_nota in notas_atualizada:
+        id_nota_atualizada_str = str(id_nota)
+        if id_nota_atualizada_str in notas.keys():
+            notas[id_nota_atualizada_str]["valor"] = float(notas_atualizada[id_nota_atualizada_str]["valor"])
+        else:
+            return False
+    return _salvar_notas(notas)
 
 
 def remover_nota(id_nota):
@@ -152,10 +153,8 @@ def _salvar_notas(notas):
         f.write(dados)
         return True
 
-
 def verificar_edicao_habilitada(notas, id_nota):
     id_nota_str = str(id_nota)
-    notas = listar_notas()
     nota = notas[id_nota_str]
     ciclo = obter_ciclo(nota["id_ciclo"])
     turma = obter_turma(nota["id_turma"])
@@ -163,22 +162,16 @@ def verificar_edicao_habilitada(notas, id_nota):
         data_inicio = turma["data_de_inicio"]
         formato_data = "%d/%m/%Y"
         prazo_insercao_nota = _obter_prazo_insercao_nota(ciclo, nota["id_turma"])
-        data_inicial_insercao_nota = datetime.strptime(
-            data_inicio, formato_data
-        ) + dt.timedelta(days=prazo_insercao_nota)
-        data_final_insercao_nota = data_inicial_insercao_nota + dt.timedelta(
-            days=ciclo["prazo_insercao_nota"]
-        )
+        data_inicial_insercao_nota = datetime.strptime(data_inicio, formato_data) + timedelta(days=prazo_insercao_nota)
+        data_final_insercao_nota = data_inicial_insercao_nota + timedelta(days=ciclo["prazo_insercao_nota"])
         data_atual = datetime.now()
-        if (
-            data_inicial_insercao_nota >= data_atual
-            and data_atual <= data_final_insercao_nota
-        ):
+        if data_inicial_insercao_nota <= data_atual <= data_final_insercao_nota:
             return True
         else:
             return False
     else:
         return False
+
 
 
 def _obter_prazo_insercao_nota(ciclo, id_turma):
