@@ -98,6 +98,8 @@ function criarCampoNota(alunoId, notasAlunos) {
         InputNotas.className = "valor";
         InputNotas.type = "number";
         InputNotas.step = "0.5";
+        InputNotas.min = "1";
+        InputNotas.max = "10";
         InputNotas.value = valorNota;
         InputNotas.id = `id_nota=${id_nota},id_turma=${id_turma},id_aluno=${id_aluno},id_ciclo=${id_ciclo}`;
 
