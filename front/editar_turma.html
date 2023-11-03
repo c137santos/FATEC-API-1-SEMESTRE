@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PBLTex ::. Editar Turma</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
+    <link rel="stylesheet" href="style/custom.css">
+    <link rel="stylesheet" href="style/gerenciamento_turmas.css" />
+    </head>
+<body onload="preencher_campos_formulario(obter_id())">
+    <header class="header">
+      <img src="./imagens/Logo.png" alt="logo">
+    </header>
+    <div name="main">
+        <div>
+            <h1>Formulário de Edição de Turma</h1>    
+        </div>
+        <div id="fturma">
+            <div>
+                <label for="fnome"><strong>Nome da turma:</strong></label>
+                <input type="text" name="fnome" id="fnome">
+            </div>
+            <div>
+                <label for="fprofessor"><strong>Professor responsável:</strong></label>
+                <input type="text" name="fprofessor" id="fprofessor">
+            </div>
+            <div>
+                <label for="fdata"><strong>Data de início:</strong></label>
+                <input type="date" name="fdata" id="fdata">
+                <!-- TODO: Fazer com que aceitem apenas datas futuras -->
+            </div>
+            <div>
+                <label for="fduracaosCiclo"><strong>Duração dos Ciclos:</strong></label>
+                <input type="number" name="fduracaosCiclo" id="fduracaosCiclo">
+                <!-- TODO: Fazer com que aceitem apenas números positivos -->
+            </div>
+            <div>
+                <strong>Quantidade de Ciclos:</strong>
+                <p id="fsublegenda"><strong> Valor padrão da escola PBLTeX</strong> </p>
+                <div id="fquantidadeCiclo" id="fquantidadeCiclo">
+                    <div>
+                        Duração dos ciclos Sprint
+
+                    </div>
+                <!-- TODO: Fazer com que aceitem apenas números positivos -->
+            </div>
+            <div style="padding-top: 21px;">
+                <button onclick="requisitar_editar_turma(obter_id())">Editar</button>
+            </div>
+        </div>
+    </div>
+    <div class="muleke">
+        <a href="index.html">
+            <img src="./imagens/mascote2.png" alt="mascote">
+        </a>
+    </div>
+    <script src="/front/scripts/gerenciamento_turmas_editar.js"></script>
+</body>
+</html>
