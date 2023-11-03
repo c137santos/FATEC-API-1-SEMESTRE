@@ -107,6 +107,7 @@ function exibirTurmas(turmadata, ciclosData) {
 
       // Adiciona o ícone ao turmaSquare
       turmaSquare.appendChild(imagemIcon);
+
       turmaSquare.appendChild(imagemIconEdit);
 
       // Adiciona o turmaSquare ao container
@@ -273,3 +274,14 @@ function requisitar_informacoes_turma(id) {
 }
 
 GetTurmas();
+
+/*
+function redirecionarParaPagina(id) {
+  if (id === 'turma') {
+      window.location.href = 'gerenciamento_turmas.html';
+  } }
+
+  document.getElementById('turma').addEventListener('click', function() {
+    redirecionarParaPagina('turma');
+});
+*/
