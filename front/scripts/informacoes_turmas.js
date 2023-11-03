@@ -15,22 +15,15 @@ async function preencher_info_turma(id) {
     quantidadeAlunosElement.innerHTML = alunos ? Object.keys(alunos).length : 0;
     for (let chave in PesoCiclo) {
       const pesoData = PesoCiclo[chave];
-      id_ciclo = chave
 
       const NomeCiclo = document.createElement("span");
       NomeCiclo.className = "ciclo";
       NomeCiclo.innerHTML = `C${pesoData.numero_ciclo}:`;
-      NomeCiclo.id = `${id_ciclo}`;
 
-      const PesoNota = document.createElement("input");
+      const PesoNota = document.createElement("span");
       PesoNota.className = "peso";
-      PesoNota.value = pesoData.peso_nota;
-      PesoNota.id = `${id_ciclo}`;
-      PesoNota.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-          requisitar_salvar_ciclo_peso();
-        }
-      });
+      PesoNota.textContent = pesoData.peso_nota;
+      PesoNota.id = `pesoCiclo=${pesoData.numero_ciclo}`;
       cicloPeso.appendChild(NomeCiclo);
       cicloPeso.appendChild(PesoNota);
     }
@@ -230,30 +223,4 @@ function obter_id() {
   return new URLSearchParams(window.location.search).get("id");
   //        /** Recupera o id da turma presente como consulta na URL
   //  * @returns {string} id - o identificador único
-}
-
-async function requisitar_salvar_ciclo_peso() {
-  if (
-    !confirm(
-      "Essa operação afetará o FEE dos alunos.\nDeseja prosseguir mesmo assim?"
-    )
-  ) {
-    return;
-  }
-  console.log("Editando os ciclos...");
-  const turma_id = obter_id();
-  const ciclos = await listar_ciclos_turma(turma_id);
-  for (var id_ciclo in ciclos) {
-    console.log(`Salvando o ciclo ${id_ciclo}`);
-    elementoCiclo = document.getElementById(`peso${id_ciclo}`);
-    ciclo = ciclos[id_ciclo];
-    ciclo["peso_nota"] = elementoCiclo.value;
-    console.log(ciclo);
-    res = await fetch(
-      `http://localhost:8080/api/v1/ciclos/editar/${id_ciclo}`,
-      { method: "POST", body: JSON.stringify(ciclo) }
-    );
-    console.log(res);
-  }
-  location.reload();
 }
