@@ -7,7 +7,8 @@ from regra_de_negocio.gerenciador_ciclos import (
 )
 from regra_de_negocio.gerenciador_turmas import obter_turma
 
-from datetime import datetime, timedelta
+from datetime import datetime
+import datetime as dt
 
 
 def _calcular_fee_turma_aluno(id_turma, id_aluno):
@@ -162,8 +163,8 @@ def verificar_edicao_habilitada(notas, id_nota):
         data_inicio = turma["data_de_inicio"]
         formato_data = "%d/%m/%Y"
         prazo_insercao_nota = _obter_prazo_insercao_nota(ciclo, nota["id_turma"])
-        data_inicial_insercao_nota = datetime.strptime(data_inicio, formato_data) + timedelta(days=prazo_insercao_nota)
-        data_final_insercao_nota = data_inicial_insercao_nota + timedelta(days=ciclo["prazo_insercao_nota"])
+        data_inicial_insercao_nota = datetime.strptime(data_inicio, formato_data) + dt.timedelta(days=prazo_insercao_nota)
+        data_final_insercao_nota = data_inicial_insercao_nota + dt.timedelta(days=ciclo["prazo_insercao_nota"])
         data_atual = datetime.now()
         if data_inicial_insercao_nota <= data_atual <= data_final_insercao_nota:
             return True
