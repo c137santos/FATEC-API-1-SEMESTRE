@@ -100,9 +100,10 @@ def criar_nota(request):
         return JsonResponse({"mensagem": False})
 
 
-def editar_nota(request, id_nota):
-    nota_atualizada = json.loads(request.body)
-    resultado = gerenciador_notas.editar_nota(id_nota, nota_atualizada)
+def editar_nota(request):
+    notas_atualizada = json.loads(request.body)
+    print(notas_atualizada)
+    resultado = gerenciador_notas.editar_nota(notas_atualizada)
     return JsonResponse({"mensagem": resultado})
 
 
