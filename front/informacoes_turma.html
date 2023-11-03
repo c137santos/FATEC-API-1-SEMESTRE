@@ -20,8 +20,14 @@
 
     <div class="container-info">
         <div class="info-turma">
-          <strong><p class="fnomeTurma"></p></strong>
-          <strong><p class="fnomeProfessor"></p></strong>
+          <h3>Informações da Turma</h3>
+          <hr>
+          <h5>Nome da Turma:</h5>
+          <p class="fnomeTurma" id="fnomeTurma"></p>
+          <h5>Nome do Professor:</h5>
+          <p class="fnomeProfessor" id="fnomeProfessor"></p>
+          <h5>Quantidade de Alunos:</h5>
+          <p class="fquantidadeAlunos" id="fquantidadeAlunos"></p>
         </div>
         <div class="container-ciclos">
           <p class="titulo-ciclos"><strong>Pesos dos Ciclos:</strong></p>
@@ -63,14 +69,15 @@
           console.log(turma["nome"])
           console.log(turma.professor)
           if (turma){
-            const nomeTurmaElement = document.querySelector('.fnomeTurma');
-            const nomeProfessorElement = document.querySelector('.fnomeProfessor');
+            const nomeTurmaElement = document.getElementById('fnomeTurma');
+            const nomeProfessorElement = document.getElementById('fnomeProfessor');
+            const quantidadeAlunosElement = document.getElementById('fquantidadeAlunos');
             const cicloPeso = document.querySelector(".ciclo-peso");
-            nomeTurmaElement.textContent = 'Nome turma: ' + turma["nome"];
-            nomeProfessorElement.textContent = 'Nome professor: ' + turma["professor"];
-            for (let id_ciclo in PesoCiclo){
+            nomeTurmaElement.innerHTML = turma["nome"];
+            nomeProfessorElement.innerHTML = turma["professor"];
+            quantidadeAlunosElement.innerHTML = alunos ? Object.keys(alunos).length : 0;
+            for (let chave in PesoCiclo){
               const pesoData = PesoCiclo[id_ciclo];
-
               const NomeCiclo = document.createElement("label");
               NomeCiclo.className = "ciclo";
               NomeCiclo.htmlFor = `peso${id_ciclo}`
@@ -154,28 +161,28 @@
         }
 
         async function listar_ciclos_turma(id){
-          const response = await fetch (`http://localhost:8080/api/v1/ciclos/listar/${id}`, {method: "GET"})
+          const response = await fetch (`http://localhost:8080/api/v1/ciclos/listar/${id}`)
           const PesoCiclo = await response.json()
           console.log(PesoCiclo)
           return PesoCiclo
         }
 
         async function listar_alunos_turma(id) {
-          const response = await fetch (`http://localhost:8080/api/v1/turmas_alunos/listar_alunos_da_turma/${id}`, {method: "GET"})
+          const response = await fetch (`http://localhost:8080/api/v1/turmas_alunos/listar_alunos_da_turma/${id}`)
           const alunos = await response.json()
           console.log(alunos)
           return alunos
         }
 
         async function listar_notas_alunos(id) {
-          const response = await fetch (`http://localhost:8080/api/v1/notas/turma/listar/${id}`, {method: "GET"})
+          const response = await fetch (`http://localhost:8080/api/v1/notas/turma/listar/${id}`)
           const notasAlunos = await response.json()
           console.log(notasAlunos)
           return notasAlunos
         }
 
         async function obter_turma(id) {
-            const resposta = await fetch (`http://localhost:8080/api/v1/turmas/listar/${id}`, {method: "GET"})
+            const resposta = await fetch (`http://localhost:8080/api/v1/turmas/listar/${id}`)
             const turma = await resposta.json()
             console.log(turma)
             return turma

@@ -1,4 +1,5 @@
 import json
+from regra_de_negocio import service
 
 
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
@@ -32,35 +33,28 @@ def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
 
 
 # Função para criar uma nova turma
-def criacao_turma(dados_nova_turma, nova_turma_id, turmas):
-    dados_nova_turma_json = dados_nova_turma
-    duracao_ciclo = int(dados_nova_turma_json["duracao_ciclo"])
-    quantidade_ciclos = int(dados_nova_turma_json["quantidade_ciclos"])
+def criacao_turma(nova_turma):
+    from regra_de_negocio.gerenciador_turmas_alunos import adicionar_turma_aluno
 
-    nova_turma = {
-        "nome": dados_nova_turma_json["nome"],  # Acesse a propriedade "nome" do corpo
-        "professor": dados_nova_turma_json[
-            "professor"
-        ],  # Acesse a propriedade "professor" do corpo
-        "data_de_inicio": dados_nova_turma_json[
-            "data_de_inicio"
-        ],  # Acesse a propriedade "dataInicio" do corpo
-        "duracao_ciclo": dados_nova_turma_json["duracao_ciclo"],
-        "quantidade_ciclos": dados_nova_turma_json["quantidade_ciclos"],
-    }
-
-    turmas[nova_turma_id] = nova_turma
-    turma_nome = turmas[nova_turma_id]["nome"]
+    id_nova_turma = service.gerar_novo_id_svc()
+    for alunos in nova_turma["alunos_adicionados"]:
+        turma_aluno = ({"id_turma": id_nova_turma, "id_aluno": alunos["RA"]},)
+        adicionar_turma_aluno(turma_aluno)
+    nova_turma.pop("alunos_adicionados", None)
+    turmas = buscar_turmas()
+    nova_turma["quantidade_ciclos"] = 4
+    turmas[id_nova_turma] = nova_turma
+    turma_nome = turmas[id_nova_turma]["nome"]
     resposta = {
         "mensagem": f"Criação da turma {turma_nome.capitalize()} realizada com sucesso!",
         "nova_turma": nova_turma,
-        "id_nova_turma": nova_turma_id,
-        "quantidade_ciclos": quantidade_ciclos,
+        "id_nova_turma": id_nova_turma,
+        "quantidade_ciclos": 4,
     }
 
     # Salve as alterações nos arquivos JSON
     _salvar_turmas(turmas)
-    return resposta, quantidade_ciclos, duracao_ciclo
+    return resposta
 
 
 def excluir_turma_svc(id):

@@ -21,50 +21,6 @@
         <!-- As turmas serão adicionadas automaticamente aqui -->
       </div>
     </div>
-    <!-- Modal de Criação de Turma -->
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2 id="titulo_modal">Criação de Turma</h2>
-
-        <!-- Formulário para criar uma turma -->
-        <div class="form-container">
-          <div id="turmaForm" class="data-content">
-            <label for="turmaNome">Nome da turma:</label>
-            <input type="text" id="turmaNome" class="input-field" />
-
-            <label for="professor">Professor responsável:</label>
-            <input type="text" id="professor" class="input-field" />
-
-            <label for="dataInicio">Data de início:</label>
-            <input type="date" id="dataInicio" class="input-field" />
-            <!-- TODO: Fazer com que aceitem apenas datas futuras -->
-
-            <label for="duracaoCiclo">Duracao Ciclos em dias:</label>
-            <input type="number" id="duracaoCiclo" class="input-field" />
-            <!-- TODO: Fazer com que aceitem apenas números positivos -->
-
-            <label for="quantidadeCiclo">Quantidade de ciclos:</label>
-            <input type="number" id="quantidadeCiclo" class="input-field" oninput="mostrarCampoPeso()" />
-          </div>
-          <button class="submit-turma">Criar turma</button>
-
-          <!-- Modal de confirmação -->
-          <div id="confirmacaoContainer" style="display: none">
-            <p><strong>Confirme os dados da turma:</strong></p>
-            <p>Nome da Turma: <span id="turmaNomeConfirmacao"></span></p>
-            <p>Professor: <span id="professorConfirmacao"></span></p>
-            <p>Data de Início: <span id="dataInicioConfirmacao"></span></p>
-            <p>
-              Duração dos ciclos em dias:
-              <span id="duracaoCicloConfirmacao"></span>
-            </p>
-            <button id="confirmarButton" type="submit">Confirmar</button>
-            <button id="cancelarButton">Cancelar</button>
-          </div>
-        </div>
-      </div>
-    </div>
     <button class="add-turma-button">Adicionar Turma</button>
     <!-- Moleke -->
     <div class="muleke">

@@ -11,9 +11,9 @@ body {
 
 /* Estilos para o contêiner principal das turmas */
 .turma-container {
-  width: 800px;
-  min-height: 300px;
-  max-height: 300px;
+  width: 1000px;
+  min-height: 360px;
+  max-height: 360px;
   padding: 20px;
   margin-bottom: 20px;
 
@@ -38,7 +38,7 @@ body {
 .turma-square {
   position: relative;
   width: calc(25% - 10px);
-  height: 200px;
+  height: 180px;
   background-color: #ffffff;
   border-radius: 5px;
   display: flex;
