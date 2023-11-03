@@ -59,9 +59,17 @@ def editar_turma(request, id):
 
 def criar_turma(request):
     nova_turma = json.loads(request.body)
-    resposta = criar_turma(nova_turma)
-    for i in range(resposta["nova_turma"]["quantidade_ciclos"]):
-        gerenciador_ciclos.adicionar_ciclo(resposta["id_nova_turma"])
+    resposta = cria_turma(nova_turma)
+    quantidade_ciclos = resposta["nova_turma"]["quantidade_ciclos"]
+    for i in range(quantidade_ciclos):
+        # cria um ciclo padrão para a quantidade de ciclos desejada
+        ciclo = {}
+        ciclo["id_turma"] = resposta["id_nova_turma"]
+        ciclo["duracao"] = 15
+        ciclo["peso_nota"] = float(i+1)
+        ciclo["numero_ciclo"] = i+1
+        ciclo["prazo_insercao_nota"] = 5
+        gerenciador_ciclos.adicionar_ciclo(ciclo)
     return JsonResponse(resposta)
 
 
@@ -99,9 +107,10 @@ def criar_nota(request):
         return JsonResponse({"mensagem": False})
 
 
-def editar_nota(request, id_nota):
-    nota_atualizada = json.loads(request.body)
-    resultado = gerenciador_notas.editar_nota(id_nota, nota_atualizada)
+def editar_nota(request):
+    notas_atualizada = json.loads(request.body)
+    print(notas_atualizada)
+    resultado = gerenciador_notas.editar_nota(notas_atualizada)
     return JsonResponse({"mensagem": resultado})
 
 
