@@ -61,8 +61,16 @@ def editar_turma(request, id):
 def criar_turma(request):
     nova_turma = json.loads(request.body)
     resposta = cria_turma(nova_turma)
-    for i in range(resposta["nova_turma"]["quantidade_ciclos"]):
-        gerenciador_ciclos.adicionar_ciclo(resposta["id_nova_turma"])
+    quantidade_ciclos = resposta["nova_turma"]["quantidade_ciclos"]
+    for i in range(quantidade_ciclos):
+        # cria um ciclo padrão para a quantidade de ciclos desejada
+        ciclo = {}
+        ciclo["id_turma"] = resposta["id_nova_turma"]
+        ciclo["duracao"] = 15
+        ciclo["peso_nota"] = float(i+1)
+        ciclo["numero_ciclo"] = i+1
+        ciclo["prazo_insercao_nota"] = 5
+        gerenciador_ciclos.adicionar_ciclo(ciclo)
     return JsonResponse(resposta)
 
 
