@@ -1,0 +1,43 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vh;
+  }
+
+#turmaForm{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content:center;
+}
+
+.inputs{
+  margin-right: 30px;
+}
+
+
+#listarAlunos{
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+  padding: 20px;
+}
+
+#listarAlunos h3{
+  text-align: center;
+}
+
+.divsNomes{
+  background-color: white;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+
+.submit-turma{
+  margin-top: 20px;
+  margin-left: 323px;
+}

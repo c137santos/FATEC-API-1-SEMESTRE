@@ -8,8 +8,10 @@ async function preencher_info_turma(id) {
     const nomeTurmaElement = document.querySelector(".fnomeTurma");
     const nomeProfessorElement = document.querySelector(".fnomeProfessor");
     const cicloPeso = document.querySelector(".ciclo-peso");
+    const quantidadeAlunosElement = document.getElementById('fquantidadeAlunos');
     nomeTurmaElement.textContent = "Nome turma: " + turma["nome"];
     nomeProfessorElement.textContent = "Nome professor: " + turma["professor"];
+    quantidadeAlunosElement.innerHTML = alunos ? Object.keys(alunos).length : 0;
     for (let chave in PesoCiclo) {
       const pesoData = PesoCiclo[chave];
 
@@ -80,6 +82,7 @@ function criarCampoNota(alunoId, notasAlunos) {
       const id_ciclo = notaAluno.id_ciclo;
       const cicloAberto = notaAluno.edicao_habilitada;
       const valorNota = notaAluno.valor;
+      
 
       if (id_aluno == alunoId) {
         const InputNotas = document.createElement("input");
