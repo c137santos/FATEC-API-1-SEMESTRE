@@ -41,7 +41,7 @@ body {
 .info-pair {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
 }
 
@@ -51,6 +51,7 @@ body {
 
 .info-pair p {
   margin: 0;
+  margin-left: 10px;
 }
 
 .info-ciclos {
@@ -73,18 +74,14 @@ body {
   flex-direction: column;
   text-align: center;
   justify-content: left;
-  width: 300px;
-  max-width: 300px;
+  max-width: 100%;
   height: 80px;
   padding: 0px 5px;
-  background: whitesmoke;
 }
 
 .ciclo-peso {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  font-weight: bold;
 }
 
 .ciclo {
@@ -100,7 +97,7 @@ body {
 .peso {
   border: 1px solid #0000000c;
   width: 7%;
-  padding: 5px;
+  padding: 2px;
   margin-right: 15px; /* Adiciona espaço ao redor dos pesos para separá-los dos rótulos (ciclos) */
 }
 
