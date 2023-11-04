@@ -81,6 +81,7 @@ async function exibirTurmas(turmadata, ciclosData) {
       // Adiciona os parágrafos ao turmaSquare
       turmaSquare.appendChild(nomeTurma);
       turmaSquare.appendChild(nomeProfessor);
+      turmaSquare.appendChild(dataInicioTurma);
 
       // Adicione as informações dos ciclos
       if (ciclosInfo) {
@@ -101,14 +102,14 @@ async function exibirTurmas(turmadata, ciclosData) {
         )}`;
         turmaSquare.appendChild(dataFinalCicloParagrafo);
 
+        turmaSquare.appendChild(quantidadeAlunos);
+
         if (cicloAbertoParaNota) {
           const cicloAbertoNotaParagrafo = document.createElement("p");
           cicloAbertoNotaParagrafo.textContent = `Ciclo aberto: ${cicloAbertoParaNota}`;
           turmaSquare.appendChild(cicloAbertoNotaParagrafo);
         }
       }
-      turmaSquare.appendChild(quantidadeAlunos);
-      turmaSquare.appendChild(dataInicioTurma);
 
       // Cria um ícone de lixeira para deletar a turma
       const imagemIcon = document.createElement("img");
