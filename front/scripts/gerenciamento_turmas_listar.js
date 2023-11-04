@@ -99,19 +99,18 @@ async function exibirTurmas(turmadata) {
   }
 }
 
-async function excluirTurma(id) {
+async function excluirTurma(id_turma) {
   const confirmed = window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?");
   if (confirmed) {
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`, {
-        method: "POST",
-      });
+      const response = await fetch(`http://localhost:8080/api/v1/turmas/excluir/${id_turma}`);
+      const data = await response.json();
       if (!response.ok) {
-        throw new Error('Erro ao excluir a turma.');
+        throw new Error(data.mensagem);
       }
-      document.getElementById(id).remove();
+      alert(data.mensagem); // exibe a mensagem de sucesso
     } catch (error) {
-      console.error('Houve um problema ao excluir a turma:', error.message);
+      alert(`Houve um problema! ${error.message}`); // exibe a mensagem de erro
     }
   }
 }

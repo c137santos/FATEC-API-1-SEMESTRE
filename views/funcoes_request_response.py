@@ -75,8 +75,16 @@ def criar_turma(request):
 
 
 def excluir_turma(request, id):
-    resultado = excluir_turma_svc(id)
-    return JsonResponse({"mensagem": resultado})
+    try:
+        excluir_turma_svc(id)
+    except Exception as e:
+        return JsonResponse({"mensagem": f"Falha na exclusão de turma_aluno: {str(e)}"}, status=500)
+    try:
+        gerenciador_turmas_alunos.remover_turma_aluno(id)
+    except Exception as e:
+        return JsonResponse({"mensagem": f"Falha na exclusão de lista de aluno: {str(e)}"}, status=500)
+    return JsonResponse({"mensagem": "Sucesso"}, status=200)
+
 
 
 def criar_ciclo(request):

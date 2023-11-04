@@ -57,14 +57,13 @@ def criacao_turma(nova_turma):
 
 
 def excluir_turma_svc(id):
-    turmas = busca_turmas()
-    if id in turmas.keys():
+    turma = obter_turma(id)
+    if turma:
+        turmas = busca_turmas()
         turmas.pop(id)
         _salvar_turmas(turmas)
         return True
-    else:
-        return False
-
+    return False
 
 # Parâmetro: um dicionário onde cada turma é um par chave-valor
 # Retorna:
