@@ -71,11 +71,13 @@ def remover_turma_aluno(id_turma_aluno):
 
 def _obter_novo_id_turmas_alunos():
     ids_numericos = []
+    ids_numericos.append(0)
     ids_turmas_alunos = listar_turmas_alunos()
     for id in ids_turmas_alunos.keys():
         id_int = int(id)
         ids_numericos.append(id_int)
-    id_max_int = max(ids_numericos)
+    ids_numericos.sort()
+    id_max_int = ids_numericos.pop()
     novo_id = str(id_max_int + 1)
     return novo_id
 
