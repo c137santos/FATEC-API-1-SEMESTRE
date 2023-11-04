@@ -138,11 +138,13 @@ def verificar_existencia_nota_por_ciclo(nota):
 
 def _obter_novo_id_nota():
     ids_numericos = []
+    ids_numericos.append(0)
     notas = listar_notas()
     for id_str in notas.keys():
         id_int = int(id_str)
         ids_numericos.append(id_int)
-    id_max_int = max(ids_numericos)
+    ids_numericos.sort()
+    id_max_int = ids_numericos.pop()
     novo_id = str(id_max_int + 1)
     return novo_id
 
