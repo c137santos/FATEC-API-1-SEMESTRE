@@ -78,6 +78,7 @@ async function exibirTurmas(turmadata) {
         requisitar_excluir_turma(`${turmaId}`);
       });
 
+      // Cria um ícone de edição para editar a turma
       const imagemIconEdit = document.createElement("img");
       imagemIconEdit.src = "../front/icon/edit-icon.svg";
       imagemIconEdit.alt = "Icone";
@@ -88,9 +89,8 @@ async function exibirTurmas(turmadata) {
         requisitar_editar_turma(`${turmaId}`);
       });
 
-      // Adiciona o ícone ao turmaSquare
+      // Adiciona os ícones ao turmaSquare
       turmaSquare.appendChild(imagemIcon);
-
       turmaSquare.appendChild(imagemIconEdit);
 
       // Adiciona o turmaSquare ao container
@@ -103,7 +103,12 @@ function requisitar_excluir_turma(id) {
   if (window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")) {
     fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`, {
       method: "POST",
-    }).then(document.getElementById(id).remove());
+    }).then(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.remove();
+      }
+    });
   }
 }
 
@@ -116,14 +121,3 @@ function requisitar_informacoes_turma(id) {
 }
 
 GetTurmas();
-
-/*
-function redirecionarParaPagina(id) {
-  if (id === 'turma') {
-      window.location.href = 'gerenciamento_turmas.html';
-  } }
-
-  document.getElementById('turma').addEventListener('click', function() {
-    redirecionarParaPagina('turma');
-});
-*/

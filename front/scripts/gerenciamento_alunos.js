@@ -1,17 +1,24 @@
-getInfoAlunos()
 let alunos_todos = {}
+
 async function getInfoAlunos() {
     try {
-        const response = await fetch(
-        "http://127.0.0.1:8080/api/v1/alunos/listar"
-        );
+        const response = await fetch("http://127.0.0.1:8080/api/v1/alunos/listar");
         alunos_todos = await response.json();
-        mostraAlunos(alunos_todos)
+        mostraAlunos(alunos_todos);
     } catch (error) {
         console.error("Erro ao buscar dados da API -> ", error);
         return null;
     }
 }
+
+const nome = document.getElementById('nomeNovoALuno').value;
+
+
+getInfoAlunos();  // Agora a função getInfoAlunos é chamada para buscar os dados.
+
+	
+let databrasil = moment().format("DD/MM/YYYY");
+console.log(databrasil)
 
 const renderizarAluno = (aluno) => {
   const quadrado = document.createElement("div");
@@ -59,9 +66,8 @@ const mostraAlunos = (alunos) => {
       renderizarAluno(alunos[id]);
     }
 }
-
 async function editarAluno(RA) {
-  let aluno = alunos_todos[RA]
+  let aluno = alunos_todos[RA];
   const modal = document.createElement("dialog");
 
   const titulo = document.createElement("h1");
@@ -87,13 +93,10 @@ async function editarAluno(RA) {
   formulario.appendChild(aluno_genero);
   formulario.appendChild(inputGenero);
 
-
   const aluno_nasc = document.createElement("p");
-  aluno_nasc.textContent = "data de nascimento:";
   const inputDataNascimento = document.createElement("input");
   inputDataNascimento.type = "date";
-  inputDataNascimento.value = aluno.data_nascimento;
-  formulario.appendChild(aluno_nasc);
+  inputDataNascimento.value = moment(aluno.data_nascimento, 'DD/MM/YYYY').format('YYYY-MM-DD');
   formulario.appendChild(inputDataNascimento);
 
   // Adicione um botão de salvar ao formulário
@@ -110,20 +113,21 @@ async function editarAluno(RA) {
     // Obter os valores do formulário
     const nome = inputNome.value;
     const genero = inputGenero.value;
-    const dataNascimento = inputDataNascimento.value;
+    const dataNascimento = moment(inputDataNascimento.value, 'YYYY-MM-DD').format('DD/MM/YYYY');
 
     const aluno_editado = {
-        "RA": RA,
-        "nome": nome,
-        "genero": genero,
-        "data_nascimento": dataNascimento
+      "RA": RA,
+      "nome": nome,
+      "genero": genero,
+      "data_nascimento": dataNascimento
     }
 
     const response = await backEditarAluno(aluno_editado)
     modal.close();
-    event.preventDefault()
-    });
+    event.preventDefault();
+  });
 }
+
 
 async function backEditarAluno(aluno_editado){
     try {
@@ -156,21 +160,36 @@ submitButton.addEventListener("click", function () {
     favDialog.close();
   });
 
-const criarNovoAluno = () => {
-    nomeNovo = document.getElementById('nomeNovoALuno').value
-    generoNovo = document.getElementById('generoNovoAluno').value
-    dataNascNova = document.getElementById('dataNascNovoAluno').value
+  const criarNovoAluno = () => {
+    // Obtenha os valores dos campos do formulário
+    const nome = document.getElementById('nomeNovoALuno').value;
+    const genero = document.getElementById('generoNovoAluno').value;
+    const dataNascNova = document.getElementById('dataNascNovoAluno').value;
 
+    // Formate a data para o formato "DD/MM/YYYY" usando o Moment.js
+    const dataFormatada = moment(dataNascNova).format('DD/MM/YYYY');
+
+    // Crie um objeto aluno com os valores obtidos
     const alunoNovo = {
-        "nome": nomeNovo,
-        "genero": generoNovo,
-        "data_nascimento": dataNascNova
+        "nome": nome,
+        "genero": genero,
+        "data_nascimento": dataFormatada
     }
-    try {
-      fetch ('http://127.0.0.1:8080/api/v1/alunos/criar',{method: "POST", body:JSON.stringify(alunoNovo)})
-      console.log('chamou o back')
-      } catch (error) {
-          console.error("Erro ao buscar dados da API -> ", error);
-      }
 
-}
+    try {
+        // Faça a chamada para criar o novo aluno, enviando o objeto alunoNovo
+        fetch('http://127.0.0.1:8080/api/v1/alunos/criar', { method: "POST", body: JSON.stringify(alunoNovo) })
+            .then(response => {
+                if (response.status === 200) {
+                    console.log('Aluno criado com sucesso.');
+                } else {
+                    console.error('Erro ao criar o aluno.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao buscar dados da API -> ', error);
+            });
+    } catch (error) {
+        console.error('Erro ao buscar dados da API -> ', error);
+    }
+  }

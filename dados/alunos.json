@@ -1,26 +1,20 @@
 {
-    "1": {
-        "nome": "Clara Santos",
-        "RA": 1,
-        "data_nascimento": "1995-05-01",
-        "genero": "UNDEFINED"
+    "12": {
+        "nome": "will",
+        "data_nascimento": "25/05/1984",
+        "genero": "MASC",
+        "RA": 12
     },
-    "2": {
-        "nome": "Marcelo Tambalo",
-        "RA": 2,
-        "data_nascimento": "1980-10-01",
-        "genero": "UNDEFINED"
+    "13": {
+        "nome": "everton",
+        "data_nascimento": "20/06/1980",
+        "genero": "MASC",
+        "RA": 13
     },
-    "3": {
-        "nome": "TA RA RA RA",
-        "RA": 3,
-        "data_nascimento": "1990-04-01",
-        "genero": "UNDEFINED"
-    },
-    "4": {
-        "nome": "Will",
-        "data_nascimento": "1974-05-01",
-        "genero": "mas",
-        "RA": 4
+    "14": {
+        "nome": "Hilda",
+        "data_nascimento": "01/08/1960",
+        "genero": "FEM",
+        "RA": 14
     }
 }

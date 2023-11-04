@@ -82,5 +82,89 @@
         "peso_nota": 4.0,
         "numero_ciclo": 4,
         "prazo_insercao_nota": 5
+    },
+    "13": {
+        "id_turma": "6",
+        "duracao": 15,
+        "peso_nota": 1.0,
+        "numero_ciclo": 1,
+        "prazo_insercao_nota": 5
+    },
+    "14": {
+        "id_turma": "6",
+        "duracao": 15,
+        "peso_nota": 2.0,
+        "numero_ciclo": 2,
+        "prazo_insercao_nota": 5
+    },
+    "15": {
+        "id_turma": "6",
+        "duracao": 15,
+        "peso_nota": 3.0,
+        "numero_ciclo": 3,
+        "prazo_insercao_nota": 5
+    },
+    "16": {
+        "id_turma": "6",
+        "duracao": 15,
+        "peso_nota": 4.0,
+        "numero_ciclo": 4,
+        "prazo_insercao_nota": 5
+    },
+    "17": {
+        "id_turma": "7",
+        "duracao": 15,
+        "peso_nota": 1.0,
+        "numero_ciclo": 1,
+        "prazo_insercao_nota": 5
+    },
+    "18": {
+        "id_turma": "7",
+        "duracao": 15,
+        "peso_nota": 2.0,
+        "numero_ciclo": 2,
+        "prazo_insercao_nota": 5
+    },
+    "19": {
+        "id_turma": "7",
+        "duracao": 15,
+        "peso_nota": 3.0,
+        "numero_ciclo": 3,
+        "prazo_insercao_nota": 5
+    },
+    "20": {
+        "id_turma": "7",
+        "duracao": 15,
+        "peso_nota": 4.0,
+        "numero_ciclo": 4,
+        "prazo_insercao_nota": 5
+    },
+    "21": {
+        "id_turma": "8",
+        "duracao": 15,
+        "peso_nota": 1.0,
+        "numero_ciclo": 1,
+        "prazo_insercao_nota": 5
+    },
+    "22": {
+        "id_turma": "8",
+        "duracao": 15,
+        "peso_nota": 2.0,
+        "numero_ciclo": 2,
+        "prazo_insercao_nota": 5
+    },
+    "23": {
+        "id_turma": "8",
+        "duracao": 15,
+        "peso_nota": 3.0,
+        "numero_ciclo": 3,
+        "prazo_insercao_nota": 5
+    },
+    "24": {
+        "id_turma": "8",
+        "duracao": 15,
+        "peso_nota": 4.0,
+        "numero_ciclo": 4,
+        "prazo_insercao_nota": 5
     }
 }

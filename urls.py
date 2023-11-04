@@ -25,9 +25,8 @@ URLS = {
     # URL("/api/v1/ciclos/criar"): view.criar_ciclo,
     # editar ciclo e remover ciclo serão implementados ao final
     URL("/api/v1/notas/listar"): view.listar_notas,
-    URL(
-        "/api/v1/notas/listar/:id_turma/:id_aluno"
-    ): view.listar_notas_por_id_turma_id_aluno,
+    URL( "/api/v1/notas/listar/:id_turma/:id_aluno"): view.listar_notas_por_id_turma_id_aluno,
+
     URL("/api/v1/notas/turma/listar/:id_turma"): view.filtrar_notas_por_id_turma,
     URL("/api/v1/notas/aluno/listar/:id_aluno"): view.listar_notas_por_id_aluno,
     URL("/api/v1/notas/criar"): view.criar_nota,
