@@ -24,8 +24,8 @@ def _calcular_fee_turma_aluno(id_turma, id_aluno):
         soma_das_notas += peso_nota * valor
         soma_dos_pesos += peso_nota
     if len(notas_por_turma_aluno) > 0:
-        resultado = soma_das_notas / float(soma_dos_pesos)
-        return round (resultado, 2)
+        media_fee = soma_das_notas / float(soma_dos_pesos)
+        return round (media_fee, 2)
     else:
         return 0.0
 
