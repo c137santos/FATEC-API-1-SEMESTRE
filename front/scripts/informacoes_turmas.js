@@ -140,41 +140,44 @@ function requisitar_editar_nota(alunos) {
   const notasEditaveis = document.querySelectorAll(".valor:not([readonly])");
   const requestBody = {};
 
-  if (notasEditaveis.length > 0) {
-    notasEditaveis.forEach((nota) => {
-      const id_nota = nota.id.split("id_nota=")[1].split(",")[0];
-      const id_turma = nota.id.split("id_turma=")[1].split(",")[0];
-      const id_aluno = nota.id.split("id_aluno=")[1].split(",")[0];
-      const id_ciclo = nota.id.split("id_ciclo=")[1];
-      const valor = nota.value;
-      const valorOriginal = nota.dataset.ValorOriginal;
+  let notasInvalidas = false; // Variável para verificar se há notas inválidas
 
-      if (valor >= 0 && valor <= 10) {
-        if (valor !== valorOriginal) {
-          requestBody[id_nota] = {
-            id_turma: id_turma,
-            id_aluno: id_aluno,
-            id_ciclo: id_ciclo,
-            valor: valor,
-          };
-        }
-      } else {
-        // Exibe uma mensagem de erro ao usuário
-        alert("A nota deve estar entre 0 e 10.");
-        
-        return;
-      }
-    });
+  notasEditaveis.forEach((nota) => {
+    const id_nota = nota.id.split("id_nota=")[1].split(",")[0];
+    const id_turma = nota.id.split("id_turma=")[1].split(",")[0];
+    const id_aluno = nota.id.split("id_aluno=")[1].split(",")[0];
+    const id_ciclo = nota.id.split("id_ciclo=")[1];
+    const valor = parseFloat(nota.value); // Converter o valor para número
 
-    const decisao_usuario = criar_modal_confirmar_edicao(requestBody, alunos);
-    if (decisao_usuario) {
-      fetch(`http://localhost:8080/api/v1/notas/editar`, {
-        method: "POST",
-        body: JSON.stringify(requestBody),
-      });
+    if (isNaN(valor) || valor < 0 || valor > 10) {
+      // Se a nota não for um número ou estiver fora do intervalo, marca como inválida
+      notasInvalidas = true;
+      nota.classList.add("nota-invalida"); // Adiciona uma classe para destacar a nota inválida visualmente
+    } else {
+      // Se a nota for válida, adiciona ao requestBody
+      requestBody[id_nota] = {
+        id_turma: id_turma,
+        id_aluno: id_aluno,
+        id_ciclo: id_ciclo,
+        valor: valor,
+      };
     }
+  });
+
+  if (notasInvalidas) {
+    // Exibe uma mensagem de erro ao usuário
+    alert("Todas as notas devem estar entre 0 e 10.");
+    return;
+  }
+
+  const decisao_usuario = criar_modal_confirmar_edicao(requestBody, alunos);
+  if (decisao_usuario) {
+    fetch(`http://localhost:8080/api/v1/notas/editar`, {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+    });
   } else {
-    console.log("Nenhuma nota editável encontrada.");
+    // O usuário optou por não prosseguir, você pode adicionar alguma lógica aqui se necessário
   }
 }
 
