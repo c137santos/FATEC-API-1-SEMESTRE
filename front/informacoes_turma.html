@@ -28,17 +28,22 @@
           <p class="fnomeProfessor" id="fnomeProfessor"></p>
           <h5>Quantidade de Alunos:</h5>
           <p class="fquantidadeAlunos" id="fquantidadeAlunos"></p>
+          <h5>Data de Início:</h5>
+          <p class="fdataInicio" id="fdataInicio"></p>
         </div>
-        <div class="container-ciclos">
-          <p class="titulo-ciclos"><strong>Pesos dos Ciclos:</strong></p>
-          <div class="ciclo-peso"></div>
-          <img class="btn-salvar-ciclo-peso" src="../front/icon/save-icon.svg" alt="salvar" onclick="requisitar_salvar_ciclo_peso()">
-        </div>
-            
-        </div>
+        <div class="info-ciclos">
+          <h3>Pesos dos Ciclos</h3>
+          <hr>
+          <div class="container-ciclos">
+            <div class="ciclo-peso"></div>
+          </div>
+          <div class="container-btn-salvar-ciclo">
+            <img class="btn-salvar-ciclo-peso" src="../front/icon/save-icon.svg" alt="salvar" onclick="requisitar_salvar_ciclo_peso()">      
+          </div>
+      </div>
     </div>
     <div class="aluno-container">
-        <p id="aviso_ciclo_aberto"></p>
+        <h3 id="aviso_ciclo_aberto"></h3>
         <div class="header-container">
           <div class="header-title titulo_alunos">Nome</div>
           <div class="header-title titulo_notas">Notas</div>

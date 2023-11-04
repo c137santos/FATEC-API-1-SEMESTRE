@@ -84,11 +84,11 @@ def editar_ciclo(id_ciclo, ciclo_atualizado):
         id_ciclo_str = str(id_ciclo)
         ciclos = listar_ciclos()
         if id_ciclo_str in ciclos.keys():
-            ciclos[id_ciclo]["id_turma"] = ciclo_atualizado["id_turma"]
-            ciclos[id_ciclo]["duracao"] = int(ciclo_atualizado["duracao"])
-            ciclos[id_ciclo]["peso_nota"] = float(ciclo_atualizado["peso_nota"])
-            ciclos[id_ciclo]["numero_ciclo"] = int(ciclo_atualizado["numero_ciclo"])
-            ciclos[id_ciclo]["prazo_insercao_nota"] = int(ciclo_atualizado["prazo_insercao_nota"])
+            ciclos[id_ciclo_str]["id_turma"] = ciclo_atualizado["id_turma"]
+            ciclos[id_ciclo_str]["duracao"] = int(ciclo_atualizado["duracao"])
+            ciclos[id_ciclo_str]["peso_nota"] = float(ciclo_atualizado["peso_nota"])
+            ciclos[id_ciclo_str]["numero_ciclo"] = int(ciclo_atualizado["numero_ciclo"])
+            ciclos[id_ciclo_str]["prazo_insercao_nota"] = int(ciclo_atualizado["prazo_insercao_nota"])
             return _salvar_ciclos(ciclos)
         else:
             raise KeyError("Ciclo não encontrado.")
@@ -98,11 +98,13 @@ def editar_ciclo(id_ciclo, ciclo_atualizado):
 def _obter_novo_id_ciclo():
     ciclos = listar_ciclos()
     ids_numericos = []
+    ids_numericos.append(0)
     ciclos = listar_ciclos()
     for id_str in ciclos.keys():
         id_int = int(id_str)
         ids_numericos.append(id_int)
-    id_max_int = max(ids_numericos)
+    ids_numericos.sort()
+    id_max_int = ids_numericos.pop()
     novo_id = str(id_max_int + 1)
     return novo_id
 
