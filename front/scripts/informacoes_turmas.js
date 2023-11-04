@@ -149,15 +149,23 @@ function requisitar_editar_nota(alunos) {
       const valor = nota.value;
       const valorOriginal = nota.dataset.ValorOriginal;
 
-      if (valor !== valorOriginal) {
-        requestBody[id_nota] = {
-          id_turma: id_turma,
-          id_aluno: id_aluno,
-          id_ciclo: id_ciclo,
-          valor: valor,
-        };
+      if (valor >= 0 && valor <= 10) {
+        if (valor !== valorOriginal) {
+          requestBody[id_nota] = {
+            id_turma: id_turma,
+            id_aluno: id_aluno,
+            id_ciclo: id_ciclo,
+            valor: valor,
+          };
+        }
+      } else {
+        // Exibe uma mensagem de erro ao usuário
+        alert("A nota deve estar entre 0 e 10.");
+        
+        return;
       }
     });
+
     const decisao_usuario = criar_modal_confirmar_edicao(requestBody, alunos);
     if (decisao_usuario) {
       fetch(`http://localhost:8080/api/v1/notas/editar`, {
