@@ -37,11 +37,11 @@ async function preencher_info_turma(id) {
     }
 
     // Chama a função para iniciar a criação do componentes dos alunos
-    exibirAlunos(alunos, notasAlunos, cicloPeso);
+    exibirAlunos(alunos, notasAlunos, cicloPeso, id);
   }
 }
 
-function exibirAlunos(alunos, notasAlunos, cicloPeso) {
+function exibirAlunos(alunos, notasAlunos, cicloPeso, id_turma) {
   const container = document.querySelector(".corpo_tabela");
 
   for (const chave in alunos) {
@@ -53,7 +53,7 @@ function exibirAlunos(alunos, notasAlunos, cicloPeso) {
       const alunoSquare = criarComponenteAluno(alunoId, nomeAluno, notasAlunos);
       container.appendChild(alunoSquare);
       //Chama a função para criar o campo de media de cada aluno
-      adicionarMediaAoAluno(alunoId, notasAlunos, cicloPeso);
+      adicionarMediaAoAluno(alunoId, notasAlunos, cicloPeso, id_turma);
     }
   }
 }
@@ -120,13 +120,14 @@ function criarCampoNota(alunoId, notasAlunos) {
   return campoNota;
 }
 
-function adicionarMediaAoAluno(alunoId, notasAlunos, PesoCiclo) {
+function adicionarMediaAoAluno(alunoId, notasAlunos, PesoCiclo, id_turma) {
   const alunoSquare = document.getElementById(`alunoId=${alunoId}`);
   const mediaAluno = document.createElement("div");
   mediaAluno.className = "media";
-  mediaAluno.textContent = "media";
   mediaAluno.id = `mediaAlunoId=${alunoId}`;
-
+  Promise
+    .resolve(obter_fee_turma_aluno(id_turma, alunoId))
+    .then((fee) => mediaAluno.textContent = fee)
   alunoSquare.appendChild(mediaAluno);
 }
 
@@ -148,15 +149,23 @@ function requisitar_editar_nota(alunos) {
       const valor = nota.value;
       const valorOriginal = nota.dataset.ValorOriginal;
 
-      if (valor !== valorOriginal) {
-        requestBody[id_nota] = {
-          id_turma: id_turma,
-          id_aluno: id_aluno,
-          id_ciclo: id_ciclo,
-          valor: valor,
-        };
+      if (valor >= 0 && valor <= 10) {
+        if (valor !== valorOriginal) {
+          requestBody[id_nota] = {
+            id_turma: id_turma,
+            id_aluno: id_aluno,
+            id_ciclo: id_ciclo,
+            valor: valor,
+          };
+        }
+      } else {
+        // Exibe uma mensagem de erro ao usuário
+        alert("A nota deve estar entre 0 e 10.");
+        
+        return;
       }
     });
+
     const decisao_usuario = criar_modal_confirmar_edicao(requestBody, alunos);
     if (decisao_usuario) {
       fetch(`http://localhost:8080/api/v1/notas/editar`, {
@@ -249,4 +258,10 @@ async function requisitar_salvar_ciclo_peso(){
     console.log(res)
   }
   location.reload()
+}
+
+async function obter_fee_turma_aluno(id_turma, id_aluno){
+  const response = await fetch (`http://localhost:8080/api/v1/notas/fee/obter/${id_turma}/${id_aluno}`, {method: "GET"})
+  const fee = await response.json()
+  return fee ? fee.valor : 0.0
 }
