@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "1": [
         {
             "grupo": 1,
@@ -26,3 +27,62 @@
 }
 
 //a chave do dicionario é o id do aluno
+=======
+    "1": {
+        "id_turma": "1",
+        "id_aluno": "1",
+        "id_ciclo": "1",
+        "valor": 8.5,
+        "fee": false
+    },
+    "2": {
+        "id_turma": "1",
+        "id_aluno": "1",
+        "id_ciclo": "2",
+        "valor": 8.5,
+        "fee": false
+    },
+    "3": {
+        "id_turma": "1",
+        "id_aluno": "1",
+        "id_ciclo": "3",
+        "valor": 7.5,
+        "fee": false
+    },
+    "4": {
+        "id_turma": "1",
+        "id_aluno": "1",
+        "id_ciclo": "4",
+        "valor": 9.5,
+        "fee": false
+    },
+    "5": {
+        "id_turma": "1",
+        "id_aluno": "2",
+        "id_ciclo": "1",
+        "valor": 9.5,
+        "fee": false
+    },
+    "6": {
+        "id_turma": "1",
+        "id_aluno": "2",
+        "id_ciclo": "2",
+        "valor": 0,
+        "fee": false
+    },
+    "7": {
+        "id_turma": "1",
+        "id_aluno": "2",
+        "id_ciclo": "3",
+        "valor": 0,
+        "fee": false
+    },
+    "8": {
+        "id_turma": "1",
+        "id_aluno": "2",
+        "id_ciclo": "4",
+        "valor": 0,
+        "fee": false
+    }
+}
+>>>>>>> padrao_datas_MOMENTJS#142

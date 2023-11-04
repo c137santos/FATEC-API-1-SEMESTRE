@@ -1,0 +1,106 @@
+{
+    "1": {
+        "id_turma": "1",
+        "id_aluno": "1"
+    },
+    "2": {
+        "id_turma": "1",
+        "id_aluno": "2"
+    },
+    "3": {
+        "id_turma": "1",
+        "id_aluno": "3"
+    },
+    "4": {
+        "id_turma": "1",
+        "id_aluno": "4"
+    },
+    "5": {
+        "id_turma": "1",
+        "id_aluno": "5"
+    },
+    "6": {
+        "id_turma": "2",
+        "id_aluno": "1"
+    },
+    "7": {
+        "id_turma": "2",
+        "id_aluno": "5"
+    },
+    "8": {
+        "id_turma": "4",
+        "id_aluno": 1
+    },
+    "9": {
+        "id_turma": "4",
+        "id_aluno": 2
+    },
+    "10": {
+        "id_turma": "4",
+        "id_aluno": 3
+    },
+    "11": {
+        "id_turma": "5",
+        "id_aluno": 1
+    },
+    "12": {
+        "id_turma": "5",
+        "id_aluno": 2
+    },
+    "13": {
+        "id_turma": "5",
+        "id_aluno": 3
+    },
+    "14": {
+        "id_turma": "5",
+        "id_aluno": 4
+    },
+    "15": {
+        "id_turma": "6",
+        "id_aluno": 12
+    },
+    "16": {
+        "id_turma": "6",
+        "id_aluno": 13
+    },
+    "17": {
+        "id_turma": "6",
+        "id_aluno": 14
+    },
+    "18": {
+        "id_turma": "6",
+        "id_aluno": 16
+    },
+    "19": {
+        "id_turma": "7",
+        "id_aluno": 12
+    },
+    "20": {
+        "id_turma": "7",
+        "id_aluno": 13
+    },
+    "21": {
+        "id_turma": "7",
+        "id_aluno": 14
+    },
+    "22": {
+        "id_turma": "7",
+        "id_aluno": 16
+    },
+    "23": {
+        "id_turma": "8",
+        "id_aluno": 12
+    },
+    "24": {
+        "id_turma": "8",
+        "id_aluno": 13
+    },
+    "25": {
+        "id_turma": "8",
+        "id_aluno": 14
+    },
+    "26": {
+        "id_turma": "8",
+        "id_aluno": 16
+    }
+}

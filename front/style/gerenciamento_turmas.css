@@ -5,12 +5,15 @@ body {
   align-items: center;
 }
 
+<<<<<<< HEAD
 /* Estilos para o cabeçalho */
 .header {
   width: 100%;
   display: flex;
   justify-content: center;
 }
+=======
+>>>>>>> padrao_datas_MOMENTJS#142
 
 .title {
   margin-top: 5px;
@@ -18,6 +21,7 @@ body {
 
 /* Estilos para o contêiner principal das turmas */
 .turma-container {
+<<<<<<< HEAD
   width: 800px;
   min-height: 300px;
   max-height: 300px;
@@ -25,6 +29,14 @@ body {
   margin-bottom: 20px;
   border: 0.2px solid #cccccc23;
   border-radius: 5px;
+=======
+  width: 1200px;
+  min-height: 480px;
+  max-height: 480px;
+  padding: 20px;
+  margin-bottom: 20px;
+
+>>>>>>> padrao_datas_MOMENTJS#142
   background-color: #f7f7f700;
   display: flex;
   flex-direction: column;
@@ -46,7 +58,11 @@ body {
 .turma-square {
   position: relative;
   width: calc(25% - 10px);
+<<<<<<< HEAD
   height: 150px;
+=======
+  height: 210px;
+>>>>>>> padrao_datas_MOMENTJS#142
   background-color: #ffffff;
   border-radius: 5px;
   display: flex;
@@ -135,7 +151,11 @@ body {
   width: 250px;
   padding: 2px;
   margin-bottom: 10px;
+<<<<<<< HEAD
   border: 1px solid #ccc;
+=======
+  border: 1px solid #2929cf;
+>>>>>>> padrao_datas_MOMENTJS#142
   border-radius: 5px;
 }
 
@@ -260,3 +280,24 @@ label {
 #cancelarButton:hover {
   background-color: #ce17179d;
 }
+<<<<<<< HEAD
+=======
+
+#fturma {
+  padding-top: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+#fquantidadeCiclo {
+  border-radius: 5px;
+  padding: 3%;
+}
+
+#fsublegenda {
+  padding: 0;
+  margin: 0;
+  font-size: 11px
+}
+>>>>>>> padrao_datas_MOMENTJS#142
