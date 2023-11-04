@@ -148,13 +148,13 @@ function requisitar_editar_nota(alunos) {
       const valor = nota.value;
       const valorOriginal = nota.dataset.ValorOriginal;
 
-      if (valor !== valorOriginal) {
-        requestBody[id_nota] = {
-          id_turma: id_turma,
-          id_aluno: id_aluno,
-          id_ciclo: id_ciclo,
-          valor: valor,
-        };
+        if (valor !== valorOriginal) {
+          requestBody[id_nota] = {
+            id_turma: id_turma,
+            id_aluno: id_aluno,
+            id_ciclo: id_ciclo,
+            valor: valor,
+          };
       }
     });
     const decisao_usuario = criar_modal_confirmar_edicao(requestBody, alunos);
