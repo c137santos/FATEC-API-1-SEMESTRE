@@ -209,5 +209,5 @@ def listar_turmas_aluno(request, id_aluno):
 
 def listar_detalhes_ciclos_por_id_turma(request, id_turma):
     turma = gerenciador_turmas.obter_turma(id_turma)
-    resposta = gerenciador_ciclos.detalhesCicloTurma(turma)
+    resposta = gerenciador_ciclos.detalhesCicloTurma(turma, id_turma)
     return JsonResponse(resposta)

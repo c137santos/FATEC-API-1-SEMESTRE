@@ -7,7 +7,7 @@ body {
 }
 
 .menu-button {
-  text-decoration:none
+  text-decoration: none;
 }
 
 .titulo {
@@ -16,32 +16,42 @@ body {
 }
 
 .container-info {
-  margin-top: 10px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /* Alinha os elementos no topo do contêiner */
-  width: 1200px;
-  margin-bottom: 20px;
+  align-items: flex-start;
+  width: 600px;
 }
 
 .info-turma {
   padding: 8px;
-  width: 236px;
-  height: 390px;
   background-color: whitesmoke;
   border-radius: 5px;
+  width: 300px;
+  height: 180px;
+  margin-right: 10px;
 }
 
-.container-ciclos {
-  display: flex;
-  flex-direction: column;
+.info-turma h3 {
   text-align: center;
-  justify-content: left;
-  width: 300px;
-  max-width: 300px;
-  height: 80px;
-  padding: 0px 5px;
-  background: whitesmoke;
+  font-size: 24px;
+  border-bottom: 2px solid #333;
+  margin: 0 0 10px;
+}
+
+.info-pair {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.info-pair h5 {
+  margin: 0;
+}
+
+.info-pair p {
+  margin: 0;
+  margin-left: 10px;
 }
 
 .info-ciclos {
@@ -52,34 +62,42 @@ body {
   border-radius: 5px;
 }
 
-.titulo-ciclos {
-  margin-top: 0px;
-  margin-bottom: 5px;
+.info-ciclos h3 {
+  text-align: center;
+  font-size: 24px;
+  border-bottom: 2px solid #333;
+  margin: 0 0 10px;
+}
+
+.container-ciclos {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: left;
+  max-width: 100%;
+  height: 80px;
+  padding: 0px 5px;
 }
 
 .ciclo-peso {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start ;
-  font-weight: bold;
+  justify-content: center;
 }
 
 .ciclo {
   display: flex;
   align-items: center;
   font-weight: 200;
-
   margin-right: 2px;
   font-size: 14px;
   font-weight: bold;
-  text-decoration: underline 
+  text-decoration: underline;
 }
-
 
 .peso {
   border: 1px solid #0000000c;
   width: 7%;
-  padding: 5px;
+  padding: 2px;
   margin-right: 15px; /* Adiciona espaço ao redor dos pesos para separá-los dos rótulos (ciclos) */
 }
 
@@ -87,13 +105,10 @@ body {
 .aluno-container {
   overflow-x: hidden;
   width: 550px;
-  height: 380px;
+  height: 265px;
   padding-top: 5px;
   margin-bottom: 9px;
   border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   overflow-y: auto;
 }
 
@@ -182,7 +197,6 @@ div.media {
   padding: 0px;
 }
 
-
 .campoNotaHabilitado {
   display: flex;
   flex-direction: row;
@@ -194,7 +208,6 @@ div.media {
   text-align: center;
   padding: 0px;
 }
-
 
 .valor {
   background-color: whitesmoke;
@@ -216,7 +229,7 @@ div.media {
 
 .btn-salvar-ciclo-peso:hover {
   background-color: rgb(251, 179, 197);
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .container-btn-salvar-ciclo {
@@ -224,13 +237,4 @@ div.media {
   flex-direction: column;
   text-align: center;
   justify-content: left;
-}
-
-.btn-voltar {
-  width: 49%;
-}
-
-.container-btn-voltar {
-  display: ruby;
-  justify-content: center;
 }
