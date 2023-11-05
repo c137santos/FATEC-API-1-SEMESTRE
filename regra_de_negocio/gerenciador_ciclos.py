@@ -112,8 +112,6 @@ def detalhesCicloTurma(turma):
     else:
         # Nenhum ciclo aberto, estamos no último ciclo
         ciclo_atual = quantidade_ciclos
-        ciclo_aberto_para_nota = None
-
     return {
         "data_final_ciclo": str(data_final_ciclo),
         "ciclo_atual": ciclo_atual,
