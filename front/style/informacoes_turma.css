@@ -20,7 +20,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start; /* Alinha os elementos no topo do contêiner */
-  width: 600px;
+  width: 1200px;
   margin-bottom: 20px;
 }
 
@@ -87,8 +87,7 @@ body {
 .aluno-container {
   overflow-x: hidden;
   width: 550px;
-  height: 330px;
-  padding: 20px;
+  height: 380px;
   padding-top: 5px;
   margin-bottom: 9px;
   border-radius: 5px;
@@ -121,16 +120,16 @@ body {
   display: flex;
   background-color: #f5f5f5;
   box-sizing: border-box;
-  padding: 5px;
   height: 40px;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   cursor: pointer;
+  align-items: center;
 }
 
-.aluno-square:hover {
+/* .aluno-square:hover {
   background-color: transparent;
   box-shadow: 0 0 50px 20px rgb(154, 104, 241);
-}
+} */
 
 .header-title,
 .aluno-square p,
@@ -170,13 +169,39 @@ div.media {
   justify-content: center;
 }
 
-.valor {
-  background-color: rgb(90, 236, 188);
+.campoNotaDesabilitado {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #ccc;
+  color: gray;
   width: 50px;
   margin-left: 10px;
   margin-right: 10px;
   text-align: center;
   padding: 0px;
+}
+
+
+.campoNotaHabilitado {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #e2bdfd;
+  width: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+  padding: 0px;
+}
+
+
+.valor {
+  background-color: whitesmoke;
+  width: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
 }
 
 .btn-salvar-ciclo-peso {
@@ -199,4 +224,13 @@ div.media {
   flex-direction: column;
   text-align: center;
   justify-content: left;
+}
+
+.btn-voltar {
+  width: 49%;
+}
+
+.container-btn-voltar {
+  display: ruby;
+  justify-content: center;
 }
