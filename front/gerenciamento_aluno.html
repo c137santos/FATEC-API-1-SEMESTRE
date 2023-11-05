@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gerenciamento de Alunos</title>
     <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
     />
-    <link rel="stylesheet" href="style/custom.css">
-    <link rel="stylesheet" href="style/gerenciamento_aluno.css">
+    <link rel="stylesheet" href="style/custom.css" />
+    <link rel="stylesheet" href="style/gerenciamento_aluno.css" />
   </head>
   <header class="header">
     <img src="./imagens/Logo.png" alt="logo" />
@@ -17,8 +17,7 @@
   <body>
     <h1 class="texto-titulo">Gerenciamento de Alunos</h1>
     <button id="buttonNovoAluno">Criar novo aluno</button>
-    <div id="aluno-container" class="divAlunos">
-    </div>
+    <div id="aluno-container" class="divAlunos"></div>
   </body>
   <div class="muleke">
     <a href="index.html">
@@ -27,19 +26,22 @@
   </div>
   <dialog id="favDialog">
     <form method="dialog">
-        <section>
-            <label ><strong>Nome:</strong></label>
-            <input type="text" id="nomeNovoALuno">
-            <label ><strong>Genero:</strong></label>
-            <input type="text" id="generoNovoAluno">
-            <label ><strong>Data de nascimento:</strong></label>
-            <input type="date" id="dataNascNovoAluno">
-        </section>
-        <menu>
+      <section>
+        <label><strong>Nome:</strong></label>
+        <input type="text" id="nomeNovoALuno" />
+        <label><strong>Gênero:</strong></label>
+        <select id="generoNovoAluno" size="1">
+          <option value="default" disabled selected>Escolha uma opção</option>
+          <option value="masculino">Masculino</option>
+          <option value="feminino">Feminino</option>
+        </select>
+        <label><strong>Data de nascimento:</strong></label>
+        <input type="date" id="dataNascNovoAluno" />
+      </section>
+      <menu>
         <button id="submit" type="submit">Confirmar</button>
-        </menu>
+      </menu>
     </form>
-    </dialog>
-
+  </dialog>
 </html>
 <script src="/front/scripts/gerenciamento_alunos.js"></script>
