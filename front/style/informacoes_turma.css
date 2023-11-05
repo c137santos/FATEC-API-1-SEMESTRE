@@ -105,13 +105,10 @@ body {
 .aluno-container {
   overflow-x: hidden;
   width: 550px;
-  height: 380px;
+  height: 265px;
   padding-top: 5px;
   margin-bottom: 9px;
   border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   overflow-y: auto;
 }
 
@@ -200,7 +197,6 @@ div.media {
   padding: 0px;
 }
 
-
 .campoNotaHabilitado {
   display: flex;
   flex-direction: row;
@@ -212,7 +208,6 @@ div.media {
   text-align: center;
   padding: 0px;
 }
-
 
 .valor {
   background-color: whitesmoke;
