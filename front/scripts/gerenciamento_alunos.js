@@ -158,8 +158,20 @@ submitButton.addEventListener("click", function () {
 
 const criarNovoAluno = () => {
     nomeNovo = document.getElementById('nomeNovoALuno').value
+    if (nomeNovo === "") {
+      alert("o nome do aluno é obrigatório");
+      return;
+    }
     generoNovo = document.getElementById('generoNovoAluno').value
+    if (generoNovo === "") {
+      alert("o gênero do aluno é obrigatório");
+      return;
+    }
     dataNascNova = document.getElementById('dataNascNovoAluno').value
+    if (dataNascNova === "") {
+      alert("a data de nascimento do aluno é obrigatório");
+      return;
+    }
 
     const alunoNovo = {
         "nome": nomeNovo,
