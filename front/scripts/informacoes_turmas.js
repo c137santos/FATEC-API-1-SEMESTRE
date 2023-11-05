@@ -42,7 +42,7 @@ async function preencher_info_turma(id) {
   }
 }
 
-function criarCabecalhoNota(){
+function criarCabecalhoNota() {
   const cabecalhoNota = document.createElement("div");
   cabecalhoNota.className = "aluno-square";
   cabecalhoNota.style = "font-weight: bold;";
@@ -54,13 +54,13 @@ function criarCabecalhoNota(){
   const elementoCampoCiclos = document.createElement("div");
   elementoCampoCiclos.className = "campoNota";
 
-  for( var x = 1; x < 5; ++x ){
+  for (var x = 1; x < 5; ++x) {
     const elementoCampoValor = document.createElement("span");
-    elementoCampoValor.className = "valor"
-    elementoCampoValor.innerText = `C${x}`
-    elementoCampoCiclos.appendChild(elementoCampoValor)
+    elementoCampoValor.className = "valor";
+    elementoCampoValor.innerText = `C${x}`;
+    elementoCampoCiclos.appendChild(elementoCampoValor);
   }
-  
+
   const elementoCampoMedia = document.createElement("div");
   elementoCampoMedia.innerHTML = "FEE";
   elementoCampoMedia.className = "media";
@@ -68,14 +68,14 @@ function criarCabecalhoNota(){
   cabecalhoNota.appendChild(elementoNomeAluno);
   cabecalhoNota.appendChild(elementoCampoCiclos);
   cabecalhoNota.appendChild(elementoCampoMedia);
-  return cabecalhoNota
+  return cabecalhoNota;
 }
 
 function exibirAlunos(alunos, notasAlunos, cicloPeso, id_turma) {
   const container = document.querySelector(".corpo_tabela");
 
   const cabecalhoNota = criarCabecalhoNota();
-  container.appendChild(cabecalhoNota)
+  container.appendChild(cabecalhoNota);
 
   for (const chave in alunos) {
     if (alunos.hasOwnProperty(chave)) {
@@ -140,11 +140,10 @@ function criarCampoNota(alunoId, notasAlunos) {
           //   document.getElementById("aviso_ciclo_aberto");
           // aviso_ciclo_aberto.textContent = `Ciclo aberto para nota: ${id_ciclo}`;
           InputNotas.dataset.ValorOriginal = valorNota;
-          InputNotas.setAttribute("class","campoNotaHabilitado");
+          InputNotas.setAttribute("class", "campoNotaHabilitado");
           InputNotas.removeAttribute("readonly");
-
         } else {
-          InputNotas.setAttribute("class","campoNotaDesabilitado");
+          InputNotas.setAttribute("class", "campoNotaDesabilitado");
           InputNotas.setAttribute("readonly", true);
         }
 
@@ -172,7 +171,9 @@ async function editarNota() {
 }
 
 function requisitar_editar_nota(alunos) {
-  const notasEditaveis = document.querySelectorAll(".campoNotaHabilitado:not([readonly])");
+  const notasEditaveis = document.querySelectorAll(
+    ".campoNotaHabilitado:not([readonly])"
+  );
   const requestBody = {};
 
   let notasInvalidas = false; // Variável para verificar se há notas inválidas
@@ -202,6 +203,7 @@ function requisitar_editar_nota(alunos) {
           id_aluno: id_aluno,
           id_ciclo: id_ciclo,
           valor: valor,
+          fee: false,
         };
       }
     });
