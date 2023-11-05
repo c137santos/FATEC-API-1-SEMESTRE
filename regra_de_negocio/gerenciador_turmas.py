@@ -65,6 +65,7 @@ def excluir_turma_svc(id):
         return True
     return False
 
+
 # Parâmetro: um dicionário onde cada turma é um par chave-valor
 # Retorna:
 #   True se a operação for bem sucedida

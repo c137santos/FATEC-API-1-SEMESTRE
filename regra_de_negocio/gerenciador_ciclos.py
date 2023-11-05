@@ -56,6 +56,7 @@ def adicionar_ciclo(ciclo):
     ciclos[novo_id_ciclo] = ciclo
     return _salvar_ciclos(ciclos)
 
+
 def editar_ciclo(id_ciclo, ciclo_atualizado):
     try:
         id_ciclo_str = str(id_ciclo)
@@ -65,12 +66,15 @@ def editar_ciclo(id_ciclo, ciclo_atualizado):
             ciclos[id_ciclo_str]["duracao"] = int(ciclo_atualizado["duracao"])
             ciclos[id_ciclo_str]["peso_nota"] = float(ciclo_atualizado["peso_nota"])
             ciclos[id_ciclo_str]["numero_ciclo"] = int(ciclo_atualizado["numero_ciclo"])
-            ciclos[id_ciclo_str]["prazo_insercao_nota"] = int(ciclo_atualizado["prazo_insercao_nota"])
+            ciclos[id_ciclo_str]["prazo_insercao_nota"] = int(
+                ciclo_atualizado["prazo_insercao_nota"]
+            )
             return _salvar_ciclos(ciclos)
         else:
             raise KeyError("Ciclo não encontrado.")
     except KeyError as e:
         return f"Falha na edição: {str(e)}"
+
 
 def _obter_novo_id_ciclo():
     ids_numericos = []
@@ -81,6 +85,7 @@ def _obter_novo_id_ciclo():
     id_max_int = max(ids_numericos)
     novo_id = str(id_max_int + 1)
     return novo_id
+
 
 def _salvar_ciclos(ciclos):
     dados = json.dumps(ciclos, indent=4)

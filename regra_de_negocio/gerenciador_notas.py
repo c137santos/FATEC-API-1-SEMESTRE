@@ -20,7 +20,7 @@ def _calcular_fee_turma_aluno(id_turma, id_aluno):
         ciclo = obter_ciclo(notas_por_turma_aluno[id_nota]["id_ciclo"])
         peso_nota = ciclo["peso_nota"]
         valor = notas_por_turma_aluno[id_nota]["valor"]
-        soma_das_notas += (peso_nota * valor)
+        soma_das_notas += peso_nota * valor
         soma_dos_pesos += peso_nota
     if len(notas_por_turma_aluno) > 0:
         return soma_das_notas / float(soma_dos_pesos)
@@ -112,7 +112,9 @@ def editar_nota(notas_atualizada):
     for id_nota in notas_atualizada:
         id_nota_atualizada_str = str(id_nota)
         if id_nota_atualizada_str in notas.keys():
-            notas[id_nota_atualizada_str]["valor"] = float(notas_atualizada[id_nota_atualizada_str]["valor"])
+            notas[id_nota_atualizada_str]["valor"] = float(
+                notas_atualizada[id_nota_atualizada_str]["valor"]
+            )
         else:
             return False
     return _salvar_notas(notas)
@@ -152,6 +154,7 @@ def _salvar_notas(notas):
         f.write(dados)
         return True
 
+
 def verificar_edicao_habilitada(notas, id_nota):
     id_nota_str = str(id_nota)
     nota = notas[id_nota_str]
@@ -161,8 +164,12 @@ def verificar_edicao_habilitada(notas, id_nota):
         data_inicio = turma["data_de_inicio"]
         formato_data = "%d/%m/%Y"
         prazo_insercao_nota = _obter_prazo_insercao_nota(ciclo, nota["id_turma"])
-        data_inicial_insercao_nota = datetime.strptime(data_inicio, formato_data) + timedelta(days=prazo_insercao_nota)
-        data_final_insercao_nota = data_inicial_insercao_nota + timedelta(days=ciclo["prazo_insercao_nota"])
+        data_inicial_insercao_nota = datetime.strptime(
+            data_inicio, formato_data
+        ) + timedelta(days=prazo_insercao_nota)
+        data_final_insercao_nota = data_inicial_insercao_nota + timedelta(
+            days=ciclo["prazo_insercao_nota"]
+        )
         data_atual = datetime.now()
         if data_inicial_insercao_nota <= data_atual <= data_final_insercao_nota:
             return True
@@ -170,7 +177,6 @@ def verificar_edicao_habilitada(notas, id_nota):
             return False
     else:
         return False
-
 
 
 def _obter_prazo_insercao_nota(ciclo, id_turma):

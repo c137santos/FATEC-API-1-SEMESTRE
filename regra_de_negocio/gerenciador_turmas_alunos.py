@@ -69,7 +69,6 @@ def remover_turma_aluno(id_turma):
     return _salvar_turmas_alunos(turmas_alunos)
 
 
-
 def _obter_novo_id_turmas_alunos():
     ids_numericos = []
     ids_turmas_alunos = listar_turmas_alunos()

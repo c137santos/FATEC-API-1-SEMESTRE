@@ -76,7 +76,7 @@ async function exibirTurmas(turmadata) {
       imagemIcon.addEventListener("click", (event) => {
         event.stopPropagation();
         excluirTurma(`${turmaId}`);
-      });
+      })
 
       const imagemIconEdit = document.createElement("img");
       imagemIconEdit.src = "../front/icon/edit-icon.svg";
@@ -86,7 +86,7 @@ async function exibirTurmas(turmadata) {
       imagemIconEdit.addEventListener("click", (event) => {
         event.stopPropagation();
         encaminharParaPaginaEditarTurma(`${turmaId}`);
-      });
+      })
 
       // Adiciona o ícone ao turmaSquare
       turmaSquare.appendChild(imagemIcon);
@@ -99,16 +99,15 @@ async function exibirTurmas(turmadata) {
   }
 }
 
-async function excluirTurma(id) {
+async function excluirTurma(turmaId) {
   const confirmed = window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")
   if (confirmed) {
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`)
+      const response = await fetch(`http://localhost:8080/api/v1/turmas/excluir/${turmaId}`)
       const data = await response.json()
       if (!response.ok) {
         throw new Error(data.mensagem)
       }
-      alert(data.mensagem)
     } catch (error) {
       alert(`Houve um problema! ${error.message}`)
     }
