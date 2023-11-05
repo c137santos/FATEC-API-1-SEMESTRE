@@ -17,11 +17,11 @@ async function requisitar_editar_turma(id){
     const decisao_usuario = criar_modal_confirmar_edicao();
     if(decisao_usuario){
         const dataPreenchida = document.getElementById('fdata')['value']
-        const dataFormatada = dataPreenchida.split('-').reverse().join('/');
+        const dataPreenchidaForm = moment(dataPreenchida).format("DD/MM/YYYY"); 
         const turma = {
             "nome" : document.getElementById('fnome')['value'],
             "professor" : document.getElementById('fprofessor')['value'],
-            "data_de_inicio" : dataFormatada,
+            "data_de_inicio" : dataPreenchidaForm,
             "duracao_ciclo": document.getElementById('fduracaosCiclo')['value']
         }
         fetch (`http://localhost:8080/api/v1/turmas/editar/${id}`,{method: "POST", body:JSON.stringify(turma)})

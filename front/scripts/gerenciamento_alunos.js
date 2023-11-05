@@ -1,3 +1,4 @@
+let idAluno = ''
 getInfoAlunos()
 let alunos_todos = {}
 async function getInfoAlunos() {
@@ -52,7 +53,46 @@ const renderizarAluno = (aluno) => {
     imagemIconDelete.addEventListener("click", () => deleteAluno(`${aluno.RA}`))
       quadrado.appendChild(imagemIconDelete);
   alunos.appendChild(quadrado);
+
+  quadrado.addEventListener("click", async (e) => {
+    let turmasALuno = await getTurmasAluno(aluno.RA)
+    idAluno = aluno.RA
+    const id = e.target.id;
+    const dialog = document.createElement("dialog");
+    dialog.id = "detalhes-aluno";
+    dialog.className = "dialog";
+    dialog.innerHTML = `
+    <div class="dialog-header">
+        <h2 class="dialog-title">Detalhes do aluno ${id}</h2>
+        </div>
+        <div class="dialog-body">
+        <p>RA: ${aluno.RA}</p>
+        <p>Nome: ${aluno.nome}</p>
+        <p>Gênero: ${aluno.genero}</p>
+        <p>Data de nascimento: ${aluno.data_nascimento}</p>
+        </div>
+        <div>
+        <p> Escolha a turma:</p>
+        <select id="select-turmas">
+          <option value="" selected></option>
+        </select>
+        <div id="mostraNotas"> 
+           <p> Notas da turma:</p>
+        </div>
+        </div>
+        <button onclick="fechaDialogo()">Fechar</button>
+        `;
+    document.body.appendChild(dialog);
+    dialog.showModal();
+    selectTurmas(turmasALuno)
+  });
 };
+
+function fechaDialogo(){
+  dialogo = document.getElementById("detalhes-aluno")
+  dialogo.close();
+  window.location.reload(false);
+}
 
 const mostraAlunos = (alunos) => {
     for (const id in alunos) {
@@ -124,11 +164,13 @@ async function editarAluno(RA) {
       return;
     }
 
+    let dataNascimentoForm = moment(dataNascimento).format("DD/MM/YYYY");
+
     const aluno_editado = {
         "RA": RA,
         "nome": nome,
         "genero": genero,
-        "data_nascimento": dataNascimento
+        "data_nascimento": dataNascimentoForm
     }
 
     const response = await backEditarAluno(aluno_editado)
@@ -185,10 +227,12 @@ const criarNovoAluno = () => {
       return;
     }
 
+    const dataNascNovaForm = moment(dataNascNova).format("DD/MM/YYYY");
+
     const alunoNovo = {
         "nome": nomeNovo,
         "genero": generoNovo,
-        "data_nascimento": dataNascNova
+        "data_nascimento": dataNascNovaForm
     }
     try {
       fetch ('http://127.0.0.1:8080/api/v1/alunos/criar',{method: "POST", body:JSON.stringify(alunoNovo)})
@@ -197,4 +241,57 @@ const criarNovoAluno = () => {
           console.error("Erro ao buscar dados da API -> ", error);
       }
 
+}
+
+async function getTurmasAluno(RA){
+  try {
+    const response = await fetch(
+    `http://127.0.0.1:8080/api/v1/turmas_alunos/listar_turmas_do_aluno/${RA}`
+    );  
+    turmasAluno = await response.json();
+  } catch (error) {
+    console.error("Erro ao buscar dados da API -> ", error);
+  } finally{
+    return turmasAluno
+  }
+}
+
+function selectTurmas(turmaAluno){
+const select = document.getElementById("select-turmas")
+for (let turma in turmaAluno){
+  let option = document.createElement("option");
+  option.id = turma
+  option.value = turma;
+  option.textContent = turmaAluno[turma].nome;
+  select.appendChild(option);
+  }
+ select.onchange = (event) => {
+     var turmaId = event.target.value;
+     getNotasALunoTurma(turmaId)
+ }
+}
+
+async function getNotasALunoTurma(turmaId){
+  try {
+    const response = await fetch(
+    `http://127.0.0.1:8080/api/v1/notas/aluno/listar/${idAluno}`
+    );  
+    notasAluno = await response.json();
+  } catch (error) {
+    console.error("Erro ao buscar dados da API -> ", error);
+  } finally{
+    for (let nota in notasAluno){
+      if (notasAluno[nota].id_turma == turmaId) {
+        MostraNotas(notasAluno[nota].id_ciclo, notasAluno[nota].valor)
+      }
+   
+    }
+  }
+} 
+
+function MostraNotas(ciclo, valor){
+    dialogALuno = document.getElementById("mostraNotas")
+    valorNota = document.createElement("p")
+    valorNota.textContent = `Ciclo: ${ciclo} | Valor: ${valor}`
+    dialogALuno.appendChild(valorNota)
 }
