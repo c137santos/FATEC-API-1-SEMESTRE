@@ -32,35 +32,24 @@ async function coletaDadosNovaTurma() {
     alert("A duração de ciclos, em dias, é obrigatório.");
     return;
   }
+  // Formata a data
+  const dataInicioForm = moment(dataInicio).format("DD/MM/YYYY");
 
-  // Formata a data para dia/mes/ano
-
-  const data = new Date(dataInicio);
-  const dia = String(data.getDate()).padStart(2, "0"); // Garante que o dia tenha sempre 2 dígitos
-  const mes = String(data.getMonth() + 1).padStart(2, "0"); // Garante que o mês tenha sempre 2 dígitos
-  const ano = data.getFullYear();
-  // const dataFormatada = `${dia}/${mes}/${ano}`;
-
-  if (ano < 1000 || ano > 9999) {
-    alert("O ano deve ter exatamente 4 dígitos.");
-    return;
-  }
-
-  const dataFormatada = dataInicio.split("-").reverse().join("/");
   const alunos_adicionados = pegarAlunosSelecionados(alunos_todos)
 
   // Construir o objeto de turma
   const novaTurmaData = {
     nome: turmaNome,
     professor: professor,
-    data_de_inicio: dataFormatada,
+    data_de_inicio: dataInicioForm,
     duracao_ciclo: duracaoCiclo,
     quantidade_ciclos: 4,
     alunos_adicionados: alunos_adicionados
   };
   console.log(novaTurmaData);
 
-  criarNovaTurma(novaTurmaData)  
+  criarNovaTurma(novaTurmaData)
+  window.location.href = "http://127.0.0.1:5500/front/gerenciamento_turmas.html"
 }
 
 //Função para enviar as informações da nova turma em formato de string para o back end
@@ -70,18 +59,6 @@ async function criarNovaTurma(novaTurmaData) {
       method: "POST",
       body: JSON.stringify(novaTurmaData),
     });
-
-    // Verifica se a resposta da solicitação está OK (status 200)
-    if (response.ok) {
-      const resposta = await response.json();
-      const mensagem = resposta.mensagem;
-      const detalhes = resposta.detalhes;
-      alert("Resposta do servidor:\n" + mensagem + "\n" + detalhes.join("\n"));
-      window.location.href = "http://127.0.0.1:5500/front/gerenciamento_turmas.html"
-    } else {
-      // Lida com erros de resposta, se houver
-      console.error("Erro ao criar a turma: ", response.statusText);
-    }
   } catch (error) {
     console.error("Erro ao enviar os dados para o servidor: " + error);
   }
