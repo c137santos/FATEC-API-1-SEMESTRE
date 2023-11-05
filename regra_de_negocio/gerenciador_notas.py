@@ -23,7 +23,8 @@ def _calcular_fee_turma_aluno(id_turma, id_aluno):
         soma_das_notas += peso_nota * valor
         soma_dos_pesos += peso_nota
     if len(notas_por_turma_aluno) > 0:
-        return soma_das_notas / float(soma_dos_pesos)
+        media_fee = soma_das_notas / float(soma_dos_pesos)
+        return round (media_fee, 2)
     else:
         return 0.0
 
@@ -139,11 +140,13 @@ def verificar_existencia_nota_por_ciclo(nota):
 
 def _obter_novo_id_nota():
     ids_numericos = []
+    ids_numericos.append(0)
     notas = listar_notas()
     for id_str in notas.keys():
         id_int = int(id_str)
         ids_numericos.append(id_int)
-    id_max_int = max(ids_numericos)
+    ids_numericos.sort()
+    id_max_int = ids_numericos.pop()
     novo_id = str(id_max_int + 1)
     return novo_id
 

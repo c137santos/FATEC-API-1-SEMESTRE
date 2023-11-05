@@ -78,11 +78,13 @@ def editar_ciclo(id_ciclo, ciclo_atualizado):
 
 def _obter_novo_id_ciclo():
     ids_numericos = []
+    ids_numericos.append(0)
     ciclos = listar_ciclos()
     for id_str in ciclos.keys():
         id_int = int(id_str)
         ids_numericos.append(id_int)
-    id_max_int = max(ids_numericos)
+    ids_numericos.sort()
+    id_max_int = ids_numericos.pop()
     novo_id = str(id_max_int + 1)
     return novo_id
 
