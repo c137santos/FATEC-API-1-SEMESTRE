@@ -13,8 +13,20 @@ async function GetTurmas() {
     turmaData = await response.json();
     console.log(turmaData);
 
-    // Chama a função para exibir as turmas
-    await exibirTurmas(turmaData);
+    const ciclosData = {};
+    for (const turmaId in turmaData) {
+      if (turmaData.hasOwnProperty(turmaId)) {
+        const responseCiclos = await fetch(
+          `http://127.0.0.1:8080/api/v1/ciclos_detalhes/listar/turma/${turmaId}`
+        );
+        const ciclosInfo = await responseCiclos.json();
+        // Modelo do ciclosInfo para uma turma com ciclo 1 aberto, se nao tiver vem como null
+        // {"data_final_ciclo": "2023-11-04 00:00:00", "ciclo_atual": 2, "ciclo_aberto_para_nota": 1}
+        ciclosData[turmaId] = ciclosInfo;
+      }
+    }
+
+    exibirTurmas(turmaData, ciclosData);
   } catch (error) {
     console.error("Erro ao buscar dados da API -> ", error);
     return null;
@@ -29,13 +41,18 @@ async function listar_alunos_turma(id) {
   return alunos;
 }
 
+function formatarData(data) {
+  return new Date(data).toLocaleDateString("pt-BR");
+}
+
 // Função para exibir as turmas no DOM
-async function exibirTurmas(turmadata) {
+async function exibirTurmas(turmadata, ciclosData) {
   const container = document.querySelector(".flex-warp-container");
   // Itera sobre os objetos do JSON e cria elementos HTML para cada turma
   for (const turmaId in turmadata) {
     if (turmadata.hasOwnProperty(turmaId)) {
       const turma = turmadata[turmaId];
+      const ciclosInfo = ciclosData[turmaId]; // Dados dos ciclos para a turma atual
 
       // Cria um elemento div para representar uma turma
       const turmaSquare = document.createElement("div");
@@ -47,7 +64,7 @@ async function exibirTurmas(turmadata) {
 
       // Cria elementos de parágrafo para o nome da turma e nome do professor
       const nomeTurma = document.createElement("p");
-      nomeTurma.textContent = `Nome da Turma: ${turma.nome}`;
+      nomeTurma.textContent = `Turma: ${turma.nome}`;
 
       const nomeProfessor = document.createElement("p");
       nomeProfessor.textContent = `Professor: ${turma.professor}`;
@@ -64,8 +81,35 @@ async function exibirTurmas(turmadata) {
       // Adiciona os parágrafos ao turmaSquare
       turmaSquare.appendChild(nomeTurma);
       turmaSquare.appendChild(nomeProfessor);
-      turmaSquare.appendChild(quantidadeAlunos);
       turmaSquare.appendChild(dataInicioTurma);
+
+      // Adicione as informações dos ciclos
+      if (ciclosInfo) {
+        // para cada turma retorna um objeto:
+        // ciclo_aberto_para_nota vem vazio ou com o numero do ciclo
+        // {"data_final_ciclo": "2023-11-04 00:00:00", "ciclo_atual": 2, "ciclo_aberto_para_nota": null}
+        const cicloAtual = ciclosInfo.ciclo_atual;
+        const dataFinalCiclo = ciclosInfo.data_final_ciclo;
+        const cicloAbertoParaNota = ciclosInfo.ciclo_aberto_para_nota;
+
+        const cicloInfoParagrafo = document.createElement("p");
+        cicloInfoParagrafo.textContent = `Ciclo Atual: ${cicloAtual}`;
+        turmaSquare.appendChild(cicloInfoParagrafo);
+
+        const dataFinalCicloParagrafo = document.createElement("p");
+        dataFinalCicloParagrafo.textContent = `Data Final do Ciclo: ${formatarData(
+          dataFinalCiclo
+        )}`;
+        turmaSquare.appendChild(dataFinalCicloParagrafo);
+
+        turmaSquare.appendChild(quantidadeAlunos);
+
+        if (cicloAbertoParaNota) {
+          const cicloAbertoNotaParagrafo = document.createElement("p");
+          cicloAbertoNotaParagrafo.textContent = `Ciclo aberto: ${cicloAbertoParaNota}`;
+          turmaSquare.appendChild(cicloAbertoNotaParagrafo);
+        }
+      }
 
       // Cria um ícone de lixeira para deletar a turma
       const imagemIcon = document.createElement("img");
