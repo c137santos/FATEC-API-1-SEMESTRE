@@ -109,8 +109,20 @@ async function editarAluno(RA) {
   buttonSalvar.addEventListener("click", async () => {
     // Obter os valores do formulário
     const nome = inputNome.value;
+    if (nome === "") {
+      alert("O Nome do aluno é obrigatório.");
+      return;
+    }
     const genero = inputGenero.value;
+    if (genero === "") {
+      alert("O gênero do aluno é obrigatório.");
+      return;
+    }
     const dataNascimento = inputDataNascimento.value;
+    if (dataNascimento === "") {
+      alert("A data de nascimento do aluno é obrigatório.");
+      return;
+    }
 
     const aluno_editado = {
         "RA": RA,
