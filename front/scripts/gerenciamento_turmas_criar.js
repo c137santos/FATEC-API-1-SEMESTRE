@@ -48,7 +48,8 @@ async function coletaDadosNovaTurma() {
   };
   console.log(novaTurmaData);
 
-  criarNovaTurma(novaTurmaData)  
+  criarNovaTurma(novaTurmaData)
+  window.location.href = "http://127.0.0.1:5500/front/gerenciamento_turmas.html"
 }
 
 //Função para enviar as informações da nova turma em formato de string para o back end
@@ -58,18 +59,6 @@ async function criarNovaTurma(novaTurmaData) {
       method: "POST",
       body: JSON.stringify(novaTurmaData),
     });
-
-    // Verifica se a resposta da solicitação está OK (status 200)
-    if (response.ok) {
-      const resposta = await response.json();
-      const mensagem = resposta.mensagem;
-      const detalhes = resposta.detalhes;
-      alert("Resposta do servidor:\n" + mensagem + "\n" + detalhes.join("\n"));
-      window.location.href = "http://127.0.0.1:5500/front/gerenciamento_turmas.html"
-    } else {
-      // Lida com erros de resposta, se houver
-      console.error("Erro ao criar a turma: ", response.statusText);
-    }
   } catch (error) {
     console.error("Erro ao enviar os dados para o servidor: " + error);
   }
