@@ -124,11 +124,13 @@ async function editarAluno(RA) {
       return;
     }
 
+    let dataNascimentoForm = moment(dataNascimento).format("DD/MM/YYYY");
+
     const aluno_editado = {
         "RA": RA,
         "nome": nome,
         "genero": genero,
-        "data_nascimento": dataNascimento
+        "data_nascimento": dataNascimentoForm
     }
 
     const response = await backEditarAluno(aluno_editado)
@@ -185,10 +187,12 @@ const criarNovoAluno = () => {
       return;
     }
 
+    const dataNascNovaForm = moment(dataNascNova).format("DD/MM/YYYY");
+
     const alunoNovo = {
         "nome": nomeNovo,
         "genero": generoNovo,
-        "data_nascimento": dataNascNova
+        "data_nascimento": dataNascNovaForm
     }
     try {
       fetch ('http://127.0.0.1:8080/api/v1/alunos/criar',{method: "POST", body:JSON.stringify(alunoNovo)})
