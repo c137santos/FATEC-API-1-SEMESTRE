@@ -27,8 +27,8 @@ async function requisitar_editar_turma(id){
             "alunos_adicionados": alunos_adicionados
         }
         fetch (`http://localhost:8080/api/v1/turmas/editar/${id}`,{method: "POST", body:JSON.stringify(turma)})
-            .then(() => window.location.href = 'editar_turma.html?id=' + id)
-    }
+            .then(() => window.location.href = 'http://127.0.0.1:5500/front/gerenciamento_turmas.html')
+        }
 }
 /** Obtém uma turma pelo id
  * @param {string} id - o identificador único da turma.
