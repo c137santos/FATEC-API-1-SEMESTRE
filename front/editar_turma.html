@@ -6,6 +6,7 @@
     <title>PBLTex ::. Editar Turma</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
     <link rel="stylesheet" href="style/custom.css">
+    <link rel="stylesheet" href="style/gerenciamento_turmas.css" />
     </head>
 <body onload="preencher_campos_formulario(obter_id())">
     <header class="header">
@@ -15,7 +16,7 @@
         <div>
             <h1>Formulário de Edição de Turma</h1>    
         </div>
-        <div name="fturma" style="padding-top: 34px;">
+        <div id="fturma">
             <div>
                 <label for="fnome"><strong>Nome da turma:</strong></label>
                 <input type="text" name="fnome" id="fnome">
@@ -27,68 +28,40 @@
             <div>
                 <label for="fdata"><strong>Data de início:</strong></label>
                 <input type="date" name="fdata" id="fdata">
+                <!-- TODO: Fazer com que aceitem apenas datas futuras -->
+            </div>
+            <div>
+                <label for="fduracaosCiclo"><strong>Duração dos Ciclos:</strong></label>
+                <input type="number" name="fduracaosCiclo" id="fduracaosCiclo">
+                <!-- TODO: Fazer com que aceitem apenas números positivos -->
+            </div>
+            <div>
+                <strong>Quantidade de Ciclos:</strong>
+                <p id="fsublegenda"><strong> Valor padrão da escola PBLTeX</strong> </p>
+                <div id="fquantidadeCiclo" id="fquantidadeCiclo">
+                    <div>
+                        Duração dos ciclos Sprint
+
+                    </div>
+                <!-- TODO: Fazer com que aceitem apenas números positivos -->
+            </div>
+            <h3 >
+              Adicionar alunos na turma:
+            </h3>
+        </div>
+            <div id="listarAlunos">
             </div>
             <div style="padding-top: 21px;">
                 <button onclick="requisitar_editar_turma(obter_id())">Editar</button>
             </div>
         </div>
-    </div>
-    <script>
-        /** Realiza o preenchimento inicial de diversos campos da página 
-         * @param {string} id - o identificador único da turma.
-        */
-        async function preencher_campos_formulario(id){
-            const turma = await obter_turma(id)
-            if(turma){
-                document.getElementById('fnome')['value'] = turma["nome"]
-                document.getElementById('fprofessor')['value'] = turma["professor"]
-    
-                document.getElementById('fdata')['value'] = turma["data_de_inicio"]
-            } else {
-                alert("Falha ao preencher os campos do formulário!\nA turma não foi encontrada.")
-            }
-        }
-        /** Submete a edição da turma ao backend 
-         * @param {string} id - o identificador único da turma.
-        */
-        async function requisitar_editar_turma(id){
-            const decisao_usuario = criar_modal_confirmar_edicao();
-            if(decisao_usuario){
-                const turma = {
-                    "nome" : document.getElementById('fnome')['value'],
-                    "professor" : document.getElementById('fprofessor')['value'],
-                    "data_de_inicio" : document.getElementById('fdata')['value']
-                }
-                fetch (`http://localhost:8080/api/v1/turmas/${id}/editar`,{method: "POST", body:JSON.stringify(turma)})
-                    .then(() => window.location.href = 'editar_turma.html?id=' + id)
-            }
-        }
-        /** Obtém uma turma pelo id
-         * @param {string} id - o identificador único da turma.
-         * @returns {object} retornará undefined ou um objeto contendo os atributos nome, professor e data_de_inicio.
-        */
-        async function obter_turma(id) {
-            const resposta = await fetch (`http://localhost:8080/api/v1/turmas/get_turma/${id}`, {method: "POST"})
-            const turma = await resposta.json()
-            console.log(turma)
-            return turma
-        }
-        /** Recupera o id da turma presente como consulta na URL
-         * @returns {string} id - o identificador único
-        */
-        function obter_id(){ return new URLSearchParams(window.location.search).get('id') }
-        /** Cria um modal para a confirmação do usuário
-         * @return {boolean} resposta - decisão do usuário
-        */
-        function criar_modal_confirmar_edicao(){
-            const mensagem = "Atenção! Os dados da turma serão modificados.\nDeseja prosseguir com a edição?"
-            return window.confirm(mensagem);
-        }
-    </script>
     <div class="muleke">
         <a href="index.html">
             <img src="./imagens/mascote2.png" alt="mascote">
         </a>
     </div>
+    <script src="/front/scripts/gerenciamento_turmas_editar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciamento de Alunos</title>
+    <link rel="stylesheet" href="../front/style/informacoes_turma.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
+    />
+    <link rel="stylesheet" href="style/custom.css" />
+  </head>
+  <body onload="preencher_info_turma(obter_id())">
+    <header class="header">
+      <a href="index.html">
+        <img src="./imagens/Logo.png" alt="logo" />
+      </a>
+    </header>
+    <div class="container-info">
+      <div class="info-turma">
+        <h3>Informações:</h3>
+        <hr />
+        <div class="info-pair">
+          <h5>Nome da Turma:</h5>
+          <p class="fnomeTurma" id="fnomeTurma"></p>
+        </div>
+        <div class="info-pair">
+          <h5>Nome do Professor:</h5>
+          <p class="fnomeProfessor" id="fnomeProfessor"></p>
+        </div>
+        <div class="info-pair">
+          <h5>Quantidade de Alunos:</h5>
+          <p class="fquantidadeAlunos" id="fquantidadeAlunos"></p>
+        </div>
+        <div class="info-pair">
+          <h5>Data de Início:</h5>
+          <p class="fdataInicio" id="fdataInicio"></p>
+        </div>
+      </div>
+      <div class="info-ciclos">
+        <h3>Pesos dos Ciclos</h3>
+        <hr />
+        <div class="container-ciclos">
+          <div class="ciclo-peso"></div>
+        </div>
+        <div class="container-btn-salvar-ciclo">
+          <img
+            class="btn-salvar-ciclo-peso"
+            src="../front/icon/save-icon.svg"
+            alt="salvar"
+            onclick="requisitar_salvar_ciclo_peso()"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="aluno-container">
+      <h3 id="aviso_ciclo_aberto"></h3>
+      <div class="corpo_tabela">
+        <!-- Os Alunos serão adicionadas automaticamente aqui -->
+      </div>
+    </div>
+    <button onclick="editarNota()">Editar nota</button>
+    <button id="turma" class="menu-button">
+      <a href="gerenciamento_turmas.html">Voltar para lista de Turmas</a>
+    </button>
+    <!-- Moleke -->
+    <div class="muleke">
+      <a href="index.html">
+        <img src="./imagens/mascote2.png" alt="mascote" />
+      </a>
+    </div>
+    <script src="/front/scripts/informacoes_turmas.js"></script>
+  </body>
+</html>

@@ -1,0 +1,240 @@
+/* Estilos gerais para o corpo da página */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px o0px;
+}
+
+.menu-button {
+  text-decoration: none;
+}
+
+.titulo {
+  margin-top: 5px;
+  justify-content: center;
+}
+
+.container-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 600px;
+}
+
+.info-turma {
+  padding: 8px;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  width: 300px;
+  height: 180px;
+  margin-right: 10px;
+}
+
+.info-turma h3 {
+  text-align: center;
+  font-size: 24px;
+  border-bottom: 2px solid #333;
+  margin: 0 0 10px;
+}
+
+.info-pair {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.info-pair h5 {
+  margin: 0;
+}
+
+.info-pair p {
+  margin: 0;
+  margin-left: 10px;
+}
+
+.info-ciclos {
+  padding: 8px;
+  width: 312px;
+  height: 180px;
+  background-color: whitesmoke;
+  border-radius: 5px;
+}
+
+.info-ciclos h3 {
+  text-align: center;
+  font-size: 24px;
+  border-bottom: 2px solid #333;
+  margin: 0 0 10px;
+}
+
+.container-ciclos {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: left;
+  max-width: 100%;
+  height: 80px;
+  padding: 0px 5px;
+}
+
+.ciclo-peso {
+  display: flex;
+  justify-content: center;
+}
+
+.ciclo {
+  display: flex;
+  align-items: center;
+  font-weight: 200;
+  margin-right: 2px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.peso {
+  border: 1px solid #0000000c;
+  width: 7%;
+  padding: 2px;
+  margin-right: 15px; /* Adiciona espaço ao redor dos pesos para separá-los dos rótulos (ciclos) */
+}
+
+/* Estilos para o contêiner principal dos alunos */
+.aluno-container {
+  overflow-x: hidden;
+  width: 550px;
+  height: 265px;
+  padding-top: 5px;
+  margin-bottom: 9px;
+  border-radius: 5px;
+  overflow-y: auto;
+}
+
+.aviso_ciclo_aberto {
+  text-align: center;
+  margin-top: 2px;
+  margin-bottom: 5px;
+}
+
+.header-container {
+  height: 40px;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  font-weight: bold;
+  font-size: initial;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+/* Estilos para os quadrados representando os alunos */
+.aluno-square {
+  display: flex;
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+  height: 40px;
+  margin-bottom: 3px;
+  cursor: pointer;
+  align-items: center;
+}
+
+/* .aluno-square:hover {
+  background-color: transparent;
+  box-shadow: 0 0 50px 20px rgb(154, 104, 241);
+} */
+
+.header-title,
+.aluno-square p,
+.aluno-square div {
+  color: #000000;
+  margin: 0;
+  text-align: center;
+  border-right: 1px solid #ccc;
+}
+
+.header-title.titulo_alunos,
+.aluno-square .aluno {
+  width: 150px;
+}
+
+.titulo_notas,
+.campoNota {
+  align-items: center;
+  width: auto; /* Use "auto" para que o campo se ajuste ao conteúdo */
+  min-width: 280px; /* Defina um tamanho mínimo para evitar que fique muito pequeno */
+  border-right: 1px solid #ccc; /* Adicione uma borda à direita */
+  padding: 0 10px; /* Adicione algum espaçamento interno para melhor aparência */
+}
+
+.titulo_media,
+div.media {
+  width: 100px;
+  border-right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.campoNota {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.campoNotaDesabilitado {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #ccc;
+  color: gray;
+  width: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+  padding: 0px;
+}
+
+.campoNotaHabilitado {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #e2bdfd;
+  width: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+  padding: 0px;
+}
+
+.valor {
+  background-color: whitesmoke;
+  width: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.btn-salvar-ciclo-peso {
+  width: 29px;
+  align-self: flex-end;
+  border: solid;
+  border-radius: 4px;
+  border-width: 1px;
+  border-color: rgba(184, 20, 255, 0.968);
+  background-color: rgb(243, 237, 245);
+}
+
+.btn-salvar-ciclo-peso:hover {
+  background-color: rgb(251, 179, 197);
+  cursor: pointer;
+}
+
+.container-btn-salvar-ciclo {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: left;
+}

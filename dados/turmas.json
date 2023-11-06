@@ -1,12 +1,9 @@
 {
     "1": {
-        "nome": "ADS",
+        "nome": "Team Bee",
         "professor": "Nadalete",
-        "data_de_inicio": "21/02/2023"
-    },
-    "5": {
-        "nome": "Turma Teste",
-        "professor": "Professora teste",
-        "data_de_inicio": "2023-10-11"
+        "data_de_inicio": "19/10/2023",
+        "duracao_ciclo": "15",
+        "quantidade_ciclos": 4
     }
 }
