@@ -13,6 +13,7 @@ import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 
 import json
 
+
 def criar_aluno(request):
     novo_aluno = json.loads(request.body)
     gerenciador_alunos.criar_aluno(novo_aluno)
@@ -53,6 +54,7 @@ def editar_turma(request, id):
         turma["professor"],
         turma["data_de_inicio"],
         turma["duracao_ciclo"],
+        turma["alunos_adicionados"],
     )
     return JsonResponse({"mensagem": resultado})
 
@@ -220,6 +222,7 @@ def listar_alunos_turma(request, id_turma):
 def listar_turmas_aluno(request, id_aluno):
     turmas = gerenciador_turmas_alunos.listar_turmas_aluno(id_aluno)
     return JsonResponse(turmas)
+
 
 def listar_detalhes_ciclos_por_id_turma(request, id_turma):
     turma = gerenciador_turmas.obter_turma(id_turma)

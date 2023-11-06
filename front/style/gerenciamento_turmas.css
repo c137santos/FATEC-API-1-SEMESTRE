@@ -266,3 +266,19 @@ label {
   margin: 0;
   font-size: 11px;
 }
+
+#listarAlunos{
+  margin-top: 20px;
+  height: 300px;
+  width: 600px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.divsNomes{
+  background-color: white;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
