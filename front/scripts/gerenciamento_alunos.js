@@ -1,4 +1,5 @@
 let idAluno = ''
+let editar_aluno = false
 getInfoAlunos()
 let alunos_todos = {}
 async function getInfoAlunos() {
@@ -55,6 +56,7 @@ const renderizarAluno = (aluno) => {
   alunos.appendChild(quadrado);
 
   quadrado.addEventListener("click", async (e) => {
+    if (editar_aluno == false){
     let turmasALuno = await getTurmasAluno(aluno.RA)
     idAluno = aluno.RA
     const id = e.target.id;
@@ -82,10 +84,11 @@ const renderizarAluno = (aluno) => {
         </div>
         <button onclick="fechaDialogo()">Fechar</button>
         `;
-    document.body.appendChild(dialog);
+    document.body.appendChild(info);
     info.showModal();
     selectTurmas(turmasALuno)
-  });
+   }
+  })
 };
 
 function fechaDialogo(){
@@ -101,6 +104,7 @@ const mostraAlunos = (alunos) => {
 }
 
 async function editarAluno(RA) {
+  editar_aluno=true
   let aluno = alunos_todos[RA]
   const modal = document.createElement("dialog");
 
@@ -175,6 +179,7 @@ async function editarAluno(RA) {
 
     const response = await backEditarAluno(aluno_editado)
     modal.close();
+    editar_aluno=false
     event.preventDefault()
     });
 }
