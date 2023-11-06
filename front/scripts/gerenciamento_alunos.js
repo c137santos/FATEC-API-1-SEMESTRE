@@ -58,10 +58,10 @@ const renderizarAluno = (aluno) => {
     let turmasALuno = await getTurmasAluno(aluno.RA)
     idAluno = aluno.RA
     const id = e.target.id;
-    const dialog = document.createElement("dialog");
-    dialog.id = "detalhes-aluno";
-    dialog.className = "dialog";
-    dialog.innerHTML = `
+    const info = document.createElement("dialog");
+    info.id = "detalhes-aluno";
+    info.className = "dialog";
+    info.innerHTML = `
     <div class="dialog-header">
         <h2 class="dialog-title">Detalhes do aluno ${id}</h2>
         </div>
@@ -83,7 +83,7 @@ const renderizarAluno = (aluno) => {
         <button onclick="fechaDialogo()">Fechar</button>
         `;
     document.body.appendChild(dialog);
-    dialog.showModal();
+    info.showModal();
     selectTurmas(turmasALuno)
   });
 };
