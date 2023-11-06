@@ -96,11 +96,10 @@ def detalhesCicloTurma(turma, id_turma):
     data_inicio = datetime.strptime(turma["data_de_inicio"], "%d/%m/%Y")
     duracao_ciclo = int(turma["duracao_ciclo"])
     ciclos = listar_ciclos_por_id_turma(id_turma_str)
-    print(ciclos)
     quantidade_ciclos = int(turma["quantidade_ciclos"])
     ciclo_atual = None
     ciclo_aberto_para_nota = None
-    
+
     for ciclo_numero, ciclo_info in ciclos.items():
         if ciclo_info['id_turma'] == id_turma_str:
             prazo_insercao = ciclo_info['prazo_insercao_nota']
