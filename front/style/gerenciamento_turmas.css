@@ -268,7 +268,9 @@ label {
 }
 
 #listarAlunos{
-  height: 200px;
+  margin-top: 20px;
+  height: 300px;
+  width: 600px;
   overflow-x: hidden;
   overflow-y: auto;
 }
