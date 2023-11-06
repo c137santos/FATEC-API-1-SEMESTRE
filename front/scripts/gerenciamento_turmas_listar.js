@@ -7,7 +7,7 @@ function levaPaginaEditar() {
 }
 
 let turmaData;
-async function GetTurmas() {
+async function getTurmas() {
   try {
     const response = await fetch("http://127.0.0.1:8080/api/v1/turmas/listar");
     turmaData = await response.json();
@@ -34,7 +34,7 @@ async function GetTurmas() {
   }
 }
 
-async function listar_alunos_turma(id) {
+async function listarAlunosTurma(id) {
   const response = await fetch(
     `http://localhost:8080/api/v1/turmas_alunos/listar_alunos_da_turma/${id}`
   );
@@ -60,7 +60,7 @@ async function exibirTurmas(turmadata, ciclosData) {
       turmaSquare.className = "turma-square";
       turmaSquare.id = `${turmaId}`; // Adiciona o ID da turma ao turmaSquare
       turmaSquare.addEventListener("click", () =>
-        requisitar_informacoes_turma(`${turmaId}`)
+        encarminharParaPgInformacoesDaTurma(`${turmaId}`)
       );
 
       // Cria elementos de parágrafo para o nome da turma e nome do professor
@@ -70,7 +70,7 @@ async function exibirTurmas(turmadata, ciclosData) {
       const nomeProfessor = document.createElement("p");
       nomeProfessor.textContent = `Professor: ${turma.professor}`;
 
-      const alunos = await listar_alunos_turma(turmaId);
+      const alunos = await listarAlunosTurma(turmaId);
       const quantidadeAlunos = document.createElement("p");
       quantidadeAlunos.textContent = `Alunos: ${
         alunos ? Object.keys(alunos).length : 0
@@ -120,8 +120,8 @@ async function exibirTurmas(turmadata, ciclosData) {
       imagemIcon.id = `${turmaId}`; // Adiciona o ID da turma ao ícone de deletar
       imagemIcon.addEventListener("click", (event) => {
         event.stopPropagation();
-        requisitar_excluir_turma(`${turmaId}`);
-      });
+        excluirTurma(`${turmaId}`);
+      })
 
       const imagemIconEdit = document.createElement("img");
       imagemIconEdit.src = "../front/icon/edit-icon.svg";
@@ -130,8 +130,8 @@ async function exibirTurmas(turmadata, ciclosData) {
       imagemIconEdit.id = `${turmaId}`;
       imagemIconEdit.addEventListener("click", (event) => {
         event.stopPropagation();
-        requisitar_editar_turma(`${turmaId}`);
-      });
+        encaminharParaPaginaEditarTurma(`${turmaId}`);
+      })
 
       // Adiciona o ícone ao turmaSquare
       turmaSquare.appendChild(imagemIcon);
@@ -144,31 +144,27 @@ async function exibirTurmas(turmadata, ciclosData) {
   }
 }
 
-function requisitar_excluir_turma(id) {
-  if (window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")) {
-    fetch(`http://localhost:8080/api/v1/turmas/excluir/${id}`, {
-      method: "POST",
-    }).then(document.getElementById(id).remove());
+async function excluirTurma(turmaId) {
+  const confirmed = window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")
+  if (confirmed) {
+    try {
+      const response = await fetch(`http://localhost:8080/api/v1/turmas/excluir/${turmaId}`)
+      const data = await response.json()
+      if (!response.ok) {
+        throw new Error(data.mensagem)
+      }
+    } catch (error) {
+      alert(`Houve um problema! ${error.message}`)
+    }
   }
 }
 
-function requisitar_editar_turma(id) {
+function encaminharParaPaginaEditarTurma(id) {
   window.location.href = "editar_turma.html?id=" + id;
 }
 
-function requisitar_informacoes_turma(id) {
+function encarminharParaPgInformacoesDaTurma(id) {
   window.location.href = "informacoes_turma.html?id=" + id;
 }
 
-GetTurmas();
-
-/*
-function redirecionarParaPagina(id) {
-  if (id === 'turma') {
-      window.location.href = 'gerenciamento_turmas.html';
-  } }
-
-  document.getElementById('turma').addEventListener('click', function() {
-    redirecionarParaPagina('turma');
-});
-*/
+getTurmas();

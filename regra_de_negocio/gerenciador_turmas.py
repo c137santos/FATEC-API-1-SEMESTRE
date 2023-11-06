@@ -55,14 +55,15 @@ def criacao_turma(nova_turma):
         adicionar_turma_aluno(turma_aluno)
     return resposta
 
+
 def excluir_turma_svc(id):
-    turmas = busca_turmas()
-    if id in turmas.keys():
+    turma = obter_turma(id)
+    if turma:
+        turmas = busca_turmas()
         turmas.pop(id)
         _salvar_turmas(turmas)
         return True
-    else:
-        return False
+    return False
 
 
 # Parâmetro: um dicionário onde cada turma é um par chave-valor
@@ -73,6 +74,7 @@ def _salvar_turmas(turmas):
     with open("dados/turmas.json", "w", encoding="utf-8") as arquivo:
         arquivo.write(dados)
         return True
+
 
 def _obter_novo_id_turma():
     ids_numericos = []
