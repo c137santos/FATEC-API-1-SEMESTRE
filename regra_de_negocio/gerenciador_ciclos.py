@@ -1,5 +1,5 @@
 import json
-
+from datetime import datetime, timedelta
 
 def listar_ciclos():
     with open("dados/ciclos.json", "r", encoding="utf-8") as f:
@@ -94,7 +94,40 @@ def _salvar_ciclos(ciclos):
     with open("dados/ciclos.json", "w", encoding="utf-8") as f:
         f.write(dados)
         return True
+    
+def detalhesCicloTurma(turma, id_turma):
+    id_turma_str = str(id_turma)
+    data_atual = datetime.now()
+    data_inicio = datetime.strptime(turma["data_de_inicio"], "%d/%m/%Y")
+    duracao_ciclo = int(turma["duracao_ciclo"])
+    ciclos = listar_ciclos_por_id_turma(id_turma_str)
+    quantidade_ciclos = int(turma["quantidade_ciclos"])
+    ciclo_atual = None
+    ciclo_aberto_para_nota = None
 
+    for ciclo_numero, ciclo_info in ciclos.items():
+        if ciclo_info['id_turma'] == id_turma_str:
+            prazo_insercao = ciclo_info['prazo_insercao_nota']
+
+    for i in range(quantidade_ciclos):
+        # Calcular o final do ciclo
+        data_final_ciclo = data_inicio + timedelta(days=duracao_ciclo * (i + 1))
+        
+        # Verificar se estamos no ciclo atual
+        if data_atual < data_final_ciclo:
+            ciclo_atual = i + 1
+            break
+        # Verificar se o ciclo está aberto para notas
+        if data_final_ciclo + timedelta(days=1) <= data_atual <= data_final_ciclo + timedelta(prazo_insercao):
+            ciclo_aberto_para_nota = i + 1
+    else:
+        # Nenhum ciclo aberto, estamos no último ciclo
+        ciclo_atual = quantidade_ciclos
+    return {
+        "data_final_ciclo": str(data_final_ciclo),
+        "ciclo_atual": ciclo_atual,
+        "ciclo_aberto_para_nota": ciclo_aberto_para_nota
+    }
 
 def excluir_ciclo_da_turma(id_turma):
     ciclos_da_turma = listar_ciclos_por_id_turma(id_turma)
