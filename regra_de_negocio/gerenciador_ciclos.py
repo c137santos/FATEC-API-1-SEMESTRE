@@ -100,10 +100,13 @@ def detalhesCicloTurma(turma, id_turma):
     quantidade_ciclos = int(turma["quantidade_ciclos"])
     ciclo_atual = None
     ciclo_aberto_para_nota = None
+    
+    for ciclo_numero, ciclo_info in ciclos.items():
+        if ciclo_info['id_turma'] == id_turma_str:
+            prazo_insercao = ciclo_info['prazo_insercao_nota']
+
     for i in range(quantidade_ciclos):
         # Calcular o final do ciclo
-        ciclo = ciclos[str(i+1)]
-        prazo_insercao = ciclo["prazo_insercao_nota"]
         data_final_ciclo = data_inicio + timedelta(days=duracao_ciclo * (i + 1))
         
         # Verificar se estamos no ciclo atual
