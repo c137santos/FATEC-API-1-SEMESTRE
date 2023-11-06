@@ -4,7 +4,7 @@ from regra_de_negocio.service import (
     cria_turma,
 )
 
-from regra_de_negocio.gerenciador_turmas import excluir_turma_svc, editar_turma_svc
+from regra_de_negocio.gerenciador_turmas import excluir_turma_svc, editar_turma_svc, obter_turma
 import regra_de_negocio.gerenciador_turmas as gerenciador_turmas
 import regra_de_negocio.gerenciador_ciclos as gerenciador_ciclos
 import regra_de_negocio.gerenciador_notas as gerenciador_notas
@@ -208,6 +208,6 @@ def listar_turmas_aluno(request, id_aluno):
     return JsonResponse(turmas)
 
 def listar_detalhes_ciclos_por_id_turma(request, id_turma):
-    turma = gerenciador_turmas.obter_turma(id_turma)
+    turma = obter_turma(id_turma)
     resposta = gerenciador_ciclos.detalhesCicloTurma(turma, id_turma)
     return JsonResponse(resposta)
