@@ -97,7 +97,7 @@ def _salvar_ciclos(ciclos):
 
 
 def excluir_ciclo_da_turma(id_turma):
-    print(f'\n> Excluindo ciclos relacionados a turma...\n')
+    print(f"\n> Excluindo ciclos relacionados a turma...\n")
     ciclos_da_turma = listar_ciclos_por_id_turma(id_turma)
     if not ciclos_da_turma:
         return
@@ -110,5 +110,3 @@ def excluir_ciclo_da_turma(id_turma):
     }
 
     _salvar_ciclos(ciclos_a_manter)
-
-

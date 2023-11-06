@@ -1,14 +1,20 @@
 {
-  "1": {
-    "nome": "Clara Santos",
-    "RA": 1
-  },
-  "2": {
-    "nome": "Marcelo Tambalo",
-    "RA": 2
-  },
-  "3": {
-    "nome": "TA RA RA RA",
-    "RA": 3
-  }
+    "1": {
+        "nome": "Walmir",
+        "data_nascimento": "04/11/1994",
+        "genero": "Masculino",
+        "RA": 1
+    },
+    "2": {
+        "nome": "Nadalete",
+        "data_nascimento": "11/12/1980",
+        "genero": "Binario",
+        "RA": 2
+    },
+    "3": {
+        "nome": "Gorette",
+        "data_nascimento": "12/09/2000",
+        "genero": "Feminino",
+        "RA": 3
+    }
 }

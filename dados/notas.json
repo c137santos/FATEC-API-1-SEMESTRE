@@ -31,7 +31,7 @@
         "id_turma": "1",
         "id_aluno": "2",
         "id_ciclo": "1",
-        "valor": 0.0,
+        "valor": 10.0,
         "fee": false
     },
     "6": {
@@ -80,7 +80,7 @@
         "id_turma": "1",
         "id_aluno": "3",
         "id_ciclo": "4",
-        "valor": 0.7,
+        "valor": 7.0,
         "fee": false
     },
     "13": {
