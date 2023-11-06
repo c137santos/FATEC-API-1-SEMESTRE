@@ -11,7 +11,6 @@ async function getTurmas() {
   try {
     const response = await fetch("http://127.0.0.1:8080/api/v1/turmas/listar");
     turmaData = await response.json();
-    console.log(turmaData);
 
     const ciclosData = {};
     for (const turmaId in turmaData) {
@@ -23,7 +22,6 @@ async function getTurmas() {
         // Modelo do ciclosInfo para uma turma com ciclo 1 aberto, se nao tiver vem como null
         // {"data_final_ciclo": "2023-11-04 00:00:00", "ciclo_atual": 2, "ciclo_aberto_para_nota": 1}
         ciclosData[turmaId] = ciclosInfo;
-        console.log(ciclosInfo);
       }
     }
 

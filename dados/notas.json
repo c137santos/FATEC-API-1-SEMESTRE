@@ -82,5 +82,61 @@
         "id_ciclo": "4",
         "valor": 0.7,
         "fee": false
+    },
+    "13": {
+        "id_turma": "2",
+        "id_aluno": "1",
+        "id_ciclo": "5",
+        "valor": 0.0,
+        "fee": false
+    },
+    "14": {
+        "id_turma": "2",
+        "id_aluno": "1",
+        "id_ciclo": "6",
+        "valor": 0.0,
+        "fee": false
+    },
+    "15": {
+        "id_turma": "2",
+        "id_aluno": "1",
+        "id_ciclo": "7",
+        "valor": 0.0,
+        "fee": false
+    },
+    "16": {
+        "id_turma": "2",
+        "id_aluno": "1",
+        "id_ciclo": "8",
+        "valor": 0.0,
+        "fee": false
+    },
+    "17": {
+        "id_turma": "2",
+        "id_aluno": "2",
+        "id_ciclo": "5",
+        "valor": 0.0,
+        "fee": false
+    },
+    "18": {
+        "id_turma": "2",
+        "id_aluno": "2",
+        "id_ciclo": "6",
+        "valor": 0.0,
+        "fee": false
+    },
+    "19": {
+        "id_turma": "2",
+        "id_aluno": "2",
+        "id_ciclo": "7",
+        "valor": 0.0,
+        "fee": false
+    },
+    "20": {
+        "id_turma": "2",
+        "id_aluno": "2",
+        "id_ciclo": "8",
+        "valor": 0.0,
+        "fee": false
     }
 }

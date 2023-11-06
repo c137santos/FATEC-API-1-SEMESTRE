@@ -35,7 +35,6 @@ async function requisitar_editar_turma(id){
 async function obter_turma(id) {
     const resposta = await fetch (`http://localhost:8080/api/v1/turmas/listar/${id}`, {method: "POST"})
     const turma = await resposta.json()
-    console.log(turma)
     return turma
 }
 /** Recupera o id da turma presente como consulta na URL

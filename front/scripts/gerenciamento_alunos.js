@@ -197,7 +197,6 @@ async function backEditarAluno(aluno_editado){
 const deleteAluno = (RA) => {
   try {
       fetch (`http://127.0.0.1:8080/api/v1/alunos/deletar/${RA}`,{method: "POST"})
-      console.log('chamou o deletar')
       } catch (error) {
           console.error("Erro ao buscar dados da API -> ", error);
       }
@@ -241,7 +240,6 @@ const criarNovoAluno = () => {
     }
     try {
       fetch ('http://127.0.0.1:8080/api/v1/alunos/criar',{method: "POST", body:JSON.stringify(alunoNovo)})
-      console.log('chamou o back')
       } catch (error) {
           console.error("Erro ao buscar dados da API -> ", error);
       }

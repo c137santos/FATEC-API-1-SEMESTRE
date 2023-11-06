@@ -255,7 +255,6 @@ async function listar_ciclos_turma(id) {
     `http://localhost:8080/api/v1/ciclos/listar/${id}`
   );
   const PesoCiclo = await response.json();
-  console.log(PesoCiclo);
   return PesoCiclo;
 }
 
@@ -264,7 +263,6 @@ async function listar_alunos_turma(id) {
     `http://localhost:8080/api/v1/turmas_alunos/listar_alunos_da_turma/${id}`
   );
   const alunos = await response.json();
-  console.log(alunos);
   return alunos;
 }
 
@@ -273,7 +271,6 @@ async function listar_notas_alunos(id) {
     `http://localhost:8080/api/v1/notas/turma/listar/${id}`
   );
   const notasAlunos = await response.json();
-  console.log(notasAlunos);
   return notasAlunos;
 }
 
@@ -282,7 +279,6 @@ async function obter_turma(id) {
     `http://localhost:8080/api/v1/turmas/listar/${id}`
   );
   const turma = await resposta.json();
-  console.log(turma);
   return turma;
 }
 function obter_id() {
@@ -299,20 +295,16 @@ async function requisitar_salvar_ciclo_peso() {
   ) {
     return;
   }
-  console.log("Editando os ciclos...");
   const turma_id = obter_id();
   const ciclos = await listar_ciclos_turma(turma_id);
   for (var id_ciclo in ciclos) {
-    console.log(`Salvando o ciclo ${id_ciclo}`);
     elementoCiclo = document.getElementById(`pesoCiclo=${id_ciclo}`);
     ciclo = ciclos[id_ciclo];
     ciclo["peso_nota"] = elementoCiclo.value;
-    console.log(ciclo);
     res = await fetch(
       `http://localhost:8080/api/v1/ciclos/editar/${id_ciclo}`,
       { method: "POST", body: JSON.stringify(ciclo) }
     );
-    console.log(res);
   }
   location.reload();
 }

@@ -7,7 +7,6 @@ async function coletaDadosNovaTurma() {
   const professor = document.getElementById("professor").value;
   const dataInicio = document.getElementById("dataInicio").value;
   const duracaoCiclo = document.getElementById("duracaoCiclo").value;
-  console.log(dataInicio);
 
   const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/;
   if (turmaNome === "") {
@@ -46,7 +45,6 @@ async function coletaDadosNovaTurma() {
     quantidade_ciclos: 4,
     alunos_adicionados: alunos_adicionados
   };
-  console.log(novaTurmaData);
 
   criarNovaTurma(novaTurmaData)
   window.location.href = "http://127.0.0.1:5500/front/gerenciamento_turmas.html"
@@ -72,7 +70,6 @@ async function listarAlunos(){
         "http://127.0.0.1:8080/api/v1/alunos/listar"
         );
         alunos_todos = await response.json();
-        console.log(alunos_todos)
         addAlunosPossiveis(alunos_todos)
         return alunos_todos
     } catch (error) {

@@ -60,6 +60,7 @@ def adicionar_turma_aluno(turma_aluno):
 
 
 def remover_turma_aluno(id_turma):
+    print(f'\n> Excluindo a lista de alunos dessa turma...\n')
     id_turma = str(id_turma)
     turmas_alunos = listar_turmas_alunos()
     turmas_alunos_copia = turmas_alunos.copy()
