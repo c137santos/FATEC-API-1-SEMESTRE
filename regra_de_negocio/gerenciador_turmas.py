@@ -55,6 +55,7 @@ def criacao_turma(nova_turma):
         adicionar_turma_aluno(turma_aluno)
     return resposta
 
+
 def excluir_turma_svc(id):
     turma = obter_turma(id)
     if turma:
@@ -73,6 +74,7 @@ def _salvar_turmas(turmas):
     with open("dados/turmas.json", "w", encoding="utf-8") as arquivo:
         arquivo.write(dados)
         return True
+
 
 def _obter_novo_id_turma():
     ids_numericos = []

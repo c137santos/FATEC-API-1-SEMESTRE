@@ -96,6 +96,21 @@ def _salvar_ciclos(ciclos):
         return True
 
 
+def excluir_ciclo_da_turma(id_turma):
+    ciclos_da_turma = listar_ciclos_por_id_turma(id_turma)
+    if not ciclos_da_turma:
+        return
+
+    todos_os_ciclos = listar_ciclos()
+    ciclos_a_manter = {
+        id_ciclo: ciclo
+        for id_ciclo, ciclo in todos_os_ciclos.items()
+        if ciclo["id_turma"] != id_turma
+    }
+
+    _salvar_ciclos(ciclos_a_manter)
+
+
 # def _verificar_duplicidade(id_ciclo, ciclo, ciclos):
 #     try:
 #         id_ciclo_textual = str(id_ciclo)
@@ -108,20 +123,6 @@ def _salvar_ciclos(ciclos):
 #             return True
 #     except:
 #         return True
-
-# def remover_ciclo(id_ciclo):
-#     try:
-#         if id_ciclo:
-#             ciclos = listar_ciclos()
-#             ciclos.pop(id_ciclo)
-#             # ajustar a sequência de todos os outros ciclos
-#             # remover as notas em cascata
-#             _salvar_ciclos(ciclos)
-#             return True
-#         else:
-#             False
-#     except:
-#         return False
 
 # def editar_ciclo(id_ciclo, ciclo):
 #     if id_ciclo == None or ciclo == None:

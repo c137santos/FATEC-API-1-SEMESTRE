@@ -24,7 +24,7 @@ def _calcular_fee_turma_aluno(id_turma, id_aluno):
         soma_dos_pesos += peso_nota
     if len(notas_por_turma_aluno) > 0:
         media_fee = soma_das_notas / float(soma_dos_pesos)
-        return round (media_fee, 2)
+        return round(media_fee, 2)
     else:
         return 0.0
 
@@ -192,3 +192,16 @@ def _obter_prazo_insercao_nota(ciclo, id_turma):
         if ciclo_iteracao["numero_ciclo"] <= numero_ciclo:
             prazo_insercao_nota += ciclo_iteracao["duracao"]
     return prazo_insercao_nota + 1  # o +1 é o dia seguinte do requisito
+
+
+def excluir_notas_relacionadas_turma(id_turma):
+    print(f"\n> Excluindo notas relacionados a turma...\n")
+    todos_notas = listar_notas()
+
+    notas_mantidas = {
+        id_nota: nota
+        for id_nota, nota in todos_notas.items()
+        if nota["id_turma"] != id_turma
+    }
+
+    return _salvar_notas(notas_mantidas)
