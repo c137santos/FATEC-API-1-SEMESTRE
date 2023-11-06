@@ -17,15 +17,25 @@ def obter_turma(id_turma):
         return None
 
 
-def editar_turma_svc(id, nome, professor, data_de_inicio, duracao_ciclo):
+def editar_turma_svc(
+    id, nome, professor, data_de_inicio, duracao_ciclo, alunos_adicionados
+):
+    from regra_de_negocio.gerenciador_turmas_alunos import adicionar_turma_aluno
+
     turmas = busca_turmas()
+    id_turma = 0
     if id in turmas.keys():
+        id_turma = id
         turma = turmas[id]
         turma["nome"] = nome
         turma["professor"] = professor
         turma["data_de_inicio"] = data_de_inicio
         turma["duracao_ciclo"] = duracao_ciclo
         _salvar_turmas(turmas)
+
+    for alunos in alunos_adicionados:
+        turma_aluno = ({"id_turma": id_turma, "id_aluno": str(alunos["RA"])},)
+        adicionar_turma_aluno(turma_aluno)
         return True
     else:
         return False
@@ -55,6 +65,7 @@ def criacao_turma(nova_turma):
         adicionar_turma_aluno(turma_aluno)
     return resposta
 
+
 def excluir_turma_svc(id):
     turmas = busca_turmas()
     if id in turmas.keys():
@@ -73,6 +84,7 @@ def _salvar_turmas(turmas):
     with open("dados/turmas.json", "w", encoding="utf-8") as arquivo:
         arquivo.write(dados)
         return True
+
 
 def _obter_novo_id_turma():
     ids_numericos = []
