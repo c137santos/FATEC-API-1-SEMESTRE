@@ -26,33 +26,5 @@
         "peso_nota": 4.0,
         "numero_ciclo": 4,
         "prazo_insercao_nota": 5
-    },
-    "5": {
-        "id_turma": "2",
-        "duracao": 15,
-        "peso_nota": 1.0,
-        "numero_ciclo": 1,
-        "prazo_insercao_nota": 5
-    },
-    "6": {
-        "id_turma": "2",
-        "duracao": 15,
-        "peso_nota": 2.0,
-        "numero_ciclo": 2,
-        "prazo_insercao_nota": 5
-    },
-    "7": {
-        "id_turma": "2",
-        "duracao": 15,
-        "peso_nota": 3.0,
-        "numero_ciclo": 3,
-        "prazo_insercao_nota": 5
-    },
-    "8": {
-        "id_turma": "2",
-        "duracao": 15,
-        "peso_nota": 4.0,
-        "numero_ciclo": 4,
-        "prazo_insercao_nota": 5
     }
 }

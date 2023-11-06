@@ -10,13 +10,5 @@
     "3": {
         "id_turma": "1",
         "id_aluno": "3"
-    },
-    "4": {
-        "id_turma": "2",
-        "id_aluno": "1"
-    },
-    "5": {
-        "id_turma": "2",
-        "id_aluno": "2"
     }
 }

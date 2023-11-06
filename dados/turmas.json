@@ -5,12 +5,5 @@
         "data_de_inicio": "03/09/2023",
         "duracao_ciclo": "15",
         "quantidade_ciclos": 4
-    },
-    "2": {
-        "nome": "Truma",
-        "professor": "prf",
-        "data_de_inicio": "01/11/2023",
-        "duracao_ciclo": "5",
-        "quantidade_ciclos": 4
     }
 }
