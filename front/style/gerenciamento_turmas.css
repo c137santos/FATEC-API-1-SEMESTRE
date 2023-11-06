@@ -81,3 +81,188 @@ body {
   height: 27px;
   cursor: pointer;
 }
+
+/* Estilos para o modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+/* Estilos para o conteúdo do modal */
+.modal-content {
+  background-image: url("../imagens/Fundo.png"),
+    linear-gradient(90deg, #d24d5d 0%, #a952a3 30%, #9a68f1 100%);
+  width: 40%;
+  height: 530px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+/* Estilos para o formulário e seus campos */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.data-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-field {
+  width: 250px;
+  padding: 2px;
+  margin-bottom: 10px;
+  border: 1px solid #2929cf;
+  border-radius: 5px;
+}
+
+#titulo_modal {
+  margin-top: 5px;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* Estilos para a lista de grupos */
+h3 {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Estilo para a lista de checkboxes */
+ul {
+  background-color: #b1a5a517;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 5px;
+  width: 286px;
+  min-height: 160px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+/* Estilo para cada item da lista checkbox e label */
+li {
+  background-color: #ece2e218;
+  display: flex;
+  border-radius: 5px;
+  width: 265px;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+li:hover {
+  background-color: transparent;
+  box-shadow: 0 0 20px 15px rgb(154, 104, 241);
+}
+
+.checkbox:checked + li {
+  background-color: transparent;
+  box-shadow: 0 0 5px 10px rgb(154, 104, 241);
+  cursor: pointer; /* Mostra o cursor de mão ao passar o mouse */
+}
+/* Estilo para o checkbox */
+.checkbox {
+  margin-right: 85px;
+}
+
+label {
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Estilos para o botão de fechar o modal */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  font-size: 50px;
+  display: inline-block;
+  line-height: 10px;
+  cursor: pointer;
+}
+
+/* Estilos para o botão de criar turma */
+.submit-turma {
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+/* Estilos para a seção de confirmação */
+#confirmacaoContainer {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+#confirmacaoContainer span {
+  font-weight: 900;
+}
+
+#confirmacaoContainer p {
+  margin: 5px 0;
+}
+
+#confirmarButton {
+  margin-top: 25px;
+  background-color: #4caf50;
+}
+
+#confirmarButton:hover {
+  background-color: #45a04991;
+}
+
+#cancelarButton {
+  background-color: #ce1717;
+}
+
+#cancelarButton:hover {
+  background-color: #ce17179d;
+}
+
+#fturma {
+  padding-top: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+#fquantidadeCiclo {
+  border-radius: 5px;
+  padding: 3%;
+}
+
+#fsublegenda {
+  padding: 0;
+  margin: 0;
+  font-size: 11px;
+}
