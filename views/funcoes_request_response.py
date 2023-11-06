@@ -93,8 +93,21 @@ def criar_turma(request):
 
 
 def excluir_turma(request, id):
-    resultado = excluir_turma_svc(id)
-    return JsonResponse({"mensagem": resultado})
+    """
+    A exclusão de turma está em modo cascata.
+    """
+    print(f"\n> Excluindo turmas...\n")
+    try:
+        excluir_turma_svc(id)
+    except Exception as e:
+        return JsonResponse(
+            {"mensagem": f"Falha na exclusão de turma_aluno: {str(e)}"},
+            status="500 Internal Server Error",
+        )
+    gerenciador_turmas_alunos.remover_turma_aluno(id)
+    gerenciador_ciclos.excluir_ciclo_da_turma(id)
+    gerenciador_notas.excluir_notas_relacionadas_turma(id)
+    return JsonResponse({"mensagem": "Sucesso"}, status="200 ok")
 
 
 def criar_ciclo(request):
