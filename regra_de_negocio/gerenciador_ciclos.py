@@ -90,13 +90,13 @@ def _salvar_ciclos(ciclos):
         f.write(dados)
         return True
     
-def detalhesCicloTurma(turma, id_turma):
+def detalhesCicloTurma(turma_info, id_turma):
     id_turma_str = str(id_turma)
     data_atual = datetime.now()
-    data_inicio = datetime.strptime(turma["data_de_inicio"], "%d/%m/%Y")
-    duracao_ciclo = int(turma["duracao_ciclo"])
+    data_inicio = datetime.strptime(turma_info["data_de_inicio"], "%d/%m/%Y")
+    duracao_ciclo = int(turma_info["duracao_ciclo"])
     ciclos = listar_ciclos_por_id_turma(id_turma_str)
-    quantidade_ciclos = int(turma["quantidade_ciclos"])
+    quantidade_ciclos = int(turma_info["quantidade_ciclos"])
     ciclo_atual = None
     ciclo_aberto_para_nota = None
 
@@ -118,11 +118,12 @@ def detalhesCicloTurma(turma, id_turma):
     else:
         # Nenhum ciclo aberto, estamos no último ciclo
         ciclo_atual = quantidade_ciclos
-    return {
+    info_turma = {
         "data_final_ciclo": str(data_final_ciclo),
         "ciclo_atual": ciclo_atual,
         "ciclo_aberto_para_nota": ciclo_aberto_para_nota
     }
+    return info_turma
 
 # def _verificar_duplicidade(id_ciclo, ciclo, ciclos):
 #     try:

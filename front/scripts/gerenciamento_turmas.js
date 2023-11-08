@@ -13,19 +13,14 @@ async function GetTurmas() {
     turmaData = await response.json();
     console.log(turmaData);
 
-    const ciclosData = {};
-    for (const turmaId in turmaData) {
-      if (turmaData.hasOwnProperty(turmaId)) {
-        const responseCiclos = await fetch(
-          `http://127.0.0.1:8080/api/v1/ciclos_detalhes/listar/turma/${turmaId}`
-        );
-        const ciclosInfo = await responseCiclos.json();
-        // Modelo do ciclosInfo para uma turma com ciclo 1 aberto, se nao tiver vem como null
-        // {"data_final_ciclo": "2023-11-04 00:00:00", "ciclo_atual": 2, "ciclo_aberto_para_nota": 1}
-        ciclosData[turmaId] = ciclosInfo;
-        console.log(ciclosInfo);
-      }
-    }
+    const responseCiclos = await fetch(
+      `http://127.0.0.1:8080/api/v1/ciclos_detalhes/listar/turmas`
+    );
+    const ciclosData = await responseCiclos.json();
+    // Modelo do ciclosInfo para uma turma com ciclo 1 aberto, se nao tiver vem como null
+    // 1:{ data_final_ciclo: "2023-11-09 00:00:00", ciclo_atual: 1, ciclo_aberto_para_nota: null }
+    // 2:{ data_final_ciclo: "2023-11-21 00:00:00", ciclo_atual: 2, ciclo_aberto_para_nota: 1 }
+    console.log(ciclosData);
 
     exibirTurmas(turmaData, ciclosData);
   } catch (error) {
@@ -86,9 +81,9 @@ async function exibirTurmas(turmadata, ciclosData) {
 
       // Adicione as informações dos ciclos
       if (ciclosInfo) {
-        // para cada turma retorna um objeto:
         // ciclo_aberto_para_nota vem vazio ou com o numero do ciclo
-        // {"data_final_ciclo": "2023-11-04 00:00:00", "ciclo_atual": 2, "ciclo_aberto_para_nota": null}
+        // 1:{ data_final_ciclo: "2023-11-09 00:00:00", ciclo_atual: 1, ciclo_aberto_para_nota: null }
+        // 2:{ data_final_ciclo: "2023-11-21 00:00:00", ciclo_atual: 2, ciclo_aberto_para_nota: 1 }
         const cicloAtual = ciclosInfo.ciclo_atual;
         const dataFinalCiclo = ciclosInfo.data_final_ciclo;
         const cicloAbertoParaNota = ciclosInfo.ciclo_aberto_para_nota;
