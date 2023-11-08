@@ -56,6 +56,7 @@ def adicionar_ciclo(ciclo):
     ciclos[novo_id_ciclo] = ciclo
     return _salvar_ciclos(ciclos)
 
+
 def editar_ciclo(id_ciclo, ciclo_atualizado):
     try:
         id_ciclo_str = str(id_ciclo)
@@ -65,12 +66,15 @@ def editar_ciclo(id_ciclo, ciclo_atualizado):
             ciclos[id_ciclo_str]["duracao"] = int(ciclo_atualizado["duracao"])
             ciclos[id_ciclo_str]["peso_nota"] = float(ciclo_atualizado["peso_nota"])
             ciclos[id_ciclo_str]["numero_ciclo"] = int(ciclo_atualizado["numero_ciclo"])
-            ciclos[id_ciclo_str]["prazo_insercao_nota"] = int(ciclo_atualizado["prazo_insercao_nota"])
+            ciclos[id_ciclo_str]["prazo_insercao_nota"] = int(
+                ciclo_atualizado["prazo_insercao_nota"]
+            )
             return _salvar_ciclos(ciclos)
         else:
             raise KeyError("Ciclo não encontrado.")
     except KeyError as e:
         return f"Falha na edição: {str(e)}"
+
 
 def _obter_novo_id_ciclo():
     ids_numericos = []
@@ -83,6 +87,7 @@ def _obter_novo_id_ciclo():
     id_max_int = ids_numericos.pop()
     novo_id = str(id_max_int + 1)
     return novo_id
+
 
 def _salvar_ciclos(ciclos):
     dados = json.dumps(ciclos, indent=4)
@@ -125,6 +130,21 @@ def detalhesCicloTurma(turma_info, id_turma):
     }
     return info_turma
 
+def excluir_ciclo_da_turma(id_turma):
+    ciclos_da_turma = listar_ciclos_por_id_turma(id_turma)
+    if not ciclos_da_turma:
+        return
+
+    todos_os_ciclos = listar_ciclos()
+    ciclos_a_manter = {
+        id_ciclo: ciclo
+        for id_ciclo, ciclo in todos_os_ciclos.items()
+        if ciclo["id_turma"] != id_turma
+    }
+
+    _salvar_ciclos(ciclos_a_manter)
+
+
 # def _verificar_duplicidade(id_ciclo, ciclo, ciclos):
 #     try:
 #         id_ciclo_textual = str(id_ciclo)
@@ -137,20 +157,6 @@ def detalhesCicloTurma(turma_info, id_turma):
 #             return True
 #     except:
 #         return True
-
-# def remover_ciclo(id_ciclo):
-#     try:
-#         if id_ciclo:
-#             ciclos = listar_ciclos()
-#             ciclos.pop(id_ciclo)
-#             # ajustar a sequência de todos os outros ciclos
-#             # remover as notas em cascata
-#             _salvar_ciclos(ciclos)
-#             return True
-#         else:
-#             False
-#     except:
-#         return False
 
 # def editar_ciclo(id_ciclo, ciclo):
 #     if id_ciclo == None or ciclo == None:

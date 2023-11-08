@@ -59,14 +59,14 @@ def adicionar_turma_aluno(turma_aluno):
         return _salvar_turmas_alunos(turmas_alunos)
 
 
-def remover_turma_aluno(id_turma_aluno):
-    id_turma_aluno_str = str(id_turma_aluno)
+def remover_turma_aluno(id_turma):
+    id_turma = str(id_turma)
     turmas_alunos = listar_turmas_alunos()
-    if id_turma_aluno_str in turmas_alunos.keys():
-        turmas_alunos.pop(id_turma_aluno_str)
-        return _salvar_turmas_alunos(turmas_alunos)
-    else:
-        return False
+    turmas_alunos_copia = turmas_alunos.copy()
+    for id_turma_aluno in turmas_alunos_copia:
+        if id_turma == turmas_alunos_copia[id_turma_aluno]["id_turma"]:
+            turmas_alunos.pop(id_turma_aluno)
+    return _salvar_turmas_alunos(turmas_alunos)
 
 
 def _obter_novo_id_turmas_alunos():
