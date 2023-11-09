@@ -1,4 +1,5 @@
 import json
+import regra_de_negocio.global_settings as global_settings
 
 
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
@@ -46,7 +47,8 @@ def criacao_turma(nova_turma):
 
     id_nova_turma = _obter_novo_id_turma()
     turmas = busca_turmas()
-    nova_turma["quantidade_ciclos"] = 4
+    nova_turma["quantidade_ciclos"] = global_settings.read_global_settings()["quant_ciclos"]
+    nova_turma["duracao_ciclo"]= global_settings.read_global_settings()["quant_dias_ciclo"]
     alunos_adicionados = nova_turma.pop("alunos_adicionados")
     turmas[id_nova_turma] = nova_turma
     turma_nome = turmas[id_nova_turma]["nome"]
