@@ -230,5 +230,5 @@ def listar_detalhes_ciclos_por_id_turma(request):
         #Devolve um objeto onde a chave é o id da turma
         #1:{ data_final_ciclo: "2023-11-09 00:00:00", ciclo_atual: 1, ciclo_aberto_para_nota: null }
         #2:{ data_final_ciclo: "2023-11-21 00:00:00", ciclo_atual: 2, ciclo_aberto_para_nota: 1 }
-        resposta[id_turma] = gerenciador_ciclos.detalhesCicloTurma(turma_info, id_turma)
+        resposta[id_turma] = gerenciador_ciclos.detalhes_ciclos_turma(turma_info, id_turma)
     return JsonResponse(resposta)

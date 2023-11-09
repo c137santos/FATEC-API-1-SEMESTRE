@@ -96,7 +96,7 @@ def _salvar_ciclos(ciclos):
         f.write(dados)
         return True
     
-def detalhesCicloTurma(turma_info, id_turma):
+def detalhes_ciclos_turma(turma_info, id_turma):
     id_turma_str = str(id_turma)
     data_atual = datetime.now()
     data_inicio = datetime.strptime(turma_info["data_de_inicio"], "%d/%m/%Y")
