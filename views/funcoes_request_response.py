@@ -223,3 +223,16 @@ def listar_detalhes_ciclos_por_id_turma(request, id_turma):
     turma = gerenciador_turmas.obter_turma(id_turma)
     resposta = gerenciador_ciclos.detalhesCicloTurma(turma, id_turma)
     return JsonResponse(resposta)
+
+def listar_global_settings(request):
+    global_settings = global_settings.read_global_settings()
+    return JsonResponse(global_settings)
+
+def editar_global_settings(request):
+    info_editar_settings = request.body
+    global_settings.edit_global_settings(
+        info_editar_settings["quantidade_sprint"],
+        info_editar_settings["dias_sprint"],
+        info_editar_settings["prazo_nota"]
+    )
+    return JsonResponse({"mensagem": "concluido"})
