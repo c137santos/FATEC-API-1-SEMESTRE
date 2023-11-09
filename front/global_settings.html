@@ -70,7 +70,6 @@ function editGlobalSettings(){
     }
     try {
       fetch ('http://127.0.0.1:8080/api/v1/globalsettings/editar',{method: "POST", body:JSON.stringify(alteracoes)})
-      console.log('chamou o back')
       } catch (error) {
           console.error("Erro ao buscar dados da API -> ", error);
       }

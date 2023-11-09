@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timedelta
 
 
 def listar_ciclos():
@@ -57,12 +58,34 @@ def adicionar_ciclo(ciclo):
     return _salvar_ciclos(ciclos)
 
 
+def editar_ciclo(id_ciclo, ciclo_atualizado):
+    try:
+        id_ciclo_str = str(id_ciclo)
+        ciclos = listar_ciclos()
+        if id_ciclo_str in ciclos.keys():
+            ciclos[id_ciclo_str]["id_turma"] = ciclo_atualizado["id_turma"]
+            ciclos[id_ciclo_str]["duracao"] = int(ciclo_atualizado["duracao"])
+            ciclos[id_ciclo_str]["peso_nota"] = float(ciclo_atualizado["peso_nota"])
+            ciclos[id_ciclo_str]["numero_ciclo"] = int(ciclo_atualizado["numero_ciclo"])
+            ciclos[id_ciclo_str]["prazo_insercao_nota"] = int(
+                ciclo_atualizado["prazo_insercao_nota"]
+            )
+            return _salvar_ciclos(ciclos)
+        else:
+            raise KeyError("Ciclo não encontrado.")
+    except KeyError as e:
+        return f"Falha na edição: {str(e)}"
+
+
 def _obter_novo_id_ciclo():
     ids_numericos = []
-    for id_str in listar_ciclos.keys():
+    ids_numericos.append(0)
+    ciclos = listar_ciclos()
+    for id_str in ciclos.keys():
         id_int = int(id_str)
         ids_numericos.append(id_int)
-    id_max_int = max(ids_numericos)
+    ids_numericos.sort()
+    id_max_int = ids_numericos.pop()
     novo_id = str(id_max_int + 1)
     return novo_id
 
@@ -72,6 +95,60 @@ def _salvar_ciclos(ciclos):
     with open("dados/ciclos.json", "w", encoding="utf-8") as f:
         f.write(dados)
         return True
+
+
+def detalhesCicloTurma(turma, id_turma):
+    id_turma_str = str(id_turma)
+    data_atual = datetime.now()
+    data_inicio = datetime.strptime(turma["data_de_inicio"], "%d/%m/%Y")
+    duracao_ciclo = int(turma["duracao_ciclo"])
+    ciclos = listar_ciclos_por_id_turma(id_turma_str)
+    quantidade_ciclos = int(turma["quantidade_ciclos"])
+    ciclo_atual = None
+    ciclo_aberto_para_nota = None
+
+    for ciclo_numero, ciclo_info in ciclos.items():
+        if ciclo_info["id_turma"] == id_turma_str:
+            prazo_insercao = ciclo_info["prazo_insercao_nota"]
+
+    for i in range(quantidade_ciclos):
+        # Calcular o final do ciclo
+        data_final_ciclo = data_inicio + timedelta(days=duracao_ciclo * (i + 1))
+
+        # Verificar se estamos no ciclo atual
+        if data_atual < data_final_ciclo:
+            ciclo_atual = i + 1
+            break
+        # Verificar se o ciclo está aberto para notas
+        if (
+            data_final_ciclo + timedelta(days=1)
+            <= data_atual
+            <= data_final_ciclo + timedelta(prazo_insercao)
+        ):
+            ciclo_aberto_para_nota = i + 1
+    else:
+        # Nenhum ciclo aberto, estamos no último ciclo
+        ciclo_atual = quantidade_ciclos
+    return {
+        "data_final_ciclo": str(data_final_ciclo),
+        "ciclo_atual": ciclo_atual,
+        "ciclo_aberto_para_nota": ciclo_aberto_para_nota,
+    }
+
+
+def excluir_ciclo_da_turma(id_turma):
+    ciclos_da_turma = listar_ciclos_por_id_turma(id_turma)
+    if not ciclos_da_turma:
+        return
+
+    todos_os_ciclos = listar_ciclos()
+    ciclos_a_manter = {
+        id_ciclo: ciclo
+        for id_ciclo, ciclo in todos_os_ciclos.items()
+        if ciclo["id_turma"] != id_turma
+    }
+
+    _salvar_ciclos(ciclos_a_manter)
 
 
 # def _verificar_duplicidade(id_ciclo, ciclo, ciclos):
@@ -86,20 +163,6 @@ def _salvar_ciclos(ciclos):
 #             return True
 #     except:
 #         return True
-
-# def remover_ciclo(id_ciclo):
-#     try:
-#         if id_ciclo:
-#             ciclos = listar_ciclos()
-#             ciclos.pop(id_ciclo)
-#             # ajustar a sequência de todos os outros ciclos
-#             # remover as notas em cascata
-#             _salvar_ciclos(ciclos)
-#             return True
-#         else:
-#             False
-#     except:
-#         return False
 
 # def editar_ciclo(id_ciclo, ciclo):
 #     if id_ciclo == None or ciclo == None:

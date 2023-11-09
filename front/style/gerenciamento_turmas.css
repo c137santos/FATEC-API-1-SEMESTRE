@@ -5,19 +5,17 @@ body {
   align-items: center;
 }
 
-
 .title {
   margin-top: 5px;
 }
 
 /* Estilos para o contêiner principal das turmas */
 .turma-container {
-  width: 800px;
-  min-height: 300px;
-  max-height: 300px;
+  width: 1200px;
+  min-height: 350px;
+  max-height: 400px;
   padding: 20px;
   margin-bottom: 20px;
-
   background-color: #f7f7f700;
   display: flex;
   flex-direction: column;
@@ -39,12 +37,11 @@ body {
 .turma-square {
   position: relative;
   width: calc(25% - 10px);
-  height: 150px;
+  height: 210px;
   background-color: #ffffff;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   cursor: pointer;
   padding: 10px; /* Adicione um preenchimento interno para o conteúdo */
@@ -63,7 +60,7 @@ body {
   color: #000000;
   text-align: center; /* Centraliza o texto horizontalmente */
   max-width: 90%; /* Limita a largura para evitar transbordamento */
-  margin: 5px 0; /* Espaçamento interno superior e inferior */
+  margin: 2px 0px;
 }
 
 /* Estilos para o ícone de lixeira */
@@ -76,7 +73,6 @@ body {
   cursor: pointer;
 }
 
-
 /* Estilos para o ícone de lixeira */
 .edit-icon {
   position: absolute;
@@ -85,7 +81,6 @@ body {
   height: 27px;
   cursor: pointer;
 }
-
 
 /* Estilos para o modal */
 .modal {
@@ -269,5 +264,21 @@ label {
 #fsublegenda {
   padding: 0;
   margin: 0;
-  font-size: 11px
+  font-size: 11px;
+}
+
+#listarAlunos{
+  margin-top: 20px;
+  height: 300px;
+  width: 600px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.divsNomes{
+  background-color: white;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
 }

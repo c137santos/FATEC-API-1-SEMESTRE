@@ -1,20 +1,20 @@
 {
     "1": {
-        "nome": "Clara Santos",
-        "RA": 1,
-        "data_nascimento": "2023-10-10",
-        "sexo": "Nao-bin\u00e1ria"
+        "nome": "Marcelo Tambalo",
+        "data_nascimento": "30/11/2023",
+        "genero": "MASCULINO",
+        "RA": 1
     },
     "2": {
-        "nome": "Marcelo Tambalo",
-        "RA": 2,
-        "data_nascimento": "1994-11-04",
-        "sexo": "undefined"
+        "nome": "Renzo Nutitelle",
+        "data_nascimento": "10/11/1990",
+        "genero": "MASCULINO",
+        "RA": 2
     },
-    "4": {
-        "nome": "Walmir",
-        "data_nascimento": "1888-11-04",
-        "sexo": "Golfinho",
-        "RA": 4
+    "3": {
+        "nome": "Bia Bonita",
+        "data_nascimento": "12/01/1989",
+        "genero": "Feminino",
+        "RA": 3
     }
 }

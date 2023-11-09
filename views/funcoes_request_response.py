@@ -5,7 +5,7 @@ from regra_de_negocio.service import (
 )
 
 from regra_de_negocio.gerenciador_turmas import excluir_turma_svc, editar_turma_svc
-
+import regra_de_negocio.gerenciador_turmas as gerenciador_turmas
 import regra_de_negocio.gerenciador_ciclos as gerenciador_ciclos
 import regra_de_negocio.gerenciador_notas as gerenciador_notas
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
@@ -54,22 +54,60 @@ def editar_turma(request, id):
         turma["professor"],
         turma["data_de_inicio"],
         turma["duracao_ciclo"],
+        turma["alunos_adicionados"],
     )
     return JsonResponse({"mensagem": resultado})
 
 
 def criar_turma(request):
+    print(f"\n> Inserindo nova turma...\n")
     nova_turma = json.loads(request.body)
-    print(nova_turma)
     resposta = cria_turma(nova_turma)
-    for i in range(resposta["nova_turma"]["quantidade_ciclos"]):
-        gerenciador_ciclos.adicionar_ciclo(resposta["id_nova_turma"])
+    quantidade_ciclos = resposta["nova_turma"]["quantidade_ciclos"]
+    # cria um ciclo padrão para a quantidade de ciclos desejada
+    print(f"> Criando os ciclos associados à turma...\n")
+    for i in range(quantidade_ciclos):
+        ciclo = {}
+        ciclo["id_turma"] = resposta["id_nova_turma"]
+        ciclo["duracao"] = 15
+        ciclo["peso_nota"] = float(i + 1)
+        ciclo["numero_ciclo"] = i + 1
+        ciclo["prazo_insercao_nota"] = 5
+        gerenciador_ciclos.adicionar_ciclo(ciclo)
+    # cria as notas para cada aluno adicionado
+    print(f"> Criando as notas dos alunos...\n")
+    id_nova_turma_str = str(resposta["id_nova_turma"])
+    ciclos = gerenciador_ciclos.listar_ciclos_por_id_turma(id_nova_turma_str)
+    alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_nova_turma_str)
+    for id_aluno in alunos:
+        for id_ciclo in ciclos:
+            nova_nota = {}
+            nova_nota["id_turma"] = id_nova_turma_str
+            nova_nota["id_aluno"] = str(id_aluno)
+            nova_nota["id_ciclo"] = str(id_ciclo)
+            nova_nota["valor"] = 0.0
+            nova_nota["fee"] = False
+            gerenciador_notas.adicionar_nota(nova_nota)
+    print(f"> Criação de turma finalizada.\n")
     return JsonResponse(resposta)
 
 
 def excluir_turma(request, id):
-    resultado = excluir_turma_svc(id)
-    return JsonResponse({"mensagem": resultado})
+    """
+    A exclusão de turma está em modo cascata.
+    """
+    print(f"\n> Excluindo turmas...\n")
+    try:
+        excluir_turma_svc(id)
+    except Exception as e:
+        return JsonResponse(
+            {"mensagem": f"Falha na exclusão de turma_aluno: {str(e)}"},
+            status="500 Internal Server Error",
+        )
+    gerenciador_turmas_alunos.remover_turma_aluno(id)
+    gerenciador_ciclos.excluir_ciclo_da_turma(id)
+    gerenciador_notas.excluir_notas_relacionadas_turma(id)
+    return JsonResponse({"mensagem": "Sucesso"}, status="200 ok")
 
 
 def criar_ciclo(request):
@@ -88,6 +126,12 @@ def listar_ciclos_por_id_turma(request, id_turma):
     return JsonResponse(ciclos)
 
 
+def editar_ciclo(request, id_ciclo):
+    ciclo = json.loads(request.body)
+    resultado = gerenciador_ciclos.editar_ciclo(id_ciclo, ciclo)
+    return JsonResponse({"mensagem": resultado})
+
+
 def criar_nota(request):
     nova_nota = json.loads(request.body)
     if not gerenciador_notas.verificar_existencia_nota_por_ciclo(nova_nota):
@@ -97,9 +141,10 @@ def criar_nota(request):
         return JsonResponse({"mensagem": False})
 
 
-def editar_nota(request, id_nota):
-    nota_atualizada = json.loads(request.body)
-    resultado = gerenciador_notas.editar_nota(id_nota, nota_atualizada)
+def editar_nota(request):
+    notas_atualizada = json.loads(request.body)
+    print(notas_atualizada)
+    resultado = gerenciador_notas.editar_nota(notas_atualizada)
     return JsonResponse({"mensagem": resultado})
 
 
@@ -177,3 +222,9 @@ def listar_alunos_turma(request, id_turma):
 def listar_turmas_aluno(request, id_aluno):
     turmas = gerenciador_turmas_alunos.listar_turmas_aluno(id_aluno)
     return JsonResponse(turmas)
+
+
+def listar_detalhes_ciclos_por_id_turma(request, id_turma):
+    turma = gerenciador_turmas.obter_turma(id_turma)
+    resposta = gerenciador_ciclos.detalhesCicloTurma(turma, id_turma)
+    return JsonResponse(resposta)

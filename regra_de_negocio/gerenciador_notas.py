@@ -7,15 +7,13 @@ from regra_de_negocio.gerenciador_ciclos import (
 )
 from regra_de_negocio.gerenciador_turmas import obter_turma
 
-from datetime import datetime
-import datetime as dt
+from datetime import datetime, timedelta
 
 
 def _calcular_fee_turma_aluno(id_turma, id_aluno):
-    id_aluno_str = str(id_aluno)
     id_turma_str = str(id_turma)
-    obter_turma(id_turma_str)
-    notas_por_turma_aluno = listar_notas_por_turma_aluno(id_aluno_str, id_turma_str)
+    id_aluno_str = str(id_aluno)
+    notas_por_turma_aluno = listar_notas_por_turma_aluno(id_turma_str, id_aluno_str)
     soma_das_notas = 0.0
     soma_dos_pesos = 0.0
     for id_nota in notas_por_turma_aluno:
@@ -25,7 +23,8 @@ def _calcular_fee_turma_aluno(id_turma, id_aluno):
         soma_das_notas += peso_nota * valor
         soma_dos_pesos += peso_nota
     if len(notas_por_turma_aluno) > 0:
-        return soma_das_notas / float(soma_dos_pesos)
+        media_fee = soma_das_notas / float(soma_dos_pesos)
+        return round(media_fee, 2)
     else:
         return 0.0
 
@@ -67,23 +66,24 @@ def filtrar_notas_por_id_turma_svc(notas, id_turma):
 def listar_notas_por_id_aluno(notas, id_aluno):
     if not id_aluno:
         return {}
-    id_turma_str = str(id_aluno)
+    id_aluno_str = str(id_aluno)
     notas_encontradas = {}
     for id_nota in notas.keys():
-        if id_turma_str == notas[id_nota]["id_aluno"]:
+        if id_aluno_str == notas[id_nota]["id_aluno"]:
             if notas[id_nota]["fee"]:
                 continue
             notas_encontradas[id_nota] = notas[id_nota]
+
     return notas_encontradas
 
 
 def listar_notas_por_id_ciclo(notas, id_ciclo):
     if not id_ciclo:
         return {}
-    id_turma_str = str(id_ciclo)
+    id_ciclo_str = str(id_ciclo)
     notas_encontradas = {}
     for id_nota in notas.keys():
-        if id_turma_str == notas[id_nota]["id_ciclo"]:
+        if id_ciclo_str == notas[id_nota]["id_ciclo"]:
             if notas[id_nota]["fee"]:
                 continue
             notas_encontradas[id_nota] = notas[id_nota]
@@ -106,16 +106,19 @@ def adicionar_nota(nova_nota):
     return _salvar_notas(notas)
 
 
-def editar_nota(id_nota_atualizada, nota_atualizada):
-    if not nota_atualizada:
+def editar_nota(notas_atualizada):
+    if not notas_atualizada:
         return False
     notas = listar_notas()
-    id_nota_atualizada_str = str(id_nota_atualizada)
-    if id_nota_atualizada_str in notas.keys():
-        notas[id_nota_atualizada_str] = nota_atualizada
-        return _salvar_notas(notas)
-    else:
-        return False
+    for id_nota in notas_atualizada:
+        id_nota_atualizada_str = str(id_nota)
+        if id_nota_atualizada_str in notas.keys():
+            notas[id_nota_atualizada_str]["valor"] = float(
+                notas_atualizada[id_nota_atualizada_str]["valor"]
+            )
+        else:
+            return False
+    return _salvar_notas(notas)
 
 
 def remover_nota(id_nota):
@@ -137,11 +140,13 @@ def verificar_existencia_nota_por_ciclo(nota):
 
 def _obter_novo_id_nota():
     ids_numericos = []
+    ids_numericos.append(0)
     notas = listar_notas()
     for id_str in notas.keys():
         id_int = int(id_str)
         ids_numericos.append(id_int)
-    id_max_int = max(ids_numericos)
+    ids_numericos.sort()
+    id_max_int = ids_numericos.pop()
     novo_id = str(id_max_int + 1)
     return novo_id
 
@@ -155,7 +160,6 @@ def _salvar_notas(notas):
 
 def verificar_edicao_habilitada(notas, id_nota):
     id_nota_str = str(id_nota)
-    notas = listar_notas()
     nota = notas[id_nota_str]
     ciclo = obter_ciclo(nota["id_ciclo"])
     turma = obter_turma(nota["id_turma"])
@@ -165,15 +169,12 @@ def verificar_edicao_habilitada(notas, id_nota):
         prazo_insercao_nota = _obter_prazo_insercao_nota(ciclo, nota["id_turma"])
         data_inicial_insercao_nota = datetime.strptime(
             data_inicio, formato_data
-        ) + dt.timedelta(days=prazo_insercao_nota)
-        data_final_insercao_nota = data_inicial_insercao_nota + dt.timedelta(
+        ) + timedelta(days=prazo_insercao_nota)
+        data_final_insercao_nota = data_inicial_insercao_nota + timedelta(
             days=ciclo["prazo_insercao_nota"]
         )
         data_atual = datetime.now()
-        if (
-            data_inicial_insercao_nota >= data_atual
-            and data_atual <= data_final_insercao_nota
-        ):
+        if data_inicial_insercao_nota <= data_atual <= data_final_insercao_nota:
             return True
         else:
             return False
@@ -191,3 +192,16 @@ def _obter_prazo_insercao_nota(ciclo, id_turma):
         if ciclo_iteracao["numero_ciclo"] <= numero_ciclo:
             prazo_insercao_nota += ciclo_iteracao["duracao"]
     return prazo_insercao_nota + 1  # o +1 é o dia seguinte do requisito
+
+
+def excluir_notas_relacionadas_turma(id_turma):
+    print(f"\n> Excluindo notas relacionados a turma...\n")
+    todos_notas = listar_notas()
+
+    notas_mantidas = {
+        id_nota: nota
+        for id_nota, nota in todos_notas.items()
+        if nota["id_turma"] != id_turma
+    }
+
+    return _salvar_notas(notas_mantidas)

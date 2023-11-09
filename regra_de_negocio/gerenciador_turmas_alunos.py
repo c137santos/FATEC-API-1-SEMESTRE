@@ -7,7 +7,7 @@ from regra_de_negocio.gerenciador_turmas import busca_turmas
 def listar_turmas_alunos():
     with open("dados/turmas_alunos.json", "r", encoding="utf-8") as f:
         turmas_alunos = json.load(f)
-        return turmas_alunos
+    return turmas_alunos
 
 
 # Essa função retorna todos os alunos de uma turma
@@ -49,32 +49,35 @@ def listar_turmas_aluno(id_aluno):
 def adicionar_turma_aluno(turma_aluno):
     if not turma_aluno:
         return False
-    alunos = listar_alunos_turma(turma_aluno["id_turma"])
-    if turma_aluno["id_aluno"] in alunos.keys():
+    alunos = listar_alunos_turma(turma_aluno[0]["id_turma"])
+    if turma_aluno[0]["id_aluno"] in alunos.keys():
         return False
     else:
         turmas_alunos = listar_turmas_alunos()
         novo_id_turmas_alunos = _obter_novo_id_turmas_alunos()
-        turmas_alunos[novo_id_turmas_alunos] = turma_aluno
+        turmas_alunos[novo_id_turmas_alunos] = turma_aluno[0]
         return _salvar_turmas_alunos(turmas_alunos)
 
 
-def remover_turma_aluno(id_turma_aluno):
-    id_turma_aluno_str = str(id_turma_aluno)
+def remover_turma_aluno(id_turma):
+    id_turma = str(id_turma)
     turmas_alunos = listar_turmas_alunos()
-    if id_turma_aluno_str in turmas_alunos.keys():
-        turmas_alunos.pop(id_turma_aluno_str)
-        return _salvar_turmas_alunos(turmas_alunos)
-    else:
-        return False
+    turmas_alunos_copia = turmas_alunos.copy()
+    for id_turma_aluno in turmas_alunos_copia:
+        if id_turma == turmas_alunos_copia[id_turma_aluno]["id_turma"]:
+            turmas_alunos.pop(id_turma_aluno)
+    return _salvar_turmas_alunos(turmas_alunos)
 
 
 def _obter_novo_id_turmas_alunos():
     ids_numericos = []
-    for id_str in listar_turmas_alunos.keys():
-        id_int = int(id_str)
+    ids_numericos.append(0)
+    ids_turmas_alunos = listar_turmas_alunos()
+    for id in ids_turmas_alunos.keys():
+        id_int = int(id)
         ids_numericos.append(id_int)
-    id_max_int = max(ids_numericos)
+    ids_numericos.sort()
+    id_max_int = ids_numericos.pop()
     novo_id = str(id_max_int + 1)
     return novo_id
 

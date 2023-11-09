@@ -13,7 +13,9 @@ def editar_aluno_svc(id, alunos_editar):
         aluno = alunos[id]
         aluno["nome"] = alunos_editar["nome"]
         aluno["data_nascimento"] = alunos_editar["data_nascimento"]
-        aluno["sexo"] = alunos_editar["sexo"]
+        aluno["genero"] = (
+            str.upper(alunos_editar["genero"]) if alunos_editar["genero"] else ""
+        )
         _salvar_alunos(alunos)
 
 
@@ -33,7 +35,7 @@ def criar_aluno(novo_aluno):
     aluno = {
         "nome": novo_aluno["nome"],
         "data_nascimento": novo_aluno["data_nascimento"],
-        "sexo": novo_aluno["sexo"],
+        "genero": novo_aluno["genero"],
         "RA": int(id_novo_aluno),
     }
 
@@ -50,10 +52,12 @@ def _salvar_alunos(alunos):
 
 def _novo_id_aluno():
     ids_numericos = []
+    ids_numericos.append(0)
     alunos = listar_alunos()
     for id_str in alunos.keys():
         id_int = int(id_str)
         ids_numericos.append(id_int)
-    id_max_int = max(ids_numericos)
+    ids_numericos.sort()
+    id_max_int = ids_numericos.pop()
     novo_id = str(id_max_int + 1)
     return novo_id

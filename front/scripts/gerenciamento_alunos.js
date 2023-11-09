@@ -1,3 +1,5 @@
+let idAluno = ''
+let editar_aluno = false
 getInfoAlunos()
 let alunos_todos = {}
 async function getInfoAlunos() {
@@ -26,9 +28,9 @@ const renderizarAluno = (aluno) => {
   labelNome.textContent = aluno.nome;
   quadrado.appendChild(labelNome);
   
-  const labelSexo = document.createElement("p");
-  labelSexo.textContent = aluno.sexo;
-  quadrado.appendChild(labelSexo);
+  const labelGenero = document.createElement("p");
+  labelGenero.textContent = aluno.genero;
+  quadrado.appendChild(labelGenero);
 
   const labelIdade = document.createElement("p");
   labelIdade.textContent = aluno.data_nascimento;
@@ -52,7 +54,48 @@ const renderizarAluno = (aluno) => {
     imagemIconDelete.addEventListener("click", () => deleteAluno(`${aluno.RA}`))
       quadrado.appendChild(imagemIconDelete);
   alunos.appendChild(quadrado);
+
+  quadrado.addEventListener("click", async (e) => {
+    if (editar_aluno == false){
+    let turmasALuno = await getTurmasAluno(aluno.RA)
+    idAluno = aluno.RA
+    const id = e.target.id;
+    const info = document.createElement("dialog");
+    info.id = "detalhes-aluno";
+    info.className = "dialog";
+    info.innerHTML = `
+    <div class="dialog-header">
+        <h2 class="dialog-title">Detalhes do aluno ${id}</h2>
+        </div>
+        <div class="dialog-body">
+        <p>RA: ${aluno.RA}</p>
+        <p>Nome: ${aluno.nome}</p>
+        <p>Gênero: ${aluno.genero}</p>
+        <p>Data de nascimento: ${aluno.data_nascimento}</p>
+        </div>
+        <div>
+        <p> Escolha a turma:</p>
+        <select id="select-turmas">
+          <option value="" selected></option>
+        </select>
+        <div id="mostraNotas"> 
+           <p> Notas da turma:</p>
+        </div>
+        </div>
+        <button onclick="fechaDialogo()">Fechar</button>
+        `;
+    document.body.appendChild(info);
+    info.showModal();
+    selectTurmas(turmasALuno)
+   }
+  })
 };
+
+function fechaDialogo(){
+  dialogo = document.getElementById("detalhes-aluno")
+  dialogo.close();
+  window.location.reload(false);
+}
 
 const mostraAlunos = (alunos) => {
     for (const id in alunos) {
@@ -61,6 +104,7 @@ const mostraAlunos = (alunos) => {
 }
 
 async function editarAluno(RA) {
+  editar_aluno=true
   let aluno = alunos_todos[RA]
   const modal = document.createElement("dialog");
 
@@ -79,13 +123,13 @@ async function editarAluno(RA) {
   formulario.appendChild(aluno_label);
   formulario.appendChild(inputNome);
 
-  const aluno_sexo = document.createElement("p");
-  aluno_sexo.textContent = "Sexo";
-  const inputSexo = document.createElement("input");
-  inputSexo.type = "text";
-  inputSexo.value = aluno.sexo;
-  formulario.appendChild(aluno_sexo);
-  formulario.appendChild(inputSexo);
+  const aluno_genero = document.createElement("p");
+  aluno_genero.textContent = "Genero";
+  const inputGenero = document.createElement("input");
+  inputGenero.type = "text";
+  inputGenero.value = aluno.genero;
+  formulario.appendChild(aluno_genero);
+  formulario.appendChild(inputGenero);
 
 
   const aluno_nasc = document.createElement("p");
@@ -109,18 +153,33 @@ async function editarAluno(RA) {
   buttonSalvar.addEventListener("click", async () => {
     // Obter os valores do formulário
     const nome = inputNome.value;
-    const sexo = inputSexo.value;
+    if (nome === "") {
+      alert("O Nome do aluno é obrigatório.");
+      return;
+    }
+    const genero = inputGenero.value;
+    if (genero === "") {
+      alert("O gênero do aluno é obrigatório.");
+      return;
+    }
     const dataNascimento = inputDataNascimento.value;
+    if (dataNascimento === "") {
+      alert("A data de nascimento do aluno é obrigatório.");
+      return;
+    }
+
+    let dataNascimentoForm = moment(dataNascimento).format("DD/MM/YYYY");
 
     const aluno_editado = {
         "RA": RA,
         "nome": nome,
-        "sexo": sexo,
-        "data_nascimento": dataNascimento
+        "genero": genero,
+        "data_nascimento": dataNascimentoForm
     }
 
     const response = await backEditarAluno(aluno_editado)
     modal.close();
+    editar_aluno=false
     event.preventDefault()
     });
 }
@@ -158,13 +217,27 @@ submitButton.addEventListener("click", function () {
 
 const criarNovoAluno = () => {
     nomeNovo = document.getElementById('nomeNovoALuno').value
-    sexoNovo = document.getElementById('sexoNovoAluno').value
+    if (nomeNovo === "") {
+      alert("o nome do aluno é obrigatório");
+      return;
+    }
+    generoNovo = document.getElementById('generoNovoAluno').value
+    if (generoNovo === "") {
+      alert("o gênero do aluno é obrigatório");
+      return;
+    }
     dataNascNova = document.getElementById('dataNascNovoAluno').value
+    if (dataNascNova === "") {
+      alert("a data de nascimento do aluno é obrigatório");
+      return;
+    }
+
+    const dataNascNovaForm = moment(dataNascNova).format("DD/MM/YYYY");
 
     const alunoNovo = {
-        "nome":nomeNovo,
-        "sexo": sexoNovo,
-        "data_nascimento":dataNascNova
+        "nome": nomeNovo,
+        "genero": generoNovo,
+        "data_nascimento": dataNascNovaForm
     }
     try {
       fetch ('http://127.0.0.1:8080/api/v1/alunos/criar',{method: "POST", body:JSON.stringify(alunoNovo)})
@@ -173,4 +246,57 @@ const criarNovoAluno = () => {
           console.error("Erro ao buscar dados da API -> ", error);
       }
 
+}
+
+async function getTurmasAluno(RA){
+  try {
+    const response = await fetch(
+    `http://127.0.0.1:8080/api/v1/turmas_alunos/listar_turmas_do_aluno/${RA}`
+    );  
+    turmasAluno = await response.json();
+  } catch (error) {
+    console.error("Erro ao buscar dados da API -> ", error);
+  } finally{
+    return turmasAluno
+  }
+}
+
+function selectTurmas(turmaAluno){
+const select = document.getElementById("select-turmas")
+for (let turma in turmaAluno){
+  let option = document.createElement("option");
+  option.id = turma
+  option.value = turma;
+  option.textContent = turmaAluno[turma].nome;
+  select.appendChild(option);
+  }
+ select.onchange = (event) => {
+     var turmaId = event.target.value;
+     getNotasALunoTurma(turmaId)
+ }
+}
+
+async function getNotasALunoTurma(turmaId){
+  try {
+    const response = await fetch(
+    `http://127.0.0.1:8080/api/v1/notas/aluno/listar/${idAluno}`
+    );  
+    notasAluno = await response.json();
+  } catch (error) {
+    console.error("Erro ao buscar dados da API -> ", error);
+  } finally{
+    for (let nota in notasAluno){
+      if (notasAluno[nota].id_turma == turmaId) {
+        MostraNotas(notasAluno[nota].id_ciclo, notasAluno[nota].valor)
+      }
+   
+    }
+  }
+} 
+
+function MostraNotas(ciclo, valor){
+    dialogALuno = document.getElementById("mostraNotas")
+    valorNota = document.createElement("p")
+    valorNota.textContent = `Ciclo: ${ciclo} | Valor: ${valor}`
+    dialogALuno.appendChild(valorNota)
 }
