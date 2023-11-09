@@ -54,7 +54,6 @@ def editar_turma(request, id):
         turma["nome"],
         turma["professor"],
         turma["data_de_inicio"],
-        turma["duracao_ciclo"],
         turma["alunos_adicionados"],
     )
     return JsonResponse({"mensagem": resultado})
@@ -70,7 +69,7 @@ def criar_turma(request):
         ciclo["duracao"] = info_global_settings["quant_dias_ciclo"]
         ciclo["peso_nota"] = float(i + 1)
         ciclo["numero_ciclo"] = i + 1
-        ciclo["prazo_insercao_nota"] = info_global_settings["prazo_inserção_nota"]
+        ciclo["prazo_insercao_nota"] = info_global_settings["prazo_insercao_nota"]
         gerenciador_ciclos.adicionar_ciclo(ciclo)
     # cria as notas para cada aluno adicionado
     id_nova_turma_str = str(resposta["id_nova_turma"])
@@ -225,14 +224,14 @@ def listar_detalhes_ciclos_por_id_turma(request, id_turma):
     return JsonResponse(resposta)
 
 def listar_global_settings(request):
-    global_settings = global_settings.read_global_settings()
-    return JsonResponse(global_settings)
+    global_settings_resp = global_settings.read_global_settings()
+    return JsonResponse(global_settings_resp)
 
 def editar_global_settings(request):
-    info_editar_settings = request.body
+    info_editar_settings = json.loads(request.body)
     global_settings.edit_global_settings(
-        info_editar_settings["quantidade_sprint"],
-        info_editar_settings["dias_sprint"],
+        info_editar_settings["sprints"],
+        info_editar_settings["dias"],
         info_editar_settings["prazo_nota"]
     )
     return JsonResponse({"mensagem": "concluido"})

@@ -18,7 +18,7 @@ def obter_turma(id_turma):
 
 
 def editar_turma_svc(
-    id, nome, professor, data_de_inicio, duracao_ciclo, alunos_adicionados
+    id, nome, professor, data_de_inicio, alunos_adicionados
 ):
     from regra_de_negocio.gerenciador_turmas_alunos import adicionar_turma_aluno
 
@@ -30,7 +30,6 @@ def editar_turma_svc(
         turma["nome"] = nome
         turma["professor"] = professor
         turma["data_de_inicio"] = data_de_inicio
-        turma["duracao_ciclo"] = duracao_ciclo
         _salvar_turmas(turmas)
 
     for alunos in alunos_adicionados:
