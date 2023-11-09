@@ -10,6 +10,7 @@ import regra_de_negocio.gerenciador_ciclos as gerenciador_ciclos
 import regra_de_negocio.gerenciador_notas as gerenciador_notas
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
 import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
+import regra_de_negocio.global_settings as global_settings
 
 import json
 
@@ -60,22 +61,18 @@ def editar_turma(request, id):
 
 
 def criar_turma(request):
-    print(f"\n> Inserindo nova turma...\n")
     nova_turma = json.loads(request.body)
     resposta = cria_turma(nova_turma)
-    quantidade_ciclos = resposta["nova_turma"]["quantidade_ciclos"]
-    # cria um ciclo padrão para a quantidade de ciclos desejada
-    print(f"> Criando os ciclos associados à turma...\n")
-    for i in range(quantidade_ciclos):
+    info_global_settings= global_settings.read_global_settings()
+    for i in range(info_global_settings["quant_ciclos"]):
         ciclo = {}
         ciclo["id_turma"] = resposta["id_nova_turma"]
-        ciclo["duracao"] = 15
+        ciclo["duracao"] = info_global_settings["quant_dias_ciclo"]
         ciclo["peso_nota"] = float(i + 1)
         ciclo["numero_ciclo"] = i + 1
-        ciclo["prazo_insercao_nota"] = 5
+        ciclo["prazo_insercao_nota"] = info_global_settings["prazo_inserção_nota"]
         gerenciador_ciclos.adicionar_ciclo(ciclo)
     # cria as notas para cada aluno adicionado
-    print(f"> Criando as notas dos alunos...\n")
     id_nova_turma_str = str(resposta["id_nova_turma"])
     ciclos = gerenciador_ciclos.listar_ciclos_por_id_turma(id_nova_turma_str)
     alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_nova_turma_str)
@@ -88,7 +85,6 @@ def criar_turma(request):
             nova_nota["valor"] = 0.0
             nova_nota["fee"] = False
             gerenciador_notas.adicionar_nota(nova_nota)
-    print(f"> Criação de turma finalizada.\n")
     return JsonResponse(resposta)
 
 
@@ -217,7 +213,6 @@ def listar_turmas_alunos(request):
 def listar_alunos_turma(request, id_turma):
     alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_turma)
     return JsonResponse(alunos)
-
 
 def listar_turmas_aluno(request, id_aluno):
     turmas = gerenciador_turmas_alunos.listar_turmas_aluno(id_aluno)
