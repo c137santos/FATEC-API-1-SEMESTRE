@@ -50,12 +50,11 @@ def criacao_turma(nova_turma):
     nova_turma["quantidade_ciclos"] = 4
     alunos_adicionados = nova_turma.pop("alunos_adicionados")
     turmas[id_nova_turma] = nova_turma
-    turma_nome = turmas[id_nova_turma]["nome"]
+    turma_nova = turmas[id_nova_turma]
     resposta = {
-        "mensagem": f"Criação da turma {turma_nome.capitalize()} realizada com sucesso!",
-        "detalhes": [],
-        "nova_turma": nova_turma,
+        "quantidade_ciclos": turma_nova["quantidade_ciclos"],
         "id_nova_turma": id_nova_turma,
+        "nome_turma": turma_nova["nome"],
     }
 
     # Salve as alterações nos arquivos JSON
