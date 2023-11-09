@@ -150,7 +150,7 @@ def excluir_ciclo_da_turma(id_turma):
     _salvar_ciclos(ciclos_a_manter)
 
 def cria_ciclos_pra_turma(id_nova_turma, info_global_settings):
-     for i in range(info_global_settings["quant_ciclos"]):
+     for i in range(int(info_global_settings["quant_ciclos"])):
         ciclo = {}
         ciclo["id_turma"] = id_nova_turma
         ciclo["duracao"] = info_global_settings["quant_dias_ciclo"]
