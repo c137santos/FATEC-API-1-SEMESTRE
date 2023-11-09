@@ -114,8 +114,10 @@ def retorna_response(environ, start_response):
     start_response(response.status, list(response.headers.items()))
     return response
 
+
 def ajusta_banco():
     ...
+
 
 if __name__ == "__main__":
     ajusta_banco()

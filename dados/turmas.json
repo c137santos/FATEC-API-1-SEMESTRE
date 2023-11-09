@@ -12,12 +12,5 @@
         "data_de_inicio": "02/11/2023",
         "duracao_ciclo": "14",
         "quantidade_ciclos": 4
-    },
-    "3": {
-        "nome": "Empresarial",
-        "professor": "Walmir Tiriri",
-        "data_de_inicio": "01/11/2023",
-        "duracao_ciclo": "5",
-        "quantidade_ciclos": 4
     }
 }

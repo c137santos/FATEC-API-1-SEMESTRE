@@ -1,20 +1,20 @@
 {
-  "1": {
-      "nome": "Clara Santos",
-      "RA": 1,
-      "data_nascimento": "2023-10-10",
-      "sexo": "Nao-binario"
-  },
-  "2": {
-      "nome": "Marcelo Tambalo",
-      "RA": 2,
-      "data_nascimento": "1994-11-04",
-      "sexo": ""
-  },
-  "3": {
-      "nome": "Lucas Nadalete",
-      "RA": 3,
-      "data_nascimento": "1888-11-04",
-      "sexo": "Golfinho"
-  }
+    "1": {
+        "nome": "Marcelo Tambalo",
+        "data_nascimento": "30/11/2023",
+        "genero": "homem_cis",
+        "RA": 1
+    },
+    "2": {
+        "nome": "Renzo Nutitelle",
+        "data_nascimento": "10/11/1990",
+        "genero": "homem_cis",
+        "RA": 2
+    },
+    "3": {
+        "nome": "Bia Bonita",
+        "data_nascimento": "12/01/1989",
+        "genero": "mulher_trans",
+        "RA": 3
+    }
 }

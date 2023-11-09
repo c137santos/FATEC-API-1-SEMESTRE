@@ -1,16 +1,16 @@
 {
     "1": {
-        "nome": "Logica Geral",
-        "professor": "Nadallete",
-        "data_de_inicio": "24/10/2023",
-        "duracao_ciclo": 10,
+        "nome": "Logica ok!",
+        "professor": "Nadalete Lucas",
+        "data_de_inicio": "02/11/2023",
+        "duracao_ciclo": "10",
         "quantidade_ciclos": 4
     },
     "2": {
         "nome": "ADS",
         "professor": "Goretti",
-        "data_de_inicio": "22/10/2023",
-        "duracao_ciclo": 11,
+        "data_de_inicio": "02/11/2023",
+        "duracao_ciclo": "14",
         "quantidade_ciclos": 4
     }
 }

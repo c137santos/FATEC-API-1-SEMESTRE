@@ -2,19 +2,19 @@
     "1": {
         "nome": "Marcelo Tambalo",
         "data_nascimento": "30/11/2023",
-        "genero": "MASCULINO",
+        "genero": "homem_cis",
         "RA": 1
     },
     "2": {
         "nome": "Renzo Nutitelle",
         "data_nascimento": "10/11/1990",
-        "genero": "MASCULINO",
+        "genero": "homem_cis",
         "RA": 2
     },
     "3": {
         "nome": "Bia Bonita",
         "data_nascimento": "12/01/1989",
-        "genero": "Feminino",
+        "genero": "mulher_trans",
         "RA": 3
     }
 }

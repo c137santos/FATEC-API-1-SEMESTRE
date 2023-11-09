@@ -60,12 +60,12 @@ def editar_turma(request, id):
 
 
 def criar_turma(request):
-    print(f"\n> Inserindo nova turma...\n")
+    print("\n> Inserindo nova turma...\n")
     nova_turma = json.loads(request.body)
     resposta = cria_turma(nova_turma)
     quantidade_ciclos = resposta["nova_turma"]["quantidade_ciclos"]
     # cria um ciclo padrão para a quantidade de ciclos desejada
-    print(f"> Criando os ciclos associados à turma...\n")
+    print("> Criando os ciclos associados à turma...\n")
     for i in range(quantidade_ciclos):
         ciclo = {}
         ciclo["id_turma"] = resposta["id_nova_turma"]
@@ -75,7 +75,7 @@ def criar_turma(request):
         ciclo["prazo_insercao_nota"] = 5
         gerenciador_ciclos.adicionar_ciclo(ciclo)
     # cria as notas para cada aluno adicionado
-    print(f"> Criando as notas dos alunos...\n")
+    print("> Criando as notas dos alunos...\n")
     id_nova_turma_str = str(resposta["id_nova_turma"])
     ciclos = gerenciador_ciclos.listar_ciclos_por_id_turma(id_nova_turma_str)
     alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_nova_turma_str)
@@ -88,7 +88,7 @@ def criar_turma(request):
             nova_nota["valor"] = 0.0
             nova_nota["fee"] = False
             gerenciador_notas.adicionar_nota(nova_nota)
-    print(f"> Criação de turma finalizada.\n")
+    print("> Criação de turma finalizada.\n")
     return JsonResponse(resposta)
 
 
@@ -96,7 +96,7 @@ def excluir_turma(request, id):
     """
     A exclusão de turma está em modo cascata.
     """
-    print(f"\n> Excluindo turmas...\n")
+    print("\n> Excluindo turmas...\n")
     try:
         excluir_turma_svc(id)
     except Exception as e:
