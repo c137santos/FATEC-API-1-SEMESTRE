@@ -118,17 +118,18 @@ def retorna_response(environ, start_response):
     return response
 
 
-def ajusta_banco(arg):
+def ajusta_banco(arg = False):
     if arg:
         copy_fs("./devdb", "./dados", walker=Walker(filter=["*.json"]))
-        print("Banco reformatado")
+        print("Banco formatado")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1].lower() == "true":
-        ajusta_banco(True)
-    else:
-        ajusta_banco(False)
+    if len(sys.argv) > 1:
+        if sys.argv[1].lower() == "db":
+            ajusta_banco(True)
+        else:
+            print(f"'{sys.argv[1]}' é um argumento inválido. Para formatar o banco utilize:'python3 wgsi.py db'")
     print("🚀 Servidor HTTP rodando! 🚀 \n Acesse o servidor em: 127.0.0.1:8080")
     server = make_server("127.0.0.1", 8080, retorna_response)
     server.serve_forever()

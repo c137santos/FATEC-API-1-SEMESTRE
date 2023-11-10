@@ -136,9 +136,6 @@ function criarCampoNota(alunoId, notasAlunos) {
         InputNotas.id = `id_nota=${id_nota},id_turma=${id_turma},id_aluno=${id_aluno},id_ciclo=${id_ciclo}`;
 
         if (cicloAberto === true) {
-          // const aviso_ciclo_aberto =
-          //   document.getElementById("aviso_ciclo_aberto");
-          // aviso_ciclo_aberto.textContent = `Ciclo aberto para nota: ${id_ciclo}`;
           InputNotas.dataset.ValorOriginal = valorNota;
           InputNotas.setAttribute("class", "campoNotaHabilitado");
           InputNotas.removeAttribute("readonly");
