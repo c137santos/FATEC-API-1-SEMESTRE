@@ -38,11 +38,13 @@ async function preencher_info_turma(id) {
     }
 
     // Chama a função para iniciar a criação do componentes dos alunos
-    exibirAlunos(alunos, notasAlunos, cicloPeso, id);
+    exibirAlunos(alunos, notasAlunos, cicloPeso, id, PesoCiclo);
   }
 }
 
-function criarCabecalhoNota() {
+function criarCabecalhoNota(quant_ciclos) {
+  quant_ciclos=Object.keys(quant_ciclos).length
+
   const cabecalhoNota = document.createElement("div");
   cabecalhoNota.className = "aluno-square";
   cabecalhoNota.style = "font-weight: bold;";
@@ -54,7 +56,7 @@ function criarCabecalhoNota() {
   const elementoCampoCiclos = document.createElement("div");
   elementoCampoCiclos.className = "campoNota";
 
-  for (var x = 1; x < 5; ++x) {
+  for (var x = 1; x <= quant_ciclos; ++x) {
     const elementoCampoValor = document.createElement("span");
     elementoCampoValor.className = "valor";
     elementoCampoValor.innerText = `C${x}`;
@@ -71,10 +73,10 @@ function criarCabecalhoNota() {
   return cabecalhoNota;
 }
 
-function exibirAlunos(alunos, notasAlunos, cicloPeso, id_turma) {
+function exibirAlunos(alunos, notasAlunos, cicloPeso, id_turma, quant_ciclos) {
   const container = document.querySelector(".corpo_tabela");
 
-  const cabecalhoNota = criarCabecalhoNota();
+  const cabecalhoNota = criarCabecalhoNota(quant_ciclos);
   container.appendChild(cabecalhoNota);
 
   for (const chave in alunos) {

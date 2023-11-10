@@ -5,7 +5,7 @@ function redirecionarParaPagina(id) {
         window.location.href = 'gerenciamento_aluno.html';
     } else if (id === 'grupos') {
         window.location.href = 'listar_grupo.html';
-    } else if (id === 'global-settings') {
+    } else if (id === 'global_settings') {
         window.location.href = 'global_settings.html';
     } else {
         window.location.href = 'pagina-padrao.html';
@@ -18,5 +18,10 @@ document.getElementById('turma').addEventListener('click', function() {
 
 document.getElementById('aluno').addEventListener('click', function() {
     redirecionarParaPagina('aluno');
+});
+
+
+document.getElementById('global_settings').addEventListener('click', function() {
+    redirecionarParaPagina('global_settings');
 });
 

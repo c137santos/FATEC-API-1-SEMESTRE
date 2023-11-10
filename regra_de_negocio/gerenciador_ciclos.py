@@ -96,6 +96,45 @@ def _salvar_ciclos(ciclos):
         return True
 
 
+def detalhesCicloTurma(turma, id_turma):
+    id_turma_str = str(id_turma)
+    data_atual = datetime.now()
+    data_inicio = datetime.strptime(turma["data_de_inicio"], "%d/%m/%Y")
+    duracao_ciclo = int(turma["duracao_ciclo"])
+    ciclos = listar_ciclos_por_id_turma(id_turma_str)
+    quantidade_ciclos = int(turma["quantidade_ciclos"])
+    ciclo_atual = None
+    ciclo_aberto_para_nota = None
+
+    for ciclo_numero, ciclo_info in ciclos.items():
+        if ciclo_info["id_turma"] == id_turma_str:
+            prazo_insercao = ciclo_info["prazo_insercao_nota"]
+
+    for i in range(quantidade_ciclos):
+        # Calcular o final do ciclo
+        data_final_ciclo = data_inicio + timedelta(days=duracao_ciclo * (i + 1))
+
+        # Verificar se estamos no ciclo atual
+        if data_atual < data_final_ciclo:
+            ciclo_atual = i + 1
+            break
+        # Verificar se o ciclo está aberto para notas
+        if (
+            data_final_ciclo + timedelta(days=1)
+            <= data_atual
+            <= data_final_ciclo + timedelta(prazo_insercao)
+        ):
+            ciclo_aberto_para_nota = i + 1
+    else:
+        # Nenhum ciclo aberto, estamos no último ciclo
+        ciclo_atual = quantidade_ciclos
+    return {
+        "data_final_ciclo": str(data_final_ciclo),
+        "ciclo_atual": ciclo_atual,
+        "ciclo_aberto_para_nota": ciclo_aberto_para_nota,
+    }
+
+
 def excluir_ciclo_da_turma(id_turma):
     print(f"\n> Excluindo ciclos relacionados a turma...\n")
     ciclos_da_turma = listar_ciclos_por_id_turma(id_turma)
@@ -110,3 +149,40 @@ def excluir_ciclo_da_turma(id_turma):
     }
 
     _salvar_ciclos(ciclos_a_manter)
+
+def cria_ciclos_pra_turma(id_nova_turma, info_global_settings):
+     for i in range(int(info_global_settings["quant_ciclos"])):
+        ciclo = {}
+        ciclo["id_turma"] = id_nova_turma
+        ciclo["duracao"] = info_global_settings["quant_dias_ciclo"]
+        ciclo["peso_nota"] = float(i + 1)
+        ciclo["numero_ciclo"] = i + 1
+        ciclo["prazo_insercao_nota"] = info_global_settings["prazo_insercao_nota"]
+        adicionar_ciclo(ciclo)
+
+
+# def _verificar_duplicidade(id_ciclo, ciclo, ciclos):
+#     try:
+#         id_ciclo_textual = str(id_ciclo)
+#         if ciclo and id_ciclo_textual not in ciclos.keys():
+#             for c in ciclos:
+#                 if ciclo["id_turma"] == c["id_turma"] and ciclo["numero_ciclo"] == c["numero_ciclo"]:
+#                     return True
+#             return False
+#         else:
+#             return True
+#     except:
+#         return True
+
+# def editar_ciclo(id_ciclo, ciclo):
+#     if id_ciclo == None or ciclo == None:
+#         return False
+#     try:
+#         id_ciclo_textual = str(id_ciclo)
+#         ciclos = listar_ciclos()
+#         if id_ciclo_textual in ciclos:
+#             ciclos[id_ciclo_textual] = ciclo
+#             return _salvar_ciclos(ciclos)
+#         return False
+#     except:
+#         return False

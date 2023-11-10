@@ -1,19 +1,19 @@
 {
     "1": {
-        "nome": "Walmir",
-        "data_nascimento": "04/11/1994",
-        "genero": "Masculino",
+        "nome": "Marcelo Tambalo",
+        "data_nascimento": "30/11/2023",
+        "genero": "MASCULINO",
         "RA": 1
     },
     "2": {
-        "nome": "Nadalete",
-        "data_nascimento": "11/12/1980",
-        "genero": "Binario",
+        "nome": "Renzo Nutitelle",
+        "data_nascimento": "10/11/1990",
+        "genero": "Masculino",
         "RA": 2
     },
     "3": {
-        "nome": "Gorette",
-        "data_nascimento": "12/09/2000",
+        "nome": "Bia Bonita",
+        "data_nascimento": "12/01/1989",
         "genero": "Feminino",
         "RA": 3
     }

@@ -6,7 +6,6 @@ async function coletaDadosNovaTurma() {
   const turmaNome = document.getElementById("turmaNome").value;
   const professor = document.getElementById("professor").value;
   const dataInicio = document.getElementById("dataInicio").value;
-  const duracaoCiclo = document.getElementById("duracaoCiclo").value;
 
   const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]*$/;
   if (turmaNome === "") {
@@ -27,10 +26,7 @@ async function coletaDadosNovaTurma() {
     alert("A Data de início é obrigatório.");
     return;
   }
-  if (duracaoCiclo === "") {
-    alert("A duração de ciclos, em dias, é obrigatório.");
-    return;
-  }
+
   // Formata a data
   const dataInicioForm = moment(dataInicio).format("DD/MM/YYYY");
 
@@ -41,8 +37,6 @@ async function coletaDadosNovaTurma() {
     nome: turmaNome,
     professor: professor,
     data_de_inicio: dataInicioForm,
-    duracao_ciclo: duracaoCiclo,
-    quantidade_ciclos: 4,
     alunos_adicionados: alunos_adicionados
   };
 

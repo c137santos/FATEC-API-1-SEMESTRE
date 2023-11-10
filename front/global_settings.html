@@ -5,17 +5,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
         <link rel="stylesheet" href="style/custom.css">
+        <link rel="stylesheet" href="style/global_settings.css">
+
         <title>Configurações Globais</title>
     </head>
     <header class="header">
         <img src="./imagens/Logo.png" alt="logo">
-    </header>
+      </header>
     <body>
         <div class="card_global_settings">
-            <h1 class="texto-titulo"> Quantidade de dias na sprint:</h1>
-            <h3 class="texto-titulo" id="dias"></h3>
-            <h1 class="texto-titulo"> Quantidade de sprints:</h1>
-            <h3 class="texto-titulo" id="sprints"></h3>
+            <h3 class="texto-titulo"> Quantidade de dias na sprint:</h3>
+            <p class="texto-titulo" id="dias"></p>
+            <h3 class="texto-titulo"> Quantidade de sprints:</h3>
+            <p class="texto-titulo" id="sprints"></p>
+            <h3 class="texto-titulo"> Prazo de inserção de notas:</h3>
+            <p class="texto-titulo" id="nota"></p>
             <dialog id="favDialog">
                 <form method="dialog">
                     <section>
@@ -23,6 +27,8 @@
                         <input type="text" id="dias_edit">
                         <label ><strong>Quantidade de sprints:</strong></label>
                         <input type="text" id="sprints_edit">
+                        <label ><strong>Prazo de inserção de nota:</strong></label>
+                        <input type="text" id="prazo_nota">
                     </section>
                     <menu>
                     <button id="cancel" type="reset">Cancelar</button>
@@ -46,7 +52,7 @@ getGlobalSettings()
 async function getGlobalSettings() {
     try {
         const response = await fetch(
-        "http://127.0.0.1:8080/api/v1/globalsettings/"
+        "http://127.0.0.1:8080/api/v1/global_settings/listar"
         );
         const globalSettings = await response.json();
         mostraGlobalSettings(globalSettings)
@@ -57,19 +63,22 @@ async function getGlobalSettings() {
 }
 
 function mostraGlobalSettings(globalSettings) {
-    document.getElementById("dias").textContent=globalSettings.dias_sprint;
-    document.getElementById("sprints").textContent=globalSettings.quantidade_sprint;
+    document.getElementById("dias").textContent=globalSettings.quant_dias_ciclo;
+    document.getElementById("sprints").textContent=globalSettings.quant_ciclos;
+    document.getElementById("nota").textContent=globalSettings.prazo_insercao_nota;
 }
 
 function editGlobalSettings(){
     dias_edit = document.getElementById('dias_edit').value
     sprints_edit = document.getElementById('sprints_edit').value
+    prazo_nota = document.getElementById('sprints_edit').value
     alteracoes = {
       "dias":dias_edit,
-      "sprints": sprints_edit
+      "sprints": sprints_edit,
+      "prazo_nota": prazo_nota
     }
     try {
-      fetch ('http://127.0.0.1:8080/api/v1/globalsettings/editar',{method: "POST", body:JSON.stringify(alteracoes)})
+      fetch ('http://127.0.0.1:8080/api/v1/global_settings/editar',{method: "POST", body:JSON.stringify(alteracoes)})
       } catch (error) {
           console.error("Erro ao buscar dados da API -> ", error);
       }
