@@ -12,11 +12,11 @@ def busca_turmas():  # retorna todas turmas
 
 def cria_turma(dados_nova_turma):
     resposta = gerenciador_turmas.criacao_turma(dados_nova_turma)
-    info_global_settings= global_settings.read_global_settings()
+    info_global_settings = global_settings.read_global_settings()
     id_nova_turma_str = str(resposta["id_nova_turma"])
-    #cria ciclos para a turma
+    # cria ciclos para a turma
     gerenciador_ciclos.cria_ciclos_pra_turma(id_nova_turma_str, info_global_settings)
-    #cria notas para o aluno
+    # cria notas para o aluno
     ciclos = gerenciador_ciclos.listar_ciclos_por_id_turma(id_nova_turma_str)
     alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_nova_turma_str)
     gerenciador_notas.adicionar_notas_aluno_turma(ciclos, alunos, id_nova_turma_str)

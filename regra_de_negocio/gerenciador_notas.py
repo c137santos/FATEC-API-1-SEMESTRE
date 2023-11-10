@@ -206,6 +206,7 @@ def excluir_notas_relacionadas_turma(id_turma):
 
     return _salvar_notas(notas_mantidas)
 
+
 def adicionar_notas_aluno_turma(ciclos, alunos, id_nova_turma_str):
     for id_aluno in alunos:
         for id_ciclo in ciclos:
