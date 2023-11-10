@@ -18,9 +18,7 @@ def obter_turma(id_turma):
         return None
 
 
-def editar_turma_svc(
-    id, nome, professor, data_de_inicio, alunos_adicionados
-):
+def editar_turma_svc(id, nome, professor, data_de_inicio, alunos_adicionados):
     from regra_de_negocio.gerenciador_turmas_alunos import adicionar_turma_aluno
 
     turmas = busca_turmas()
@@ -47,8 +45,12 @@ def criacao_turma(nova_turma):
 
     id_nova_turma = _obter_novo_id_turma()
     turmas = busca_turmas()
-    nova_turma["quantidade_ciclos"] = global_settings.read_global_settings()["quant_ciclos"]
-    nova_turma["duracao_ciclo"]= global_settings.read_global_settings()["quant_dias_ciclo"]
+    nova_turma["quantidade_ciclos"] = global_settings.read_global_settings()[
+        "quant_ciclos"
+    ]
+    nova_turma["duracao_ciclo"] = global_settings.read_global_settings()[
+        "quant_dias_ciclo"
+    ]
     alunos_adicionados = nova_turma.pop("alunos_adicionados")
     turmas[id_nova_turma] = nova_turma
     turma_nome = turmas[id_nova_turma]["nome"]

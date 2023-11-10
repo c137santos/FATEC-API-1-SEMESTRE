@@ -69,7 +69,7 @@ def excluir_turma(request, id):
     """
     A exclusão de turma está em modo cascata.
     """
-    print(f"\n> Excluindo turmas...\n")
+    print("\n> Excluindo turmas...\n")
     try:
         excluir_turma_svc(id)
     except Exception as e:
@@ -191,6 +191,7 @@ def listar_alunos_turma(request, id_turma):
     alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_turma)
     return JsonResponse(alunos)
 
+
 def listar_turmas_aluno(request, id_aluno):
     turmas = gerenciador_turmas_alunos.listar_turmas_aluno(id_aluno)
     return JsonResponse(turmas)
@@ -201,15 +202,17 @@ def listar_detalhes_ciclos_por_id_turma(request, id_turma):
     resposta = gerenciador_ciclos.detalhesCicloTurma(turma, id_turma)
     return JsonResponse(resposta)
 
+
 def listar_global_settings(request):
     global_settings_resp = global_settings.read_global_settings()
     return JsonResponse(global_settings_resp)
+
 
 def editar_global_settings(request):
     info_editar_settings = json.loads(request.body)
     global_settings.edit_global_settings(
         info_editar_settings["sprints"],
         info_editar_settings["dias"],
-        info_editar_settings["prazo_nota"]
+        info_editar_settings["prazo_nota"],
     )
     return JsonResponse({"mensagem": "concluido"})

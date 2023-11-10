@@ -195,7 +195,7 @@ def _obter_prazo_insercao_nota(ciclo, id_turma):
 
 
 def excluir_notas_relacionadas_turma(id_turma):
-    print(f"\n> Excluindo notas relacionados a turma...\n")
+    print("\n> Excluindo notas relacionados a turma...\n")
     todos_notas = listar_notas()
 
     notas_mantidas = {
@@ -205,6 +205,7 @@ def excluir_notas_relacionadas_turma(id_turma):
     }
 
     return _salvar_notas(notas_mantidas)
+
 
 def adicionar_notas_aluno_turma(ciclos, alunos, id_nova_turma_str):
     for id_aluno in alunos:
