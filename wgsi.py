@@ -1,5 +1,8 @@
 from wsgiref.simple_server import make_server
 import json
+from fs.copy import copy_fs
+from fs.walk import Walker
+import sys
 
 # Implementação do protocolo de comunicação entre o python e a web
 # WSGI - Web Server Gateway Interface
@@ -115,12 +118,17 @@ def retorna_response(environ, start_response):
     return response
 
 
-def ajusta_banco():
-    ...
+def ajusta_banco(arg):
+    if arg:
+        copy_fs("./devdb", "./dados", walker=Walker(filter=["*.json"]))
+        print("Banco reformatado")
 
 
 if __name__ == "__main__":
-    ajusta_banco()
+    if len(sys.argv) > 1 and sys.argv[1].lower() == "true":
+        ajusta_banco(True)
+    else:
+        ajusta_banco(False)
     print("🚀 Servidor HTTP rodando! 🚀 \n Acesse o servidor em: 127.0.0.1:8080")
     server = make_server("127.0.0.1", 8080, retorna_response)
     server.serve_forever()
