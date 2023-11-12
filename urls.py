@@ -13,6 +13,8 @@ def URL(pattern):
 # Essa função tem objetivo de compreender os IDs que são passados na URL por meio da aplicação de regex.
 
 URLS = {
+    URL("/api/v1/global_settings/listar"): view.listar_global_settings,
+    URL("/api/v1/global_settings/editar"): view.editar_global_settings,
     URL("/api/v1/alunos/atualizar/:id"): view.editar_aluno,
     URL("/api/v1/turmas/listar"): view.listar_turmas,
     URL("/api/v1/turmas/listar/:id"): view.obter_turma,
