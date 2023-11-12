@@ -1,8 +1,10 @@
 #container {
-    max-width: 600px;
+    max-width: 700px;
     border-radius: 8px;
     padding: 20px;
     background-color: white;
+    font-size: 20px;
+    width: 100%;
 }
 
 .input-section,
@@ -33,12 +35,28 @@ button:hover {
     background-color: #d24d5d;
 }
 
-.info-section a {
-    color: #007BFF;
-    text-decoration: none;
+.info-section {
+    max-width: 700px;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #9a68f142;
+    text-align: center;
+    margin-top: 50px;
 }
 
-.info-section a:hover {
-    text-decoration: underline;
+
+.button-section {
+    text-align: center;
+}
+
+.titulo {
+    text-align: center;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
 }
 
