@@ -1,0 +1,44 @@
+#container {
+    max-width: 600px;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: white;
+}
+
+.input-section,
+.info-section,
+.button-section {
+    margin-bottom: 20px;
+}
+
+select,
+input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #9a68f1;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+}
+
+button:hover {
+    justify-content: center;
+    background-color: #d24d5d;
+}
+
+.info-section a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.info-section a:hover {
+    text-decoration: underline;
+}
+
