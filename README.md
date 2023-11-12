@@ -35,39 +35,14 @@ Para acessar a documentação do projeto, fique a vontade para ver nosso site.
 
 #### Prazos
 
-<table border="1 px">
-    <tr>
-        <th> Sprints </th>
-        <th> Início </th>
-        <th> Fim </th>
-    </tr>
-    <tr>
-        <td> 1ª sprint </td>
-        <td> 04/09 </td>
-        <td> 24/09 </td>
-    </tr>
-    <tr>
-        <td> 2ª sprint </td>
-        <td> 25/09 </td>
-        <td> 15/10 </td>
-    </tr>
-    <tr>
-        <td> 3ª sprint </td>
-        <td> 16/10 </td>
-        <td> 05/11 </td>
-    </tr>
-    <tr>
-        <td> 4ª sprint </td>
-        <td> 06/11 </td>
-        <td> 26/11 </td>
-    </tr>
-    <tr>
-        <td> Feira de Soluções </td>
-        <td> 12/12 </td>
-        <td> 12/12 </td>
-    </tr>
+| Sprints | Início | Fim |
+| ------- | ------ | --- |
+| 1ª sprint | 04/09 | 24/09 |
+| 2ª sprint | 25/09 | 15/10 |
+| 3ª sprint | 16/10 | 05/11 |
+| 4ª sprint | 06/11 | 26/11 |
+| Feira de Soluções | 12/12 | 12/12 |
 
-</table>
 
 ### Priorização das Sprints
 
