@@ -125,12 +125,12 @@ async function editarAluno(RA) {
   const selecionarGenero = document.createElement("select");
   selecionarGenero.id = "generoNovoAluno";
   const opcoesGenero = [
-    "Homem Cis",
-    "Mulher Cis",
-    "Homem Trans",
-    "Mulher Trans",
-    "Gênero Neutro",
-    "Não-Binário",
+    "Homem cis",
+    "Mulher cis",
+    "Homem trans",
+    "Mulher trans",
+    "Gênero neutro",
+    "Não-binário",
   ];
   opcoesGenero.forEach(function (opcao) {
     const option = document.createElement("option");
