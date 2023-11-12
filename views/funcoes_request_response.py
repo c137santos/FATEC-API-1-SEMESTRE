@@ -13,7 +13,7 @@ import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 import regra_de_negocio.global_settings as global_settings
 
 import json
-
+import math
 
 def criar_aluno(request):
     novo_aluno = json.loads(request.body)
@@ -216,3 +216,25 @@ def editar_global_settings(request):
         info_editar_settings["prazo_nota"],
     )
     return JsonResponse({"mensagem": "concluido"})
+
+def listar_fee_alunos_turma(request, id_turma):
+    alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_turma)
+    for id_aluno in alunos.keys():
+        fee = gerenciador_notas._calcular_fee_turma_aluno(id_aluno=id_aluno,id_turma=id_turma)
+        alunos[id_aluno]["fee"] = fee
+    return JsonResponse(alunos)
+
+def listar_fee_turmas(request):
+    turmas = gerenciador_turmas.busca_turmas()
+    for id_turma in turmas.keys():
+        alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_turma)
+        fee_turma = []
+        for id_aluno in alunos.keys():
+            fee = gerenciador_notas._calcular_fee_turma_aluno(id_aluno=id_aluno,id_turma=id_turma)
+            fee_turma.append(fee)
+        if len(fee_turma) == 0:
+            turmas[id_turma]['fee'] = 0.0   
+        else:
+            media_fee = sum(fee_turma) / len(fee_turma)
+            turmas[id_turma]['fee'] = round(media_fee, 2)
+    return JsonResponse(turmas)
