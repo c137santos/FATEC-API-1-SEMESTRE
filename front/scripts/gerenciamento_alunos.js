@@ -140,7 +140,7 @@ async function editarAluno(RA) {
   });
 
   const generoAtual = opcoesGenero.find(
-    (opcao) => opcao.toLowerCase() === aluno.genero
+    (opcao) => opcao === aluno.genero
   );
   if (generoAtual) {
     selecionarGenero.value = generoAtual;
