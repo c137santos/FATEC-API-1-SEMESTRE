@@ -1,6 +1,63 @@
 import csv
 import json
 import re
+import os
+   
+def ler_csv(endereco_arquivo):
+    with open(endereco_arquivo, newline='', encoding='utf-8-sig') as arquivo_csv:
+        importado_csv = csv.DictReader(arquivo_csv, delimiter=';')
+        importado_csv_lista = list(importado_csv)
+        return importado_csv_lista, importado_csv
+    
+def valida_nome(nome):
+    if not re.match(r'^[A-Za-z\s]+$', nome):
+        raise ValueError(f"Apenas letras no nome: {nome}")
+
+def valida_genero(genero):
+    if not re.match(r'^[A-Za-z]+$', genero):
+        raise ValueError(f"Apenas letras no gênero: {genero}")
+
+def valida_data(data):
+    if not re.match(r'^\d{2}/\d{2}/\d{4}$', data):
+        raise ValueError(f"Data inválida: {data}")
+
+def verifica_csv(importado_csv, importado_csv_lista):
+    erros = []
+    cabecalhos_esperados = ["Nome completo do aluno", "Genêro", "Data de Nascimento"]
+    cabecalhos_obtidos = importado_csv.fieldnames
+    print("Cabeçalhos obtidos:", cabecalhos_obtidos)
+
+    if cabecalhos_obtidos != cabecalhos_esperados:
+        for i, cabecalho_esperado in enumerate(cabecalhos_esperados):
+            if i < len(cabecalhos_obtidos):
+                cabecalho_obtido = cabecalhos_obtidos[i]
+                if cabecalho_esperado != cabecalho_obtido:
+                    erros.append(f"Cabeçalho esperado: {cabecalho_esperado}, obtido: {cabecalho_obtido}")
+            else:
+                erros.append(f"Cabeçalho esperado ausente: {cabecalho_esperado}")
+    else:
+        for aluno in importado_csv_lista:
+            try:
+                valida_nome(aluno[cabecalhos_esperados[0]])
+            except ValueError as e:
+                erros.append(str(e))
+
+            try:
+                valida_genero(aluno[cabecalhos_esperados[1]])
+            except ValueError as e:
+                erros.append(str(e))
+
+            try:
+                valida_data(aluno[cabecalhos_esperados[2]])
+            except ValueError as e:
+                erros.append(str(e))
+
+    if erros:
+        return {"sucesso": False, "erros": erros}
+    else:
+        print("CSV verificado com sucesso!")
+        return {"sucesso": True}
+
 
 def listar_alunos():
     with open("testes/alunos.json", "r", encoding="utf-8") as f:
@@ -11,50 +68,6 @@ def listar_turma_aluno():
     with open("testes/turmas_alunos.json", "r", encoding="utf-8") as f:
         turmas_alunos = json.load(f)
         return turmas_alunos
-    
-def ler_csv():
-    with open("testes/novos_alunos.csv", newline='', encoding='utf-8-sig') as arquivo_csv:
-        leitor_csv = list(csv.DictReader(arquivo_csv, delimiter=';'))
-        verifica_csv(leitor_csv)
-        return leitor_csv
-    
-def valida_nome(nome):
-    # Verifica se o nome contém apenas letras e espaços
-    return bool(re.match(r'^[A-Za-z\s]+$', nome))
-
-def valida_genero(genero):
-    # Verifica se o gênero contém apenas letras
-    return bool(re.match(r'^[A-Za-z]+$', genero))
-
-def valida_data(data):
-    # Verifica se a data está no formato dd/mm/aaaa
-    return bool(re.match(r'^\d{2}/\d{2}/\d{4}$', data))
-
-def verifica_csv(leitor_csv):
-    # Verifica se a primeira linha contém os cabeçalhos esperados
-    cabecalhos_esperados = ["Nome completo do aluno", "Genêro", "Data de Nascimento"]
-    if leitor_csv.fieldnames != cabecalhos_esperados:
-        raise ValueError("Cabeçalhos do CSV não correspondem aos esperados.")
-
-    # Verifica cada linha do CSV
-    for aluno in leitor_csv:
-        # Verifica se todos os campos estão presentes e não são vazios
-        if not aluno["Nome completo do aluno"] or not aluno["Genêro"] or not aluno["Data de Nascimento"]:
-            raise ValueError("Campos incompletos no CSV.")
-
-        # Verifica se o nome e o gênero contêm apenas letras
-        if not valida_nome(aluno["Nome completo do aluno"]):
-            raise ValueError(f"Nome inválido em: {aluno['Nome completo do aluno']}")
-
-        if not valida_genero(aluno["Genêro"]):
-            raise ValueError(f"Gênero inválido em: {aluno['Genêro']}")
-
-        # Verifica se a data está no formato correto
-        if not valida_data(aluno["Data de Nascimento"]):
-            raise ValueError(f"Data inválida em: {aluno['Data de Nascimento']}")
-
-    print("CSV verificado com sucesso!")
-
 
 def _obter_novo_id(entidade):
     ids_numericos = [0]
@@ -78,6 +91,25 @@ def _salvar_turma_alunos(turmas_alunos):
         arquivo.write(dados)
     return True
     
+def gravar_banco(alunos, importado_csv_lista):
+    novo_id = _obter_novo_id(alunos)
+    novos_alunos = {}
+
+    for aluno in importado_csv_lista:
+        novos_alunos[novo_id] = {
+            "nome": aluno["Nome completo do aluno"],
+            "genero": aluno["Genêro"],
+            "data_nascimento": aluno["Data de Nascimento"],
+            "RA": novo_id
+        }
+        
+        novo_id = str(int(novo_id) + 1)
+    print(novos_alunos)
+    for aluno_id, aluno_info in novos_alunos.items():
+        alunos[aluno_id] = aluno_info
+    return novos_alunos
+    
+
 def criar_relacao_turma_aluno(turma_id, novos_alunos):
     turmas_alunos = listar_turma_aluno()
     novo_id =_obter_novo_id(turmas_alunos)
@@ -87,30 +119,29 @@ def criar_relacao_turma_aluno(turma_id, novos_alunos):
             "id_aluno": aluno_id
         }
         novo_id = str(int(novo_id) + 1)
-    _salvar_turma_alunos(turmas_alunos)
 
-turma_id = "1"
+def deletar_arquivo_importado(endereco_arquivo):
+    os.remove(endereco_arquivo)
 
-def gravar_banco(turma_id, alunos):
-    bancoAlunos = listar_alunos()
-    novo_id = _obter_novo_id(alunos)
-    novos_alunos = {}
-    leitor_csv = ler_csv()
 
-    for aluno in leitor_csv:
-        novos_alunos[novo_id] = {
-            "nome": aluno["Nome completo do aluno"],
-            "data_nascimento": aluno["Data de Nascimento"],
-            "genero": aluno["Genêro"],
-            "RA": novo_id
-        }
-        
-        novo_id = str(int(novo_id) + 1)
-    criar_relacao_turma_aluno(turma_id, novos_alunos)
-    print(novos_alunos)
-    for aluno_id, aluno_info in novos_alunos.items():
-        bancoAlunos[aluno_id] = aluno_info
-    _salvar_alunos(bancoAlunos)
-
-gravar_banco(turma_id, listar_alunos())
-print("Importação concluída com sucesso.")
+def realizar_importacao():
+    endereco_arquivo = "importacao/novos_alunos.csv"
+    importado_csv_lista, importado_csv = ler_csv(endereco_arquivo)
+    resultado_verificacao = verifica_csv(importado_csv, importado_csv_lista)
+    if not resultado_verificacao["sucesso"]:
+        print(resultado_verificacao["erros"])
+        return resultado_verificacao["erros"]
+    else:
+        turma_id = "1"
+        alunos = listar_alunos()
+        turma_alunos = listar_turma_aluno()
+        novos_alunos = gravar_banco(alunos, importado_csv_lista)
+        criar_relacao_turma_aluno(turma_id, novos_alunos)
+        _salvar_alunos(alunos)
+        _salvar_turma_alunos(turma_alunos)
+        deletar_arquivo_importado(endereco_arquivo)
+        print("CSV verificado com sucesso!")
+        print(novos_alunos)
+        return novos_alunos
+    
+realizar_importacao()
