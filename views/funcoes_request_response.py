@@ -11,6 +11,7 @@ import regra_de_negocio.gerenciador_notas as gerenciador_notas
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
 import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 import regra_de_negocio.global_settings as global_settings
+import regra_de_negocio.gerenciador_importacao_alunos as gerenciador_importacao_alunos
 
 import json
 
@@ -216,3 +217,11 @@ def editar_global_settings(request):
         info_editar_settings["prazo_nota"],
     )
     return JsonResponse({"mensagem": "concluido"})
+
+def salvar_arquivo_csv(request):
+    """formato requisicao:
+    """
+    requisicao = request.body
+    print(requisicao)
+    # resposta = gerenciador_importacao_alunos.salvar_arquivo_csv(requisicao)
+    return 
