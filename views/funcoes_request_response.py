@@ -1,10 +1,7 @@
 from wgsi import JsonResponse
-from regra_de_negocio.service import (
-    busca_turmas,
-    cria_turma,
-)
+from regra_de_negocio.service import busca_turmas, cria_turma, excluir_turma_svc
 
-from regra_de_negocio.gerenciador_turmas import excluir_turma_svc, editar_turma_svc
+from regra_de_negocio.gerenciador_turmas import editar_turma_svc
 import regra_de_negocio.gerenciador_turmas as gerenciador_turmas
 import regra_de_negocio.gerenciador_ciclos as gerenciador_ciclos
 import regra_de_negocio.gerenciador_notas as gerenciador_notas
@@ -77,10 +74,7 @@ def excluir_turma(request, id):
             {"mensagem": f"Falha na exclusão de turma_aluno: {str(e)}"},
             status="500 Internal Server Error",
         )
-    gerenciador_turmas_alunos.remover_turma_aluno(id)
-    gerenciador_ciclos.excluir_ciclo_da_turma(id)
-    gerenciador_notas.excluir_notas_relacionadas_turma(id)
-    return JsonResponse({"mensagem": "Sucesso"}, status="200 ok")
+    return JsonResponse({"mensagem": "sucess"}, status="200 ok")
 
 
 def criar_ciclo(request):
@@ -196,6 +190,7 @@ def listar_turmas_aluno(request, id_aluno):
     turmas = gerenciador_turmas_alunos.listar_turmas_aluno(id_aluno)
     return JsonResponse(turmas)
 
+
 def listar_detalhes_ciclos_por_id_turma(request):
     """Devolve um objeto onde a chave é o id da turma
     1:{ data_final_ciclo: "2023-11-09 00:00:00", ciclo_atual: 1, ciclo_aberto_para_nota: null }
@@ -203,8 +198,10 @@ def listar_detalhes_ciclos_por_id_turma(request):
     """
     resposta = {}
     turmas = gerenciador_turmas.busca_turmas()
-    for id_turma, turma_info in turmas.items():  
-        resposta[id_turma] = gerenciador_ciclos.detalhes_ciclos_turma(turma_info, id_turma)
+    for id_turma, turma_info in turmas.items():
+        resposta[id_turma] = gerenciador_ciclos.detalhes_ciclos_turma(
+            turma_info, id_turma
+        )
     return JsonResponse(resposta)
 
 

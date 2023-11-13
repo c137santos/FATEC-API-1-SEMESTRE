@@ -69,14 +69,16 @@ def criacao_turma(nova_turma):
     return resposta
 
 
-def excluir_turma_svc(id):
+def excluir_turma(id):
     turma = obter_turma(id)
-    if turma:
-        turmas = busca_turmas()
-        turmas.pop(id)
-        _salvar_turmas(turmas)
-        return True
-    return False
+    if not turma:
+        raise ValueError(f"Turma com o ID {id} não encontrada.")
+
+    turmas = busca_turmas()
+    turmas.pop(id)
+    _salvar_turmas(turmas)
+
+    return {"message": f"Turma {id} excluída com sucesso."}
 
 
 # Parâmetro: um dicionário onde cada turma é um par chave-valor

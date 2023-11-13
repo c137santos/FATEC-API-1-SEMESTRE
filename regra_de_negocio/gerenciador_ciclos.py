@@ -95,7 +95,8 @@ def _salvar_ciclos(ciclos):
     with open("dados/ciclos.json", "w", encoding="utf-8") as f:
         f.write(dados)
         return True
-    
+
+
 def detalhes_ciclos_turma(turma_info, id_turma):
     id_turma_str = str(id_turma)
     data_atual = datetime.now()

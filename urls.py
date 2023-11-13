@@ -24,7 +24,9 @@ URLS = {
     URL("/api/v1/ciclos/listar"): view.listar_ciclos,
     URL("/api/v1/ciclos/listar/:id_turma"): view.listar_ciclos_por_id_turma,
     URL("/api/v1/ciclos/editar/:id_ciclo"): view.editar_ciclo,
-    URL("/api/v1/ciclos_detalhes/listar/turmas"): view.listar_detalhes_ciclos_por_id_turma,
+    URL(
+        "/api/v1/ciclos_detalhes/listar/turmas"
+    ): view.listar_detalhes_ciclos_por_id_turma,
     # URL("/api/v1/ciclos/criar"): view.criar_ciclo,
     # editar ciclo e remover ciclo serão implementados ao final
     URL("/api/v1/notas/listar"): view.listar_notas,
