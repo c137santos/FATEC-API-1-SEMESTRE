@@ -10,12 +10,25 @@ def ler_csv(endereco_arquivo):
         return importado_csv_lista, importado_csv
     
 def valida_nome(nome):
-    if not re.match(r'^[A-Za-z\s]+$', nome):
+    if not re.match(r'^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$', nome):
         raise ValueError(f"Apenas letras no nome: {nome}")
 
 def valida_genero(genero):
-    if not re.match(r'^[A-Za-z]+$', genero):
+    generos_validos = [
+        "Homem cis",
+        "Mulher Cis",
+        "Homem trans",
+        "Mulher Trans",
+        "Gênero neutro",
+        "Não-binário",
+    ]
+    if not re.match(r'^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$', genero):
         raise ValueError(f"Apenas letras no gênero: {genero}")
+    if genero not in generos_validos:
+            raise ValueError(f"Gênero inválido: {genero}")
+
+        
+    
 
 def valida_data(data):
     if not re.match(r'^\d{2}/\d{2}/\d{4}$', data):
