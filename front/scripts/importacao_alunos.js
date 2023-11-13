@@ -13,6 +13,7 @@ async function listarTurmas() {
         const turma = turmaData[turmaId];
         const option = document.createElement("option");
         option.value = turmaId;
+        option.dataset.Nome = turma.nome;
         option.textContent = turma.nome;
 
         opcoesTurma.appendChild(option);
