@@ -11,9 +11,9 @@ def ler_csv(endereco_arquivo):
     
 def valida_nome(nome):
     if not re.match(r'^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$', nome):
-        raise ValueError(f"Apenas letras no nome: {nome}")
+        raise ValueError(f"Apenas letras no nome: {nome.title()}")
 
-def valida_genero(genero):
+def valida_genero(nome, genero):
     generos_validos = [
         "Homem cis",
         "Mulher Cis",
@@ -25,14 +25,11 @@ def valida_genero(genero):
     if not re.match(r'^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$', genero):
         raise ValueError(f"Apenas letras no gênero: {genero}")
     if genero not in generos_validos:
-            raise ValueError(f"Gênero inválido: {genero}")
+            raise ValueError(f"Aluno {nome.title()} está com gênero inválido: {genero}")
 
-        
-    
-
-def valida_data(data):
+def valida_data(nome, data):
     if not re.match(r'^\d{2}/\d{2}/\d{4}$', data):
-        raise ValueError(f"Data inválida: {data}")
+        raise ValueError(f"Aluno {nome.title()} está com a data inválida: {data}")
 
 def verifica_csv(importado_csv, importado_csv_lista):
     erros = []
@@ -59,12 +56,12 @@ def verifica_csv(importado_csv, importado_csv_lista):
             erros.append(str(e))
 
         try:
-            valida_genero(aluno[cabecalhos_esperados[1]])
+            valida_genero(aluno[cabecalhos_esperados[0]], aluno[cabecalhos_esperados[1]])
         except ValueError as e:
             erros.append(str(e))
 
         try:
-            valida_data(aluno[cabecalhos_esperados[2]])
+            valida_data(aluno[cabecalhos_esperados[0]], aluno[cabecalhos_esperados[2]])
         except ValueError as e:
             erros.append(str(e))
 
