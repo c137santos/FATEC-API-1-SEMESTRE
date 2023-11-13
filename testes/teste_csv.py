@@ -42,28 +42,31 @@ def verifica_csv(importado_csv, importado_csv_lista):
 
     if cabecalhos_obtidos != cabecalhos_esperados:
         for i, cabecalho_esperado in enumerate(cabecalhos_esperados):
-            if i < len(cabecalhos_obtidos):
+            if len(cabecalhos_esperados) == len(cabecalhos_obtidos) :
                 cabecalho_obtido = cabecalhos_obtidos[i]
                 if cabecalho_esperado != cabecalho_obtido:
                     erros.append(f"Cabeçalho esperado: {cabecalho_esperado}, obtido: {cabecalho_obtido}")
+                    cabecalhos_esperados[i] = cabecalhos_obtidos[i]
+                    """Troca o cabeçalho esperado para testar as informacoes dos aluno"""
             else:
-                erros.append(f"Cabeçalho esperado ausente: {cabecalho_esperado}")
-    else:
-        for aluno in importado_csv_lista:
-            try:
-                valida_nome(aluno[cabecalhos_esperados[0]])
-            except ValueError as e:
-                erros.append(str(e))
+                erros.append(f"Cabeçalhos esperados: {cabecalhos_esperados}. Cabeçalhos lidos: {cabecalhos_obtidos}")
+                return {"sucesso": False, "erros": erros}
+    
+    for aluno in importado_csv_lista:
+        try:
+            valida_nome(aluno[cabecalhos_esperados[0]])
+        except ValueError as e:
+            erros.append(str(e))
 
-            try:
-                valida_genero(aluno[cabecalhos_esperados[1]])
-            except ValueError as e:
-                erros.append(str(e))
+        try:
+            valida_genero(aluno[cabecalhos_esperados[1]])
+        except ValueError as e:
+            erros.append(str(e))
 
-            try:
-                valida_data(aluno[cabecalhos_esperados[2]])
-            except ValueError as e:
-                erros.append(str(e))
+        try:
+            valida_data(aluno[cabecalhos_esperados[2]])
+        except ValueError as e:
+            erros.append(str(e))
 
     if erros:
         return {"sucesso": False, "erros": erros}
