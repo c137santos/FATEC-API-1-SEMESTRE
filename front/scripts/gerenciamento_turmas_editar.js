@@ -76,8 +76,9 @@ async function listarAlunos(){
 
 async function verificaSeAlunosEstaNaTurma(){
     for (aluno in alunos_todos){
+        debugger
         let alunoTurma = await listarTurmasAluno(alunos_todos[aluno].RA)
-        alunos_todos[aluno].turma = alunoTurma !== {} && id in Object.keys(alunoTurma)
+        alunos_todos[aluno].turma = alunoTurma !== {} && Object.keys(alunoTurma).includes(id)
     }
     addAlunos(alunos_todos)
 }
@@ -114,6 +115,7 @@ function addAlunos(alunos) {
       checkbox.type = "checkbox";
       checkbox.name = alunos[aluno].RA;
       checkbox.id = alunos[aluno].RA;
+      console.log(alunos[aluno])
       if (alunos[aluno].turma) {
         checkbox.checked = true;
       }
@@ -157,5 +159,4 @@ function pegarAlunosArrancados(alunos){
     }
     return alunosSelecionados;
   }
-
 
