@@ -76,7 +76,7 @@ async function criaRequisicao(
 function criar_modal_confirmar_edicao(nome_Turma, arquivoImportadoJson) {
   return new Promise((resolve) => {
     arquivoImportadoJson = JSON.parse(arquivoImportadoJson);
-    let mensagem = `Atenção! Os alunos serão adicionados à turma ${nome_Turma}:\n\n`;
+    let mensagem = `<strong>Atenção! Os alunos serão adicionados à turma ${nome_Turma}:\n\n`;
 
     for (const aluno of arquivoImportadoJson) {
       const alunoNome = aluno["Nome completo do aluno"];
@@ -119,9 +119,9 @@ function exibirErrosNoModal(erros) {
   const cancelButton = document.getElementById("cancelButton");
 
   // erros
-  modalMessage.innerText =
-    "Erros encontrados:\n\n" +
-    erros.join("\n") +
+  modalMessage.innerHTML =
+    "<strong>Erros encontrados:</strong>\n\n" +
+    erros.join("<br>") +
     "\n\nPor favor corrigir arquivo para importação\n";
 
   // Exibe o modal

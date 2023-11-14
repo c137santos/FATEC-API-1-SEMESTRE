@@ -39,6 +39,11 @@ def valida_data(nome, data):
         raise ValueError(f"Aluno {nome.title()} está com a data inválida: {data}")
 
 def verifica_importacao(arquivoImportadoJson):
+    """
+    Modelo esperado:
+    [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
+    {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
+    """
     erros = []
     cabecalhos_esperados = ["Nome completo do aluno", "Genêro", "Data de Nascimento"]
 
@@ -82,3 +87,55 @@ def verifica_importacao(arquivoImportadoJson):
     else:
         print("JSON verificado com sucesso!")
         return {"sucesso": True}
+    
+def _obter_novo_id(entidade):
+    ids_numericos = [0]
+    for id_str in entidade.keys():
+        id_int = int(id_str)
+        ids_numericos.append(id_int)
+    ids_numericos.sort()
+    id_max_int = ids_numericos.pop()
+    novo_id = str(id_max_int + 1)
+    return novo_id
+    
+def gravar_alunos_banco(alunos, alunos_importados):
+    novo_id = _obter_novo_id(alunos)
+    novos_alunos = {}
+    print(alunos_importados)
+    for aluno in alunos_importados:
+        novos_alunos[novo_id] = {
+            "nome": aluno["Nome completo do aluno"],
+            "genero": aluno["Genêro"],
+            "data_nascimento": aluno["Data de Nascimento"],
+            "RA": novo_id
+        }
+        
+        novo_id = str(int(novo_id) + 1)
+    print(novos_alunos)
+    for aluno_id, aluno_info in novos_alunos.items():
+        alunos[aluno_id] = aluno_info
+    _salvar_alunos(alunos)
+    print(alunos)
+    return novos_alunos
+
+def _salvar_alunos(alunos):
+    dados = json.dumps(alunos, indent=4, ensure_ascii=False)
+    with open("dados/alunos.json", "w", encoding="utf-8") as arquivo:
+        arquivo.write(dados)
+    return True
+
+def _salvar_turma_alunos(turmas_alunos):
+    dados = json.dumps(turmas_alunos, indent=4)
+    with open("dados/turmas_alunos.json", "w", encoding="utf-8") as arquivo:
+        arquivo.write(dados)
+    return True
+
+def criar_relacao_turma_aluno(turma_id, novos_alunos, turmas_alunos):
+    novo_id =_obter_novo_id(turmas_alunos)
+    for aluno_id in novos_alunos.keys():
+        turmas_alunos[novo_id] = {
+            "id_turma": turma_id,
+            "id_aluno": aluno_id
+        }
+        novo_id = str(int(novo_id) + 1)
+    _salvar_turma_alunos(turmas_alunos)
