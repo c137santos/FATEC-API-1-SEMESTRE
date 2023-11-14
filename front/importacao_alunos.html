@@ -56,11 +56,19 @@
 
       <!-- Botão de Importar -->
       <div class="button-section">
-        <button onclick="importarArquivo()">Importar</button>
+        <button onclick="validaEntrada()">Importar</button>
       </div>
       <a href=""
         ><p id="tutorial">Passo a passo para uma importação bem sucessida</p></a
       >
+    </div>
+
+    <div id="custom-modal" class="modal">
+      <div class="modal-content">
+        <p id="modal-message"></p>
+        <button id="confirmButton" class="confirm-button">Confirmar</button>
+        <button id="cancelButton" class="cancel-button">Cancelar</button>
+      </div>
     </div>
 
     <div class="muleke">

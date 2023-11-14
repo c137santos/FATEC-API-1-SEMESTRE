@@ -1,16 +1,14 @@
-import os
-import json
+def teste(requisicao, alunos_importados):
+    turma_id = requisicao.get("turma_id")
+    nome_turma = requisicao.get("nome_Turma")
 
-def salvar_arquivo_csv(requisicao):
-    """formato requisicao:
-    """
-    requisicao = requisicao
-    print(requisicao)
-    nome_arquivo = requisicao['nome_arquivo'].value
-    # Salvar o arquivo no disco
-    arquivo = requisicao['arquivo']
-    caminho_arquivo = os.path.join("../importacao", nome_arquivo)
-    with open(caminho_arquivo, 'wb') as f:
-        f.write(arquivo.file.read())
+    print(alunos_importados)
 
+    # Iterar sobre os alunos e acessar os valores
+    for aluno in alunos_importados:
+        nome_completo = aluno['Nome completo do aluno']
+        genero = aluno['Genêro']
+        data_nascimento = aluno['Data de Nascimento']
 
+        # Faça o que quiser com os valores, por exemplo, imprimir
+        print(f"turma ID: {turma_id}, nome_turma: {nome_turma}, Nome: {nome_completo}, Gênero: {genero}, Data de Nascimento: {data_nascimento}")

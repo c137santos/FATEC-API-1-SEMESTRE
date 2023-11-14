@@ -3,6 +3,7 @@ import regra_de_negocio.global_settings as global_settings
 import regra_de_negocio.gerenciador_ciclos as gerenciador_ciclos
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
 import regra_de_negocio.gerenciador_notas as gerenciador_notas
+import regra_de_negocio.gerenciador_importacao_alunos as gerenciador_importacao_alunos
 
 
 def busca_turmas():  # retorna todas turmas
@@ -21,3 +22,17 @@ def cria_turma(dados_nova_turma):
     alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_nova_turma_str)
     gerenciador_notas.adicionar_notas_aluno_turma(ciclos, alunos, id_nova_turma_str)
     return resposta
+
+def importa_aluno_svc(requisicao, alunos_importados):
+    """
+    Formato da requisição JSON esperado:
+        "turma_id": "1",
+        "nome_Turma": "Logica ok!",
+        "alunos_importados": 
+        [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
+        {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
+    """
+    verificacao = gerenciador_importacao_alunos.teste(requisicao, alunos_importados)
+    mensagem = "ok"
+    # print(requisicao)
+    # resposta = gerenciador_importacao_alunos.salvar_arquivo_csv(requisicao)

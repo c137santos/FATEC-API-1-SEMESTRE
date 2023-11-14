@@ -2,6 +2,7 @@ from wgsi import JsonResponse
 from regra_de_negocio.service import (
     busca_turmas,
     cria_turma,
+    importa_aluno_svc,
 )
 
 from regra_de_negocio.gerenciador_turmas import excluir_turma_svc, editar_turma_svc
@@ -218,10 +219,16 @@ def editar_global_settings(request):
     )
     return JsonResponse({"mensagem": "concluido"})
 
-def salvar_arquivo_csv(request):
-    """formato requisicao:
+def importaAluno(request):
     """
-    requisicao = request.body
-    print(requisicao)
-    # resposta = gerenciador_importacao_alunos.salvar_arquivo_csv(requisicao)
-    return 
+    Formato da requisição JSON esperado:
+        "turma_id": "1",
+        "nome_Turma": "Logica ok!",
+        "alunos_importados": 
+        [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
+        {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
+    """
+    requisicao = json.loads(request.body)
+    alunos_importados = json.loads(requisicao.get('alunos_importados', '[]'))
+    resposta = importa_aluno_svc(requisicao, alunos_importados)
+    return JsonResponse(resposta)
