@@ -40,9 +40,36 @@ def obter_fee_turma_aluno(id_turma, id_aluno):
     nova_nota["id_ciclo"] = id_ultimo_ciclo
     nova_nota["valor"] = _calcular_fee_turma_aluno(id_turma_str, id_aluno_str)
     nova_nota["fee"] = True
-    # todo: remover o fee antigo quando já existir e criar no banco
+    # remove o fee antigo quando já existir e criar o novo fee no banco
+    nota_fee_existente = obter_nota(id_turma_str, id_aluno, id_ultimo_ciclo, True)
+    if nota_fee_existente:
+        notas = listar_notas()
+        id_nota_fee_existente = nota_fee_existente.keys()[0]
+        notas[id_nota_fee_existente] = nova_nota
+        _salvar_notas(notas)
+    else:
+        adicionar_nota(nova_nota)
+
     return nova_nota
 
+# Essa função é responsável por obter uma nota específica
+def obter_nota(id_turma, id_aluno, id_ciclo, fee):
+    if not (id_turma or id_aluno or id_ciclo):
+        return None
+    id_turma_str = str(id_turma)
+    id_aluno_str = str(id_aluno)
+    id_ciclo_str = str(id_ciclo)
+    notas = listar_notas()
+    nota_encontrada = {}
+    for id_nota in notas.keys():
+        nota = notas[id_nota]
+        if id_turma_str == nota['id_turma'] and\
+            id_aluno_str == nota['id_aluno'] and\
+            id_ciclo_str == nota['id_ciclo'] and\
+            notas.has_key('fee') and fee == nota['fee']:
+                nota_encontrada[id_nota] = nota
+                break
+    return nota_encontrada
 
 def listar_notas():
     with open("dados/notas.json", "r", encoding="utf-8") as f:
