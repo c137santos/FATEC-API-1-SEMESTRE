@@ -33,13 +33,6 @@ function validaEntrada() {
   if (idTurmaSelecionada && arquivoImportado) {
     const nomeArquivo = arquivo.files[0].name;
     if (nomeArquivo.toLowerCase().endsWith(".csv")) {
-      alert(
-        "Turma selecionada: " +
-          nomeTurmaSelecionada +
-          "\nNome do arquivo: " +
-          nomeArquivo
-      );
-
       criaRequisicao(
         arquivoImportado,
         idTurmaSelecionada,
@@ -59,18 +52,24 @@ async function criaRequisicao(
   nomeTurmaSelecionada
 ) {
   const arquivoImportadoJson = await converteCsvToJson(arquivoImportado);
-  console.log(arquivoImportadoJson);
-  const corpoRequisicao = {
-    turma_id: idTurmaSelecionada,
-    nome_Turma: nomeTurmaSelecionada,
-    alunos_importados: arquivoImportadoJson,
-  };
-  const decisao_usuario = criar_modal_confirmar_edicao(
-    nomeTurmaSelecionada,
-    arquivoImportadoJson
-  );
-  if (decisao_usuario) {
-    resposta = await importaAluno(corpoRequisicao);
+  const respostaValidacao = await validarImportacao(arquivoImportadoJson);
+
+  if (respostaValidacao.sucesso) {
+    const corpoRequisicao = {
+      turma_id: idTurmaSelecionada,
+      nome_Turma: nomeTurmaSelecionada,
+      alunos_importados: arquivoImportadoJson,
+    };
+    const decisao_usuario = await criar_modal_confirmar_edicao(
+      nomeTurmaSelecionada,
+      arquivoImportadoJson
+    );
+    if (decisao_usuario) {
+      resposta = await importaAluno(corpoRequisicao);
+    }
+  } else {
+    const erros = respostaValidacao.erros;
+    exibirErrosNoModal(erros);
   }
 }
 
@@ -111,6 +110,29 @@ function criar_modal_confirmar_edicao(nome_Turma, arquivoImportadoJson) {
         resolve(false);
       });
   });
+}
+
+function exibirErrosNoModal(erros) {
+  const modal = document.getElementById("custom-modal");
+  const modalMessage = document.getElementById("modal-message");
+  const confirmButton = document.getElementById("confirmButton");
+  const cancelButton = document.getElementById("cancelButton");
+
+  // erros
+  modalMessage.innerText =
+    "Erros encontrados:\n\n" +
+    erros.join("\n") +
+    "\n\nPor favor corrigir arquivo para importação\n";
+
+  // Exibe o modal
+  modal.style.display = "flex";
+
+  // Adiciona ouvintes de evento ao botão OK
+  confirmButton.innerText = "OK";
+  confirmButton.addEventListener("click", function () {
+    modal.style.display = "none";
+  });
+  cancelButton.style.display = "none";
 }
 
 async function converteCsvToJson(arquivoImportado) {
@@ -154,6 +176,21 @@ function textToJson(arquivoImportadoTexto) {
     }
   }
   return JSON.stringify(resultado).replace(/\\r/g, "").replace(/\\n/g, "");
+}
+
+async function validarImportacao(arquivoImportadoJson) {
+  try {
+    const response = await fetch(
+      "http://127.0.0.1:8080/api/v1/importacao/validar",
+      { method: "POST", body: JSON.stringify(arquivoImportadoJson) }
+    );
+    const reposta = await response.json();
+    console.log(reposta);
+    return reposta;
+  } catch (error) {
+    console.error("Erro ao buscar dados da API -> ", error);
+    return null;
+  }
 }
 
 async function importaAluno(corpoRequisicao) {

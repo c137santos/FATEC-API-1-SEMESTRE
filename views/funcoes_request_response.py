@@ -12,6 +12,7 @@ import regra_de_negocio.gerenciador_notas as gerenciador_notas
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
 import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 import regra_de_negocio.global_settings as global_settings
+import regra_de_negocio.gerenciador_importacao_alunos as gerenciador_importacao_alunos
 
 import json
 
@@ -218,7 +219,19 @@ def editar_global_settings(request):
     )
     return JsonResponse({"mensagem": "concluido"})
 
-def importaAluno(request):
+
+def validar_importacao(request):
+    """
+    Modelo esperado:
+    [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
+    {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
+    """
+    requisicao = json.loads(request.body)
+    resposta = gerenciador_importacao_alunos.verifica_importacao(requisicao)
+    print(resposta)
+    return JsonResponse(resposta)
+
+def importa_aluno(request):
     """
     Formato da requisição JSON esperado:
         "turma_id": "1",

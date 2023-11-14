@@ -53,7 +53,8 @@ URLS = {
     URL("/api/v1/alunos/deletar/:id"): view.deletar_aluno,
     URL("/api/v1/alunos/criar"): view.criar_aluno,
 
-    URL("/api/v1/importacao/importaAluno"): view.importaAluno,
+    URL("/api/v1/importacao/validar"): view.validar_importacao,
+    URL("/api/v1/importacao/importaAluno"): view.importa_aluno,
 }
 
 
