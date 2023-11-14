@@ -66,7 +66,7 @@ def obter_nota(id_turma, id_aluno, id_ciclo, fee):
         if id_turma_str == nota['id_turma'] and\
             id_aluno_str == nota['id_aluno'] and\
             id_ciclo_str == nota['id_ciclo'] and\
-            notas.has_key('fee') and fee == nota['fee']:
+            'fee' in nota and fee == nota['fee']:
                 nota_encontrada[id_nota] = nota
                 break
     return nota_encontrada

@@ -166,9 +166,10 @@ def obter_fee_turma_aluno(request, id_turma, id_aluno):
 
 def atualizar_todos_fee(request):
     turmas_alunos = gerenciador_turmas_alunos.listar_turmas_alunos()
-    for turma_aluno in turmas_alunos:
+    for id_turma_aluno in turmas_alunos.keys():
+        turma_aluno = turmas_alunos[id_turma_aluno]
         gerenciador_notas.obter_fee_turma_aluno(turma_aluno['id_turma'],turma_aluno['id_aluno'])
-    return JsonResponse({'mensagem':'operação finalizada.'})
+    return JsonResponse({'mensagem':'operacao finalizada.'})
 
 def criar_turmas_alunos(request):
     turma_aluno = json.loads(request.body)
