@@ -1,11 +1,8 @@
 async function carregarSelectTurma(graficoAluno){
     let selectTurma = document.getElementById('selectTurma')
     
-    const turmas = {
-        '1':{'nome':'ADS'},
-        '2':{'nome':'Banco de Dados'},
-        '3':{'nome':'Logistica'}
-    }
+    const response = await fetch("http://127.0.0.1:8080/api/v1/turmas/listar");
+    const turmas = await response.json();
 
     for( chave in turmas ){
         const novaOpcao = document.createElement('option');
