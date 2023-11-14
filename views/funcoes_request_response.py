@@ -12,7 +12,6 @@ import regra_de_negocio.gerenciador_notas as gerenciador_notas
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
 import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 import regra_de_negocio.global_settings as global_settings
-import regra_de_negocio.gerenciador_importacao_alunos as gerenciador_importacao_alunos
 
 import json
 

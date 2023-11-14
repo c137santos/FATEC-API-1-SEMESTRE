@@ -32,7 +32,7 @@ def importa_aluno_svc(requisicao, alunos_importados):
         [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
         {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
     """
-    verificacao = gerenciador_importacao_alunos.teste(requisicao, alunos_importados)
+    resultado_verificacao = gerenciador_importacao_alunos.verifica_csv(requisicao, alunos_importados)
     mensagem = "ok"
     # print(requisicao)
     # resposta = gerenciador_importacao_alunos.salvar_arquivo_csv(requisicao)
