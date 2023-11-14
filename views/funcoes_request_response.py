@@ -2,6 +2,7 @@ from wgsi import JsonResponse
 from regra_de_negocio.service import (
     busca_turmas,
     cria_turma,
+    listar_fee_turmas_svc,
 )
 
 from regra_de_negocio.gerenciador_turmas import excluir_turma_svc, editar_turma_svc
@@ -225,16 +226,5 @@ def listar_fee_alunos_turma(request, id_turma):
     return JsonResponse(alunos)
 
 def listar_fee_turmas(request):
-    turmas = gerenciador_turmas.busca_turmas()
-    for id_turma in turmas.keys():
-        alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_turma)
-        fee_turma = []
-        for id_aluno in alunos.keys():
-            fee = gerenciador_notas._calcular_fee_turma_aluno(id_aluno=id_aluno,id_turma=id_turma)
-            fee_turma.append(fee)
-        if len(fee_turma) == 0:
-            turmas[id_turma]['fee'] = 0.0   
-        else:
-            media_fee = sum(fee_turma) / len(fee_turma)
-            turmas[id_turma]['fee'] = round(media_fee, 2)
+    turmas = listar_fee_turmas_svc()
     return JsonResponse(turmas)
