@@ -55,6 +55,7 @@ function criar_modal_confirmar_edicao(){
 let alunos_todos = listarAlunos()
 
 async function listarAlunos(){
+    id = obter_id()
     try {
         const response = await fetch(
         "http://127.0.0.1:8080/api/v1/alunos/listar"
@@ -65,13 +66,36 @@ async function listarAlunos(){
         return null;
     }finally{
         console.log(alunos_todos)
+        for (let aluno in alunos_todos){
+            alunoTurma = await listarTurmasAluno(alunos_todos[aluno].RA)
+            alunos_todos[aluno].turma = id in Object.keys(alunoTurma)
+        }
+        debugger
         addAlunos(alunos_todos)
         return alunos_todos
 
     }
 }
 
+
+async function listarTurmasAluno(aluno_id){
+    try {
+        const response = await fetch(
+        `http://127.0.0.1:8080/api/v1/turmas_alunos/listar_turmas_do_aluno/${aluno_id}`
+        );
+        alunos_todos = await response.json();
+    } catch (error) {
+        console.error("Erro ao buscar dados da API -> ", error);
+        return null;
+    }finally{
+        return alunos_todos
+
+    }
+}
+
+
 function addAlunos(alunos) {
+    debugger
     const divListarAlunos = document.getElementById("listarAlunos");
     for (const aluno in alunos) {
       const divOrganiza = document.createElement("div") 
