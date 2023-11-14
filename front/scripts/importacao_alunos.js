@@ -52,7 +52,7 @@ async function criaRequisicao(
   nomeTurmaSelecionada
 ) {
   const arquivoImportadoJson = await converteCsvToJson(arquivoImportado);
-  const respostaValidacao = await validarImportacao(arquivoImportadoJson);
+  const respostaValidacao = await validarjson(arquivoImportadoJson);
 
   if (respostaValidacao.sucesso) {
     const corpoRequisicao = {
@@ -178,7 +178,7 @@ function textToJson(arquivoImportadoTexto) {
   return JSON.stringify(resultado).replace(/\\r/g, "").replace(/\\n/g, "");
 }
 
-async function validarImportacao(arquivoImportadoJson) {
+async function validarjson(arquivoImportadoJson) {
   try {
     const response = await fetch(
       "http://127.0.0.1:8080/api/v1/importacao/validar",
