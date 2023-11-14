@@ -11,21 +11,14 @@ async function getTurmas() {
   try {
     const response = await fetch("http://127.0.0.1:8080/api/v1/turmas/listar");
     turmaData = await response.json();
-    console.log(turmaData);
 
-    const ciclosData = {};
-    for (const turmaId in turmaData) {
-      if (turmaData.hasOwnProperty(turmaId)) {
-        const responseCiclos = await fetch(
-          `http://127.0.0.1:8080/api/v1/ciclos_detalhes/listar/turma/${turmaId}`
-        );
-        const ciclosInfo = await responseCiclos.json();
-        // Modelo do ciclosInfo para uma turma com ciclo 1 aberto, se nao tiver vem como null
-        // {"data_final_ciclo": "2023-11-04 00:00:00", "ciclo_atual": 2, "ciclo_aberto_para_nota": 1}
-        ciclosData[turmaId] = ciclosInfo;
-        console.log(ciclosInfo);
-      }
-    }
+    const responseCiclos = await fetch(
+      `http://127.0.0.1:8080/api/v1/ciclos_detalhes/listar/turmas`
+    );
+    const ciclosData = await responseCiclos.json();
+    // Modelo do ciclosInfo para uma turma com ciclo 1 aberto, se nao tiver vem como null
+    // 1:{ data_final_ciclo: "2023-11-09 00:00:00", ciclo_atual: 1, ciclo_aberto_para_nota: null }
+    // 2:{ data_final_ciclo: "2023-11-21 00:00:00", ciclo_atual: 2, ciclo_aberto_para_nota: 1 }
 
     exibirTurmas(turmaData, ciclosData);
   } catch (error) {
@@ -84,11 +77,10 @@ async function exibirTurmas(turmadata, ciclosData) {
       turmaSquare.appendChild(nomeProfessor);
       turmaSquare.appendChild(dataInicioTurma);
 
-      // Adicione as informações dos ciclos
       if (ciclosInfo) {
-        // para cada turma retorna um objeto:
         // ciclo_aberto_para_nota vem vazio ou com o numero do ciclo
-        // {"data_final_ciclo": "2023-11-04 00:00:00", "ciclo_atual": 2, "ciclo_aberto_para_nota": null}
+        // 1:{ data_final_ciclo: "2023-11-09 00:00:00", ciclo_atual: 1, ciclo_aberto_para_nota: null }
+        // 2:{ data_final_ciclo: "2023-11-21 00:00:00", ciclo_atual: 2, ciclo_aberto_para_nota: 1 }
         const cicloAtual = ciclosInfo.ciclo_atual;
         const dataFinalCiclo = ciclosInfo.data_final_ciclo;
         const cicloAbertoParaNota = ciclosInfo.ciclo_aberto_para_nota;
@@ -121,7 +113,7 @@ async function exibirTurmas(turmadata, ciclosData) {
       imagemIcon.addEventListener("click", (event) => {
         event.stopPropagation();
         excluirTurma(`${turmaId}`);
-      })
+      });
 
       const imagemIconEdit = document.createElement("img");
       imagemIconEdit.src = "../front/icon/edit-icon.svg";
@@ -131,7 +123,7 @@ async function exibirTurmas(turmadata, ciclosData) {
       imagemIconEdit.addEventListener("click", (event) => {
         event.stopPropagation();
         encaminharParaPaginaEditarTurma(`${turmaId}`);
-      })
+      });
 
       // Adiciona o ícone ao turmaSquare
       turmaSquare.appendChild(imagemIcon);
@@ -145,16 +137,20 @@ async function exibirTurmas(turmadata, ciclosData) {
 }
 
 async function excluirTurma(turmaId) {
-  const confirmed = window.confirm("Atenção! A turma será excluída.\nDeseja prosseguir?")
+  const confirmed = window.confirm(
+    "Atenção! A turma será excluída.\nDeseja prosseguir?"
+  );
   if (confirmed) {
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/turmas/excluir/${turmaId}`)
-      const data = await response.json()
+      const response = await fetch(
+        `http://localhost:8080/api/v1/turmas/excluir/${turmaId}`
+      );
+      const data = await response.json();
       if (!response.ok) {
-        throw new Error(data.mensagem)
+        throw new Error(data.mensagem);
       }
     } catch (error) {
-      alert(`Houve um problema! ${error.message}`)
+      alert(`Houve um problema! ${error.message}`);
     }
   }
 }
