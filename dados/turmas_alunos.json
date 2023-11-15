@@ -1,42 +1,22 @@
 {
-    "1": {
-        "id_turma": "1",
-        "id_aluno": "1"
-    },
-    "2": {
-        "id_turma": "2",
-        "id_aluno": "2"
-    },
-    "3": {
-        "id_turma": "2",
-        "id_aluno": "1"
-    },
-    "4": {
-        "id_turma": "1",
-        "id_aluno": "2"
-    },
-    "6": {
-        "id_turma": "1",
-        "id_aluno": "3"
-    },
-    "7": {
-        "id_turma": "1",
-        "id_aluno": "3"
-    },
-    "8": {
-        "id_turma": "1",
-        "id_aluno": "4"
-    },
-    "9": {
-        "id_turma": "1",
-        "id_aluno": "5"
-    },
-    "10": {
-        "id_turma": "1",
-        "id_aluno": "6"
-    },
-    "11": {
-        "id_turma": "1",
-        "id_aluno": "7"
-    }
+  "1": {
+    "id_turma": "1",
+    "id_aluno": "1"
+  },
+  "2": {
+    "id_turma": "2",
+    "id_aluno": "2"
+  },
+  "3": {
+    "id_turma": "2",
+    "id_aluno": "1"
+  },
+  "4": {
+    "id_turma": "1",
+    "id_aluno": "2"
+  },
+  "6": {
+    "id_turma": "1",
+    "id_aluno": "3"
+  }
 }
