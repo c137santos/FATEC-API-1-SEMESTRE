@@ -24,6 +24,7 @@ def valida_data(nome, data):
         raise ValueError(f"Aluno {nome.title()} está com a data inválida: {data}")
 
 def verifica_importacao(arquivoImportadoJson):
+    importado_json = json.loads(arquivoImportadoJson)
     """
     Modelo esperado:
     [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
@@ -32,17 +33,17 @@ def verifica_importacao(arquivoImportadoJson):
     erros = []
     cabecalhos_esperados = ["Nome completo do aluno", "Genêro", "Data de Nascimento"]
 
-    if not arquivoImportadoJson:
+    if not importado_json:
         return {"sucesso": False, "erros": ["O JSON está vazio."]}
 
     # Obtendo os cabeçalhos do primeiro aluno
-    cabecalhos_obtidos = list(arquivoImportadoJson[0].keys())
+    cabecalhos_obtidos = list(importado_json[0].keys())
     print("Cabeçalhos obtidos:", cabecalhos_obtidos)
 
     if cabecalhos_obtidos != cabecalhos_esperados:
         return {"sucesso": False, "erros": [f"Cabeçalhos esperados: {cabecalhos_esperados}. Cabeçalhos obtidos: {cabecalhos_obtidos}"]}
 
-    for aluno in arquivoImportadoJson:
+    for aluno in importado_json:
         try:
             valida_nome(aluno["Nome completo do aluno"])
         except ValueError as e:
