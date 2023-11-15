@@ -109,7 +109,7 @@ async function editarAluno(RA) {
   titulo.textContent = "Editar aluno";
   modal.appendChild(titulo);
 
-  const formulario = document.createElement("form");
+  const formulario = document.createElement("div");
   modal.appendChild(formulario);
 
   const aluno_label = document.createElement("p");
@@ -150,9 +150,10 @@ async function editarAluno(RA) {
 
   const aluno_nasc = document.createElement("p");
   aluno_nasc.textContent = "data de nascimento:";
+  const data_nascimento_formatada = aluno.data_nascimento ? aluno.data_nascimento.split('/').reverse().join('-') : ''
   const inputDataNascimento = document.createElement("input");
   inputDataNascimento.type = "date";
-  inputDataNascimento.value = aluno.data_nascimento;
+  inputDataNascimento.value = data_nascimento_formatada;
   formulario.appendChild(aluno_nasc);
   formulario.appendChild(inputDataNascimento);
 
