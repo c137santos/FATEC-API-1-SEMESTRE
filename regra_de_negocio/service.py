@@ -23,6 +23,17 @@ def cria_turma(dados_nova_turma):
     gerenciador_notas.adicionar_notas_aluno_turma(ciclos, alunos, id_nova_turma_str)
     return resposta
 
+
+def excluir_turma_svc(id_turma):
+    try:
+        gerenciador_turmas.excluir_turma(id_turma)
+        gerenciador_turmas_alunos.remover_turma_aluno(id_turma)
+        gerenciador_ciclos.excluir_ciclo_da_turma(id_turma)
+        gerenciador_notas.excluir_notas_relacionadas_turma(id_turma)
+        return {"message": f"Turma {id_turma} Excluida"}
+    except Exception as e:
+        raise Exception(f"Falha na exclusão de turma: {str(e)}")
+
 def importa_aluno_svc(requisicao, alunos_importados):
     """
     Formato da requisição JSON esperado:

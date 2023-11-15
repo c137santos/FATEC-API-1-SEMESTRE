@@ -10,11 +10,5 @@
         "data_nascimento": "10/11/1990",
         "genero": "homem_cis",
         "RA": 2
-    },
-    "3": {
-        "nome": "Bia Bonita",
-        "data_nascimento": "12/01/1989",
-        "genero": "mulher_trans",
-        "RA": 3
     }
 }
