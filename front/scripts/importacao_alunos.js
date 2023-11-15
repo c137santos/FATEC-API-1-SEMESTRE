@@ -39,11 +39,28 @@ function validaEntrada() {
         nomeTurmaSelecionada
       );
     } else {
-      alert("Selecione um arquivo no formato CSV.");
+      const mensagem = "Selecione um arquivo no formato CSV.";
+      exibirAlertaNoModal(mensagem);
     }
   } else {
-    alert("Selecione uma turma e um arquivo.");
+    const mensagem = "Selecione uma turma e um arquivo.";
+    exibirAlertaNoModal(mensagem);
   }
+}
+
+function exibirAlertaNoModal(mensagem) {
+  const modal = document.getElementById("custom-modal");
+  const modalMessage = document.getElementById("modal-message");
+  const confirmButton = document.getElementById("confirmButton");
+  const cancelButton = document.getElementById("cancelButton");
+
+  modalMessage.innerHTML = `<strong>Alerta: ${mensagem}</strong>`;
+  modal.style.display = "flex";
+  confirmButton.innerText = "OK";
+  confirmButton.addEventListener("click", function () {
+    modal.style.display = "none";
+  });
+  cancelButton.style.display = "none";
 }
 
 async function criaRequisicao(
@@ -76,7 +93,8 @@ async function criaRequisicao(
 function criar_modal_confirmar_edicao(nome_Turma, arquivoImportadoJson) {
   return new Promise((resolve) => {
     arquivoImportadoJson = JSON.parse(arquivoImportadoJson);
-    let mensagem = `<strong>Atenção! Os alunos serão adicionados à turma ${nome_Turma}:\n\n`;
+
+    let mensagem = `Atenção! Os alunos serão adicionados à turma ${nome_Turma}:\n\n`;
 
     for (const aluno of arquivoImportadoJson) {
       const alunoNome = aluno["Nome completo do aluno"];
@@ -120,9 +138,9 @@ function exibirErrosNoModal(erros) {
 
   // erros
   modalMessage.innerHTML =
-    "<strong>Erros encontrados:</strong>\n\n" +
+    "<strong>Erros encontrados:</strong><br><br>" +
     erros.join("<br>") +
-    "\n\nPor favor corrigir arquivo para importação\n";
+    "<br><br>Por favor corrigir arquivo para importação<br>";
 
   // Exibe o modal
   modal.style.display = "flex";
