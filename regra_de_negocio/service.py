@@ -41,7 +41,7 @@ def importa_aluno_svc(requisicao, alunos_importados):
     ciclos = gerenciador_ciclos.listar_ciclos_por_id_turma(turma_id)
     alunos = gerenciador_turmas_alunos.listar_alunos_turma(turma_id)
     gerenciador_notas.adicionar_notas_aluno_turma(ciclos, novos_alunos, turma_id)
-    resposta = "Alunos adicionados a turma {nome_Turma}"
+    resposta = f"Alunos adicionados a turma {nome_turma}"
     return resposta
     
 
