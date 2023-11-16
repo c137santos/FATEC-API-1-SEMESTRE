@@ -81,7 +81,7 @@ def gravar_alunos_banco(alunos, alunos_importados):
     print(alunos_importados)
     for aluno in alunos_importados:
         novos_alunos[novo_id] = {
-            "nome": aluno["Nome completo do aluno"].capitalize(),
+            "nome": aluno["Nome completo do aluno"].title(),
             "genero": aluno["Genêro"],
             "data_nascimento": aluno["Data de Nascimento"],
             "RA": novo_id
