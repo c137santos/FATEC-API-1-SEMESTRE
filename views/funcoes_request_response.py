@@ -52,6 +52,7 @@ def editar_turma(request, id):
         turma["professor"],
         turma["data_de_inicio"],
         turma["alunos_adicionados"],
+        turma["alunos_excluidos"]
     )
     return JsonResponse({"mensagem": resultado})
 

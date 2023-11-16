@@ -49,8 +49,8 @@ def listar_turmas_aluno(id_aluno):
 def adicionar_turma_aluno(turma_aluno):
     if not turma_aluno:
         return False
-    alunos = listar_alunos_turma(turma_aluno[0]["id_turma"])
-    if turma_aluno[0]["id_aluno"] in alunos.keys():
+    alunos_da_turma = listar_alunos_turma(turma_aluno[0]["id_turma"])
+    if turma_aluno[0]["id_aluno"] in alunos_da_turma.keys():
         return False
     else:
         turmas_alunos = listar_turmas_alunos()
@@ -65,6 +65,17 @@ def remover_turma_aluno(id_turma):
     turmas_alunos_copia = turmas_alunos.copy()
     for id_turma_aluno in turmas_alunos_copia:
         if id_turma == turmas_alunos_copia[id_turma_aluno]["id_turma"]:
+            turmas_alunos.pop(id_turma_aluno)
+    return _salvar_turmas_alunos(turmas_alunos)
+
+
+def remover_aluno_da_turma(id_turma, id_aluno):
+    id_turma = str(id_turma)
+    id_aluno = str(id_aluno)
+    turmas_alunos = listar_turmas_alunos()
+    turmas_alunos_copia = turmas_alunos.copy()
+    for id_turma_aluno in turmas_alunos_copia:
+        if id_turma == turmas_alunos_copia[id_turma_aluno]["id_turma"] and id_aluno == turmas_alunos_copia[id_turma_aluno]["id_aluno"] :
             turmas_alunos.pop(id_turma_aluno)
     return _salvar_turmas_alunos(turmas_alunos)
 
