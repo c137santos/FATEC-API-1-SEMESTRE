@@ -170,6 +170,10 @@ function csvToText(arquivoImportado) {
       const arquivoImportadoTexto = evt.target.result;
       resolve(arquivoImportadoTexto);
     };
+    leitor.onerror = (error) => {
+      reject(error);
+    };
+
     leitor.readAsText(arquivoImportado);
   });
 }

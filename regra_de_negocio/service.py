@@ -43,8 +43,8 @@ def importa_aluno_svc(requisicao, alunos_importados):
         [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
         {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
     """
-    turma_id = requisicao.get("turma_id")
-    nome_turma = requisicao.get("nome_Turma")
+    turma_id = requisicao["turma_id"]
+    nome_turma = requisicao["nome_Turma"]
     alunos = gerenciador_turmas_alunos.listar_alunos_turma(turma_id)
     turma_alunos = gerenciador_turmas_alunos.listar_turmas_alunos()
     novos_alunos = gerenciador_importacao_alunos.gravar_alunos_banco(alunos, alunos_importados)
