@@ -1,5 +1,5 @@
 let idAluno = ''
-let editar_aluno = false
+let naoMostraEditarAuno = false
 getInfoAlunos()
 let alunos_todos = {}
 async function getInfoAlunos() {
@@ -56,7 +56,7 @@ const renderizarAluno = (aluno) => {
   alunos.appendChild(quadrado);
 
   quadrado.addEventListener("click", async (e) => {
-    if (editar_aluno == false){
+    if (naoMostraEditarAuno == false){
     let turmasALuno = await getTurmasAluno(aluno.RA)
     idAluno = aluno.RA
     const id = e.target.id;
@@ -104,7 +104,7 @@ const mostraAlunos = (alunos) => {
 }
 
 async function editarAluno(RA) {
-  editar_aluno=true
+  naoMostraEditarAuno=true
   let aluno = alunos_todos[RA]
   const modal = document.createElement("dialog");
 
@@ -180,7 +180,7 @@ async function editarAluno(RA) {
 
     const response = await backEditarAluno(aluno_editado)
     modal.close();
-    editar_aluno=false
+    naoMostraEditarAuno=false
     event.preventDefault()
     });
 }
@@ -196,6 +196,7 @@ async function backEditarAluno(aluno_editado){
 }
 
 const deleteAluno = (RA) => {
+  naoMostraEditarAuno = true
   try {
       fetch (`http://127.0.0.1:8080/api/v1/alunos/deletar/${RA}`,{method: "POST"})
       console.log('chamou o deletar')
@@ -286,6 +287,12 @@ async function getNotasALunoTurma(turmaId){
   } catch (error) {
     console.error("Erro ao buscar dados da API -> ", error);
   } finally{
+    const notas = document.querySelectorAll(".notas");
+    if (notas.length > 0) {
+      for (let nota of notas) {
+        nota.remove();
+      }
+    }
     for (let nota in notasAluno){
       if (notasAluno[nota].id_turma == turmaId) {
         MostraNotas(notasAluno[nota].id_ciclo, notasAluno[nota].valor)
@@ -297,7 +304,9 @@ async function getNotasALunoTurma(turmaId){
 
 function MostraNotas(ciclo, valor){
     dialogALuno = document.getElementById("mostraNotas")
+    existeNota = document.getElementById("notas")
     valorNota = document.createElement("p")
-    valorNota.textContent = `Ciclo: ${ciclo} | Valor: ${valor}`
+    valorNota.className="notas"
+    valorNota.textContent = `Id_ciclo: ${ciclo} | Valor: ${valor}`
     dialogALuno.appendChild(valorNota)
 }
