@@ -68,13 +68,7 @@ async function listarAlunos(){
         console.error("Erro ao buscar dados da API -> ", error);
         return null;
     }finally{
-        console.log(alunos_todos)
-        for (let aluno in alunos_todos){
-            alunoTurma = await listarTurmasAluno(alunos_todos[aluno].RA)
-            alunos_todos[aluno].turma = id in Object.keys(alunoTurma)
-        }
-        debugger
-        addAlunos(alunos_todos)
+        verificaSeAlunosEstaNaTurma(alunos_todos)
         return alunos_todos
         
     }
@@ -82,7 +76,6 @@ async function listarAlunos(){
 
 async function verificaSeAlunosEstaNaTurma(){
     for (aluno in alunos_todos){
-        debugger
         let alunoTurma = await listarTurmasAluno(alunos_todos[aluno].RA)
         alunos_todos[aluno].turma = alunoTurma !== {} && Object.keys(alunoTurma).includes(id)
     }
@@ -113,7 +106,6 @@ async function listarTurmasAluno(aluno_id){
 // }
 
 function addAlunos(alunos) {
-    debugger
     const divListarAlunos = document.getElementById("listarAlunos");
     for (const aluno in alunos) {
       const divOrganiza = document.createElement("div") 
