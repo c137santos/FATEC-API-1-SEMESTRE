@@ -70,6 +70,7 @@ def editar_ciclo(id_ciclo, ciclo_atualizado):
             ciclos[id_ciclo_str]["prazo_insercao_nota"] = int(
                 ciclo_atualizado["prazo_insercao_nota"]
             )
+            ciclos[id_ciclo_str]["nome_ciclo"] = str(ciclo_atualizado["nome_ciclo"])
             return _salvar_ciclos(ciclos)
         else:
             raise KeyError("Ciclo não encontrado.")
@@ -160,6 +161,7 @@ def cria_ciclos_pra_turma(id_nova_turma, info_global_settings):
         ciclo["peso_nota"] = float(i + 1)
         ciclo["numero_ciclo"] = i + 1
         ciclo["prazo_insercao_nota"] = info_global_settings["prazo_insercao_nota"]
+        ciclo["nome_ciclo"] = 'ciclo#' + str(ciclo["numero_ciclo"])
         adicionar_ciclo(ciclo)
 
 
