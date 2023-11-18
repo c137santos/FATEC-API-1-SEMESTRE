@@ -1,7 +1,7 @@
-let idAluno = "";
-let editar_aluno = false;
-getInfoAlunos();
-let alunos_todos = {};
+let idAluno = ''
+let naoMostraEditarAuno = false
+getInfoAlunos()
+let alunos_todos = {}
 async function getInfoAlunos() {
   try {
     const response = await fetch("http://127.0.0.1:8080/api/v1/alunos/listar");
@@ -53,14 +53,14 @@ const renderizarAluno = (aluno) => {
   alunos.appendChild(quadrado);
 
   quadrado.addEventListener("click", async (e) => {
-    if (editar_aluno == false) {
-      let turmasALuno = await getTurmasAluno(aluno.RA);
-      idAluno = aluno.RA;
-      const id = e.target.id;
-      const info = document.createElement("dialog");
-      info.id = "detalhes-aluno";
-      info.className = "dialog";
-      info.innerHTML = `
+    if (naoMostraEditarAuno == false){
+    let turmasALuno = await getTurmasAluno(aluno.RA)
+    idAluno = aluno.RA
+    const id = e.target.id;
+    const info = document.createElement("dialog");
+    info.id = "detalhes-aluno";
+    info.className = "dialog";
+    info.innerHTML = `
     <div class="dialog-header">
         <h2 class="dialog-title">Detalhes do aluno ${id}</h2>
         </div>
@@ -101,8 +101,8 @@ const mostraAlunos = (alunos) => {
 };
 
 async function editarAluno(RA) {
-  editar_aluno = true;
-  let aluno = alunos_todos[RA];
+  naoMostraEditarAuno=true
+  let aluno = alunos_todos[RA]
   const modal = document.createElement("dialog");
 
   const titulo = document.createElement("h1");
@@ -196,9 +196,9 @@ async function editarAluno(RA) {
 
     const response = await backEditarAluno(aluno_editado);
     modal.close();
-    editar_aluno = false;
-    event.preventDefault();
-  });
+    naoMostraEditarAuno=false
+    event.preventDefault()
+    });
 }
 
 async function backEditarAluno(aluno_editado) {
@@ -215,6 +215,7 @@ async function backEditarAluno(aluno_editado) {
 }
 
 const deleteAluno = (RA) => {
+  naoMostraEditarAuno = true
   try {
     fetch(`http://127.0.0.1:8080/api/v1/alunos/deletar/${RA}`, {
       method: "POST",
@@ -308,8 +309,14 @@ async function getNotasALunoTurma(turmaId) {
     notasAluno = await response.json();
   } catch (error) {
     console.error("Erro ao buscar dados da API -> ", error);
-  } finally {
-    for (let nota in notasAluno) {
+  } finally{
+    const notas = document.querySelectorAll(".notas");
+    if (notas.length > 0) {
+      for (let nota of notas) {
+        nota.remove();
+      }
+    }
+    for (let nota in notasAluno){
       if (notasAluno[nota].id_turma == turmaId) {
         MostraNotas(notasAluno[nota].id_ciclo, notasAluno[nota].valor);
       }
@@ -317,9 +324,11 @@ async function getNotasALunoTurma(turmaId) {
   }
 }
 
-function MostraNotas(ciclo, valor) {
-  dialogALuno = document.getElementById("mostraNotas");
-  valorNota = document.createElement("p");
-  valorNota.textContent = `Ciclo: ${ciclo} | Valor: ${valor}`;
-  dialogALuno.appendChild(valorNota);
+function MostraNotas(ciclo, valor){
+    dialogALuno = document.getElementById("mostraNotas")
+    existeNota = document.getElementById("notas")
+    valorNota = document.createElement("p")
+    valorNota.className="notas"
+    valorNota.textContent = `Id_ciclo: ${ciclo} | Valor: ${valor}`
+    dialogALuno.appendChild(valorNota)
 }

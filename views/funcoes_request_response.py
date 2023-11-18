@@ -1,5 +1,12 @@
 from wgsi import JsonResponse
-from regra_de_negocio.service import busca_turmas, cria_turma, excluir_turma_svc
+
+from regra_de_negocio.service import (
+    busca_turmas,
+    cria_turma,
+    listar_fee_turmas_svc,
+    excluir_turma_svc,
+    importa_aluno_svc,
+)
 
 from regra_de_negocio.gerenciador_turmas import editar_turma_svc
 import regra_de_negocio.gerenciador_turmas as gerenciador_turmas
@@ -8,9 +15,10 @@ import regra_de_negocio.gerenciador_notas as gerenciador_notas
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
 import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 import regra_de_negocio.global_settings as global_settings
+import regra_de_negocio.gerenciador_importacao_alunos as gerenciador_importacao_alunos
 
 import json
-
+import math
 
 def criar_aluno(request):
     novo_aluno = json.loads(request.body)
@@ -52,6 +60,7 @@ def editar_turma(request, id):
         turma["professor"],
         turma["data_de_inicio"],
         turma["alunos_adicionados"],
+        turma["alunos_excluidos"]
     )
     return JsonResponse({"mensagem": resultado})
 
@@ -218,3 +227,38 @@ def editar_global_settings(request):
         info_editar_settings["prazo_nota"],
     )
     return JsonResponse({"mensagem": "concluido"})
+
+def listar_fee_alunos_turma(request, id_turma):
+    alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_turma)
+    for id_aluno in alunos.keys():
+        fee = gerenciador_notas._calcular_fee_turma_aluno(id_aluno=id_aluno,id_turma=id_turma)
+        alunos[id_aluno]["fee"] = fee
+    return JsonResponse(alunos)
+
+def listar_fee_turmas(request):
+    turmas = listar_fee_turmas_svc()
+    return JsonResponse(turmas)
+
+def validar_importacao(request):
+    """
+    Modelo esperado:
+    [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
+    {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
+    """
+    requisicao = json.loads(request.body)
+    resposta = gerenciador_importacao_alunos.verifica_importacao(requisicao)
+    return JsonResponse(resposta)
+
+def importa_aluno(request):
+    """
+    Formato da requisição JSON esperado:
+        "turma_id": "1",
+        "nome_Turma": "Logica ok!",
+        "alunos_importados": 
+        [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
+        {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
+    """
+    requisicao = json.loads(request.body)
+    alunos_importados = json.loads(requisicao["alunos_importados"])
+    resposta = importa_aluno_svc(requisicao, alunos_importados)
+    return JsonResponse(resposta)

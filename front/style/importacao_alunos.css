@@ -1,0 +1,148 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+#container {
+  max-width: 700px;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: white;
+  font-size: 20px;
+  width: 100%;
+}
+
+.titulo {
+  text-align: center;
+  margin-top: 0px;
+  font-size: 25px;
+}
+
+#selecionaTurma {
+  width: 80%;
+  border-radius: 15px;
+}
+
+#container-turma-modelo {
+  display: flex;
+  justify-content: space-between;
+}
+
+#tituloTexto {
+  margin: 0;
+  padding: 0;
+}
+
+.turma-modelo {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  align-items: center;
+  border-radius: 8px;
+  padding: 10px;
+  width: 48%; /* ou ajuste conforme necessário */
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.turma-modelo label,
+.turma-modelo p {
+  width: 100%; /* ocupar a largura total */
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.turma-modelo img {
+  max-width: 40px;
+}
+
+.input-section {
+  text-align: center; /* Centraliza o conteúdo */
+  font-size: 15px;
+}
+
+.input-section {
+  text-align: center;
+}
+
+#arquivo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#arquivo-label {
+  margin-bottom: 10px;
+}
+
+#arquivo {
+  border: 5px dotted #ccc;
+  width: 50%;
+  margin: 10px auto;
+  box-sizing: border-box;
+}
+
+select,
+input[type="file"] {
+  text-align: center;
+  width: 100%; /* ocupar a largura total */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #9a68f1;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+}
+
+button:hover {
+  justify-content: center;
+  background-color: #d24d5d;
+}
+
+.info-section {
+  max-width: 700px;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #9a68f142;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.button-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#tutorial {
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+/* Estilos do modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
