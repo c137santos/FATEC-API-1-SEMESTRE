@@ -15,17 +15,32 @@ async function preencher_info_turma(id) {
     nomeProfessorElement.textContent = turma["professor"];
     quantidadeAlunosElement.innerText = alunos ? Object.keys(alunos).length : 0;
     dataInicioElement.innerText = turma["data_de_inicio"];
+  
     for (let chave in PesoCiclo) {
+      const divDetalheCiclo = document.createElement("div");
+      divDetalheCiclo.className = "divDetalheCiclo"
+
       const pesoData = PesoCiclo[chave];
-      const NomeCiclo = document.createElement("label");
+
+      const CicloNumero = document.createElement('div')
+      CicloNumero.className = "ciclo_numero";
+      CicloNumero.innerText = `C${pesoData.numero_ciclo}:`
+
+      const NomeCiclo = document.createElement("input");
       NomeCiclo.className = "ciclo";
-      NomeCiclo.htmlFor = `pesoCiclo=${chave}`;
-      NomeCiclo.innerHTML = `C${pesoData.numero_ciclo}:`;
+      NomeCiclo.id = `nomeCiclo=${chave}`;
+      NomeCiclo.value = `${pesoData.nome_ciclo}`;
 
       const PesoNota = document.createElement("input");
       PesoNota.className = "peso";
       PesoNota.id = `pesoCiclo=${chave}`;
       PesoNota.value = pesoData.peso_nota;
+
+      NomeCiclo.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          requisitar_salvar_ciclo_peso();
+        }
+      });
 
       PesoNota.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
@@ -33,8 +48,11 @@ async function preencher_info_turma(id) {
         }
       });
 
-      cicloPeso.appendChild(NomeCiclo);
-      cicloPeso.appendChild(PesoNota);
+      divDetalheCiclo.appendChild(CicloNumero);
+      divDetalheCiclo.appendChild(NomeCiclo);
+      divDetalheCiclo.appendChild(PesoNota);
+
+      cicloPeso.appendChild(divDetalheCiclo);
     }
 
     // Chama a função para iniciar a criação do componentes dos alunos
@@ -300,9 +318,11 @@ async function requisitar_salvar_ciclo_peso() {
   const ciclos = await listar_ciclos_turma(turma_id);
   for (var id_ciclo in ciclos) {
     console.log(`Salvando o ciclo ${id_ciclo}`);
-    elementoCiclo = document.getElementById(`pesoCiclo=${id_ciclo}`);
-    ciclo = ciclos[id_ciclo];
-    ciclo["peso_nota"] = elementoCiclo.value;
+    const pesoCiclo = document.getElementById(`pesoCiclo=${id_ciclo}`);
+    const nomeCiclo = document.getElementById(`nomeCiclo=${id_ciclo}`);
+    let ciclo = ciclos[id_ciclo];
+    ciclo["peso_nota"] = pesoCiclo.value;
+    ciclo["nome_ciclo"] = nomeCiclo.value;
     console.log(ciclo);
     res = await fetch(
       `http://localhost:8080/api/v1/ciclos/editar/${id_ciclo}`,

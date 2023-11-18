@@ -18,8 +18,8 @@ def obter_turma(id_turma):
         return None
 
 
-def editar_turma_svc(id, nome, professor, data_de_inicio, alunos_adicionados):
-    from regra_de_negocio.gerenciador_turmas_alunos import adicionar_turma_aluno
+def editar_turma_svc(id, nome, professor, data_de_inicio, alunos_adicionados, alunos_excluidos):
+    from regra_de_negocio.gerenciador_turmas_alunos import adicionar_turma_aluno, remover_aluno_da_turma
 
     turmas = busca_turmas()
     id_turma = 0
@@ -31,10 +31,12 @@ def editar_turma_svc(id, nome, professor, data_de_inicio, alunos_adicionados):
         turma["data_de_inicio"] = data_de_inicio
         _salvar_turmas(turmas)
 
-    for alunos in alunos_adicionados:
-        turma_aluno = ({"id_turma": id_turma, "id_aluno": str(alunos["RA"])},)
-        adicionar_turma_aluno(turma_aluno)
-        return True
+        for alunos in alunos_adicionados:
+            turma_aluno = ({"id_turma": id_turma, "id_aluno": str(alunos["RA"])},)
+            adicionar_turma_aluno(turma_aluno)
+
+        for alunos in alunos_excluidos:
+            remover_aluno_da_turma(id_turma, alunos["RA"])
     else:
         return False
 

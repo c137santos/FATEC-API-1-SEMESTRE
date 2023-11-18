@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .painelPrincipal {
+            padding: 21px;
+            height: auto;
+            border: double;
+            border-radius: 5px;
+            background-color: aliceblue;
+        }
+
+        .boxSelectTurma {
+            display: flex;
+            justify-content: center;
+        }
+
+        .selectTurma {
+            width: 50%;
+        }
+
+        .graficoAluno {
+            width: 100%;
+        }
+
+        .graficoTurma {
+            width: 100%;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
+    />
+    <link rel="stylesheet" href="style/custom.css" />
+    <header class="header"> 
+       <img src="./imagens/Logo.png" alt="logo"/> 
+    </header>
+</head>
+
+<body>
+
+    <div class="painelPrincipal">
+        <div class="boxSelectTurma ">
+            <select name="selectTurma" id="selectTurma" class="selectTurma form-select">
+                <option value="">Selecione a turma</option>
+            </select>
+        </div>
+        <div class="graficoAluno">
+            <canvas id="graficoAluno"></canvas>
+        </div>
+        <div class="graficoTurma">
+            <canvas id="graficoTurma"></canvas>
+        </div>
+    </div>
+
+    <!-- Moleke -->
+    <div class="muleke">
+        <a href="index.html">
+            <img src="./imagens/mascote2.png" alt="mascote" />
+        </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/front/scripts/relatorio.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>   
+</body>
+
+</html>

@@ -1,7 +1,9 @@
 from wgsi import JsonResponse
+
 from regra_de_negocio.service import (
     busca_turmas,
     cria_turma,
+    listar_fee_turmas_svc,
     excluir_turma_svc,
     importa_aluno_svc,
 )
@@ -16,7 +18,7 @@ import regra_de_negocio.global_settings as global_settings
 import regra_de_negocio.gerenciador_importacao_alunos as gerenciador_importacao_alunos
 
 import json
-
+import math
 
 def criar_aluno(request):
     novo_aluno = json.loads(request.body)
@@ -58,6 +60,7 @@ def editar_turma(request, id):
         turma["professor"],
         turma["data_de_inicio"],
         turma["alunos_adicionados"],
+        turma["alunos_excluidos"]
     )
     return JsonResponse({"mensagem": resultado})
 
@@ -225,6 +228,16 @@ def editar_global_settings(request):
     )
     return JsonResponse({"mensagem": "concluido"})
 
+def listar_fee_alunos_turma(request, id_turma):
+    alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_turma)
+    for id_aluno in alunos.keys():
+        fee = gerenciador_notas._calcular_fee_turma_aluno(id_aluno=id_aluno,id_turma=id_turma)
+        alunos[id_aluno]["fee"] = fee
+    return JsonResponse(alunos)
+
+def listar_fee_turmas(request):
+    turmas = listar_fee_turmas_svc()
+    return JsonResponse(turmas)
 
 def validar_importacao(request):
     """
