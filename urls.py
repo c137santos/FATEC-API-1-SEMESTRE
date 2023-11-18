@@ -54,6 +54,9 @@ URLS = {
     URL("/api/v1/alunos/criar"): view.criar_aluno,
     URL("/api/v1/relatorios/grafico_alunos/:id_turma"): view.listar_fee_alunos_turma,
     URL("/api/v1/relatorios/grafico_turmas"): view.listar_fee_turmas,
+
+    URL("/api/v1/importacao/validar"): view.validar_importacao,
+    URL("/api/v1/importacao/importaAluno"): view.importa_aluno,
 }
 
 

@@ -4,7 +4,8 @@ from regra_de_negocio.service import (
     busca_turmas,
     cria_turma,
     listar_fee_turmas_svc,
-    excluir_turma_svc
+    excluir_turma_svc,
+    importa_aluno_svc,
 )
 
 from regra_de_negocio.gerenciador_turmas import editar_turma_svc
@@ -14,6 +15,7 @@ import regra_de_negocio.gerenciador_notas as gerenciador_notas
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
 import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 import regra_de_negocio.global_settings as global_settings
+import regra_de_negocio.gerenciador_importacao_alunos as gerenciador_importacao_alunos
 
 import json
 import math
@@ -236,3 +238,27 @@ def listar_fee_alunos_turma(request, id_turma):
 def listar_fee_turmas(request):
     turmas = listar_fee_turmas_svc()
     return JsonResponse(turmas)
+
+def validar_importacao(request):
+    """
+    Modelo esperado:
+    [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
+    {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
+    """
+    requisicao = json.loads(request.body)
+    resposta = gerenciador_importacao_alunos.verifica_importacao(requisicao)
+    return JsonResponse(resposta)
+
+def importa_aluno(request):
+    """
+    Formato da requisição JSON esperado:
+        "turma_id": "1",
+        "nome_Turma": "Logica ok!",
+        "alunos_importados": 
+        [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
+        {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
+    """
+    requisicao = json.loads(request.body)
+    alunos_importados = json.loads(requisicao["alunos_importados"])
+    resposta = importa_aluno_svc(requisicao, alunos_importados)
+    return JsonResponse(resposta)

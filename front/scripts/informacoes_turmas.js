@@ -61,7 +61,7 @@ async function preencher_info_turma(id) {
 }
 
 function criarCabecalhoNota(quant_ciclos) {
-  quant_ciclos=Object.keys(quant_ciclos).length
+  quant_ciclos = Object.keys(quant_ciclos).length;
 
   const cabecalhoNota = document.createElement("div");
   cabecalhoNota.className = "aluno-square";
@@ -229,7 +229,6 @@ function requisitar_editar_nota(alunos) {
       return;
     }
     if (notasInvalidas) {
-      // Exibe uma mensagem de erro ao usuário
       alert("Todas as notas devem estar entre 0 e 10.");
       return;
     }
@@ -239,8 +238,6 @@ function requisitar_editar_nota(alunos) {
         method: "POST",
         body: JSON.stringify(requestBody),
       });
-    } else {
-      // O usuário optou por não prosseguir, você pode adicionar alguma lógica aqui se necessário
     }
   }
 }
