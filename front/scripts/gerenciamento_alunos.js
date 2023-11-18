@@ -1,7 +1,7 @@
-let idAluno = ''
-let naoMostraEditarAuno = false
-getInfoAlunos()
-let alunos_todos = {}
+let idAluno = "";
+let naoMostraEditarAuno = false;
+getInfoAlunos();
+let alunos_todos = {};
 async function getInfoAlunos() {
   try {
     const response = await fetch("http://127.0.0.1:8080/api/v1/alunos/listar");
@@ -53,14 +53,14 @@ const renderizarAluno = (aluno) => {
   alunos.appendChild(quadrado);
 
   quadrado.addEventListener("click", async (e) => {
-    if (naoMostraEditarAuno == false){
-    let turmasALuno = await getTurmasAluno(aluno.RA)
-    idAluno = aluno.RA
-    const id = e.target.id;
-    const info = document.createElement("dialog");
-    info.id = "detalhes-aluno";
-    info.className = "dialog";
-    info.innerHTML = `
+    if (naoMostraEditarAuno == false) {
+      let turmasALuno = await getTurmasAluno(aluno.RA);
+      idAluno = aluno.RA;
+      const id = e.target.id;
+      const info = document.createElement("dialog");
+      info.id = "detalhes-aluno";
+      info.className = "dialog";
+      info.innerHTML = `
     <div class="dialog-header">
         <h2 class="dialog-title">Detalhes do aluno ${id}</h2>
         </div>
@@ -101,8 +101,8 @@ const mostraAlunos = (alunos) => {
 };
 
 async function editarAluno(RA) {
-  naoMostraEditarAuno=true
-  let aluno = alunos_todos[RA]
+  naoMostraEditarAuno = true;
+  let aluno = alunos_todos[RA];
   const modal = document.createElement("dialog");
 
   const titulo = document.createElement("h1");
@@ -130,7 +130,7 @@ async function editarAluno(RA) {
     "Homem trans",
     "Mulher trans",
     "Gênero neutro",
-    "Não-binário",
+    "Não binário",
   ];
   opcoesGenero.forEach(function (opcao) {
     const option = document.createElement("option");
@@ -139,9 +139,7 @@ async function editarAluno(RA) {
     selecionarGenero.appendChild(option);
   });
 
-  const generoAtual = opcoesGenero.find(
-    (opcao) => opcao === aluno.genero
-  );
+  const generoAtual = opcoesGenero.find((opcao) => opcao === aluno.genero);
   if (generoAtual) {
     selecionarGenero.value = generoAtual;
   }
@@ -150,7 +148,9 @@ async function editarAluno(RA) {
 
   const aluno_nasc = document.createElement("p");
   aluno_nasc.textContent = "data de nascimento:";
-  const data_nascimento_formatada = aluno.data_nascimento ? aluno.data_nascimento.split('/').reverse().join('-') : ''
+  const data_nascimento_formatada = aluno.data_nascimento
+    ? aluno.data_nascimento.split("/").reverse().join("-")
+    : "";
   const inputDataNascimento = document.createElement("input");
   inputDataNascimento.type = "date";
   inputDataNascimento.value = data_nascimento_formatada;
@@ -196,9 +196,9 @@ async function editarAluno(RA) {
 
     const response = await backEditarAluno(aluno_editado);
     modal.close();
-    naoMostraEditarAuno=false
-    event.preventDefault()
-    });
+    naoMostraEditarAuno = false;
+    event.preventDefault();
+  });
 }
 
 async function backEditarAluno(aluno_editado) {
@@ -215,7 +215,7 @@ async function backEditarAluno(aluno_editado) {
 }
 
 const deleteAluno = (RA) => {
-  naoMostraEditarAuno = true
+  naoMostraEditarAuno = true;
   try {
     fetch(`http://127.0.0.1:8080/api/v1/alunos/deletar/${RA}`, {
       method: "POST",
@@ -309,14 +309,14 @@ async function getNotasALunoTurma(turmaId) {
     notasAluno = await response.json();
   } catch (error) {
     console.error("Erro ao buscar dados da API -> ", error);
-  } finally{
+  } finally {
     const notas = document.querySelectorAll(".notas");
     if (notas.length > 0) {
       for (let nota of notas) {
         nota.remove();
       }
     }
-    for (let nota in notasAluno){
+    for (let nota in notasAluno) {
       if (notasAluno[nota].id_turma == turmaId) {
         MostraNotas(notasAluno[nota].id_ciclo, notasAluno[nota].valor);
       }
@@ -324,11 +324,11 @@ async function getNotasALunoTurma(turmaId) {
   }
 }
 
-function MostraNotas(ciclo, valor){
-    dialogALuno = document.getElementById("mostraNotas")
-    existeNota = document.getElementById("notas")
-    valorNota = document.createElement("p")
-    valorNota.className="notas"
-    valorNota.textContent = `Id_ciclo: ${ciclo} | Valor: ${valor}`
-    dialogALuno.appendChild(valorNota)
+function MostraNotas(ciclo, valor) {
+  dialogALuno = document.getElementById("mostraNotas");
+  existeNota = document.getElementById("notas");
+  valorNota = document.createElement("p");
+  valorNota.className = "notas";
+  valorNota.textContent = `Id_ciclo: ${ciclo} | Valor: ${valor}`;
+  dialogALuno.appendChild(valorNota);
 }
