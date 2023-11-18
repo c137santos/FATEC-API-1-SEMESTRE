@@ -246,5 +246,6 @@ def importa_aluno(request):
         {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
     """
     requisicao = json.loads(request.body)
-    resposta = importa_aluno_svc(requisicao)
+    alunos_importados = json.loads(requisicao["alunos_importados"])
+    resposta = importa_aluno_svc(requisicao, alunos_importados)
     return JsonResponse(resposta)
