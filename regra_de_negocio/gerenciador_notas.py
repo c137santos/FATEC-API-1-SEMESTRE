@@ -53,8 +53,6 @@ def filtrar_notas_por_id_turma_svc(notas, id_turma):
     notas_encontradas = {}
     for id_nota in notas.keys():
         if id_turma_str == notas[id_nota]["id_turma"]:
-            if notas[id_nota]["fee"]:  # se for a média, pula
-                continue
             notas_encontradas[id_nota] = notas[id_nota]
     return notas_encontradas
 
@@ -66,8 +64,6 @@ def listar_notas_por_id_aluno(notas, id_aluno):
     notas_encontradas = {}
     for id_nota in notas.keys():
         if id_aluno_str == notas[id_nota]["id_aluno"]:
-            if notas[id_nota]["fee"]:
-                continue
             notas_encontradas[id_nota] = notas[id_nota]
 
     return notas_encontradas
@@ -80,8 +76,6 @@ def listar_notas_por_id_ciclo(notas, id_ciclo):
     notas_encontradas = {}
     for id_nota in notas.keys():
         if id_ciclo_str == notas[id_nota]["id_ciclo"]:
-            if notas[id_nota]["fee"]:
-                continue
             notas_encontradas[id_nota] = notas[id_nota]
     return notas_encontradas
 
