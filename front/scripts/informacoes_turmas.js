@@ -316,7 +316,6 @@ async function requisitar_salvar_ciclo_peso() {
   ) {
     return;
   }
-  console.log("Editando os ciclos...");
   const turma_id = obter_id();
   const ciclos = await listar_ciclos_turma(turma_id);
   for (var id_ciclo in ciclos) {
@@ -326,12 +325,10 @@ async function requisitar_salvar_ciclo_peso() {
     let ciclo = ciclos[id_ciclo];
     ciclo["peso_nota"] = pesoCiclo.value;
     ciclo["nome_ciclo"] = nomeCiclo.value;
-    console.log(ciclo);
     res = await fetch(
       `http://localhost:8080/api/v1/ciclos/editar/${id_ciclo}`,
       { method: "POST", body: JSON.stringify(ciclo) }
     );
-    console.log(res);
   }
   location.reload();
 }
@@ -342,5 +339,5 @@ async function obter_fee_turma_aluno(id_turma, id_aluno) {
     { method: "GET" }
   );
   const fee = await response.json();
-  return fee ? fee.valor : 0.0;
+  return fee ? fee : 0.0;
 }
