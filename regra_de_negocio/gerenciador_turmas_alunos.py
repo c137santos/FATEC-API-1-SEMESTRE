@@ -75,7 +75,10 @@ def remover_aluno_da_turma(id_turma, id_aluno):
     turmas_alunos = listar_turmas_alunos()
     turmas_alunos_copia = turmas_alunos.copy()
     for id_turma_aluno in turmas_alunos_copia:
-        if id_turma == turmas_alunos_copia[id_turma_aluno]["id_turma"] and id_aluno == turmas_alunos_copia[id_turma_aluno]["id_aluno"] :
+        if (
+            id_turma == turmas_alunos_copia[id_turma_aluno]["id_turma"]
+            and id_aluno == turmas_alunos_copia[id_turma_aluno]["id_aluno"]
+        ):
             turmas_alunos.pop(id_turma_aluno)
     return _salvar_turmas_alunos(turmas_alunos)
 

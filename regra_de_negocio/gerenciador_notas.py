@@ -216,7 +216,7 @@ def adicionar_notas_aluno_turma(ciclos, alunos, id_nova_turma_str):
             nova_nota["id_ciclo"] = str(id_ciclo)
             nova_nota["valor"] = 0.0
             nova_nota["fee"] = False
-            print(f"Nova Nota:")
+            print("Nova Nota:")
             print(f"  ID Turma: {nova_nota['id_turma']}")
             print(f"  ID Aluno: {nova_nota['id_aluno']}")
             print(f"  ID Ciclo: {nova_nota['id_ciclo']}")

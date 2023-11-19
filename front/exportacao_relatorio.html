@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
+    />
+    <link rel="stylesheet" href="style/custom.css" />
+    <link rel="stylesheet" href="style/exportacao_relatorio.css" />
+
+    <title>Exportação de relatório</title>
+  </head>
+  <header class="header">
+    <img src="./imagens/Logo.png" alt="logo" />
+  </header>
+
+  <body onload="inicializaPaginaExportacaoRelatorio()">
+    <div id="container">
+      <div class="titulo">
+        <h3>Exportação de relatório</h3>
+      </div>
+
+      <!-- Selecione a Turma -->
+      <div id="container-turma-modelo">
+        <div class="turma-modelo">
+          <label for="fnome" id="tituloTexto"
+            ><strong>Selecione a Turma:</strong></label
+          >
+          <select type="text" name="fnome" id="selecionaTurma">
+            <option value="" disabled selected>Escolha uma turma</option>
+          </select>
+        </div>
+
+      <!-- Botão de Importar -->
+      <div class="button-section">
+        <button onclick="exportacaoRelatorio()">Exportar Relatório</button>
+      </div>
+    </div>
+
+    <div class="muleke">
+      <a href="index.html">
+        <img src="./imagens/mascote2.png" alt="mascote" />
+      </a>
+    </div>
+    <script src="/front/scripts/exportacao_relatorio.js"></script>
+  </body>
+</html>
