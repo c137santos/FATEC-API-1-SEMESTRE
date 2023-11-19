@@ -341,3 +341,15 @@ async function obter_fee_turma_aluno(id_turma, id_aluno) {
   const fee = await response.json();
   return fee ? fee.valor : 0.0;
 }
+
+function redirecionarParaPagina(id) {
+  if (id === 'turma') {
+      window.location.href = 'gerenciamento_turmas.html';
+  } else {
+      window.location.href = 'pagina-padrao.html';
+  }
+}
+
+document.getElementById('turma').addEventListener('click', function() {
+  redirecionarParaPagina('turma');
+});
