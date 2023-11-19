@@ -6,11 +6,12 @@ from regra_de_negocio.gerenciador_ciclos import (
     obter_ultimo_ciclo_por_id_turma,
 )
 from regra_de_negocio.gerenciador_turmas import obter_turma
+from regra_de_negocio.service import gerenciador_turmas_alunos
 
 from datetime import datetime, timedelta
 
 
-def _calcular_fee_turma_aluno(id_turma, id_aluno):
+def calcular_fee_turma_aluno(id_turma, id_aluno):
     id_turma_str = str(id_turma)
     id_aluno_str = str(id_aluno)
     notas_por_turma_aluno = listar_notas_por_turma_aluno(id_turma_str, id_aluno_str)
@@ -24,24 +25,19 @@ def _calcular_fee_turma_aluno(id_turma, id_aluno):
         soma_dos_pesos += peso_nota
     if len(notas_por_turma_aluno) > 0:
         media_fee = soma_das_notas / float(soma_dos_pesos)
-        return round(media_fee, 2)
+        valor_fee = round(media_fee, 2)
     else:
-        return 0.0
+        valor_fee = 0.0
+    gerenciador_turmas_alunos.adicionar_fee_na_turma_aluno(
+        id_aluno, id_turma, valor_fee
+    )
 
 
-# Essa função é responsável por recuperar um fee
-def obter_fee_turma_aluno(id_turma, id_aluno):
-    id_turma_str = str(id_turma)
-    id_aluno_str = str(id_aluno)
-    id_ultimo_ciclo, ultimo_ciclo = obter_ultimo_ciclo_por_id_turma(id_turma_str)
-    nova_nota = {}
-    nova_nota["id_turma"] = id_turma_str
-    nova_nota["id_aluno"] = id_aluno_str
-    nova_nota["id_ciclo"] = id_ultimo_ciclo
-    nova_nota["valor"] = _calcular_fee_turma_aluno(id_turma_str, id_aluno_str)
-    nova_nota["fee"] = True
-    # todo: remover o fee antigo quando já existir e criar no banco
-    return nova_nota
+def atualiza_todos_fee_da_turma(id_turma):
+    alunos = gerenciador_turmas_alunos.listar_turmas_alunos()
+    for id_aluno in alunos.keys():
+        if alunos[id_aluno]["id_turma"] == id_turma:
+            calcular_fee_turma_aluno(id_turma, id_aluno)
 
 
 def listar_notas():
@@ -103,7 +99,10 @@ def adicionar_nota(nova_nota):
     notas = listar_notas()
     novo_id_nota = _obter_novo_id_nota()
     notas[novo_id_nota] = nova_nota
-    return _salvar_notas(notas)
+    _salvar_notas(notas)
+    calcular_fee_turma_aluno(
+        notas[novo_id_nota]["aluno_id"], notas[novo_id_nota]["turma_id"]
+    )
 
 
 def editar_nota(notas_atualizada):
@@ -116,6 +115,10 @@ def editar_nota(notas_atualizada):
             notas[id_nota_atualizada_str]["valor"] = float(
                 notas_atualizada[id_nota_atualizada_str]["valor"]
             )
+            calcular_fee_turma_aluno(
+                notas[id_nota_atualizada_str]["id_aluno"],
+                notas[id_nota_atualizada_str]["id_turma"],
+            )
         else:
             return False
     return _salvar_notas(notas)
@@ -126,7 +129,10 @@ def remover_nota(id_nota):
     notas = listar_notas()
     if id_nota_str in notas.keys():
         notas.pop(id_nota_str)
-        return _salvar_notas(notas)
+        _salvar_notas(notas)
+        calcular_fee_turma_aluno(
+            notas["id_nota_str"]["id_aluno"], notas["id_nota_str"]["id_turma"]
+        )
     else:
         return False
 
@@ -197,14 +203,9 @@ def _obter_prazo_insercao_nota(ciclo, id_turma):
 def excluir_notas_relacionadas_turma(id_turma):
     print("\n> Excluindo notas relacionados a turma...\n")
     todos_notas = listar_notas()
-
-    notas_mantidas = {
-        id_nota: nota
-        for id_nota, nota in todos_notas.items()
-        if nota["id_turma"] != id_turma
-    }
-
-    return _salvar_notas(notas_mantidas)
+    for id in todos_notas.keys():
+        if todos_notas["id"]["id_turma"] == id_turma:
+            remover_nota(id)
 
 
 def adicionar_notas_aluno_turma(ciclos, alunos, id_nova_turma_str):
@@ -217,3 +218,4 @@ def adicionar_notas_aluno_turma(ciclos, alunos, id_nova_turma_str):
             nova_nota["valor"] = 0.0
             nova_nota["fee"] = False
             adicionar_nota(nova_nota)
+            calcular_fee_turma_aluno(id_aluno, int(id_nova_turma_str))

@@ -22,22 +22,22 @@ def cria_turma(dados_nova_turma):
     gerenciador_notas.adicionar_notas_aluno_turma(ciclos, alunos, id_nova_turma_str)
     return resposta
 
-  
+
 def listar_fee_turmas_svc():
     turmas = gerenciador_turmas.busca_turmas()
     for id_turma in turmas.keys():
         alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_turma)
         fee_turma = []
         for id_aluno in alunos.keys():
-            fee = gerenciador_notas._calcular_fee_turma_aluno(id_aluno=id_aluno,id_turma=id_turma)
+            fee = buscar_fee_do_aluno_na_turma(id_turma=id_turma, id_aluno=id_aluno)
             fee_turma.append(fee)
         if len(fee_turma) == 0:
-            turmas[id_turma]['fee'] = 0.0   
+            turmas[id_turma]["fee"] = 0.0
         else:
             media_fee = sum(fee_turma) / len(fee_turma)
-            turmas[id_turma]['fee'] = round(media_fee, 2)
+            turmas[id_turma]["fee"] = round(media_fee, 2)
     return turmas
-  
+
 
 def excluir_turma_svc(id_turma):
     try:
@@ -48,3 +48,13 @@ def excluir_turma_svc(id_turma):
         return {"message": f"Turma {id_turma} Excluida"}
     except Exception as e:
         raise Exception(f"Falha na exclusão de turma: {str(e)}")
+
+
+def buscar_fee_do_aluno_na_turma(id_turma, id_aluno):
+    try:
+        turma_aluno = gerenciador_turmas_alunos.busca_determinada_turma_do_aluno(
+            id_aluno, id_turma
+        )
+        return turma_aluno["fee"]
+    except Exception as e:
+        raise Exception(f"Falha na busca do fee: {str(e)}")
