@@ -3,7 +3,7 @@
       "id_turma": "1",
       "id_aluno": "1",
       "id_ciclo": "1",
-      "valor": 6.5
+      "valor": 9.0
   },
   "2": {
       "id_turma": "1",
@@ -27,7 +27,7 @@
       "id_turma": "1",
       "id_aluno": "2",
       "id_ciclo": "1",
-      "valor": 5.6
+      "valor": 4.0
   },
   "7": {
       "id_turma": "1",
@@ -51,7 +51,7 @@
       "id_turma": "1",
       "id_aluno": "3",
       "id_ciclo": "1",
-      "valor": 6.0
+      "valor": 3.0
   },
   "12": {
       "id_turma": "1",
@@ -75,7 +75,7 @@
       "id_turma": "2",
       "id_aluno": "1",
       "id_ciclo": "6",
-      "valor": 7.0
+      "valor": 8.0
   },
   "17": {
       "id_turma": "2",
@@ -99,7 +99,7 @@
       "id_turma": "2",
       "id_aluno": "2",
       "id_ciclo": "6",
-      "valor": 7.0
+      "valor": 2.0
   },
   "22": {
       "id_turma": "2",

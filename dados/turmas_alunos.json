@@ -1,27 +1,27 @@
 {
-  "1": {
-    "id_turma": "1",
-    "id_aluno": "1",
-    "fee":0.0
-  },
-  "2": {
-    "id_turma": "2",
-    "id_aluno": "2",
-    "fee":0.0
-  },
-  "3": {
-    "id_turma": "2",
-    "id_aluno": "1",
-    "fee":0.0
-  },
-  "4": {
-    "id_turma": "1",
-    "id_aluno": "2",
-    "fee":0.0
-  },
-  "6": {
-    "id_turma": "1",
-    "id_aluno": "3",
-    "fee":0.0
-  }
+    "1": {
+        "id_turma": "1",
+        "id_aluno": "1",
+        "fee": 7.64
+    },
+    "2": {
+        "id_turma": "2",
+        "id_aluno": "2",
+        "fee": 5.5
+    },
+    "3": {
+        "id_turma": "2",
+        "id_aluno": "1",
+        "fee": 5.5
+    },
+    "4": {
+        "id_turma": "1",
+        "id_aluno": "2",
+        "fee": 7.09
+    },
+    "6": {
+        "id_turma": "1",
+        "id_aluno": "3",
+        "fee": 8.79
+    }
 }
