@@ -26,11 +26,9 @@ def calcular_fee_turma_aluno(id_turma, id_aluno):
     if len(notas_por_turma_aluno) > 0:
         media_fee = soma_das_notas / float(soma_dos_pesos)
         valor_fee = round(media_fee, 2)
-    else:
-        valor_fee = 0.0
-    gerenciador_turmas_alunos.adicionar_fee_na_turma_aluno(
-        id_aluno, id_turma, valor_fee
-    )
+        gerenciador_turmas_alunos.adicionar_fee_na_turma_aluno(
+            id_aluno, id_turma, valor_fee
+        )
 
 
 def atualiza_todos_fee_da_turma(id_turma):
@@ -95,7 +93,7 @@ def adicionar_nota(nova_nota):
     notas[novo_id_nota] = nova_nota
     _salvar_notas(notas)
     calcular_fee_turma_aluno(
-        notas[novo_id_nota]["aluno_id"], notas[novo_id_nota]["turma_id"]
+        notas[novo_id_nota]["turma_id"], notas[novo_id_nota]["aluno_id"]
     )
 
 
@@ -110,8 +108,8 @@ def editar_nota(notas_atualizada):
                 notas_atualizada[id_nota_atualizada_str]["valor"]
             )
             calcular_fee_turma_aluno(
-                notas[id_nota_atualizada_str]["id_aluno"],
                 notas[id_nota_atualizada_str]["id_turma"],
+                notas[id_nota_atualizada_str]["id_aluno"],
             )
         else:
             return False
@@ -125,7 +123,7 @@ def remover_nota(id_nota):
         notas.pop(id_nota_str)
         _salvar_notas(notas)
         calcular_fee_turma_aluno(
-            notas["id_nota_str"]["id_aluno"], notas["id_nota_str"]["id_turma"]
+            notas["id_nota_str"]["id_turma"], notas["id_nota_str"]["id_aluno"]
         )
     else:
         return False
@@ -212,4 +210,4 @@ def adicionar_notas_aluno_turma(ciclos, alunos, id_nova_turma_str):
             nova_nota["valor"] = 0.0
             nova_nota["fee"] = False
             adicionar_nota(nova_nota)
-            calcular_fee_turma_aluno(id_aluno, int(id_nova_turma_str))
+            calcular_fee_turma_aluno(id_nova_turma_str, id_aluno)

@@ -171,6 +171,8 @@ body {
 
 .titulo_notas,
 .campoNota {
+  margin-left:2px;
+  margin-right:2px;
   align-items: center;
   width: auto; /* Use "auto" para que o campo se ajuste ao conteúdo */
   min-width: 280px; /* Defina um tamanho mínimo para evitar que fique muito pequeno */
@@ -200,7 +202,6 @@ div.media {
   background-color: #ccc;
   color: gray;
   width: 50px;
-  margin-left: 10px;
   margin-right: 10px;
   text-align: center;
   padding: 0px;

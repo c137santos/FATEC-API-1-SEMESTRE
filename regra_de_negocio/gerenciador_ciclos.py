@@ -74,11 +74,11 @@ def editar_ciclo(id_ciclo, ciclo_atualizado):
             )
             ciclos[id_ciclo_str]["nome_ciclo"] = str(ciclo_atualizado["nome_ciclo"])
             _salvar_ciclos(ciclos)
-            gerenciador_notas.atualiza_todos_fee_da_turma(
-                ciclos[id_ciclo_str]["id_turma"]
-            )
         else:
             raise KeyError("Ciclo não encontrado.")
+        gerenciador_notas.atualiza_todos_fee_da_turma(
+            ciclos[id_ciclo_str]["id_turma"]
+        )
     except KeyError as e:
         return f"Falha na edição: {str(e)}"
 
