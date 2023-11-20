@@ -26,18 +26,10 @@
     "4": {
         "id_turma": "1",
         "duracao": 15,
-        "peso_nota": 2.0,
+        "peso_nota": 1.0,
         "numero_ciclo": 4,
         "prazo_insercao_nota": 5,
         "nome_ciclo": "ciclo#4"
-    },
-    "5": {
-        "id_turma": "1",
-        "duracao": 15,
-        "peso_nota": 1.0,
-        "numero_ciclo": 5,
-        "prazo_insercao_nota": 5,
-        "nome_ciclo": "ciclo#5"
     },
     "6": {
         "id_turma": "2",
@@ -70,13 +62,5 @@
         "numero_ciclo": 4,
         "prazo_insercao_nota": 5,
         "nome_ciclo": "ciclo#4"
-    },
-    "10": {
-        "id_turma": "2",
-        "duracao": 15,
-        "peso_nota": 1.0,
-        "numero_ciclo": 5,
-        "prazo_insercao_nota": 5,
-        "nome_ciclo": "ciclo#5"
     }
 }
