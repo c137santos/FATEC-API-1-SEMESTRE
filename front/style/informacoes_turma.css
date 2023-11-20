@@ -70,18 +70,11 @@ body {
 }
 
 .container-ciclos {
-  /* display: flex; */
-  /* flex-direction: column; */
   text-align: center;
   justify-content: left;
   max-width: 100%;
   height: 165px;
   padding: 0px 5px;
-}
-
-.ciclo-peso {
-  /* display: flex;
-  justify-content: center; */
 }
 
 .divDetalheCiclo {
@@ -93,7 +86,7 @@ body {
   width: 10%;
   padding: 2px;
   margin-right: 15px;
-  font-weight: bold;  
+  font-weight: bold;
 }
 
 .ciclo {
@@ -113,30 +106,13 @@ body {
 /* Estilos para o contêiner principal dos alunos */
 .aluno-container {
   overflow-x: hidden;
-  width: 550px;
+  width: 700px;
   height: 265px;
   padding-top: 5px;
   margin-bottom: 9px;
   border-radius: 5px;
   overflow-y: auto;
-}
-
-.aviso_ciclo_aberto {
-  text-align: center;
-  margin-top: 2px;
-  margin-bottom: 5px;
-}
-
-.header-container {
-  height: 40px;
-  background-color: #f5f5f5;
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  font-weight: bold;
-  font-size: initial;
-  margin-bottom: 5px;
-  border-radius: 5px;
+  margin-top: 10px;
 }
 
 /* Estilos para os quadrados representando os alunos */
@@ -150,10 +126,14 @@ body {
   align-items: center;
 }
 
-/* .aluno-square:hover {
-  background-color: transparent;
-  box-shadow: 0 0 50px 20px rgb(154, 104, 241);
-} */
+.campoNota {
+  align-items: center;
+  flex-grow: 1; /* Permite que o elemento cresça conforme necessário */
+  flex-basis: 0; /* Define a base flexível como 0 para ocupar o espaço disponível */
+  min-width: 280px; /* Defina um tamanho mínimo para evitar que fique muito pequeno */
+  border-right: 1px solid #ccc; /* Adicione uma borda à direita */
+  padding: 0 10px; /* Adicione algum espaçamento interno para melhor aparência */
+}
 
 .header-title,
 .aluno-square p,
@@ -169,16 +149,15 @@ body {
   width: 150px;
 }
 
-.titulo_notas,
 .campoNota {
   align-items: center;
-  width: auto; /* Use "auto" para que o campo se ajuste ao conteúdo */
+  flex-grow: 1; /* Permite que o elemento cresça conforme necessário */
+  flex-basis: 0; /* Define a base flexível como 0 para ocupar o espaço disponível */
   min-width: 280px; /* Defina um tamanho mínimo para evitar que fique muito pequeno */
   border-right: 1px solid #ccc; /* Adicione uma borda à direita */
   padding: 0 10px; /* Adicione algum espaçamento interno para melhor aparência */
 }
 
-.titulo_media,
 div.media {
   width: 100px;
   border-right: 0;
