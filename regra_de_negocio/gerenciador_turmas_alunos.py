@@ -46,6 +46,17 @@ def listar_turmas_aluno(id_aluno):
     return turmas_do_aluno
 
 
+# dado id da turma e do aluno busca o objeto exato
+def busca_determinada_turma_do_aluno(id_aluno, id_turma):
+    turmas_aluno = listar_turmas_alunos()
+    for turma in turmas_aluno:
+        if (
+            turmas_aluno[turma]["id_turma"] == id_turma
+            and turmas_aluno[turma]["id_aluno"] == id_aluno
+        ):
+            return turmas_aluno[turma]
+
+
 def adicionar_turma_aluno(turma_aluno):
     if not turma_aluno:
         return False
@@ -75,9 +86,23 @@ def remover_aluno_da_turma(id_turma, id_aluno):
     turmas_alunos = listar_turmas_alunos()
     turmas_alunos_copia = turmas_alunos.copy()
     for id_turma_aluno in turmas_alunos_copia:
-        if id_turma == turmas_alunos_copia[id_turma_aluno]["id_turma"] and id_aluno == turmas_alunos_copia[id_turma_aluno]["id_aluno"] :
+        if (
+            id_turma == turmas_alunos_copia[id_turma_aluno]["id_turma"]
+            and id_aluno == turmas_alunos_copia[id_turma_aluno]["id_aluno"]
+        ):
             turmas_alunos.pop(id_turma_aluno)
     return _salvar_turmas_alunos(turmas_alunos)
+
+
+def adicionar_fee_na_turma_aluno(aluno_id, turma_id, valor_fee):
+    turmas_alunos = listar_turmas_alunos()
+    for id in turmas_alunos.keys():
+        if (
+            turmas_alunos[id]["id_aluno"] == aluno_id
+            and turmas_alunos[id]["id_turma"] == turma_id
+        ):
+            turmas_alunos[id]["fee"] = valor_fee
+    _salvar_turmas_alunos(turmas_alunos)
 
 
 def _obter_novo_id_turmas_alunos():

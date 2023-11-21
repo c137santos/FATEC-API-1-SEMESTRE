@@ -5,7 +5,8 @@ from regra_de_negocio.service import (
     cria_turma,
     listar_fee_turmas_svc,
     excluir_turma_svc,
-    importa_aluno_svc,
+    buscar_fee_do_aluno_na_turma,
+    importa_aluno_svc
 )
 
 from regra_de_negocio.gerenciador_turmas import editar_turma_svc
@@ -19,6 +20,7 @@ import regra_de_negocio.gerenciador_importacao_alunos as gerenciador_importacao_
 
 import json
 import math
+
 
 def criar_aluno(request):
     novo_aluno = json.loads(request.body)
@@ -60,7 +62,7 @@ def editar_turma(request, id):
         turma["professor"],
         turma["data_de_inicio"],
         turma["alunos_adicionados"],
-        turma["alunos_excluidos"]
+        turma["alunos_excluidos"],
     )
     return JsonResponse({"mensagem": resultado})
 
@@ -170,7 +172,7 @@ def listar_notas_por_id_aluno(request, id_aluno):
 
 
 def obter_fee_turma_aluno(request, id_turma, id_aluno):
-    fee = gerenciador_notas.obter_fee_turma_aluno(id_turma, id_aluno)
+    fee = buscar_fee_do_aluno_na_turma(id_turma, id_aluno)
     return JsonResponse(fee)
 
 
@@ -228,12 +230,16 @@ def editar_global_settings(request):
     )
     return JsonResponse({"mensagem": "concluido"})
 
+
 def listar_fee_alunos_turma(request, id_turma):
     alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_turma)
     for id_aluno in alunos.keys():
-        fee = gerenciador_notas._calcular_fee_turma_aluno(id_aluno=id_aluno,id_turma=id_turma)
+        fee = gerenciador_notas.buscar_fee_do_aluno_na_turma(
+            id_aluno=id_aluno, id_turma=id_turma
+        )
         alunos[id_aluno]["fee"] = fee
     return JsonResponse(alunos)
+
 
 def listar_fee_turmas(request):
     turmas = listar_fee_turmas_svc()

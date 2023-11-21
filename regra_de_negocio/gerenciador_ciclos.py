@@ -59,6 +59,8 @@ def adicionar_ciclo(ciclo):
 
 
 def editar_ciclo(id_ciclo, ciclo_atualizado):
+    from regra_de_negocio import gerenciador_notas
+
     try:
         id_ciclo_str = str(id_ciclo)
         ciclos = listar_ciclos()
@@ -71,9 +73,12 @@ def editar_ciclo(id_ciclo, ciclo_atualizado):
                 ciclo_atualizado["prazo_insercao_nota"]
             )
             ciclos[id_ciclo_str]["nome_ciclo"] = str(ciclo_atualizado["nome_ciclo"])
-            return _salvar_ciclos(ciclos)
+            _salvar_ciclos(ciclos)
         else:
             raise KeyError("Ciclo não encontrado.")
+        gerenciador_notas.atualiza_todos_fee_da_turma(
+            ciclos[id_ciclo_str]["id_turma"]
+        )
     except KeyError as e:
         return f"Falha na edição: {str(e)}"
 
@@ -161,7 +166,7 @@ def cria_ciclos_pra_turma(id_nova_turma, info_global_settings):
         ciclo["peso_nota"] = float(i + 1)
         ciclo["numero_ciclo"] = i + 1
         ciclo["prazo_insercao_nota"] = info_global_settings["prazo_insercao_nota"]
-        ciclo["nome_ciclo"] = 'ciclo#' + str(ciclo["numero_ciclo"])
+        ciclo["nome_ciclo"] = "ciclo#" + str(ciclo["numero_ciclo"])
         adicionar_ciclo(ciclo)
 
 

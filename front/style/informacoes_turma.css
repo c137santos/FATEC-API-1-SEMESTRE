@@ -150,6 +150,8 @@ body {
 }
 
 .campoNota {
+  margin-left:2px;
+  margin-right:2px;
   align-items: center;
   flex-grow: 1; /* Permite que o elemento cresça conforme necessário */
   flex-basis: 0; /* Define a base flexível como 0 para ocupar o espaço disponível */
@@ -179,7 +181,6 @@ div.media {
   background-color: #ccc;
   color: gray;
   width: 50px;
-  margin-left: 10px;
   margin-right: 10px;
   text-align: center;
   padding: 0px;
