@@ -53,6 +53,10 @@ def obter_turma(request, id):
     turmas_data = busca_turmas()
     return JsonResponse(turmas_data[id])
 
+def turmas_nao_iniciadas(request):
+    turmas_data = gerenciador_turmas.turmas_nao_iniciadas()
+    return JsonResponse(turmas_data)
+
 
 def editar_turma(request, id):
     turma = json.loads(request.body)

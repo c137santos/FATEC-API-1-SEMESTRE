@@ -1,7 +1,9 @@
 // Função para listar turmas no elemento select
 async function listarTurmas() {
   try {
-    const response = await fetch("http://127.0.0.1:8080/api/v1/turmas/listar");
+    const response = await fetch(
+      "http://127.0.0.1:8080/api/v1/turmas/nao_iniciadas"
+    );
     const turmaData = await response.json();
 
     const opcoesTurma = document.getElementById("selecionaTurma");

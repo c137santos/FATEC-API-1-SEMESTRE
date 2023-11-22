@@ -1,6 +1,6 @@
 import json
 import regra_de_negocio.global_settings as global_settings
-
+from datetime import datetime, timedelta
 
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
 def busca_turmas():
@@ -111,3 +111,15 @@ def _obter_novo_id_turma():
     id_max_int = ids_numericos.pop()
     novo_id = str(id_max_int + 1)
     return novo_id
+
+
+def turmas_nao_iniciadas():
+    turmas = busca_turmas()
+    data_atual = datetime.now()
+    turmas_nao_inciadas = {}
+    for id_turma in turmas.keys():
+        if datetime.strptime(turmas[id_turma]["data_de_inicio"], "%d/%m/%Y") - timedelta(1) > data_atual:
+            turmas_nao_inciadas[id_turma] = {
+                "nome": turmas[id_turma]["nome"]
+            }
+    return turmas_nao_inciadas
