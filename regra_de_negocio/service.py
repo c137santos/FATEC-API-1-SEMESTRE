@@ -93,9 +93,7 @@ def exportacao_relatorio_turma_svc(id_turma):
     lista_ra = []
     for aluno in alunos_da_turma.values():
         ra_aluno = aluno["RA"]
-        aluno = buscar_aluno(
-            ra_aluno
-        )
+        aluno = buscar_aluno(ra_aluno)
         if aluno:
             info_alunos[ra_aluno] = aluno
             lista_ra.append(ra_aluno)
