@@ -9,6 +9,20 @@ def listar_turmas_alunos():
         turmas_alunos = json.load(f)
     return turmas_alunos
 
+# lista o fee de todos os alunos de uma turma
+# dicionário idêntico ao turmas_alunos.json
+def listar_fee_alunos_turma(id_turma):
+    if not id_turma:
+        return {}
+    id_turma_str = str(id_turma)
+    turmas_alunos = listar_turmas_alunos()
+    alunos_turma = {}
+    for id_turmas_alunos in turmas_alunos.keys():
+        turma_aluno = turmas_alunos[id_turmas_alunos]
+        if turma_aluno["id_turma"] == id_turma:
+            alunos_turma[id_turmas_alunos] = turma_aluno
+    print(alunos_turma)
+    return alunos_turma
 
 # Essa função retorna todos os alunos de uma turma
 def listar_alunos_turma(id_turma):

@@ -41,13 +41,16 @@ class GraficoAluno {
                 return dados
         }
         const res = await fetch(`http://127.0.0.1:8080/api/v1/relatorios/grafico_alunos/${idTurma}`)
-        const dados_aluno = await res.json()
-
-        for(let id_aluno in dados_aluno){
-            const aluno = dados_aluno[id_aluno]
-            dados.labels.push(aluno.nome)
-            dados.data.push(aluno.fee)
+        const dados_grafico_alunos = await res.json()
+        const alunos = dados_grafico_alunos["alunos"]
+        const turmas_alunos = dados_grafico_alunos["turmas_alunos"] 
+        for(let id_turma_aluno in turmas_alunos){
+            const turma_aluno = turmas_alunos[id_turma_aluno]
+            const aluno = alunos[turma_aluno["id_aluno"]]
+            dados.labels.push(aluno["nome"])
+            dados.data.push(turma_aluno["fee"])
         }
+        console.log(dados)
         return dados
     }
 
