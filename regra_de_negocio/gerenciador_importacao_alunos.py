@@ -27,14 +27,14 @@ def verifica_importacao(arquivoImportadoJson):
     importado_json = json.loads(arquivoImportadoJson)
     """
     Modelo esperado:
-    [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
-    {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
+    [{"Nome completo do aluno":"valor","Gênero":"valor","Data":"valor"},
+    {"Nome completo do aluno":"valor","Gênero":"valor","Data":"valor"}]
     """
     erros = []
-    cabecalhos_esperados = ["Nome completo do aluno", "Genêro", "Data de Nascimento"]
+    cabecalhos_esperados = ["Nome completo do aluno", "Gênero", "Data de Nascimento"]
 
     if not importado_json:
-        return {"sucesso": False, "erros": ["O JSON está vazio."]}
+        return {"sucesso": False, "erros": ["O CSV está vazio."]}
 
     # Obtendo os cabeçalhos do primeiro aluno
     cabecalhos_obtidos = list(importado_json[0].keys())
@@ -50,7 +50,7 @@ def verifica_importacao(arquivoImportadoJson):
             erros.append(str(e))
 
         try:
-            valida_genero(aluno["Nome completo do aluno"], aluno["Genêro"])
+            valida_genero(aluno["Nome completo do aluno"], aluno["Gênero"])
         except ValueError as e:
             erros.append(str(e))
 
@@ -78,21 +78,18 @@ def _obter_novo_id(entidade):
 def gravar_alunos_banco(alunos, alunos_importados):
     novo_id = _obter_novo_id(alunos)
     novos_alunos = {}
-    print(alunos_importados)
     for aluno in alunos_importados:
         novos_alunos[novo_id] = {
             "nome": aluno["Nome completo do aluno"].title(),
-            "genero": aluno["Genêro"],
+            "genero": aluno["Gênero"],
             "data_nascimento": aluno["Data de Nascimento"],
             "RA": novo_id
         }
         
         novo_id = str(int(novo_id) + 1)
-    print(novos_alunos)
     for aluno_id, aluno_info in novos_alunos.items():
         alunos[aluno_id] = aluno_info
     _salvar_alunos(alunos)
-    print(alunos)
     return novos_alunos
 
 def _salvar_alunos(alunos):
@@ -112,7 +109,31 @@ def criar_relacao_turma_aluno(turma_id, novos_alunos, turmas_alunos):
     for aluno_id in novos_alunos.keys():
         turmas_alunos[novo_id] = {
             "id_turma": turma_id,
-            "id_aluno": aluno_id
+            "id_aluno": aluno_id,
+            "fee": 0.0
         }
         novo_id = str(int(novo_id) + 1)
     _salvar_turma_alunos(turmas_alunos)
+
+
+def _salvar_notas(notas):
+    dados = json.dumps(notas, indent=4)
+    with open("dados/notas.json", "w", encoding="utf-8") as f:
+        f.write(dados)
+        return True
+    
+def adicionar_nota(nova_nota, notas):
+    novo_id_nota = _obter_novo_id(notas)
+    notas[novo_id_nota] = nova_nota
+    _salvar_notas(notas)
+
+def adicionar_notas_aluno_turma(ciclos, alunos, id_nova_turma_str, notas):
+    for id_aluno in alunos:
+        for id_ciclo in ciclos:
+            nova_nota = {}
+            nova_nota["id_turma"] = id_nova_turma_str
+            nova_nota["id_aluno"] = str(id_aluno)
+            nova_nota["id_ciclo"] = str(id_ciclo)
+            nova_nota["valor"] = 0.0
+            adicionar_nota(nova_nota, notas)
+

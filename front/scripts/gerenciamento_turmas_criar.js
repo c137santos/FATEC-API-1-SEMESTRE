@@ -41,7 +41,7 @@ async function coletaDadosNovaTurma() {
   };
   console.log(novaTurmaData);
 
-  criarNovaTurma(novaTurmaData)
+  await criarNovaTurma(novaTurmaData)
   window.location.href = "http://127.0.0.1:5500/front/gerenciamento_turmas.html"
 }
 

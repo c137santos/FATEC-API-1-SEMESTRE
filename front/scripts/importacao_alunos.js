@@ -100,7 +100,7 @@ function criar_modal_confirmar_edicao(nome_Turma, arquivoImportadoJson) {
 
     for (const aluno of arquivoImportadoJson) {
       const alunoNome = aluno["Nome completo do aluno"];
-      const alunoGenero = aluno["Genêro"];
+      const alunoGenero = aluno["Gênero"];
       const alunoNascimento = aluno["Data de Nascimento"];
 
       mensagem += `Nome do aluno: ${alunoNome}, `;

@@ -4,6 +4,7 @@ import regra_de_negocio.gerenciador_ciclos as gerenciador_ciclos
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
 import regra_de_negocio.gerenciador_notas as gerenciador_notas
 import regra_de_negocio.gerenciador_importacao_alunos as gerenciador_importacao_alunos
+import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 
 
 def busca_turmas():  # retorna todas turmas
@@ -66,18 +67,20 @@ def importa_aluno_svc(requisicao, alunos_importados):
         "turma_id": "1",
         "nome_Turma": "Logica ok!",
         "alunos_importados": 
-        [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
-        {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
+        [{"Nome completo do aluno":"valor","Gênero":"valor","Data":"valor"},
+        {"Nome completo do aluno":"valor","Gênero":"valor","Data":"valor"}]
     """
     try:
         turma_id = requisicao["turma_id"]
+        turma_id_str = str(turma_id)
         nome_turma = requisicao["nome_Turma"]
-        alunos = gerenciador_turmas_alunos.listar_alunos_turma(turma_id)
+        alunos = gerenciador_alunos.listar_alunos()
         turma_alunos = gerenciador_turmas_alunos.listar_turmas_alunos()
         novos_alunos = gerenciador_importacao_alunos.gravar_alunos_banco(alunos, alunos_importados)
         gerenciador_importacao_alunos.criar_relacao_turma_aluno(turma_id, novos_alunos, turma_alunos)
-        ciclos = gerenciador_ciclos.listar_ciclos_por_id_turma(turma_id)
-        gerenciador_notas.adicionar_notas_aluno_turma(ciclos, novos_alunos, turma_id)
+        ciclos = gerenciador_ciclos.listar_ciclos_por_id_turma(turma_id_str)
+        notas = gerenciador_notas.listar_notas()
+        gerenciador_importacao_alunos.adicionar_notas_aluno_turma(ciclos, novos_alunos, turma_id_str, notas)
         resposta = f"Alunos adicionados a turma {nome_turma}"
         return resposta
     except Exception as e:

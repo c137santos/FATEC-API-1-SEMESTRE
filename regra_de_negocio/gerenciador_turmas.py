@@ -54,12 +54,12 @@ def criacao_turma(nova_turma):
 
     id_nova_turma = _obter_novo_id_turma()
     turmas = busca_turmas()
-    nova_turma["quantidade_ciclos"] = global_settings.read_global_settings()[
-        "quant_ciclos"
-    ]
     nova_turma["duracao_ciclo"] = global_settings.read_global_settings()[
         "quant_dias_ciclo"
     ]
+    nova_turma["quantidade_ciclos"] = int(global_settings.read_global_settings()[
+        "quant_ciclos"
+    ])
     alunos_adicionados = nova_turma.pop("alunos_adicionados")
     turmas[id_nova_turma] = nova_turma
     turma_nome = turmas[id_nova_turma]["nome"]
