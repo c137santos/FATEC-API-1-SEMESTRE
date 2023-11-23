@@ -67,8 +67,8 @@ def importa_aluno_svc(requisicao, alunos_importados):
         "turma_id": "1",
         "nome_Turma": "Logica ok!",
         "alunos_importados": 
-        [{"Nome completo do aluno":"valor","Gênero":"valor","Data":"valor"},
-        {"Nome completo do aluno":"valor","Gênero":"valor","Data":"valor"}]
+    [{"Nome Completo do Aluno":"valor","Gênero":"valor","Data de Nascimento":"valor"},
+    {"Nome Completo do Aluno":"valor","Gênero":"valor","Data de Nascimento":"valor"}]
     """
     try:
         turma_id = requisicao["turma_id"]

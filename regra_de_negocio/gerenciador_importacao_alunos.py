@@ -27,11 +27,11 @@ def verifica_importacao(arquivoImportadoJson):
     importado_json = json.loads(arquivoImportadoJson)
     """
     Modelo esperado:
-    [{"Nome completo do aluno":"valor","Gênero":"valor","Data":"valor"},
-    {"Nome completo do aluno":"valor","Gênero":"valor","Data":"valor"}]
+    [{"Nome Completo do Aluno":"valor","Gênero":"valor","Data de Nascimento":"valor"},
+    {"Nome Completo do Aluno":"valor","Gênero":"valor","Data de Nascimento":"valor"}]
     """
     erros = []
-    cabecalhos_esperados = ["Nome completo do aluno", "Gênero", "Data de Nascimento"]
+    cabecalhos_esperados = ["Nome Completo do Aluno", "Gênero", "Data de Nascimento"]
 
     if not importado_json:
         return {"sucesso": False, "erros": ["O CSV está vazio."]}
@@ -45,17 +45,17 @@ def verifica_importacao(arquivoImportadoJson):
 
     for aluno in importado_json:
         try:
-            valida_nome(aluno["Nome completo do aluno"])
+            valida_nome(aluno["Nome Completo do Aluno"])
         except ValueError as e:
             erros.append(str(e))
 
         try:
-            valida_genero(aluno["Nome completo do aluno"], aluno["Gênero"])
+            valida_genero(aluno["Nome Completo do Aluno"], aluno["Gênero"])
         except ValueError as e:
             erros.append(str(e))
 
         try:
-            valida_data(aluno["Nome completo do aluno"], aluno["Data de Nascimento"])
+            valida_data(aluno["Nome Completo do Aluno"], aluno["Data de Nascimento"])
         except ValueError as e:
             erros.append(str(e))
 
@@ -80,7 +80,7 @@ def gravar_alunos_banco(alunos, alunos_importados):
     novos_alunos = {}
     for aluno in alunos_importados:
         novos_alunos[novo_id] = {
-            "nome": aluno["Nome completo do aluno"].title(),
+            "nome": aluno["Nome Completo do Aluno"].title(),
             "genero": aluno["Gênero"],
             "data_nascimento": aluno["Data de Nascimento"],
             "RA": novo_id

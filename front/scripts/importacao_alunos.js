@@ -99,7 +99,7 @@ function criar_modal_confirmar_edicao(nome_Turma, arquivoImportadoJson) {
     let mensagem = `Atenção! Os alunos serão adicionados à turma ${nome_Turma}:\n\n`;
 
     for (const aluno of arquivoImportadoJson) {
-      const alunoNome = aluno["Nome completo do aluno"];
+      const alunoNome = aluno["Nome Completo do Aluno"];
       const alunoGenero = aluno["Gênero"];
       const alunoNascimento = aluno["Data de Nascimento"];
 
