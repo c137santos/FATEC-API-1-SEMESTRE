@@ -2,10 +2,14 @@ import json
 import re
 
 def valida_nome(nome):
+    if not nome.strip():
+        raise ValueError("Nome do aluno não pode estar vazio.")
     if not re.match(r'^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$', nome):
         raise ValueError(f"Apenas letras no nome: {nome.title()}")
 
 def valida_genero(nome, genero):
+    if not genero.strip():
+        raise ValueError(f"Gênero do aluno {nome.title()} não pode estar vazio.")
     generos_validos = [
         "Homem cis",
         "Mulher cis",
@@ -20,6 +24,8 @@ def valida_genero(nome, genero):
             raise ValueError(f"Aluno {nome.title()} está com gênero inválido: {genero}")
 
 def valida_data(nome, data):
+    if not data.strip():
+        raise ValueError(f"Data de nascimento do aluno {nome.title()} não pode estar vazia.")
     if not re.match(r'^\d{2}/\d{2}/\d{4}$', data):
         raise ValueError(f"Aluno {nome.title()} está com a data inválida: {data}")
 

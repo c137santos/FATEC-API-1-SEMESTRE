@@ -191,12 +191,15 @@ function textToJson(arquivoImportadoTexto) {
 
     linhaAtual = linhaAtual.map((element) => element.replace(/\r$/, ""));
 
-    if (linhaAtual.length === headers.length) {
-      var obj = {};
-      for (var j = 0; j < headers.length; j++) {
-        obj[headers[j]] = linhaAtual[j];
+    // Ignora linhas completamente vazias
+    if (linhaAtual.some((element) => element.trim() !== "")) {
+      if (linhaAtual.length === headers.length) {
+        var obj = {};
+        for (var j = 0; j < headers.length; j++) {
+          obj[headers[j]] = linhaAtual[j];
+        }
+        resultado.push(obj);
       }
-      resultado.push(obj);
     }
   }
   return JSON.stringify(resultado).replace(/\\r/g, "").replace(/\\n/g, "");
