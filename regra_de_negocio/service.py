@@ -104,9 +104,9 @@ def exportacao_relatorio_turma_svc(id_turma):
         for nota in nota_do_aluno.values():
             info_alunos[ra_aluno]["ciclo__c" + nota["id_ciclo"]] = nota["valor"]
     try:
-        gerenciador_relatorios.cria_relatorio_csv(
+        pathresponse = gerenciador_relatorios.cria_relatorio_csv(
             info_turma=info_turma, info_alunos=info_alunos
         )
     except:
         return f"Problemas com a geração do relatório da turma {info_turma['nome']}"
-    return "sucess"
+    return pathresponse

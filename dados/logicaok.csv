@@ -1,0 +1,6 @@
+nome,professor,data_de_inicio,duracao_ciclo,quantidade_ciclos
+Logica ok!,Nadalete Lucas,02/11/2023,10,4
+nome,data_nascimento,genero,RA,ciclo__c1,ciclo__c2,ciclo__c3,ciclo__c4
+Marcelo Tambalo,30/11/2023,homem_cis,1,6.5,8.5,7.5,7.5
+Renzo Nutitelle,10/11/1990,homem_cis,2,7.0,8.0,7.0,7.0
+Bia Bonita,12/01/1989,mulher_trans,3,9.0,9.5,9.0,9.5
