@@ -120,7 +120,7 @@ def retorna_response(environ, start_response):
 
 def ajusta_banco(arg=False):
     if arg:
-        copy_fs("./devdb", "./dados", walker=Walker(filter=["*.json", "*.csv"]))
+        copy_fs("./devdb", "./dados", walker=Walker(filter=["*.json"]))
         print("Banco formatado")
 
 

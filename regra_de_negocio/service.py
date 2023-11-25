@@ -63,12 +63,13 @@ def buscar_fee_do_aluno_na_turma(id_turma, id_aluno):
     except Exception as e:
         raise Exception(f"Falha na busca do fee: {str(e)}")
 
+
 def importa_aluno_svc(requisicao, alunos_importados):
     """
     Formato da requisição JSON esperado:
         "turma_id": "1",
         "nome_Turma": "Logica ok!",
-        "alunos_importados": 
+        "alunos_importados":
     [{"Nome Completo do Aluno":"valor","Gênero":"valor","Data de Nascimento":"valor"},
     {"Nome Completo do Aluno":"valor","Gênero":"valor","Data de Nascimento":"valor"}]
     """
@@ -78,11 +79,16 @@ def importa_aluno_svc(requisicao, alunos_importados):
         nome_turma = requisicao["nome_Turma"]
         alunos = gerenciador_alunos.listar_alunos()
         turma_alunos = gerenciador_turmas_alunos.listar_turmas_alunos()
-        novos_alunos = gerenciador_importacao_alunos.gravar_alunos_banco(alunos, alunos_importados)
-        gerenciador_importacao_alunos.criar_relacao_turma_aluno(turma_id, novos_alunos, turma_alunos)
+        novos_alunos = gerenciador_importacao_alunos.gravar_alunos_banco(
+            alunos, alunos_importados
+        )
+        gerenciador_importacao_alunos.criar_relacao_turma_aluno(
+            turma_id, novos_alunos, turma_alunos
+        )
         ciclos = gerenciador_ciclos.listar_ciclos_por_id_turma(turma_id_str)
-        notas = gerenciador_notas.listar_notas()
-        gerenciador_notas.adicionar_notas_aluno_turma(ciclos, novos_alunos, turma_id_str)
+        gerenciador_notas.adicionar_notas_aluno_turma(
+            ciclos, novos_alunos, turma_id_str
+        )
         resposta = f"Alunos adicionados a turma {nome_turma}"
         return resposta
     except Exception as e:
@@ -113,4 +119,3 @@ def exportacao_relatorio_turma_svc(id_turma):
     except:
         return f"Problemas com a geração do relatório da turma {info_turma['nome']}"
     return array_dados_relatorio
-

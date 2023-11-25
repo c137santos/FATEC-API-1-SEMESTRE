@@ -2,6 +2,7 @@ import json
 import regra_de_negocio.global_settings as global_settings
 from datetime import datetime, timedelta
 
+
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
 def busca_turmas():
     with open("dados/turmas.json", "r", encoding="utf-8") as f:
@@ -57,9 +58,9 @@ def criacao_turma(nova_turma):
     nova_turma["duracao_ciclo"] = global_settings.read_global_settings()[
         "quant_dias_ciclo"
     ]
-    nova_turma["quantidade_ciclos"] = int(global_settings.read_global_settings()[
-        "quant_ciclos"
-    ])
+    nova_turma["quantidade_ciclos"] = int(
+        global_settings.read_global_settings()["quant_ciclos"]
+    )
     alunos_adicionados = nova_turma.pop("alunos_adicionados")
     turmas[id_nova_turma] = nova_turma
     turma_nome = turmas[id_nova_turma]["nome"]
@@ -118,8 +119,10 @@ def turmas_nao_iniciadas():
     data_atual = datetime.now()
     turmas_nao_iniciadas = {}
     for id_turma in turmas.keys():
-        if datetime.strptime(turmas[id_turma]["data_de_inicio"], "%d/%m/%Y") - timedelta(1) > data_atual:
-            turmas_nao_iniciadas[id_turma] = {
-                "nome": turmas[id_turma]["nome"]
-            }
+        if (
+            datetime.strptime(turmas[id_turma]["data_de_inicio"], "%d/%m/%Y")
+            - timedelta(1)
+            > data_atual
+        ):
+            turmas_nao_iniciadas[id_turma] = {"nome": turmas[id_turma]["nome"]}
     return turmas_nao_iniciadas

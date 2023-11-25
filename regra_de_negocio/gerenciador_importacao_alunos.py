@@ -5,7 +5,7 @@ import re
 def valida_nome(nome):
     if not nome.strip():
         raise ValueError("Nome do aluno não pode estar vazio.")
-    if not re.match(r'^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$', nome):
+    if not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$", nome):
         raise ValueError(f"Apenas letras no nome: {nome.title()}")
 
 
@@ -28,8 +28,10 @@ def valida_genero(nome, genero):
 
 def valida_data(nome, data):
     if not data.strip():
-        raise ValueError(f"Data de nascimento do aluno {nome.title()} não pode estar vazia.")
-    if not re.match(r'^\d{2}/\d{2}/\d{4}$', data):
+        raise ValueError(
+            f"Data de nascimento do aluno {nome.title()} não pode estar vazia."
+        )
+    if not re.match(r"^\d{2}/\d{2}/\d{4}$", data):
         raise ValueError(f"Aluno {nome.title()} está com a data inválida: {data}")
 
 
@@ -130,8 +132,7 @@ def criar_relacao_turma_aluno(turma_id, novos_alunos, turmas_alunos):
         turmas_alunos[novo_id] = {
             "id_turma": turma_id,
             "id_aluno": aluno_id,
-            "fee": 0.0
+            "fee": 0.0,
         }
         novo_id = str(int(novo_id) + 1)
     _salvar_turma_alunos(turmas_alunos)
-

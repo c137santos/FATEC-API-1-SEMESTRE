@@ -1,33 +1,31 @@
-var orientacoesBotoes = false;
-
 function inicializaPaginaExportacaoRelatorio() {
-    listarTurmas();
+    listarTurmas()
 }
 
 async function listarTurmas() {
     try {
         const response = await fetch("http://127.0.0.1:8080/api/v1/turmas/listar");
-        const turmaData = await response.json();
+        const turmaData = await response.json()
 
-        const opcoesTurma = document.getElementById("selecionaTurma");
+        const opcoesTurma = document.getElementById("selecionaTurma")
 
         for (const turmaId in turmaData) {
             if (turmaData.hasOwnProperty(turmaId)) {
                 const turma = turmaData[turmaId];
                 const option = document.createElement("option");
                 option.value = turmaId;
-                option.dataset.nome = turma.nome;  // Ajuste para camelCase
+                option.dataset.nome = turma.nome;
                 option.textContent = turma.nome;
                 opcoesTurma.appendChild(option);
             }
         }
     } catch (error) {
-        console.error("Erro ao buscar dados da API -> ", error);
+        console.error("Erro ao buscar dados da API -> ", error)
     }
 }
 
 async function exportacaoRelatorio(event) {
-    event.preventDefault();
+    event.preventDefault()
     const turmaSelecionada = document.getElementById("selecionaTurma")
     const idTurma = turmaSelecionada.value
     const nomeTurma = (turmaSelecionada.options[turmaSelecionada.selectedIndex].dataset.nome).replace(/[^a-zA-Z0-9]/g, '').toLowerCase()
@@ -48,7 +46,7 @@ async function solicitaRelatorio(idTurma) {
         console.error("Erro na geração do relatório para download", error)
         throw error
     }
-  }
+}
 
 function iniciarDownload( dados, nomeDaTurma) {
     const nomeDoArquivo = nomeDaTurma + '.csv'
@@ -67,6 +65,6 @@ function iniciarDownload( dados, nomeDaTurma) {
 }
 
 function converteArrayParaCsv(dados) {
-    const linhas = dados.map(obj => Object.values(obj).join(','));
-    return [...linhas].join('\n');
+    const linhas = dados.map(obj => Object.values(obj).join(','))
+    return [...linhas].join('\n')
 }
