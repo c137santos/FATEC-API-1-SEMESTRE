@@ -86,9 +86,7 @@ def importa_aluno_svc(requisicao, alunos_importados):
 
 def exportacao_relatorio_turma_svc(id_turma):
     info_turma = gerenciador_turmas.obter_turma(id_turma)
-    alunos_da_turma = gerenciador_turmas_alunos.listar_alunos_turma(
-        id_turma
-    )  #     {"1": {"id_turma": "1","id_aluno": "1"}, "2": {"id_turma": "1","id_aluno": "4"}}
+    alunos_da_turma = gerenciador_turmas_alunos.listar_alunos_turma(id_turma)
     info_alunos = {}
     lista_ra = []
     for aluno in alunos_da_turma.values():
@@ -104,9 +102,9 @@ def exportacao_relatorio_turma_svc(id_turma):
         for nota in nota_do_aluno.values():
             info_alunos[ra_aluno]["ciclo__c" + nota["id_ciclo"]] = nota["valor"]
     try:
-        pathresponse = gerenciador_relatorios.cria_relatorio_csv(
+        array_dados_relatorio = gerenciador_relatorios.cria_relatorio_csv(
             info_turma=info_turma, info_alunos=info_alunos
         )
     except:
         return f"Problemas com a geração do relatório da turma {info_turma['nome']}"
-    return pathresponse
+    return array_dados_relatorio
