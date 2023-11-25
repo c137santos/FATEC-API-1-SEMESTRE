@@ -5,6 +5,7 @@ import regra_de_negocio.gerenciador_ciclos as gerenciador_ciclos
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
 import regra_de_negocio.gerenciador_notas as gerenciador_notas
 import regra_de_negocio.gerenciador_importacao_alunos as gerenciador_importacao_alunos
+import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
 import regra_de_negocio.gerenciador_relatorios as gerenciador_relatorios
 
 
@@ -32,9 +33,7 @@ def listar_fee_turmas_svc():
         alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_turma)
         fee_turma = []
         for id_aluno in alunos.keys():
-            fee = gerenciador_notas._calcular_fee_turma_aluno(
-                id_aluno=id_aluno, id_turma=id_turma
-            )
+            fee = buscar_fee_do_aluno_na_turma(id_turma=id_turma, id_aluno=id_aluno)
             fee_turma.append(fee)
         if len(fee_turma) == 0:
             turmas[id_turma]["fee"] = 0.0
@@ -55,29 +54,35 @@ def excluir_turma_svc(id_turma):
         raise Exception(f"Falha na exclusão de turma: {str(e)}")
 
 
+def buscar_fee_do_aluno_na_turma(id_turma, id_aluno):
+    try:
+        turma_aluno = gerenciador_turmas_alunos.busca_determinada_turma_do_aluno(
+            id_aluno, id_turma
+        )
+        return turma_aluno["fee"]
+    except Exception as e:
+        raise Exception(f"Falha na busca do fee: {str(e)}")
+
 def importa_aluno_svc(requisicao, alunos_importados):
     """
     Formato da requisição JSON esperado:
         "turma_id": "1",
         "nome_Turma": "Logica ok!",
-        "alunos_importados":
-        [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
-        {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
+        "alunos_importados": 
+    [{"Nome Completo do Aluno":"valor","Gênero":"valor","Data de Nascimento":"valor"},
+    {"Nome Completo do Aluno":"valor","Gênero":"valor","Data de Nascimento":"valor"}]
     """
     try:
         turma_id = requisicao["turma_id"]
+        turma_id_str = str(turma_id)
         nome_turma = requisicao["nome_Turma"]
-        alunos = gerenciador_turmas_alunos.listar_alunos_turma(turma_id)
+        alunos = gerenciador_alunos.listar_alunos()
         turma_alunos = gerenciador_turmas_alunos.listar_turmas_alunos()
-        novos_alunos = gerenciador_importacao_alunos.gravar_alunos_banco(
-            alunos, alunos_importados
-        )
-        gerenciador_importacao_alunos.criar_relacao_turma_aluno(
-            turma_id, novos_alunos, turma_alunos
-        )
-        ciclos = gerenciador_ciclos.listar_ciclos_por_id_turma(turma_id)
-        print(f"ciclos: {ciclos}")
-        gerenciador_notas.adicionar_notas_aluno_turma(ciclos, novos_alunos, turma_id)
+        novos_alunos = gerenciador_importacao_alunos.gravar_alunos_banco(alunos, alunos_importados)
+        gerenciador_importacao_alunos.criar_relacao_turma_aluno(turma_id, novos_alunos, turma_alunos)
+        ciclos = gerenciador_ciclos.listar_ciclos_por_id_turma(turma_id_str)
+        notas = gerenciador_notas.listar_notas()
+        gerenciador_notas.adicionar_notas_aluno_turma(ciclos, novos_alunos, turma_id_str)
         resposta = f"Alunos adicionados a turma {nome_turma}"
         return resposta
     except Exception as e:
@@ -108,3 +113,4 @@ def exportacao_relatorio_turma_svc(id_turma):
     except:
         return f"Problemas com a geração do relatório da turma {info_turma['nome']}"
     return array_dados_relatorio
+

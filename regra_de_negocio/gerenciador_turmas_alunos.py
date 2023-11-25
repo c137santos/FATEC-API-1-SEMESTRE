@@ -9,6 +9,20 @@ def listar_turmas_alunos():
         turmas_alunos = json.load(f)
     return turmas_alunos
 
+# lista o fee de todos os alunos de uma turma
+# dicionário idêntico ao turmas_alunos.json
+def listar_fee_alunos_turma(id_turma):
+    if not id_turma:
+        return {}
+    id_turma_str = str(id_turma)
+    turmas_alunos = listar_turmas_alunos()
+    alunos_turma = {}
+    for id_turmas_alunos in turmas_alunos.keys():
+        turma_aluno = turmas_alunos[id_turmas_alunos]
+        if turma_aluno["id_turma"] == id_turma:
+            alunos_turma[id_turmas_alunos] = turma_aluno
+    print(alunos_turma)
+    return alunos_turma
 
 # Essa função retorna todos os alunos de uma turma
 def listar_alunos_turma(id_turma):
@@ -46,6 +60,17 @@ def listar_turmas_aluno(id_aluno):
     return turmas_do_aluno
 
 
+# dado id da turma e do aluno busca o objeto exato
+def busca_determinada_turma_do_aluno(id_aluno, id_turma):
+    turmas_aluno = listar_turmas_alunos()
+    for turma in turmas_aluno:
+        if (
+            turmas_aluno[turma]["id_turma"] == id_turma
+            and turmas_aluno[turma]["id_aluno"] == id_aluno
+        ):
+            return turmas_aluno[turma]
+
+
 def adicionar_turma_aluno(turma_aluno):
     if not turma_aluno:
         return False
@@ -81,6 +106,17 @@ def remover_aluno_da_turma(id_turma, id_aluno):
         ):
             turmas_alunos.pop(id_turma_aluno)
     return _salvar_turmas_alunos(turmas_alunos)
+
+
+def adicionar_fee_na_turma_aluno(aluno_id, turma_id, valor_fee):
+    turmas_alunos = listar_turmas_alunos()
+    for id in turmas_alunos.keys():
+        if (
+            turmas_alunos[id]["id_aluno"] == aluno_id
+            and turmas_alunos[id]["id_turma"] == turma_id
+        ):
+            turmas_alunos[id]["fee"] = valor_fee
+    _salvar_turmas_alunos(turmas_alunos)
 
 
 def _obter_novo_id_turmas_alunos():

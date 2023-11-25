@@ -1,7 +1,9 @@
 // Função para listar turmas no elemento select
 async function listarTurmas() {
   try {
-    const response = await fetch("http://127.0.0.1:8080/api/v1/turmas/listar");
+    const response = await fetch(
+      "http://127.0.0.1:8080/api/v1/turmas/nao_iniciadas"
+    );
     const turmaData = await response.json();
 
     const opcoesTurma = document.getElementById("selecionaTurma");
@@ -77,12 +79,13 @@ async function criaRequisicao(
       nome_Turma: nomeTurmaSelecionada,
       alunos_importados: arquivoImportadoJson,
     };
-    const decisao_usuario = await criar_modal_confirmar_edicao(
+    const decisao_usuario = await criar_modal_confirmar(
       nomeTurmaSelecionada,
       arquivoImportadoJson
     );
     if (decisao_usuario) {
       resposta = await importaAluno(corpoRequisicao);
+      window.location.href = "informacoes_turma.html?id=" + idTurmaSelecionada;
     }
   } else {
     const erros = respostaValidacao.erros;
@@ -90,15 +93,15 @@ async function criaRequisicao(
   }
 }
 
-function criar_modal_confirmar_edicao(nome_Turma, arquivoImportadoJson) {
+function criar_modal_confirmar(nome_Turma, arquivoImportadoJson) {
   return new Promise((resolve) => {
     arquivoImportadoJson = JSON.parse(arquivoImportadoJson);
 
     let mensagem = `Atenção! Os alunos serão adicionados à turma ${nome_Turma}:\n\n`;
 
     for (const aluno of arquivoImportadoJson) {
-      const alunoNome = aluno["Nome completo do aluno"];
-      const alunoGenero = aluno["Genêro"];
+      const alunoNome = aluno["Nome Completo do Aluno"];
+      const alunoGenero = aluno["Gênero"];
       const alunoNascimento = aluno["Data de Nascimento"];
 
       mensagem += `Nome do aluno: ${alunoNome}, `;
@@ -108,13 +111,10 @@ function criar_modal_confirmar_edicao(nome_Turma, arquivoImportadoJson) {
 
     mensagem += "\nDeseja prosseguir com a importação?";
 
-    // Preenche a mensagem na modal
     document.getElementById("modal-message").innerText = mensagem;
 
-    // Exibe a modal
     document.getElementById("custom-modal").style.display = "flex";
 
-    // Adiciona os ouvintes de evento aos botões
     document
       .getElementById("confirmButton")
       .addEventListener("click", function () {
@@ -189,12 +189,15 @@ function textToJson(arquivoImportadoTexto) {
 
     linhaAtual = linhaAtual.map((element) => element.replace(/\r$/, ""));
 
-    if (linhaAtual.length === headers.length) {
-      var obj = {};
-      for (var j = 0; j < headers.length; j++) {
-        obj[headers[j]] = linhaAtual[j];
+    // Ignora linhas completamente vazias
+    if (linhaAtual.some((element) => element.trim() !== "")) {
+      if (linhaAtual.length === headers.length) {
+        var obj = {};
+        for (var j = 0; j < headers.length; j++) {
+          obj[headers[j]] = linhaAtual[j];
+        }
+        resultado.push(obj);
       }
-      resultado.push(obj);
     }
   }
   return JSON.stringify(resultado).replace(/\\r/g, "").replace(/\\n/g, "");

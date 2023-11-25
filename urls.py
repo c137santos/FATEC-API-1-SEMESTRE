@@ -18,6 +18,7 @@ URLS = {
     URL("/api/v1/alunos/atualizar/:id"): view.editar_aluno,
     URL("/api/v1/turmas/listar"): view.listar_turmas,
     URL("/api/v1/turmas/listar/:id"): view.obter_turma,
+    URL("/api/v1/turmas/nao_iniciadas"): view.turmas_nao_iniciadas,
     URL("/api/v1/turmas/editar/:id"): view.editar_turma,
     URL("/api/v1/turmas/criar"): view.criar_turma,
     URL("/api/v1/turmas/excluir/:id"): view.excluir_turma,
@@ -39,9 +40,6 @@ URLS = {
     URL("/api/v1/notas/editar"): view.editar_nota,
     URL("/api/v1/notas/excluir/:id_nota"): view.excluir_nota,
     URL("/api/v1/notas/fee/obter/:id_turma/:id_aluno"): view.obter_fee_turma_aluno,
-    # URL("/api/v1/turmas_alunos/criar"): view.criar_turmas_alunos,
-    # URL("/api/v1/turmas_alunos/remover/:id"): view.remover_turmas_alunos,
-    # URL("/api/v1/turmas_alunos/listar"): view.listar_turmas_alunos,
     URL(
         "/api/v1/turmas_alunos/listar_alunos_da_turma/:id_turma"
     ): view.listar_alunos_turma,

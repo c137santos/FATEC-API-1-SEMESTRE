@@ -3,11 +3,15 @@ import re
 
 
 def valida_nome(nome):
-    if not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$", nome):
+    if not nome.strip():
+        raise ValueError("Nome do aluno não pode estar vazio.")
+    if not re.match(r'^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$', nome):
         raise ValueError(f"Apenas letras no nome: {nome.title()}")
 
 
 def valida_genero(nome, genero):
+    if not genero.strip():
+        raise ValueError(f"Gênero do aluno {nome.title()} não pode estar vazio.")
     generos_validos = [
         "Homem cis",
         "Mulher cis",
@@ -23,7 +27,9 @@ def valida_genero(nome, genero):
 
 
 def valida_data(nome, data):
-    if not re.match(r"^\d{2}/\d{2}/\d{4}$", data):
+    if not data.strip():
+        raise ValueError(f"Data de nascimento do aluno {nome.title()} não pode estar vazia.")
+    if not re.match(r'^\d{2}/\d{2}/\d{4}$', data):
         raise ValueError(f"Aluno {nome.title()} está com a data inválida: {data}")
 
 
@@ -31,14 +37,14 @@ def verifica_importacao(arquivoImportadoJson):
     importado_json = json.loads(arquivoImportadoJson)
     """
     Modelo esperado:
-    [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
-    {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
+    [{"Nome Completo do Aluno":"valor","Gênero":"valor","Data de Nascimento":"valor"},
+    {"Nome Completo do Aluno":"valor","Gênero":"valor","Data de Nascimento":"valor"}]
     """
     erros = []
-    cabecalhos_esperados = ["Nome completo do aluno", "Genêro", "Data de Nascimento"]
+    cabecalhos_esperados = ["Nome Completo do Aluno", "Gênero", "Data de Nascimento"]
 
     if not importado_json:
-        return {"sucesso": False, "erros": ["O JSON está vazio."]}
+        return {"sucesso": False, "erros": ["O CSV está vazio."]}
 
     # Obtendo os cabeçalhos do primeiro aluno
     cabecalhos_obtidos = list(importado_json[0].keys())
@@ -54,17 +60,17 @@ def verifica_importacao(arquivoImportadoJson):
 
     for aluno in importado_json:
         try:
-            valida_nome(aluno["Nome completo do aluno"])
+            valida_nome(aluno["Nome Completo do Aluno"])
         except ValueError as e:
             erros.append(str(e))
 
         try:
-            valida_genero(aluno["Nome completo do aluno"], aluno["Genêro"])
+            valida_genero(aluno["Nome Completo do Aluno"], aluno["Gênero"])
         except ValueError as e:
             erros.append(str(e))
 
         try:
-            valida_data(aluno["Nome completo do aluno"], aluno["Data de Nascimento"])
+            valida_data(aluno["Nome Completo do Aluno"], aluno["Data de Nascimento"])
         except ValueError as e:
             erros.append(str(e))
 
@@ -89,21 +95,18 @@ def _obter_novo_id(entidade):
 def gravar_alunos_banco(alunos, alunos_importados):
     novo_id = _obter_novo_id(alunos)
     novos_alunos = {}
-    print(alunos_importados)
     for aluno in alunos_importados:
         novos_alunos[novo_id] = {
-            "nome": aluno["Nome completo do aluno"].title(),
-            "genero": aluno["Genêro"],
+            "nome": aluno["Nome Completo do Aluno"].title(),
+            "genero": aluno["Gênero"],
             "data_nascimento": aluno["Data de Nascimento"],
             "RA": novo_id,
         }
 
         novo_id = str(int(novo_id) + 1)
-    print(novos_alunos)
     for aluno_id, aluno_info in novos_alunos.items():
         alunos[aluno_id] = aluno_info
     _salvar_alunos(alunos)
-    print(alunos)
     return novos_alunos
 
 
@@ -124,6 +127,11 @@ def _salvar_turma_alunos(turmas_alunos):
 def criar_relacao_turma_aluno(turma_id, novos_alunos, turmas_alunos):
     novo_id = _obter_novo_id(turmas_alunos)
     for aluno_id in novos_alunos.keys():
-        turmas_alunos[novo_id] = {"id_turma": turma_id, "id_aluno": aluno_id}
+        turmas_alunos[novo_id] = {
+            "id_turma": turma_id,
+            "id_aluno": aluno_id,
+            "fee": 0.0
+        }
         novo_id = str(int(novo_id) + 1)
     _salvar_turma_alunos(turmas_alunos)
+
