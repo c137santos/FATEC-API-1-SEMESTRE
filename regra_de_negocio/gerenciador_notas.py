@@ -7,7 +7,6 @@ from regra_de_negocio.gerenciador_ciclos import (
 )
 from regra_de_negocio.gerenciador_turmas import obter_turma
 from regra_de_negocio.service import gerenciador_turmas_alunos
-import regra_de_negocio.gerenciador_ciclos as gerenciador_ciclos
 
 from datetime import datetime, timedelta
 
@@ -191,27 +190,6 @@ def _obter_prazo_insercao_nota(ciclo, id_turma):
         if ciclo_iteracao["numero_ciclo"] <= numero_ciclo:
             prazo_insercao_nota += ciclo_iteracao["duracao"]
     return prazo_insercao_nota + 1  # o +1 é o dia seguinte do requisito
-
-
-def obter_data_insercao_nota(id_turma):
-    id_turma_str = str(id_turma)
-    turma = obter_turma(id_turma_str)
-    formato_data = "%d/%m/%Y"
-    data_inicio = turma["data_de_inicio"]
-    duracao_ciclo = int(turma['duracao_ciclo'])
-    ciclos = gerenciador_ciclos.listar_ciclos_por_id_turma(id_turma)
-    data_de_inicio_ciclos = {}
-    data_de_inicio_ciclo = datetime.strptime(data_inicio, formato_data)
-    
-    for id_ciclo in ciclos:
-        data_de_fim_ciclo = data_de_inicio_ciclo + timedelta(days=duracao_ciclo)
-
-        data_de_inicio_ciclos[id_ciclo] = {
-            "data_de_inicio_ciclo": data_de_inicio_ciclo.strftime(formato_data),
-            "data_de_fim_ciclo": data_de_fim_ciclo.strftime(formato_data)
-        }
-        data_de_inicio_ciclo = data_de_fim_ciclo + timedelta(days=1)
-    return data_de_inicio_ciclos
 
 def excluir_notas_relacionadas_turma(id_turma):
     print("\n> Excluindo notas relacionados a turma...\n")

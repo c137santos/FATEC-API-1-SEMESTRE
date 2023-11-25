@@ -1,5 +1,6 @@
 import json
 from datetime import datetime, timedelta
+import gerenciador_turmas as gerenciador_turmas
 
 
 def listar_ciclos():
@@ -168,6 +169,27 @@ def cria_ciclos_pra_turma(id_nova_turma, info_global_settings):
         ciclo["prazo_insercao_nota"] = int(info_global_settings["prazo_insercao_nota"])
         ciclo["nome_ciclo"] = "ciclo#" + str(ciclo["numero_ciclo"])
         adicionar_ciclo(ciclo)
+
+def obter_datas_ciclos(id_turma):
+    id_turma_str = str(id_turma)
+    turma = gerenciador_turmas.obter_turma(id_turma_str)
+    formato_data = "%d/%m/%Y"
+    data_inicio = turma["data_de_inicio"]
+    duracao_ciclo = int(turma['duracao_ciclo'])
+    ciclos = listar_ciclos_por_id_turma(id_turma)
+    data_de_inicio_ciclos = {}
+    data_de_inicio_ciclo = datetime.strptime(data_inicio, formato_data)
+    
+    for id_ciclo in ciclos:
+        data_de_fim_ciclo = data_de_inicio_ciclo + timedelta(days=duracao_ciclo)
+
+        data_de_inicio_ciclos[id_ciclo] = {
+            "data_de_inicio_ciclo": data_de_inicio_ciclo.strftime(formato_data),
+            "data_de_fim_ciclo": data_de_fim_ciclo.strftime(formato_data)
+        }
+        data_de_inicio_ciclo = data_de_fim_ciclo + timedelta(days=1)
+    return data_de_inicio_ciclos
+
 
 
 # def _verificar_duplicidade(id_ciclo, ciclo, ciclos):

@@ -274,6 +274,6 @@ def importa_aluno(request):
     return JsonResponse(resposta)
 
 
-def obter_data_insercao_nota(request, id_turma):
-    resposta = gerenciador_notas.obter_data_insercao_nota(id_turma)
+def obter_datas_ciclos(request, id_turma):
+    resposta = gerenciador_ciclos.obter_datas_ciclos(id_turma)
     return JsonResponse(resposta)
