@@ -192,6 +192,28 @@ def _obter_prazo_insercao_nota(ciclo, id_turma):
     return prazo_insercao_nota + 1  # o +1 é o dia seguinte do requisito
 
 
+def obter_data_insercao_nota(id_turma):
+    id_turma_str = str(id_turma)
+    turma = obter_turma(id_turma_str)
+    formato_data = "%d/%m/%Y"
+    data_inicio = turma["data_de_inicio"]
+    qtd_ciclos = int(turma['quantidade_ciclos'])
+    duracao_ciclo = int(turma['duracao_ciclo'])
+    ciclo = 1
+    data_de_inicio_ciclos = {}
+    data_de_inicio_ciclo = datetime.strptime(data_inicio, formato_data)
+    
+    while ciclo <= qtd_ciclos:
+        data_de_fim_ciclo = data_de_inicio_ciclo + timedelta(days=duracao_ciclo)
+
+        data_de_inicio_ciclos[ciclo] = {
+            "data_de_inicio_ciclo": data_de_inicio_ciclo.strftime(formato_data),
+            "data_de_fim_ciclo": data_de_fim_ciclo.strftime(formato_data)
+        }
+        data_de_inicio_ciclo = data_de_fim_ciclo + timedelta(days=1)
+        ciclo += 1
+    return data_de_inicio_ciclos
+
 def excluir_notas_relacionadas_turma(id_turma):
     print("\n> Excluindo notas relacionados a turma...\n")
     todos_notas = listar_notas()

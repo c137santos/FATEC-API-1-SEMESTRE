@@ -272,3 +272,8 @@ def importa_aluno(request):
     alunos_importados = json.loads(requisicao["alunos_importados"])
     resposta = importa_aluno_svc(requisicao, alunos_importados)
     return JsonResponse(resposta)
+
+
+def obter_data_insercao_nota(request, id_turma):
+    resposta = gerenciador_notas.obter_data_insercao_nota(id_turma)
+    return JsonResponse(resposta)

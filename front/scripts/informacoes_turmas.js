@@ -1,6 +1,7 @@
 async function preencher_info_turma(id) {
   const turma = await obter_turma(id);
   const PesoCiclo = await listar_ciclos_turma(id);
+  const dataCiclos = await listar_data_ciclos(id);
   const alunos = await listar_alunos_turma(id);
   const notasAlunos = await listar_notas_alunos(id);
 
@@ -15,16 +16,15 @@ async function preencher_info_turma(id) {
     nomeProfessorElement.textContent = turma["professor"];
     quantidadeAlunosElement.innerText = alunos ? Object.keys(alunos).length : 0;
     dataInicioElement.innerText = turma["data_de_inicio"];
-  
     for (let chave in PesoCiclo) {
       const divDetalheCiclo = document.createElement("div");
-      divDetalheCiclo.className = "divDetalheCiclo"
+      divDetalheCiclo.className = "divDetalheCiclo";
 
       const pesoData = PesoCiclo[chave];
 
-      const CicloNumero = document.createElement('div')
+      const CicloNumero = document.createElement("div");
       CicloNumero.className = "ciclo_numero";
-      CicloNumero.innerText = `C${pesoData.numero_ciclo}:`
+      CicloNumero.innerText = `C${pesoData.numero_ciclo}:`;
 
       const NomeCiclo = document.createElement("input");
       NomeCiclo.className = "ciclo";
@@ -35,6 +35,14 @@ async function preencher_info_turma(id) {
       PesoNota.className = "peso";
       PesoNota.id = `pesoCiclo=${chave}`;
       PesoNota.value = pesoData.peso_nota;
+
+      const dataInicioCiclo = document.createElement("div");
+      dataInicioCiclo.className = "dataCiclo";
+      dataInicioCiclo.innerText = `${dataCiclos[chave]["data_de_inicio_ciclo"]}`;
+
+      const dataFimCiclo = document.createElement("div");
+      dataFimCiclo.className = "dataCiclo";
+      dataFimCiclo.innerText = `${dataCiclos[chave]["data_de_fim_ciclo"]}`;
 
       NomeCiclo.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
@@ -51,6 +59,8 @@ async function preencher_info_turma(id) {
       divDetalheCiclo.appendChild(CicloNumero);
       divDetalheCiclo.appendChild(NomeCiclo);
       divDetalheCiclo.appendChild(PesoNota);
+      divDetalheCiclo.appendChild(dataInicioCiclo);
+      divDetalheCiclo.appendChild(dataFimCiclo);
 
       cicloPeso.appendChild(divDetalheCiclo);
     }
@@ -273,6 +283,15 @@ async function listar_ciclos_turma(id) {
   return PesoCiclo;
 }
 
+async function listar_data_ciclos(id) {
+  const response = await fetch(
+    `http://localhost:8080/api/v1/ciclos/listar_data_ciclos/${id}`
+  );
+  const datas_ciclos = await response.json();
+  console.log(datas_ciclos);
+  return datas_ciclos;
+}
+
 async function listar_alunos_turma(id) {
   const response = await fetch(
     `http://localhost:8080/api/v1/turmas_alunos/listar_alunos_da_turma/${id}`
@@ -340,13 +359,13 @@ async function obter_fee_turma_aluno(id_turma, id_aluno) {
 }
 
 function redirecionarParaPagina(id) {
-  if (id === 'turma') {
-      window.location.href = 'gerenciamento_turmas.html';
+  if (id === "turma") {
+    window.location.href = "gerenciamento_turmas.html";
   } else {
-      window.location.href = 'pagina-padrao.html';
+    window.location.href = "pagina-padrao.html";
   }
 }
 
-document.getElementById('turma').addEventListener('click', function() {
-  redirecionarParaPagina('turma');
+document.getElementById("turma").addEventListener("click", function () {
+  redirecionarParaPagina("turma");
 });

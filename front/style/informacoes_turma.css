@@ -19,7 +19,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  width: 600px;
+  width: 700px;
 }
 
 .info-turma {
@@ -56,7 +56,7 @@ body {
 
 .info-ciclos {
   padding: 8px;
-  width: 250px;
+  width: 350px;
   height: 250px;
   background-color: whitesmoke;
   border-radius: 5px;
@@ -101,6 +101,10 @@ body {
   width: 15%;
   padding: 2px;
   margin-right: 15px; /* Adiciona espaço ao redor dos pesos para separá-los dos rótulos (ciclos) */
+}
+
+.dataCiclo {
+  margin-right: 5px;
 }
 
 /* Estilos para o contêiner principal dos alunos */
@@ -150,8 +154,8 @@ body {
 }
 
 .campoNota {
-  margin-left:2px;
-  margin-right:2px;
+  margin-left: 2px;
+  margin-right: 2px;
   align-items: center;
   flex-grow: 1; /* Permite que o elemento cresça conforme necessário */
   flex-basis: 0; /* Define a base flexível como 0 para ocupar o espaço disponível */

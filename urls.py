@@ -15,6 +15,7 @@ def URL(pattern):
 URLS = {
     URL("/api/v1/global_settings/listar"): view.listar_global_settings,
     URL("/api/v1/global_settings/editar"): view.editar_global_settings,
+    
     URL("/api/v1/alunos/atualizar/:id"): view.editar_aluno,
     URL("/api/v1/turmas/listar"): view.listar_turmas,
     URL("/api/v1/turmas/listar/:id"): view.obter_turma,
@@ -25,6 +26,7 @@ URLS = {
     URL("/api/v1/ciclos/listar"): view.listar_ciclos,
     URL("/api/v1/ciclos/listar/:id_turma"): view.listar_ciclos_por_id_turma,
     URL("/api/v1/ciclos/editar/:id_ciclo"): view.editar_ciclo,
+    URL("/api/v1/ciclos/listar_data_ciclos/:id_turma"): view.obter_data_insercao_nota,
     URL(
         "/api/v1/ciclos_detalhes/listar/turmas"
     ): view.listar_detalhes_ciclos_por_id_turma,
