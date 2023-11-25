@@ -190,8 +190,6 @@ def obter_datas_ciclos(id_turma):
         data_de_inicio_ciclo = data_de_fim_ciclo + timedelta(days=1)
     return data_de_inicio_ciclos
 
-
-
 # def _verificar_duplicidade(id_ciclo, ciclo, ciclos):
 #     try:
 #         id_ciclo_textual = str(id_ciclo)
