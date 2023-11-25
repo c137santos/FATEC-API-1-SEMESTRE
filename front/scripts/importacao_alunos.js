@@ -79,12 +79,13 @@ async function criaRequisicao(
       nome_Turma: nomeTurmaSelecionada,
       alunos_importados: arquivoImportadoJson,
     };
-    const decisao_usuario = await criar_modal_confirmar_edicao(
+    const decisao_usuario = await criar_modal_confirmar(
       nomeTurmaSelecionada,
       arquivoImportadoJson
     );
     if (decisao_usuario) {
       resposta = await importaAluno(corpoRequisicao);
+      window.location.href = "informacoes_turma.html?id=" + idTurmaSelecionada;
     }
   } else {
     const erros = respostaValidacao.erros;
@@ -92,7 +93,7 @@ async function criaRequisicao(
   }
 }
 
-function criar_modal_confirmar_edicao(nome_Turma, arquivoImportadoJson) {
+function criar_modal_confirmar(nome_Turma, arquivoImportadoJson) {
   return new Promise((resolve) => {
     arquivoImportadoJson = JSON.parse(arquivoImportadoJson);
 
@@ -110,13 +111,10 @@ function criar_modal_confirmar_edicao(nome_Turma, arquivoImportadoJson) {
 
     mensagem += "\nDeseja prosseguir com a importação?";
 
-    // Preenche a mensagem na modal
     document.getElementById("modal-message").innerText = mensagem;
 
-    // Exibe a modal
     document.getElementById("custom-modal").style.display = "flex";
 
-    // Adiciona os ouvintes de evento aos botões
     document
       .getElementById("confirmButton")
       .addEventListener("click", function () {
