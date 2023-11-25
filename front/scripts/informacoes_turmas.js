@@ -37,7 +37,7 @@ async function preencher_info_turma(id) {
       PesoNota.value = pesoData.peso_nota;
 
       const dataInicioCiclo = document.createElement("div");
-      dataInicioCiclo.className = "dataCiclo";
+      dataInicioCiclo.className = "dataCiclo1";
       dataInicioCiclo.innerText = `${dataCiclos[chave]["data_de_inicio_ciclo"]}`;
 
       const dataFimCiclo = document.createElement("div");
