@@ -93,7 +93,7 @@ def adicionar_nota(nova_nota):
     notas[novo_id_nota] = nova_nota
     _salvar_notas(notas)
     calcular_fee_turma_aluno(
-        notas[novo_id_nota]["turma_id"], notas[novo_id_nota]["aluno_id"]
+        notas[novo_id_nota]["id_turma"], notas[novo_id_nota]["id_aluno"]
     )
 
 

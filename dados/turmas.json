@@ -12,5 +12,12 @@
         "data_de_inicio": "02/11/2023",
         "duracao_ciclo": "14",
         "quantidade_ciclos": 4
+    },
+    "3": {
+        "nome": "Banco de Dados",
+        "professor": "Walmir",
+        "data_de_inicio": "30/11/2023",
+        "duracao_ciclo": "15",
+        "quantidade_ciclos": 4
     }
 }

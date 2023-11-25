@@ -18,6 +18,7 @@ URLS = {
     URL("/api/v1/alunos/atualizar/:id"): view.editar_aluno,
     URL("/api/v1/turmas/listar"): view.listar_turmas,
     URL("/api/v1/turmas/listar/:id"): view.obter_turma,
+    URL("/api/v1/turmas/nao_iniciadas"): view.turmas_nao_iniciadas,
     URL("/api/v1/turmas/editar/:id"): view.editar_turma,
     URL("/api/v1/turmas/criar"): view.criar_turma,
     URL("/api/v1/turmas/excluir/:id"): view.excluir_turma,
