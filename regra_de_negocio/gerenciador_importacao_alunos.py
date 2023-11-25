@@ -1,11 +1,13 @@
 import json
 import re
 
+
 def valida_nome(nome):
     if not nome.strip():
         raise ValueError("Nome do aluno não pode estar vazio.")
-    if not re.match(r'^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$', nome):
+    if not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$", nome):
         raise ValueError(f"Apenas letras no nome: {nome.title()}")
+
 
 def valida_genero(nome, genero):
     if not genero.strip():
@@ -18,16 +20,20 @@ def valida_genero(nome, genero):
         "Gênero neutro",
         "Não binário",
     ]
-    if not re.match(r'^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$', genero):
+    if not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$", genero):
         raise ValueError(f"Apenas letras no gênero: {genero}")
     if genero not in generos_validos:
-            raise ValueError(f"Aluno {nome.title()} está com gênero inválido: {genero}")
+        raise ValueError(f"Aluno {nome.title()} está com gênero inválido: {genero}")
+
 
 def valida_data(nome, data):
     if not data.strip():
-        raise ValueError(f"Data de nascimento do aluno {nome.title()} não pode estar vazia.")
-    if not re.match(r'^\d{2}/\d{2}/\d{4}$', data):
+        raise ValueError(
+            f"Data de nascimento do aluno {nome.title()} não pode estar vazia."
+        )
+    if not re.match(r"^\d{2}/\d{2}/\d{4}$", data):
         raise ValueError(f"Aluno {nome.title()} está com a data inválida: {data}")
+
 
 def verifica_importacao(arquivoImportadoJson):
     importado_json = json.loads(arquivoImportadoJson)
@@ -47,7 +53,12 @@ def verifica_importacao(arquivoImportadoJson):
     print("Cabeçalhos obtidos:", cabecalhos_obtidos)
 
     if cabecalhos_obtidos != cabecalhos_esperados:
-        return {"sucesso": False, "erros": [f"Cabeçalhos esperados: {cabecalhos_esperados}. Cabeçalhos obtidos: {cabecalhos_obtidos}"]}
+        return {
+            "sucesso": False,
+            "erros": [
+                f"Cabeçalhos esperados: {cabecalhos_esperados}. Cabeçalhos obtidos: {cabecalhos_obtidos}"
+            ],
+        }
 
     for aluno in importado_json:
         try:
@@ -70,7 +81,8 @@ def verifica_importacao(arquivoImportadoJson):
     else:
         print("JSON verificado com sucesso!")
         return {"sucesso": True}
-    
+
+
 def _obter_novo_id(entidade):
     ids_numericos = [0]
     for id_str in entidade.keys():
@@ -80,7 +92,8 @@ def _obter_novo_id(entidade):
     id_max_int = ids_numericos.pop()
     novo_id = str(id_max_int + 1)
     return novo_id
-    
+
+
 def gravar_alunos_banco(alunos, alunos_importados):
     novo_id = _obter_novo_id(alunos)
     novos_alunos = {}
@@ -89,14 +102,15 @@ def gravar_alunos_banco(alunos, alunos_importados):
             "nome": aluno["Nome Completo do Aluno"].title(),
             "genero": aluno["Gênero"],
             "data_nascimento": aluno["Data de Nascimento"],
-            "RA": novo_id
+            "RA": novo_id,
         }
-        
+
         novo_id = str(int(novo_id) + 1)
     for aluno_id, aluno_info in novos_alunos.items():
         alunos[aluno_id] = aluno_info
     _salvar_alunos(alunos)
     return novos_alunos
+
 
 def _salvar_alunos(alunos):
     dados = json.dumps(alunos, indent=4, ensure_ascii=False)
@@ -104,20 +118,21 @@ def _salvar_alunos(alunos):
         arquivo.write(dados)
     return True
 
+
 def _salvar_turma_alunos(turmas_alunos):
     dados = json.dumps(turmas_alunos, indent=4)
     with open("dados/turmas_alunos.json", "w", encoding="utf-8") as arquivo:
         arquivo.write(dados)
     return True
 
+
 def criar_relacao_turma_aluno(turma_id, novos_alunos, turmas_alunos):
-    novo_id =_obter_novo_id(turmas_alunos)
+    novo_id = _obter_novo_id(turmas_alunos)
     for aluno_id in novos_alunos.keys():
         turmas_alunos[novo_id] = {
             "id_turma": turma_id,
             "id_aluno": aluno_id,
-            "fee": 0.0
+            "fee": 0.0,
         }
         novo_id = str(int(novo_id) + 1)
     _salvar_turma_alunos(turmas_alunos)
-
