@@ -1,6 +1,6 @@
 import json
 
-from regra_de_negocio.gerenciador_ciclos import listar_ciclos_por_id_turma, obter_ciclo
+from regra_de_negocio.gerenciador_ciclos import listar_ciclos_por_id_turma, obter_ciclo, obter_datas_ciclos
 from regra_de_negocio.gerenciador_turmas import obter_turma
 from regra_de_negocio.service import gerenciador_turmas_alunos
 
@@ -156,36 +156,25 @@ def verificar_edicao_habilitada(notas, id_nota):
     id_nota_str = str(id_nota)
     nota = notas[id_nota_str]
     ciclo = obter_ciclo(nota["id_ciclo"])
+    ciclo_nota = nota["id_ciclo"]
     turma = obter_turma(nota["id_turma"])
-    if ciclo and turma:
-        data_inicio = turma["data_de_inicio"]
-        formato_data = "%d/%m/%Y"
-        prazo_insercao_nota = _obter_prazo_insercao_nota(ciclo, nota["id_turma"])
-        data_inicial_insercao_nota = datetime.strptime(
-            data_inicio, formato_data
-        ) + timedelta(days=prazo_insercao_nota)
-        data_final_insercao_nota = data_inicial_insercao_nota + timedelta(
-            days=ciclo["prazo_insercao_nota"]
-        )
+    data_ciclos = obter_datas_ciclos(turma, nota["id_turma"])
+    """{'1': -> id_ciclo
+       {'data_de_inicio_ciclo': '02/11/2023', 
+       'data_de_fim_ciclo': '12/11/2023'},"""
+    formato_data = "%d/%m/%Y"
+    prazo_insercao_nota = int(ciclo["prazo_insercao_nota"])
+    if ciclo_nota in data_ciclos.keys():
         data_atual = datetime.now()
+        data_fim_ciclo = data_ciclos[ciclo_nota]["data_de_fim_ciclo"]
+        data_inicial_insercao_nota = datetime.strptime(data_fim_ciclo, formato_data) + timedelta(days=1)# O dia apos o fim do ciclo
+        data_final_insercao_nota = data_inicial_insercao_nota + timedelta(days=prazo_insercao_nota)
         if data_inicial_insercao_nota <= data_atual <= data_final_insercao_nota:
             return True
         else:
             return False
     else:
         return False
-
-
-def _obter_prazo_insercao_nota(ciclo, id_turma):
-    id_turma_str = str(id_turma)
-    ciclos = listar_ciclos_por_id_turma(id_turma_str)
-    numero_ciclo = ciclo["numero_ciclo"]
-    prazo_insercao_nota = 0
-    for id_ciclo in ciclos.keys():
-        ciclo_iteracao = ciclos[id_ciclo]
-        if ciclo_iteracao["numero_ciclo"] <= numero_ciclo:
-            prazo_insercao_nota += ciclo_iteracao["duracao"]
-    return prazo_insercao_nota + 1  # o +1 é o dia seguinte do requisito
 
 def excluir_notas_relacionadas_turma(id_turma):
     print("\n> Excluindo notas relacionados a turma...\n")

@@ -12,10 +12,12 @@ async function preencher_info_turma(id) {
     const quantidadeAlunosElement =
       document.getElementById("fquantidadeAlunos");
     const dataInicioElement = document.getElementById("fdataInicio");
+    const duracaoCicloElement = document.getElementById("fduracaoCiclo");
     nomeTurmaElement.textContent = turma["nome"];
     nomeProfessorElement.textContent = turma["professor"];
     quantidadeAlunosElement.innerText = alunos ? Object.keys(alunos).length : 0;
     dataInicioElement.innerText = turma["data_de_inicio"];
+    duracaoCicloElement.innerHTML = `${turma["duracao_ciclo"]} dias`;
     for (let chave in PesoCiclo) {
       const divDetalheCiclo = document.createElement("div");
       divDetalheCiclo.className = "divDetalheCiclo";
