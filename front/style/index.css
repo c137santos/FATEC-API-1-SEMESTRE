@@ -24,6 +24,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 700px;
 }
 
 .menu-button a,
@@ -54,13 +55,13 @@ body {
     border: 2px solid transparent;
     cursor: pointer;
     font-size: 20px;
-    width: min-content;
+    width: 200px;
     border-width: 30px;
     /* Defina a largura da borda desejada, por exemplo, 5 pixels */
 }
 
 .action-button {
-    width: auto;
+    width: 400px;
     border-width: 0;
 }
 
