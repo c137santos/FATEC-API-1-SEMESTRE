@@ -159,6 +159,9 @@ def verificar_edicao_habilitada(notas, id_nota):
     ciclo_nota = nota["id_ciclo"]
     turma = obter_turma(nota["id_turma"])
     data_ciclos = obter_datas_ciclos(turma, nota["id_turma"])
+    """{'1': -> id_ciclo
+       {'data_de_inicio_ciclo': '02/11/2023', 
+       'data_de_fim_ciclo': '12/11/2023'},"""
     formato_data = "%d/%m/%Y"
     prazo_insercao_nota = int(ciclo["prazo_insercao_nota"])
     for ciclo in data_ciclos.keys():
