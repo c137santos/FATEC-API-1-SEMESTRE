@@ -187,7 +187,6 @@ def _obter_prazo_insercao_nota(ciclo, id_turma):
             prazo_insercao_nota += ciclo_iteracao["duracao"]
     return prazo_insercao_nota + 1  # o +1 é o dia seguinte do requisito
 
-
 def excluir_notas_relacionadas_turma(id_turma):
     print("\n> Excluindo notas relacionados a turma...\n")
     todos_notas = listar_notas()

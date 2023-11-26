@@ -19,7 +19,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  width: 600px;
+  width: 700px;
 }
 
 .info-turma {
@@ -56,7 +56,7 @@ body {
 
 .info-ciclos {
   padding: 8px;
-  width: 250px;
+  width: 350px;
   height: 250px;
   background-color: whitesmoke;
   border-radius: 5px;
@@ -69,11 +69,27 @@ body {
   margin: 0 0 10px;
 }
 
+.titulo-data {
+  display: flex;
+  align-items: center;
+  text-align: right;
+  width: 175px; /* Defina o comprimento desejado */
+  margin-left: auto; /* Move a div para a direita */
+}
+
+.titulo-data p {
+  margin: 0; /* Remove margens padrão dos parágrafos */
+}
+
+.titulo-data strong {
+  padding: 25px; /* Adiciona espaçamento interno aos strongs */
+}
+
 .container-ciclos {
   text-align: center;
   justify-content: left;
   max-width: 100%;
-  height: 165px;
+  height: 142px;
   padding: 0px 5px;
 }
 
@@ -85,7 +101,7 @@ body {
 .ciclo_numero {
   width: 10%;
   padding: 2px;
-  margin-right: 15px;
+  margin-right: 5px;
   font-weight: bold;
 }
 
@@ -93,14 +109,20 @@ body {
   border: 1px solid #0000000c;
   width: 70%;
   padding: 2px;
-  margin-right: 15px;
+  margin-right: 10px;
+  text-align: center;
 }
 
 .peso {
   border: 1px solid #0000000c;
   width: 15%;
   padding: 2px;
-  margin-right: 15px; /* Adiciona espaço ao redor dos pesos para separá-los dos rótulos (ciclos) */
+  margin-right: 10px; /* Adiciona espaço ao redor dos pesos para separá-los dos rótulos (ciclos) */
+  text-align: center;
+}
+
+.dataCiclo1 {
+  margin-right: 5px;
 }
 
 /* Estilos para o contêiner principal dos alunos */
@@ -150,8 +172,8 @@ body {
 }
 
 .campoNota {
-  margin-left:2px;
-  margin-right:2px;
+  margin-left: 2px;
+  margin-right: 2px;
   align-items: center;
   flex-grow: 1; /* Permite que o elemento cresça conforme necessário */
   flex-basis: 0; /* Define a base flexível como 0 para ocupar o espaço disponível */

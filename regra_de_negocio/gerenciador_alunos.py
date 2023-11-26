@@ -13,9 +13,7 @@ def editar_aluno_svc(id, alunos_editar):
         aluno = alunos[id]
         aluno["nome"] = alunos_editar["nome"]
         aluno["data_nascimento"] = alunos_editar["data_nascimento"]
-        aluno["genero"] = (
-            str.upper(alunos_editar["genero"]) if alunos_editar["genero"] else ""
-        )
+        aluno["genero"] = alunos_editar["genero"]
         _salvar_alunos(alunos)
 
 

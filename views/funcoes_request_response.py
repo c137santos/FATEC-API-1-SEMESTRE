@@ -286,3 +286,17 @@ def exportacao_relatorio_turma(request, id):
     except:
         raise ("errou")
     return JsonResponse(response)
+
+
+def exportacao_relatorio_turma(request, id):
+    try:
+        response = exportacao_relatorio_turma_svc(id)
+    except:
+        raise ("errou")
+    return JsonResponse(response)
+
+def obter_datas_ciclos(request, id_turma):
+    id_turma_str = str(id_turma)
+    turma = gerenciador_turmas.obter_turma(id_turma_str)
+    resposta = gerenciador_ciclos.obter_datas_ciclos(turma, id_turma_str)
+    return JsonResponse(resposta)
