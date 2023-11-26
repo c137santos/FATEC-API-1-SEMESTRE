@@ -6,11 +6,11 @@ function redirecionarParaPagina(id) {
     } else if (id === 'global_settings') {
         window.location.href = 'global_settings.html';
     } else if (id == 'relatorio'){
-        window.location.href = 'relatorio.html';
+        window.location.href = 'exportacao_relatorio.html';
     } else if (id == 'importar-aluno'){
         window.location.href = 'importacao_alunos.html';
-    }else if (id == 'exportar'){
-        window.location.href = '.html';
+        }else if (id == 'relatorio_graficos'){
+        window.location.href = 'relatorio.html';
     } else {
         window.location.href = 'pagina-padrao.html';
     }
