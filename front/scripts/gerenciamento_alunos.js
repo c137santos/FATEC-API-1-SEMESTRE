@@ -132,6 +132,7 @@ async function editarAluno(RA) {
     "Gênero neutro",
     "Não binário",
   ];
+
   opcoesGenero.forEach(function (opcao) {
     const option = document.createElement("option");
     option.text = opcao;
@@ -143,6 +144,7 @@ async function editarAluno(RA) {
   if (generoAtual) {
     selecionarGenero.value = generoAtual;
   }
+
   formulario.appendChild(aluno_genero);
   formulario.appendChild(selecionarGenero);
 
@@ -174,7 +176,8 @@ async function editarAluno(RA) {
       alert("O Nome do aluno é obrigatório.");
       return;
     }
-    const genero = inputGenero.value;
+
+    const genero = selecionarGenero.value;
     if (genero === "") {
       alert("O gênero do aluno é obrigatório.");
       return;
