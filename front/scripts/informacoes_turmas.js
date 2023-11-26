@@ -350,3 +350,15 @@ function redirecionarParaPagina(id) {
 document.getElementById('turma').addEventListener('click', function() {
   redirecionarParaPagina('turma');
 });
+
+function redirecionarParaPagina(id) {
+  if (id === 'turma') {
+      window.location.href = 'gerenciamento_turmas.html';
+  } else {
+      window.location.href = 'pagina-padrao.html';
+  }
+}
+
+document.getElementById('turma').addEventListener('click', function() {
+  redirecionarParaPagina('turma');
+});

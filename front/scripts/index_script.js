@@ -10,7 +10,7 @@ function redirecionarParaPagina(id) {
     } else if (id == 'importar-aluno'){
         window.location.href = 'importacao_alunos.html';
     }else if (id == 'exportar'){
-        window.location.href = '.html';
+        window.location.href = 'exportacao_relatorio.html';
     } else {
         window.location.href = 'pagina-padrao.html';
     }
