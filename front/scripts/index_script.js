@@ -5,11 +5,11 @@ function redirecionarParaPagina(id) {
         window.location.href = 'gerenciamento_aluno.html';
     } else if (id === 'global_settings') {
         window.location.href = 'global_settings.html';
-    } else if (id == 'relatorio'){
+    } else if (id == 'exportacao_relatorio'){
         window.location.href = 'exportacao_relatorio.html';
     } else if (id == 'importar-aluno'){
         window.location.href = 'importacao_alunos.html';
-        }else if (id == 'relatorio_graficos'){
+        } else if (id == 'relatorio_graficos'){
         window.location.href = 'relatorio.html';
     } else {
         window.location.href = 'pagina-padrao.html';
@@ -28,14 +28,14 @@ document.getElementById('global_settings').addEventListener('click', function() 
     redirecionarParaPagina('global_settings');
 });
 
-document.getElementById('relatorio').addEventListener('click', function() {
-    redirecionarParaPagina('relatorio');
+document.getElementById('relatorio_graficos').addEventListener('click', function() {
+    redirecionarParaPagina('relatorio_graficos');
 });
 
 document.getElementById('importar-aluno').addEventListener('click', function() {
     redirecionarParaPagina('importar-aluno');
 });
 
-document.getElementById('exportar').addEventListener('click', function() {
-    redirecionarParaPagina('exportar');
+document.getElementById('exportacao_relatorio').addEventListener('click', function() {
+    redirecionarParaPagina('exportacao_relatorio');
 });

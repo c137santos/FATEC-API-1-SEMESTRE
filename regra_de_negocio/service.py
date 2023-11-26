@@ -116,6 +116,6 @@ def exportacao_relatorio_turma_svc(id_turma):
         array_dados_relatorio = gerenciador_relatorios.cria_relatorio_csv(
             info_turma=info_turma, info_alunos=info_alunos
         )
-    except:
-        return f"Problemas com a geração do relatório da turma {info_turma['nome']}"
+    except Exception as e:
+        return f"Problemas com a geração do relatório da turma {info_turma['nome']}, {str(e)}"
     return array_dados_relatorio

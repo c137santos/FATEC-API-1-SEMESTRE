@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timedelta 
+from datetime import datetime, timedelta
 
 
 def listar_ciclos():
@@ -167,23 +167,25 @@ def cria_ciclos_pra_turma(id_nova_turma, info_global_settings):
         ciclo["nome_ciclo"] = "ciclo#" + str(ciclo["numero_ciclo"])
         adicionar_ciclo(ciclo)
 
+
 def obter_datas_ciclos(turma, id_turma_str):
     formato_data = "%d/%m/%Y"
     data_inicio = turma["data_de_inicio"]
-    duracao_ciclo = int(turma['duracao_ciclo'])
+    duracao_ciclo = int(turma["duracao_ciclo"])
     ciclos = listar_ciclos_por_id_turma(id_turma_str)
     data_de_inicio_ciclos = {}
     data_de_inicio_ciclo = datetime.strptime(data_inicio, formato_data)
-    
+
     for id_ciclo in ciclos:
         data_de_fim_ciclo = data_de_inicio_ciclo + timedelta(days=duracao_ciclo)
 
         data_de_inicio_ciclos[id_ciclo] = {
             "data_de_inicio_ciclo": data_de_inicio_ciclo.strftime(formato_data),
-            "data_de_fim_ciclo": data_de_fim_ciclo.strftime(formato_data)
+            "data_de_fim_ciclo": data_de_fim_ciclo.strftime(formato_data),
         }
         data_de_inicio_ciclo = data_de_fim_ciclo + timedelta(days=1)
     return data_de_inicio_ciclos
+
 
 # def _verificar_duplicidade(id_ciclo, ciclo, ciclos):
 #     try:
@@ -195,7 +197,7 @@ def obter_datas_ciclos(turma, id_turma_str):
 #             return False
 #         else:
 #             return True
-#     except:
+#     except Exception as e:
 #         return True
 
 # def editar_ciclo(id_ciclo, ciclo):
@@ -208,5 +210,5 @@ def obter_datas_ciclos(turma, id_turma_str):
 #             ciclos[id_ciclo_textual] = ciclo
 #             return _salvar_ciclos(ciclos)
 #         return False
-#     except:
+#     except Exception as e:
 #         return False

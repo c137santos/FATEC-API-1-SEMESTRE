@@ -1,6 +1,9 @@
 import json
 
-from regra_de_negocio.gerenciador_ciclos import listar_ciclos_por_id_turma, obter_ciclo, obter_datas_ciclos
+from regra_de_negocio.gerenciador_ciclos import (
+    obter_ciclo,
+    obter_datas_ciclos,
+)
 from regra_de_negocio.gerenciador_turmas import obter_turma
 from regra_de_negocio.service import gerenciador_turmas_alunos
 
@@ -112,15 +115,17 @@ def editar_nota(notas_atualizada):
     return _salvar_notas(notas)
 
 
-def remover_nota(id_nota):
+def remover_nota(id_nota, delecao_cascata=False):
     id_nota_str = str(id_nota)
     notas = listar_notas()
+    id_turma = notas[id_nota_str]["id_turma"]
+    id_aluno = notas[id_nota_str]["id_aluno"]
     if id_nota_str in notas.keys():
         notas.pop(id_nota_str)
         _salvar_notas(notas)
-        calcular_fee_turma_aluno(
-            notas["id_nota_str"]["id_turma"], notas["id_nota_str"]["id_aluno"]
-        )
+        if delecao_cascata:
+            return
+        calcular_fee_turma_aluno(id_turma, id_aluno)
     else:
         return False
 
@@ -153,22 +158,30 @@ def _salvar_notas(notas):
 
 
 def verificar_edicao_habilitada(notas, id_nota):
+    """
+    {'1': -> id_ciclo
+       {'data_de_inicio_ciclo': '02/11/2023',
+       'data_de_fim_ciclo': '12/11/2023'}
+    """
     id_nota_str = str(id_nota)
     nota = notas[id_nota_str]
     ciclo = obter_ciclo(nota["id_ciclo"])
     ciclo_nota = nota["id_ciclo"]
     turma = obter_turma(nota["id_turma"])
     data_ciclos = obter_datas_ciclos(turma, nota["id_turma"])
-    """{'1': -> id_ciclo
-       {'data_de_inicio_ciclo': '02/11/2023', 
-       'data_de_fim_ciclo': '12/11/2023'},"""
     formato_data = "%d/%m/%Y"
     prazo_insercao_nota = int(ciclo["prazo_insercao_nota"])
     if ciclo_nota in data_ciclos.keys():
         data_atual = datetime.now()
         data_fim_ciclo = data_ciclos[ciclo_nota]["data_de_fim_ciclo"]
-        data_inicial_insercao_nota = datetime.strptime(data_fim_ciclo, formato_data) + timedelta(days=1)# O dia apos o fim do ciclo
-        data_final_insercao_nota = data_inicial_insercao_nota + timedelta(days=prazo_insercao_nota)
+        data_inicial_insercao_nota = datetime.strptime(
+            data_fim_ciclo, formato_data
+        ) + timedelta(
+            days=1
+        )  # O dia apos o fim do ciclo
+        data_final_insercao_nota = data_inicial_insercao_nota + timedelta(
+            days=prazo_insercao_nota
+        )
         if data_inicial_insercao_nota <= data_atual <= data_final_insercao_nota:
             return True
         else:
@@ -176,12 +189,13 @@ def verificar_edicao_habilitada(notas, id_nota):
     else:
         return False
 
+
 def excluir_notas_relacionadas_turma(id_turma):
     print("\n> Excluindo notas relacionados a turma...\n")
     todos_notas = listar_notas()
     for id in todos_notas.keys():
-        if todos_notas["id"]["id_turma"] == id_turma:
-            remover_nota(id)
+        if todos_notas[id]["id_turma"] == id_turma:
+            remover_nota(id, delecao_cascata=True)
 
 
 def adicionar_notas_aluno_turma(ciclos, alunos, id_nova_turma_str):

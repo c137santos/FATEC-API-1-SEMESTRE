@@ -18,7 +18,6 @@ async function requisitar_editar_turma(id){
     const alunos_excluidos = pegarAlunosArrancados(alunos_todos)
     const decisao_usuario = criar_modal_confirmar_edicao();
     if(decisao_usuario){
-        debugger
         const dataPreenchida = document.getElementById('fdata')['value']
         const dataPreenchidaForm = moment(dataPreenchida).format("DD/MM/YYYY"); 
         const turma = {
@@ -77,7 +76,7 @@ async function listarAlunos(){
 async function verificaSeAlunosEstaNaTurma(){
     for (aluno in alunos_todos){
         let alunoTurma = await listarTurmasAluno(alunos_todos[aluno].RA)
-        alunos_todos[aluno].turma = alunoTurma !== {} && Object.keys(alunoTurma).includes(id)
+        alunos_todos[aluno].turma = alunoTurma && Object.keys(alunoTurma).length > 0
     }
     addAlunos(alunos_todos)
 }
