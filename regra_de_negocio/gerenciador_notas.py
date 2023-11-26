@@ -164,17 +164,15 @@ def verificar_edicao_habilitada(notas, id_nota):
        'data_de_fim_ciclo': '12/11/2023'},"""
     formato_data = "%d/%m/%Y"
     prazo_insercao_nota = int(ciclo["prazo_insercao_nota"])
-    for ciclo in data_ciclos.keys():
-        if ciclo_nota == str(ciclo):
-            data_atual = datetime.now()
-            data_fim_ciclo = data_ciclos[ciclo_nota]["data_de_fim_ciclo"]
-            data_inicial_insercao_nota = datetime.strptime(data_fim_ciclo, formato_data) + timedelta(days=1)# O dia apos o fim do ciclo
-            data_final_insercao_nota = data_inicial_insercao_nota + timedelta(days=prazo_insercao_nota)
-            print(f"Data inicial insercao:{data_inicial_insercao_nota} Data final insercao:{data_final_insercao_nota}")
-            if data_inicial_insercao_nota <= data_atual <= data_final_insercao_nota:
-                return True
-            else:
-                return False
+    if ciclo_nota in data_ciclos.keys():
+        data_atual = datetime.now()
+        data_fim_ciclo = data_ciclos[ciclo_nota]["data_de_fim_ciclo"]
+        data_inicial_insercao_nota = datetime.strptime(data_fim_ciclo, formato_data) + timedelta(days=1)# O dia apos o fim do ciclo
+        data_final_insercao_nota = data_inicial_insercao_nota + timedelta(days=prazo_insercao_nota)
+        if data_inicial_insercao_nota <= data_atual <= data_final_insercao_nota:
+            return True
+        else:
+            return False
     else:
         return False
 
