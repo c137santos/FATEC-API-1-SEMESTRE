@@ -1,10 +1,6 @@
 import json
 
-from regra_de_negocio.gerenciador_ciclos import (
-    listar_ciclos_por_id_turma,
-    obter_ciclo,
-    obter_ultimo_ciclo_por_id_turma,
-)
+from regra_de_negocio.gerenciador_ciclos import listar_ciclos_por_id_turma, obter_ciclo
 from regra_de_negocio.gerenciador_turmas import obter_turma
 from regra_de_negocio.service import gerenciador_turmas_alunos
 

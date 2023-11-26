@@ -3,10 +3,11 @@ from wgsi import JsonResponse
 from regra_de_negocio.service import (
     busca_turmas,
     cria_turma,
+    exportacao_relatorio_turma_svc,
     listar_fee_turmas_svc,
     excluir_turma_svc,
     buscar_fee_do_aluno_na_turma,
-    importa_aluno_svc
+    importa_aluno_svc,
 )
 
 from regra_de_negocio.gerenciador_turmas import editar_turma_svc
@@ -19,7 +20,6 @@ import regra_de_negocio.global_settings as global_settings
 import regra_de_negocio.gerenciador_importacao_alunos as gerenciador_importacao_alunos
 
 import json
-import math
 
 
 def criar_aluno(request):
@@ -52,6 +52,7 @@ def listar_turmas(request):
 def obter_turma(request, id):
     turmas_data = busca_turmas()
     return JsonResponse(turmas_data[id])
+
 
 def turmas_nao_iniciadas(request):
     turmas_data = gerenciador_turmas.turmas_nao_iniciadas()
@@ -238,16 +239,14 @@ def editar_global_settings(request):
 def listar_fee_alunos_turma(request, id_turma):
     turmas_alunos = gerenciador_turmas_alunos.listar_fee_alunos_turma(id_turma)
     alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_turma)
-    resultado = {
-        "alunos":alunos,
-        "turmas_alunos":turmas_alunos
-    }
+    resultado = {"alunos": alunos, "turmas_alunos": turmas_alunos}
     return JsonResponse(resultado)
 
 
 def listar_fee_turmas(request):
     turmas = listar_fee_turmas_svc()
     return JsonResponse(turmas)
+
 
 def validar_importacao(request):
     """
@@ -259,20 +258,42 @@ def validar_importacao(request):
     resposta = gerenciador_importacao_alunos.verifica_importacao(requisicao)
     return JsonResponse(resposta)
 
+
 def importa_aluno(request):
     """
-    Formato da requisição JSON esperado:
-        "turma_id": "1",
-        "nome_Turma": "Logica ok!",
-        "alunos_importados": 
-        [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
-        {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
+    Importa dados de alunos para uma turma específica.
+    Formato esperado da requisição JSON:
+        {"turma_id": "1", "nome_Turma": "Logica ok!","alunos_importados": [
+                {"Nome completo do aluno": "valor", "Gênero": "valor","Data": "valor"},
+                {"Nome completo do aluno": "valor", "Gênero": "valor", "Data": "valor"}]}
+    Parâmetros:
+        - turma_id (str): Identificador da turma.
+        - nome_Turma (str): Nome da turma.
+        - alunos_importados (list): Lista de dicionários contendo dados dos alunos.
+
+    Retorna:
+        JsonResponse: Resposta contendo o resultado da operação de importação.
     """
     requisicao = json.loads(request.body)
     alunos_importados = json.loads(requisicao["alunos_importados"])
     resposta = importa_aluno_svc(requisicao, alunos_importados)
     return JsonResponse(resposta)
 
+
+def exportacao_relatorio_turma(request, id):
+    try:
+        response = exportacao_relatorio_turma_svc(id)
+    except:
+        raise ("errou")
+    return JsonResponse(response)
+
+
+def exportacao_relatorio_turma(request, id):
+    try:
+        response = exportacao_relatorio_turma_svc(id)
+    except:
+        raise ("errou")
+    return JsonResponse(response)
 
 def obter_datas_ciclos(request, id_turma):
     id_turma_str = str(id_turma)
