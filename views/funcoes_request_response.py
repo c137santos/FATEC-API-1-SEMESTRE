@@ -275,5 +275,7 @@ def importa_aluno(request):
 
 
 def obter_datas_ciclos(request, id_turma):
-    resposta = gerenciador_ciclos.obter_datas_ciclos(id_turma)
+    id_turma_str = str(id_turma)
+    turma = gerenciador_turmas.obter_turma(id_turma_str)
+    resposta = gerenciador_ciclos.obter_datas_ciclos(turma, id_turma_str)
     return JsonResponse(resposta)

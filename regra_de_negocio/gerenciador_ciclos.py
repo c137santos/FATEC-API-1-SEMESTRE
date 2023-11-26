@@ -1,6 +1,5 @@
 import json
-from datetime import datetime, timedelta
-import gerenciador_turmas as gerenciador_turmas
+from datetime import datetime, timedelta 
 
 
 def listar_ciclos():
@@ -170,13 +169,11 @@ def cria_ciclos_pra_turma(id_nova_turma, info_global_settings):
         ciclo["nome_ciclo"] = "ciclo#" + str(ciclo["numero_ciclo"])
         adicionar_ciclo(ciclo)
 
-def obter_datas_ciclos(id_turma):
-    id_turma_str = str(id_turma)
-    turma = gerenciador_turmas.obter_turma(id_turma_str)
+def obter_datas_ciclos(turma, id_turma_str):
     formato_data = "%d/%m/%Y"
     data_inicio = turma["data_de_inicio"]
     duracao_ciclo = int(turma['duracao_ciclo'])
-    ciclos = listar_ciclos_por_id_turma(id_turma)
+    ciclos = listar_ciclos_por_id_turma(id_turma_str)
     data_de_inicio_ciclos = {}
     data_de_inicio_ciclo = datetime.strptime(data_inicio, formato_data)
     
