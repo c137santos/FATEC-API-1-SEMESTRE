@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
+    />
+    <link rel="stylesheet" href="style/custom.css" />
+    <link rel="stylesheet" href="style/importacao_alunos.css" />
+
+    <title>Importacao de Alunos</title>
+  </head>
+  <header class="header">
+    <img src="./imagens/Logo.png" alt="logo" />
+  </header>
+
+  <body onload="listarTurmas()">
+    <div id="container">
+      <div class="titulo">
+        <h2>Importação de Alunos</h2>
+      </div>
+
+      <!-- Selecione a Turma -->
+      <div id="container-turma-modelo">
+        <div class="turma-modelo">
+          <label for="fnome" id="tituloTexto"
+            ><strong>Selecione a Turma:</strong></label
+          >
+          <select type="text" name="fnome" id="selecionaTurma">
+            <option value="" disabled selected>Escolha uma turma</option>
+          </select>
+        </div>
+
+        <!-- Modelo de Arquivo -->
+        <div class="turma-modelo">
+          <p id="tituloTexto">
+              <strong>Modelo para importação de dados</strong>
+            </a>
+          </p>
+          <a href="../modelo_importacao_alunos.xlsx" download>
+            <img src="imagens/dowload.png" alt="Download" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Upload de Arquivo -->
+      <div class="input-section">
+        <strong
+          ><label for="arquivo"
+            >Escolha o arquivo CSV para importação:</label
+          ></strong
+        >
+        <input type="file" id="arquivo" name="arquivo" accept=".csv" />
+      </div>
+
+      <!-- Botão de Importar -->
+      <div class="button-section">
+        <button onclick="validaEntrada()">Importar</button>
+      </div>
+      <a href="../passo_a_passo.docx" download="passo_a_passo.docx">
+        ><p id="tutorial">Passo a passo para uma importação bem sucessida</p></a
+      >
+    </div>
+
+    <div id="custom-modal" class="modal">
+      <div class="modal-content">
+        <p id="modal-message"></p>
+        <button id="confirmButton" class="confirm-button">Confirmar</button>
+        <button id="cancelButton" class="cancel-button">Cancelar</button>
+      </div>
+    </div>
+
+    <div class="muleke">
+      <a href="index.html">
+        <img src="./imagens/mascote2.png" alt="mascote" />
+      </a>
+    </div>
+    <script src="/front/scripts/importacao_alunos.js"></script>
+  </body>
+</html>

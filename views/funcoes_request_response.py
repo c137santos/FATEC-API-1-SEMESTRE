@@ -1,15 +1,23 @@
 from wgsi import JsonResponse
+
 from regra_de_negocio.service import (
     busca_turmas,
     cria_turma,
+    exportacao_relatorio_turma_svc,
+    listar_fee_turmas_svc,
+    excluir_turma_svc,
+    buscar_fee_do_aluno_na_turma,
+    importa_aluno_svc,
 )
 
-from regra_de_negocio.gerenciador_turmas import excluir_turma_svc, editar_turma_svc
+from regra_de_negocio.gerenciador_turmas import editar_turma_svc
 import regra_de_negocio.gerenciador_turmas as gerenciador_turmas
 import regra_de_negocio.gerenciador_ciclos as gerenciador_ciclos
 import regra_de_negocio.gerenciador_notas as gerenciador_notas
 import regra_de_negocio.gerenciador_turmas_alunos as gerenciador_turmas_alunos
 import regra_de_negocio.gerenciador_alunos as gerenciador_alunos
+import regra_de_negocio.global_settings as global_settings
+import regra_de_negocio.gerenciador_importacao_alunos as gerenciador_importacao_alunos
 
 import json
 
@@ -46,6 +54,11 @@ def obter_turma(request, id):
     return JsonResponse(turmas_data[id])
 
 
+def turmas_nao_iniciadas(request):
+    turmas_data = gerenciador_turmas.turmas_nao_iniciadas()
+    return JsonResponse(turmas_data)
+
+
 def editar_turma(request, id):
     turma = json.loads(request.body)
     resultado = editar_turma_svc(
@@ -53,42 +66,15 @@ def editar_turma(request, id):
         turma["nome"],
         turma["professor"],
         turma["data_de_inicio"],
-        turma["duracao_ciclo"],
         turma["alunos_adicionados"],
+        turma["alunos_excluidos"],
     )
     return JsonResponse({"mensagem": resultado})
 
 
 def criar_turma(request):
-    print(f"\n> Inserindo nova turma...\n")
     nova_turma = json.loads(request.body)
     resposta = cria_turma(nova_turma)
-    quantidade_ciclos = resposta["nova_turma"]["quantidade_ciclos"]
-    # cria um ciclo padrão para a quantidade de ciclos desejada
-    print(f"> Criando os ciclos associados à turma...\n")
-    for i in range(quantidade_ciclos):
-        ciclo = {}
-        ciclo["id_turma"] = resposta["id_nova_turma"]
-        ciclo["duracao"] = 15
-        ciclo["peso_nota"] = float(i + 1)
-        ciclo["numero_ciclo"] = i + 1
-        ciclo["prazo_insercao_nota"] = 5
-        gerenciador_ciclos.adicionar_ciclo(ciclo)
-    # cria as notas para cada aluno adicionado
-    print(f"> Criando as notas dos alunos...\n")
-    id_nova_turma_str = str(resposta["id_nova_turma"])
-    ciclos = gerenciador_ciclos.listar_ciclos_por_id_turma(id_nova_turma_str)
-    alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_nova_turma_str)
-    for id_aluno in alunos:
-        for id_ciclo in ciclos:
-            nova_nota = {}
-            nova_nota["id_turma"] = id_nova_turma_str
-            nova_nota["id_aluno"] = str(id_aluno)
-            nova_nota["id_ciclo"] = str(id_ciclo)
-            nova_nota["valor"] = 0.0
-            nova_nota["fee"] = False
-            gerenciador_notas.adicionar_nota(nova_nota)
-    print(f"> Criação de turma finalizada.\n")
     return JsonResponse(resposta)
 
 
@@ -96,7 +82,7 @@ def excluir_turma(request, id):
     """
     A exclusão de turma está em modo cascata.
     """
-    print(f"\n> Excluindo turmas...\n")
+    print("\n> Excluindo turmas...\n")
     try:
         excluir_turma_svc(id)
     except Exception as e:
@@ -104,10 +90,7 @@ def excluir_turma(request, id):
             {"mensagem": f"Falha na exclusão de turma_aluno: {str(e)}"},
             status="500 Internal Server Error",
         )
-    gerenciador_turmas_alunos.remover_turma_aluno(id)
-    gerenciador_ciclos.excluir_ciclo_da_turma(id)
-    gerenciador_notas.excluir_notas_relacionadas_turma(id)
-    return JsonResponse({"mensagem": "Sucesso"}, status="200 ok")
+    return JsonResponse({"mensagem": "sucess"}, status="200 ok")
 
 
 def criar_ciclo(request):
@@ -194,7 +177,7 @@ def listar_notas_por_id_aluno(request, id_aluno):
 
 
 def obter_fee_turma_aluno(request, id_turma, id_aluno):
-    fee = gerenciador_notas.obter_fee_turma_aluno(id_turma, id_aluno)
+    fee = buscar_fee_do_aluno_na_turma(id_turma, id_aluno)
     return JsonResponse(fee)
 
 
@@ -224,7 +207,86 @@ def listar_turmas_aluno(request, id_aluno):
     return JsonResponse(turmas)
 
 
-def listar_detalhes_ciclos_por_id_turma(request, id_turma):
-    turma = gerenciador_turmas.obter_turma(id_turma)
-    resposta = gerenciador_ciclos.detalhesCicloTurma(turma, id_turma)
+def listar_detalhes_ciclos_por_id_turma(request):
+    """Devolve um objeto onde a chave é o id da turma
+    1:{ data_final_ciclo: "2023-11-09 00:00:00", ciclo_atual: 1, ciclo_aberto_para_nota: null }
+    2:{ data_final_ciclo: "2023-11-21 00:00:00", ciclo_atual: 2, ciclo_aberto_para_nota: 1 }
+    """
+    resposta = {}
+    turmas = gerenciador_turmas.busca_turmas()
+    for id_turma, turma_info in turmas.items():
+        resposta[id_turma] = gerenciador_ciclos.detalhes_ciclos_turma(
+            turma_info, id_turma
+        )
+    return JsonResponse(resposta)
+
+
+def listar_global_settings(request):
+    global_settings_resp = global_settings.read_global_settings()
+    return JsonResponse(global_settings_resp)
+
+
+def editar_global_settings(request):
+    info_editar_settings = json.loads(request.body)
+    global_settings.edit_global_settings(
+        info_editar_settings["sprints"],
+        info_editar_settings["dias"],
+        info_editar_settings["prazo_nota"],
+    )
+    return JsonResponse({"mensagem": "concluido"})
+
+
+def listar_fee_alunos_turma(request, id_turma):
+    turmas_alunos = gerenciador_turmas_alunos.listar_fee_alunos_turma(id_turma)
+    alunos = gerenciador_turmas_alunos.listar_alunos_turma(id_turma)
+    resultado = {"alunos": alunos, "turmas_alunos": turmas_alunos}
+    return JsonResponse(resultado)
+
+
+def listar_fee_turmas(request):
+    turmas = listar_fee_turmas_svc()
+    return JsonResponse(turmas)
+
+
+def validar_importacao(request):
+    """
+    Modelo esperado:
+    [{"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"},
+    {"Nome completo do aluno":"valor","Genêro":"valor","Data":"valor"}]
+    """
+    requisicao = json.loads(request.body)
+    resposta = gerenciador_importacao_alunos.verifica_importacao(requisicao)
+    return JsonResponse(resposta)
+
+
+def importa_aluno(request):
+    """
+    Importa dados de alunos para uma turma específica.
+    Formato esperado da requisição JSON:
+        {"turma_id": "1", "nome_Turma": "Logica ok!","alunos_importados": [
+                {"Nome completo do aluno": "valor", "Gênero": "valor","Data": "valor"},
+                {"Nome completo do aluno": "valor", "Gênero": "valor", "Data": "valor"}]}
+    Parâmetros:
+        - turma_id (str): Identificador da turma.
+        - nome_Turma (str): Nome da turma.
+        - alunos_importados (list): Lista de dicionários contendo dados dos alunos.
+
+    Retorna:
+        JsonResponse: Resposta contendo o resultado da operação de importação.
+    """
+    requisicao = json.loads(request.body)
+    alunos_importados = json.loads(requisicao["alunos_importados"])
+    resposta = importa_aluno_svc(requisicao, alunos_importados)
+    return JsonResponse(resposta)
+
+
+def exportacao_relatorio_turma(request, id):
+    response = exportacao_relatorio_turma_svc(id)
+    return JsonResponse(response)
+
+
+def obter_datas_ciclos(request, id_turma):
+    id_turma_str = str(id_turma)
+    turma = gerenciador_turmas.obter_turma(id_turma_str)
+    resposta = gerenciador_ciclos.obter_datas_ciclos(turma, id_turma_str)
     return JsonResponse(resposta)

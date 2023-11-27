@@ -1,80 +1,81 @@
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .header {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    height: 300px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 300px;
+  margin-bottom: -100px;
 }
 
 .header img {
-    border: 1px solid transparent;
-    width: 491px;
-    padding: 0;
-    height: 131px;
-    margin-top: -150px;
+  border: 1px solid transparent;
+  width: 491px;
+  padding: 0;
+  height: 131px;
+  margin-top: -150px;
 }
 
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 700px;
 }
 
 .menu-button a,
 .action-button a,
 .action-buttheaderson {
-    text-decoration: none;
-    /*Retira sublinhados de links*/
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  text-decoration: none;
+  /*Retira sublinhados de links*/
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Adicione um estilo para a tag <img> dentro do botão .menu-button */
 .menu-button img {
-    width: 50px; /* Defina a largura da imagem conforme desejado */
-    height: 50px; /* Defina a altura da imagem conforme desejado */
-    margin-bottom: 10px; /* Adicione espaço entre a imagem e o texto */
+  width: 50px; /* Defina a largura da imagem conforme desejado */
+  height: 50px; /* Defina a altura da imagem conforme desejado */
+  margin-bottom: 10px; /* Adicione espaço entre a imagem e o texto */
 }
-
 
 /*Height e Width garantem que o link ocupe o espaço completo do botão*/
 
 .menu-button,
 .action-button {
-    background-color: white;
-    color: black;
-    border: 2px solid transparent;
-    cursor: pointer;
-    font-size: 20px;
-    width: min-content;
-    border-width: 30px;
-    /* Defina a largura da borda desejada, por exemplo, 5 pixels */
+  background-color: white;
+  color: black;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-size: 20px;
+  width: 200px;
+  border-width: 30px;
+  /* Defina a largura da borda desejada, por exemplo, 5 pixels */
 }
 
 .action-button {
-    width: auto;
-    border-width: 0;
+  width: 400px;
+  border-width: 0;
 }
 
 .menu-button:hover,
 .action-buttheaderon:hover {
-    background-color: transparent;
-    box-shadow: 0 0 50px 20px rgb(154, 104, 241);
-    /* Adiciona um brilho quando o botão é hover */
+  background-color: transparent;
+  box-shadow: 0 0 50px 20px rgb(154, 104, 241);
+  /* Adiciona um brilho quando o botão é hover */
 }
 
 .turma-icon {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .aluno-icon {
-    margin-top: 20px;
+  margin-top: 20px;
 }

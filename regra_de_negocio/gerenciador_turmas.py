@@ -1,4 +1,6 @@
 import json
+import regra_de_negocio.global_settings as global_settings
+from datetime import datetime, timedelta
 
 
 # Esta função busca informações sobre as turmas a partir de um arquivo JSON e as retorna
@@ -18,9 +20,12 @@ def obter_turma(id_turma):
 
 
 def editar_turma_svc(
-    id, nome, professor, data_de_inicio, duracao_ciclo, alunos_adicionados
+    id, nome, professor, data_de_inicio, alunos_adicionados, alunos_excluidos
 ):
-    from regra_de_negocio.gerenciador_turmas_alunos import adicionar_turma_aluno
+    from regra_de_negocio.gerenciador_turmas_alunos import (
+        adicionar_turma_aluno,
+        remover_aluno_da_turma,
+    )
 
     turmas = busca_turmas()
     id_turma = 0
@@ -30,13 +35,16 @@ def editar_turma_svc(
         turma["nome"] = nome
         turma["professor"] = professor
         turma["data_de_inicio"] = data_de_inicio
-        turma["duracao_ciclo"] = duracao_ciclo
         _salvar_turmas(turmas)
 
-    for alunos in alunos_adicionados:
-        turma_aluno = ({"id_turma": id_turma, "id_aluno": str(alunos["RA"])},)
-        adicionar_turma_aluno(turma_aluno)
-        return True
+        for alunos in alunos_adicionados:
+            turma_aluno = (
+                {"id_turma": id_turma, "id_aluno": str(alunos["RA"]), "fee": float(0)},
+            )
+            adicionar_turma_aluno(turma_aluno)
+
+        for alunos in alunos_excluidos:
+            remover_aluno_da_turma(id_turma, alunos["RA"])
     else:
         return False
 
@@ -47,7 +55,12 @@ def criacao_turma(nova_turma):
 
     id_nova_turma = _obter_novo_id_turma()
     turmas = busca_turmas()
-    nova_turma["quantidade_ciclos"] = 4
+    nova_turma["duracao_ciclo"] = global_settings.read_global_settings()[
+        "quant_dias_ciclo"
+    ]
+    nova_turma["quantidade_ciclos"] = int(
+        global_settings.read_global_settings()["quant_ciclos"]
+    )
     alunos_adicionados = nova_turma.pop("alunos_adicionados")
     turmas[id_nova_turma] = nova_turma
     turma_nome = turmas[id_nova_turma]["nome"]
@@ -66,14 +79,16 @@ def criacao_turma(nova_turma):
     return resposta
 
 
-def excluir_turma_svc(id):
+def excluir_turma(id):
     turma = obter_turma(id)
-    if turma:
-        turmas = busca_turmas()
-        turmas.pop(id)
-        _salvar_turmas(turmas)
-        return True
-    return False
+    if not turma:
+        raise ValueError(f"Turma com o ID {id} não encontrada.")
+
+    turmas = busca_turmas()
+    turmas.pop(id)
+    _salvar_turmas(turmas)
+
+    return {"message": f"Turma {id} excluída com sucesso."}
 
 
 # Parâmetro: um dicionário onde cada turma é um par chave-valor
@@ -97,3 +112,15 @@ def _obter_novo_id_turma():
     id_max_int = ids_numericos.pop()
     novo_id = str(id_max_int + 1)
     return novo_id
+
+
+def turmas_nao_iniciadas():
+    turmas = busca_turmas()
+    data_atual = datetime.now()
+    turmas_nao_iniciadas = {}
+    for id_turma in turmas.keys():
+        if (
+            datetime.strptime(turmas[id_turma]["data_de_inicio"], "%d/%m/%Y") > data_atual
+        ):
+            turmas_nao_iniciadas[id_turma] = {"nome": turmas[id_turma]["nome"]}
+    return turmas_nao_iniciadas

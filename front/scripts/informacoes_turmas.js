@@ -1,6 +1,7 @@
 async function preencher_info_turma(id) {
   const turma = await obter_turma(id);
   const PesoCiclo = await listar_ciclos_turma(id);
+  const dataCiclos = await listar_data_ciclos(id);
   const alunos = await listar_alunos_turma(id);
   const notasAlunos = await listar_notas_alunos(id);
 
@@ -11,21 +12,45 @@ async function preencher_info_turma(id) {
     const quantidadeAlunosElement =
       document.getElementById("fquantidadeAlunos");
     const dataInicioElement = document.getElementById("fdataInicio");
+    const duracaoCicloElement = document.getElementById("fduracaoCiclo");
     nomeTurmaElement.textContent = turma["nome"];
     nomeProfessorElement.textContent = turma["professor"];
     quantidadeAlunosElement.innerText = alunos ? Object.keys(alunos).length : 0;
     dataInicioElement.innerText = turma["data_de_inicio"];
+    duracaoCicloElement.innerHTML = `${turma["duracao_ciclo"]} dias`;
     for (let chave in PesoCiclo) {
+      const divDetalheCiclo = document.createElement("div");
+      divDetalheCiclo.className = "divDetalheCiclo";
+
       const pesoData = PesoCiclo[chave];
-      const NomeCiclo = document.createElement("label");
+
+      const CicloNumero = document.createElement("div");
+      CicloNumero.className = "ciclo_numero";
+      CicloNumero.innerText = `C${pesoData.numero_ciclo}:`;
+
+      const NomeCiclo = document.createElement("input");
       NomeCiclo.className = "ciclo";
-      NomeCiclo.htmlFor = `pesoCiclo=${chave}`;
-      NomeCiclo.innerHTML = `C${pesoData.numero_ciclo}:`;
+      NomeCiclo.id = `nomeCiclo=${chave}`;
+      NomeCiclo.value = `${pesoData.nome_ciclo}`;
 
       const PesoNota = document.createElement("input");
       PesoNota.className = "peso";
       PesoNota.id = `pesoCiclo=${chave}`;
       PesoNota.value = pesoData.peso_nota;
+
+      const dataInicioCiclo = document.createElement("div");
+      dataInicioCiclo.className = "dataCiclo1";
+      dataInicioCiclo.innerText = `${dataCiclos[chave]["data_de_inicio_ciclo"]}`;
+
+      const dataFimCiclo = document.createElement("div");
+      dataFimCiclo.className = "dataCiclo";
+      dataFimCiclo.innerText = `${dataCiclos[chave]["data_de_fim_ciclo"]}`;
+
+      NomeCiclo.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          requisitar_salvar_ciclo_peso();
+        }
+      });
 
       PesoNota.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
@@ -33,16 +58,23 @@ async function preencher_info_turma(id) {
         }
       });
 
-      cicloPeso.appendChild(NomeCiclo);
-      cicloPeso.appendChild(PesoNota);
+      divDetalheCiclo.appendChild(CicloNumero);
+      divDetalheCiclo.appendChild(NomeCiclo);
+      divDetalheCiclo.appendChild(PesoNota);
+      divDetalheCiclo.appendChild(dataInicioCiclo);
+      divDetalheCiclo.appendChild(dataFimCiclo);
+
+      cicloPeso.appendChild(divDetalheCiclo);
     }
 
     // Chama a função para iniciar a criação do componentes dos alunos
-    exibirAlunos(alunos, notasAlunos, cicloPeso, id);
+    exibirAlunos(alunos, notasAlunos, cicloPeso, id, PesoCiclo);
   }
 }
 
-function criarCabecalhoNota() {
+function criarCabecalhoNota(quant_ciclos) {
+  quant_ciclos = Object.keys(quant_ciclos).length;
+
   const cabecalhoNota = document.createElement("div");
   cabecalhoNota.className = "aluno-square";
   cabecalhoNota.style = "font-weight: bold;";
@@ -54,7 +86,7 @@ function criarCabecalhoNota() {
   const elementoCampoCiclos = document.createElement("div");
   elementoCampoCiclos.className = "campoNota";
 
-  for (var x = 1; x < 5; ++x) {
+  for (var x = 1; x <= quant_ciclos; ++x) {
     const elementoCampoValor = document.createElement("span");
     elementoCampoValor.className = "valor";
     elementoCampoValor.innerText = `C${x}`;
@@ -71,10 +103,10 @@ function criarCabecalhoNota() {
   return cabecalhoNota;
 }
 
-function exibirAlunos(alunos, notasAlunos, cicloPeso, id_turma) {
+function exibirAlunos(alunos, notasAlunos, cicloPeso, id_turma, quant_ciclos) {
   const container = document.querySelector(".corpo_tabela");
 
-  const cabecalhoNota = criarCabecalhoNota();
+  const cabecalhoNota = criarCabecalhoNota(quant_ciclos);
   container.appendChild(cabecalhoNota);
 
   for (const chave in alunos) {
@@ -136,9 +168,6 @@ function criarCampoNota(alunoId, notasAlunos) {
         InputNotas.id = `id_nota=${id_nota},id_turma=${id_turma},id_aluno=${id_aluno},id_ciclo=${id_ciclo}`;
 
         if (cicloAberto === true) {
-          // const aviso_ciclo_aberto =
-          //   document.getElementById("aviso_ciclo_aberto");
-          // aviso_ciclo_aberto.textContent = `Ciclo aberto para nota: ${id_ciclo}`;
           InputNotas.dataset.ValorOriginal = valorNota;
           InputNotas.setAttribute("class", "campoNotaHabilitado");
           InputNotas.removeAttribute("readonly");
@@ -212,7 +241,6 @@ function requisitar_editar_nota(alunos) {
       return;
     }
     if (notasInvalidas) {
-      // Exibe uma mensagem de erro ao usuário
       alert("Todas as notas devem estar entre 0 e 10.");
       return;
     }
@@ -222,8 +250,6 @@ function requisitar_editar_nota(alunos) {
         method: "POST",
         body: JSON.stringify(requestBody),
       });
-    } else {
-      // O usuário optou por não prosseguir, você pode adicionar alguma lógica aqui se necessário
     }
   }
 }
@@ -257,6 +283,15 @@ async function listar_ciclos_turma(id) {
   const PesoCiclo = await response.json();
   console.log(PesoCiclo);
   return PesoCiclo;
+}
+
+async function listar_data_ciclos(id) {
+  const response = await fetch(
+    `http://localhost:8080/api/v1/ciclos/listar_data_ciclos/${id}`
+  );
+  const datas_ciclos = await response.json();
+  console.log(datas_ciclos);
+  return datas_ciclos;
 }
 
 async function listar_alunos_turma(id) {
@@ -299,20 +334,19 @@ async function requisitar_salvar_ciclo_peso() {
   ) {
     return;
   }
-  console.log("Editando os ciclos...");
   const turma_id = obter_id();
   const ciclos = await listar_ciclos_turma(turma_id);
   for (var id_ciclo in ciclos) {
     console.log(`Salvando o ciclo ${id_ciclo}`);
-    elementoCiclo = document.getElementById(`pesoCiclo=${id_ciclo}`);
-    ciclo = ciclos[id_ciclo];
-    ciclo["peso_nota"] = elementoCiclo.value;
-    console.log(ciclo);
+    const pesoCiclo = document.getElementById(`pesoCiclo=${id_ciclo}`);
+    const nomeCiclo = document.getElementById(`nomeCiclo=${id_ciclo}`);
+    let ciclo = ciclos[id_ciclo];
+    ciclo["peso_nota"] = pesoCiclo.value;
+    ciclo["nome_ciclo"] = nomeCiclo.value;
     res = await fetch(
       `http://localhost:8080/api/v1/ciclos/editar/${id_ciclo}`,
       { method: "POST", body: JSON.stringify(ciclo) }
     );
-    console.log(res);
   }
   location.reload();
 }
@@ -323,5 +357,17 @@ async function obter_fee_turma_aluno(id_turma, id_aluno) {
     { method: "GET" }
   );
   const fee = await response.json();
-  return fee ? fee.valor : 0.0;
+  return fee ? fee : 0.0;
 }
+
+function redirecionarParaPagina(id) {
+  if (id === "turma") {
+    window.location.href = "gerenciamento_turmas.html";
+  } else {
+    window.location.href = "pagina-padrao.html";
+  }
+}
+
+document.getElementById("turma").addEventListener("click", function () {
+  redirecionarParaPagina("turma");
+});
