@@ -2,7 +2,7 @@
 
 Trabalho de API do 1º semestre da FATEC.
 ### Tema
-Desenvolver uma solução para a instituição de ensino PBLTex, especializada em cursos práticas de ensino aplicando PBL(Problem Based Learning), que consiste em construir um sistema de informação direcionado para a gestão e acompanhamento de scores de alunos.
+Desenvolver uma solução para a instituição de ensino PBLTex, especializada em cursos voltados às práticas de ensino aplicando PBL(Problem Based Learning), que consiste em construir um sistema de informação direcionado para a gestão e acompanhamento de scores de alunos.
 ### Objetivos 
   Desenvolvimento de uma solução computacional que exercite a capacidade de pesquisa e autodidaxia dos integrantes dos grupos, no que tange:
 - A aplicação (no projeto) de técnicas de programação para a construção de algoritmos.
@@ -29,7 +29,7 @@ Desenvolver uma solução para a instituição de ensino PBLTex, especializada e
 
 ### Documentação do projeto
 
-Para acessar a documentação do projeto, fique a vontade para ver nosso site.
+Para acessar a documentação do projeto, fique à vontade para acessar nosso site:
 
 [Documentação FATEC API](https://github.com/ClaraSantosmf/FATEC-API-1S-DOCUMENTS)
 
@@ -46,7 +46,7 @@ Para acessar a documentação do projeto, fique a vontade para ver nosso site.
 
 ### Priorização das Sprints
 
-O Kanbam utilizado possui quatro colunas. Backlog geral do projeto se encontra em aba de backlog. As tasks priorizada para a sprint que está ocorrendo na aba Priorizado. As task em execução estão na aba Coding, e as tasks já finalizadas na aba Done.
+O Kanbam utilizado possui quatro colunas. Backlog geral do projeto se encontra em aba de backlog. As tasks priorizadas para a sprint que está ocorrendo na aba Priorizado. As task em execução estão na aba Coding, e as tasks já finalizadas na aba Done.
 
 [Board Kanbam com a priorização](https://github.com/users/ClaraSantosmf/projects/5)
 
@@ -82,16 +82,23 @@ Nos hiperlinks, você pode encontrar as tasks detalhadas da próxima sprint.
 
 ## Board de Produto
 
-| Prioridade | Épicos planejados | UserStory | Sprint |
+| Prioridade | Épicos planejados | Detalhamento | Sprint |
 | ------------- | ------------- | ------------- | ------------- |
+| Média | [**Documentação:**] | Implementação da rotina de documentação de práticas ao longo do projeto | [[#1]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/1)  |
+| Alta | [**Wireframe e fluxos do produto:**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/frontend/) | Desenho das telas para o site | [[#1]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/1)  |
+| Alta | [**Criação do Backlog:**] | Criar o Backlog priorizado para nortear o projeto | [[#1]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/1)  |
+| Alta | [**Ambiente de trabalho:**] | Preparar o ambiente de trabalho computacional da equipe | [[#1]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/1)  |
+| Alta | [**Estudo de tecnologias:**] | Estudo aprofundado das tecnologias a serem utilizadas ao longo do projeto (Python, JavaScript, Github, CSS, HTML, dentre outras) | [[#1]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/1)  |
 | Alta | [**Gerenciamento de Turmas:**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-2-gerenciamento-de-turmas_1) | Como administrador, quero realizar CRUD em relação às turmas| [[#2]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/2?closed=1)  |
-| Alta | [**Global Settings**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-6-configuracoes-globais_1)  | Como administrador, quero realizar CRUD em relação ao Global Settings|[[#2]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/2?closed=1)  |
-| Alta | [**Gerenciamento de Grupo**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-3-gerenciamento-de-grupos) | Como administrador, quero realizar o CRUD para grupos, organizando os alunos e facilitar a gestão. | [#4]  |
+| Média | [**Identidade Visual**]  | Estabelecer a identidade visual para a página: criação de logo, determinar paleta de cores, definição do mascote, layout das páginas |[[#2]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/2?closed=1)  |
+| Média | [**Tela Inicial**]  | Criação da tela inicial (index) para a página |[[#2]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/2?closed=1)  |
+| Alta | [**Global Settings**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-6-configuracoes-globais_1)  | Como administrador, quero realizar CRUD em relação ao Global Settings|[[#3]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/3)  |
 | Alta | [**Gerenciamento de Alunos**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-4-gerenciamento-de-alunos) | Como administrador, desejo realizar operações CRUD relacionadas aos alunos, no sistema. | [[#3]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/3)  |
-| Média | [**Gerenciamento de Ciclos de Entrega e Scores:**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-5-gerenciamento-de-ciclos-de-entrega-e-scores) | Como administrador, desejo ter a capacidade de criar e gerenciar ciclos de entrega e pontuações (scores) associados a esses ciclos para acompanhar o desempenho dos alunos. Sendo possível as operações do CRUD | [[#3]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/3) |
-| Média | [**Importação massiva de dados**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-7-carregamento-de-dados-massivo) | Como administrador, desejo importar dados em massa para o sistema a partir de arquivos externos, facilitando a entrada de informações de alunos, turmas e outros dados relacionados por meio de um CSV. | [#4] |
-| Baixa | [**Visibilidade e Acompanhamento (relatório)**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-1-exportacao-de-dados) | Como administrador, desejo acessar relatórios que forneçam visibilidade sobre o desempenho dos alunos, as atividades da turma e outras métricas relevantes, a fim de tomar decisões informadas. Produzindo um PDF. | [#4] |
-| Baixa | [**Carga massiva de Alunos**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-7-carregamento-de-dados-massivo) | Como administrador, desejo ter a capacidade de realizar a carga massiva de alunos no sistema, permitindo a inclusão rápida de um grande número de alunos de uma só vez por meio de CSV. | [#4] |
+| Média | [**Relacionamento Aluno/Turma**] | Como administrador, quero relacionar alunos a uma turma |[[#3]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/3)  |
+| Alta | [**Gerenciamento de Ciclos de Entrega e Scores:**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-5-gerenciamento-de-ciclos-de-entrega-e-scores) | Como administrador, desejo ter a capacidade de criar e gerenciar ciclos de entrega e pontuações (scores) associados a esses ciclos para acompanhar o desempenho dos alunos. Sendo possível as operações do CRUD | [[#3]](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/3) |
+| Média | [**Importação massiva de dados**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-7-carregamento-de-dados-massivo) | Como administrador, desejo importar dados em massa para o sistema a partir de arquivos externos, facilitando a entrada de informações de alunos, turmas e outros dados relacionados por meio de um CSV. | [#4](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/4) |
+| Alta | [**Visibilidade e Acompanhamento (relatório)**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-1-exportacao-de-dados) | Como administrador, desejo acessar relatórios que forneçam visibilidade sobre o desempenho dos alunos, as atividades da turma e outras métricas relevantes, a fim de tomar decisões informadas. Produzindo um PDF. | [#4](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/4) |
+| Alta | [**Carga massiva de Alunos**](https://clarasantosmf.github.io/FATEC-API-1S-DOCUMENTS/sprints/#epico-7-carregamento-de-dados-massivo) | Como administrador, desejo ter a capacidade de realizar a carga massiva de alunos no sistema, permitindo a inclusão rápida de um grande número de alunos de uma só vez por meio de CSV. | [#4](https://github.com/ClaraSantosmf/FATEC-API-1-SEMESTRE/milestone/4) |
 
 
 # Produto
