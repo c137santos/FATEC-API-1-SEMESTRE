@@ -138,3 +138,23 @@ def _salvar_turmas_alunos(turmas_alunos):
     with open("dados/turmas_alunos.json", "w", encoding="utf-8") as f:
         f.write(dados)
         return True
+
+
+def listar_alunos_turma_relatorio(id_turma):
+    if not id_turma:
+        return {}
+    turmas_alunos = listar_turmas_alunos()
+    alunos = listar_alunos()
+    id_turma_str = str(id_turma)
+    alunos_da_turma = {}
+    for id_turmas_alunos in turmas_alunos.keys():
+        turma_aluno = turmas_alunos[id_turmas_alunos]
+        if turma_aluno["id_turma"] == id_turma_str:
+            if turma_aluno["id_aluno"] in alunos.keys():
+                alunos_da_turma[turma_aluno["id_aluno"]] = alunos[
+                    turma_aluno["id_aluno"]
+                ]
+                alunos_da_turma[turma_aluno["id_aluno"]]["FEE"] = turmas_alunos[
+                    id_turmas_alunos
+                ]["fee"]
+    return alunos_da_turma

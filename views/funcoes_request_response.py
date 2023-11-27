@@ -281,10 +281,7 @@ def importa_aluno(request):
 
 
 def exportacao_relatorio_turma(request, id):
-    try:
-        response = exportacao_relatorio_turma_svc(id)
-    except Exception as e:
-        raise (f"errou, {str(e)}")
+    response = exportacao_relatorio_turma_svc(id)
     return JsonResponse(response)
 
 

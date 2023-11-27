@@ -1,4 +1,3 @@
-from regra_de_negocio.gerenciador_alunos import buscar_aluno
 import regra_de_negocio.gerenciador_turmas as gerenciador_turmas
 import regra_de_negocio.global_settings as global_settings
 import regra_de_negocio.gerenciador_ciclos as gerenciador_ciclos
@@ -97,21 +96,23 @@ def importa_aluno_svc(requisicao, alunos_importados):
 
 def exportacao_relatorio_turma_svc(id_turma):
     info_turma = gerenciador_turmas.obter_turma(id_turma)
-    alunos_da_turma = gerenciador_turmas_alunos.listar_alunos_turma(id_turma)
+    alunos_da_turma = gerenciador_turmas_alunos.listar_alunos_turma_relatorio(id_turma)
     info_alunos = {}
     lista_ra = []
     for aluno in alunos_da_turma.values():
-        ra_aluno = aluno["RA"]
-        aluno = buscar_aluno(ra_aluno)
         if aluno:
-            info_alunos[ra_aluno] = aluno
-            lista_ra.append(ra_aluno)
+            info_alunos[aluno["RA"]] = aluno
+            lista_ra.append(aluno["RA"])
     for ra_aluno in lista_ra:
         nota_do_aluno = gerenciador_notas.listar_notas_por_turma_aluno(
             id_turma=id_turma, id_aluno=ra_aluno
         )
         for nota in nota_do_aluno.values():
-            info_alunos[ra_aluno]["ciclo__c" + nota["id_ciclo"]] = nota["valor"]
+            nome_do_ciclo = gerenciador_ciclos.obter_ciclo(nota["id_ciclo"])[
+                "nome_ciclo"
+            ]
+            info_alunos[ra_aluno][nome_do_ciclo] = nota["valor"]
+
     try:
         array_dados_relatorio = gerenciador_relatorios.cria_relatorio_csv(
             info_turma=info_turma, info_alunos=info_alunos
