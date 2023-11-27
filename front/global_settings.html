@@ -74,6 +74,12 @@
       globalSettings.prazo_insercao_nota;
   }
 
+  function preencheDialogo(globalSettings){
+    document.getElementById("dias_edit").value = document.getElementById("dias").textContent;
+    document.getElementById("sprints_edit").value = document.getElementById("sprints").textContent;
+    document.getElementById("prazo_nota").value = document.getElementById("nota").textContent;
+  }
+
   function editGlobalSettings() {
     dias_edit = document.getElementById("dias_edit").value;
     sprints_edit = document.getElementById("sprints_edit").value;
@@ -101,6 +107,7 @@
 
     // O botão Update abre uma Dialog
     updateButton.addEventListener("click", function () {
+      preencheDialogo();
       favDialog.showModal();
     });
     submitButton.addEventListener("click", function () {
