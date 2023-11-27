@@ -120,9 +120,7 @@ def turmas_nao_iniciadas():
     turmas_nao_iniciadas = {}
     for id_turma in turmas.keys():
         if (
-            datetime.strptime(turmas[id_turma]["data_de_inicio"], "%d/%m/%Y")
-            - timedelta(1)
-            > data_atual
+            datetime.strptime(turmas[id_turma]["data_de_inicio"], "%d/%m/%Y") > data_atual
         ):
             turmas_nao_iniciadas[id_turma] = {"nome": turmas[id_turma]["nome"]}
     return turmas_nao_iniciadas
