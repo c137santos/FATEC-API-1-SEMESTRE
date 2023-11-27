@@ -69,6 +69,20 @@ def editar_turma(request, id):
         turma["alunos_adicionados"],
         turma["alunos_excluidos"],
     )
+
+    # cria as notas caso o aluno não tenha
+    turmas_alunos = gerenciador_turmas_alunos.listar_turmas_alunos()
+    alunos = {}
+    for id_tumas_alunos in turmas_alunos.keys():
+        turma_aluno = turmas_alunos[id_tumas_alunos]
+        if turma_aluno["id_turma"] == id:
+            notas = gerenciador_notas.listar_notas_por_turma_aluno(id, turma_aluno["id_aluno"])
+            if len(notas.keys()) == 0:
+                alunos[turma_aluno["id_aluno"]] = gerenciador_alunos.buscar_aluno(turma_aluno["id_aluno"])
+    
+    ciclos = gerenciador_ciclos.listar_ciclos_por_id_turma(id)
+    gerenciador_notas.adicionar_notas_aluno_turma(ciclos, alunos,id)
+
     return JsonResponse({"mensagem": resultado})
 
 
