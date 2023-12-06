@@ -62,5 +62,69 @@
         "numero_ciclo": 4,
         "prazo_insercao_nota": 5,
         "nome_ciclo": "ciclo#4"
+    },
+    "10": {
+        "id_turma": "3",
+        "duracao": 10,
+        "peso_nota": 1.0,
+        "numero_ciclo": 1,
+        "prazo_insercao_nota": 5,
+        "nome_ciclo": "ciclo#1"
+    },
+    "11": {
+        "id_turma": "3",
+        "duracao": 10,
+        "peso_nota": 2.0,
+        "numero_ciclo": 2,
+        "prazo_insercao_nota": 5,
+        "nome_ciclo": "ciclo#2"
+    },
+    "12": {
+        "id_turma": "3",
+        "duracao": 10,
+        "peso_nota": 3.0,
+        "numero_ciclo": 3,
+        "prazo_insercao_nota": 5,
+        "nome_ciclo": "ciclo#3"
+    },
+    "13": {
+        "id_turma": "3",
+        "duracao": 10,
+        "peso_nota": 4.0,
+        "numero_ciclo": 4,
+        "prazo_insercao_nota": 5,
+        "nome_ciclo": "ciclo#4"
+    },
+    "14": {
+        "id_turma": "4",
+        "duracao": 10,
+        "peso_nota": 1.0,
+        "numero_ciclo": 1,
+        "prazo_insercao_nota": 5,
+        "nome_ciclo": "ciclo#1"
+    },
+    "15": {
+        "id_turma": "4",
+        "duracao": 10,
+        "peso_nota": 2.0,
+        "numero_ciclo": 2,
+        "prazo_insercao_nota": 5,
+        "nome_ciclo": "ciclo#2"
+    },
+    "16": {
+        "id_turma": "4",
+        "duracao": 10,
+        "peso_nota": 3.0,
+        "numero_ciclo": 3,
+        "prazo_insercao_nota": 5,
+        "nome_ciclo": "ciclo#3"
+    },
+    "17": {
+        "id_turma": "4",
+        "duracao": 10,
+        "peso_nota": 4.0,
+        "numero_ciclo": 4,
+        "prazo_insercao_nota": 5,
+        "nome_ciclo": "ciclo#4"
     }
 }
