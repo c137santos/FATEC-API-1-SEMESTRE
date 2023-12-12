@@ -106,13 +106,14 @@ def editar_nota(notas_atualizada):
             notas[id_nota_atualizada_str]["valor"] = float(
                 notas_atualizada[id_nota_atualizada_str]["valor"]
             )
-            calcular_fee_turma_aluno(
-                notas[id_nota_atualizada_str]["id_turma"],
-                notas[id_nota_atualizada_str]["id_aluno"],
-            )
         else:
             return False
-    return _salvar_notas(notas)
+    _salvar_notas(notas)
+    calcular_fee_turma_aluno(
+                notas[id_nota_atualizada_str]["id_turma"],
+                notas[id_nota_atualizada_str]["id_aluno"],
+            )  
+    return f"Nota(s) alteradas com sucesso"
 
 
 def remover_nota(id_nota, delecao_cascata=False):

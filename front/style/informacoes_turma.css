@@ -182,7 +182,8 @@ body {
   padding: 0 10px; /* Adicione algum espaçamento interno para melhor aparência */
 }
 
-div.media {
+div.media,
+div.media_titulo {
   width: 100px;
   border-right: 0;
   display: flex;

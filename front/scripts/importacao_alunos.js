@@ -50,21 +50,6 @@ function validaEntrada() {
   }
 }
 
-function exibirAlertaNoModal(mensagem) {
-  const modal = document.getElementById("custom-modal");
-  const modalMessage = document.getElementById("modal-message");
-  const confirmButton = document.getElementById("confirmButton");
-  const cancelButton = document.getElementById("cancelButton");
-
-  modalMessage.innerHTML = `<strong>Alerta: ${mensagem}</strong>`;
-  modal.style.display = "flex";
-  confirmButton.innerText = "OK";
-  confirmButton.addEventListener("click", function () {
-    modal.style.display = "none";
-  });
-  cancelButton.style.display = "none";
-}
-
 async function criaRequisicao(
   arquivoImportado,
   idTurmaSelecionada,
@@ -93,64 +78,82 @@ async function criaRequisicao(
   }
 }
 
+function exibirAlertaNoModal(mensagem) {
+  const modal = document.getElementById("error-modal");
+  const modalMessage = document.getElementById("modal-message");
+  const okButton = document.getElementById("okButton");
+
+  modalMessage.innerHTML = `<strong>Alerta: ${mensagem}</strong>`;
+  modal.style.display = "flex";
+  okButton.addEventListener("click", function () {
+    modal.style.display = "none";
+  });
+}
+
 function criar_modal_confirmar(nome_Turma, arquivoImportadoJson) {
+  const confirmationModal = document.getElementById("confirmation-modal");
+  const confirmationMessage = document.getElementById("confirmation-message");
+  const confirmButton = document.getElementById("confirmButton");
+  const cancelButton = document.getElementById("cancelButton");
+  const titleMesssagme = document.getElementById("title-message");
+  console.log(arquivoImportadoJson);
   return new Promise((resolve) => {
     arquivoImportadoJson = JSON.parse(arquivoImportadoJson);
 
-    let mensagem = `Atenção! Os alunos serão adicionados à turma ${nome_Turma}:\n\n`;
-
+    let titulo = `Atenção! Os alunos serão adicionados à turma <strong>${nome_Turma}:</strong></p><br>`;
+    titleMesssagme.innerHTML = titulo;
+    let mensagem = "";
+    contador = 1;
     for (const aluno of arquivoImportadoJson) {
       const alunoNome = aluno["Nome Completo do Aluno"];
       const alunoGenero = aluno["Gênero"];
       const alunoNascimento = aluno["Data de Nascimento"];
 
-      mensagem += `Nome do aluno: ${alunoNome}, `;
+      mensagem += `<p>${contador} - `;
+      mensagem += `Aluno: <strong>${alunoNome}</strong>, `;
       mensagem += `Gênero: ${alunoGenero}, `;
-      mensagem += `Data de Nascimento: ${alunoNascimento}\n\n`;
+      mensagem += `Data de Nascimento: ${alunoNascimento}</p>`;
+
+      contador += 1;
     }
 
-    mensagem += "\nDeseja prosseguir com a importação?";
+    confirmationMessage.innerHTML = mensagem;
 
-    document.getElementById("modal-message").innerText = mensagem;
+    confirmationModal.style.display = "flex";
 
-    document.getElementById("custom-modal").style.display = "flex";
+    confirmButton.addEventListener("click", function () {
+      confirmationModal.style.display = "none";
+      resolve(true);
+    });
 
-    document
-      .getElementById("confirmButton")
-      .addEventListener("click", function () {
-        document.getElementById("custom-modal").style.display = "none";
-        resolve(true);
-      });
-    document
-      .getElementById("cancelButton")
-      .addEventListener("click", function () {
-        document.getElementById("custom-modal").style.display = "none";
-        resolve(false);
-      });
+    cancelButton.addEventListener("click", function () {
+      confirmationModal.style.display = "none";
+      resolve(false);
+    });
   });
 }
 
 function exibirErrosNoModal(erros) {
-  const modal = document.getElementById("custom-modal");
+  const modal = document.getElementById("error-modal");
   const modalMessage = document.getElementById("modal-message");
-  const confirmButton = document.getElementById("confirmButton");
-  const cancelButton = document.getElementById("cancelButton");
+  const okButton = document.getElementById("okButton");
 
-  // erros
-  modalMessage.innerHTML =
-    "<strong>Erros encontrados:</strong><br><br>" +
-    erros.join("<br>") +
-    "<br><br>Por favor corrigir arquivo para importação<br>";
+  let mensagemErro = "<strong>Erros encontrados:</strong><br><br>";
+
+  for (let erro of erros) {
+    mensagemErro += erro + "<br><br>";
+  }
+  mensagemErro += "<br><br>Por favor corrigir arquivo para importação<br>";
+
+  modalMessage.innerHTML = mensagemErro;
 
   // Exibe o modal
   modal.style.display = "flex";
 
   // Adiciona ouvintes de evento ao botão OK
-  confirmButton.innerText = "OK";
-  confirmButton.addEventListener("click", function () {
+  okButton.addEventListener("click", function () {
     modal.style.display = "none";
   });
-  cancelButton.style.display = "none";
 }
 
 async function converteCsvToJson(arquivoImportado) {

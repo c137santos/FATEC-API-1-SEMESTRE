@@ -1,16 +1,30 @@
 {
-    "1": {
-        "nome": "Logica ok!",
-        "professor": "Nadalete Lucas",
-        "data_de_inicio": "02/11/2023",
-        "duracao_ciclo": "10",
-        "quantidade_ciclos": 4
-    },
-    "2": {
-        "nome": "ADS",
-        "professor": "Goretti",
-        "data_de_inicio": "02/11/2023",
-        "duracao_ciclo": "14",
-        "quantidade_ciclos": 4
-    }
+  "1": {
+    "nome": "Logica ok!",
+    "professor": "Nadalete Lucas",
+    "data_de_inicio": "02/11/2023",
+    "duracao_ciclo": "10",
+    "quantidade_ciclos": 4
+  },
+  "2": {
+    "nome": "ADS",
+    "professor": "Goretti",
+    "data_de_inicio": "02/11/2023",
+    "duracao_ciclo": "14",
+    "quantidade_ciclos": 4
+  },
+  "3": {
+    "nome": "Intelig\u00eancia Artificial",
+    "professor": "Sam Altiman",
+    "data_de_inicio": "30/11/2023",
+    "duracao_ciclo": "10",
+    "quantidade_ciclos": 4
+  },
+  "4": {
+    "nome": "Empreendorismo",
+    "professor": "Steve Jobs",
+    "data_de_inicio": "19/12/2023",
+    "duracao_ciclo": "10",
+    "quantidade_ciclos": 4
+  }
 }

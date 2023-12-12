@@ -66,9 +66,10 @@ async function preencher_info_turma(id) {
 
       cicloPeso.appendChild(divDetalheCiclo);
     }
-
     // Chama a função para iniciar a criação do componentes dos alunos
     exibirAlunos(alunos, notasAlunos, cicloPeso, id, PesoCiclo);
+    // Chama a funcão que mostra se a media é parcial ou total
+    verificaFechouUltimoCiclo(dataCiclos);
   }
 }
 
@@ -95,7 +96,7 @@ function criarCabecalhoNota(quant_ciclos) {
 
   const elementoCampoMedia = document.createElement("div");
   elementoCampoMedia.innerHTML = "FEE";
-  elementoCampoMedia.className = "media";
+  elementoCampoMedia.className = "media_titulo";
 
   cabecalhoNota.appendChild(elementoNomeAluno);
   cabecalhoNota.appendChild(elementoCampoCiclos);
@@ -118,7 +119,7 @@ function exibirAlunos(alunos, notasAlunos, cicloPeso, id_turma, quant_ciclos) {
       const alunoSquare = criarComponenteAluno(alunoId, nomeAluno, notasAlunos);
       container.appendChild(alunoSquare);
       //Chama a função para criar o campo de media de cada aluno
-      adicionarMediaAoAluno(alunoId, notasAlunos, cicloPeso, id_turma);
+      adicionarMediaAoAluno(alunoId, id_turma);
     }
   }
 }
@@ -183,7 +184,7 @@ function criarCampoNota(alunoId, notasAlunos) {
   return campoNota;
 }
 
-function adicionarMediaAoAluno(alunoId, notasAlunos, PesoCiclo, id_turma) {
+function adicionarMediaAoAluno(alunoId, id_turma) {
   const alunoSquare = document.getElementById(`alunoId=${alunoId}`);
   const mediaAluno = document.createElement("div");
   mediaAluno.className = "media";
@@ -192,6 +193,21 @@ function adicionarMediaAoAluno(alunoId, notasAlunos, PesoCiclo, id_turma) {
     (fee) => (mediaAluno.textContent = fee)
   );
   alunoSquare.appendChild(mediaAluno);
+}
+
+function verificaFechouUltimoCiclo(dataCiclos) {
+  const elementoTituloMedia = document.querySelector(".media_titulo");
+  const dataAtual = moment();
+  const keys = Object.keys(dataCiclos);
+  const dataUltimoCiclo = dataCiclos[keys[keys.length - 1]];
+  const dataFinalCiclo = moment(
+    dataUltimoCiclo.data_de_fim_ciclo,
+    "DD/MM/YYYY"
+  );
+
+  elementoTituloMedia.innerHTML = dataAtual.isAfter(dataFinalCiclo)
+    ? "FEE Final"
+    : "FEE Parcial";
 }
 
 async function editarNota() {

@@ -16,5 +16,89 @@
         "data_nascimento": "12/01/1989",
         "genero": "Mulher trans",
         "RA": 3
+    },
+    "4": {
+        "nome": "Marília Borgo",
+        "genero": "Não binário",
+        "data_nascimento": "10/11/2000",
+        "RA": "4"
+    },
+    "5": {
+        "nome": "Mateus Soares",
+        "genero": "Homem cis",
+        "data_nascimento": "10/11/2000",
+        "RA": "5"
+    },
+    "6": {
+        "nome": "Sarah Roberrta",
+        "genero": "Mulher cis",
+        "data_nascimento": "10/11/2000",
+        "RA": "6"
+    },
+    "7": {
+        "nome": "Caio Augusto",
+        "genero": "Gênero neutro",
+        "data_nascimento": "10/11/2000",
+        "RA": "7"
+    },
+    "8": {
+        "nome": "Danielle Tamazato",
+        "genero": "Não binário",
+        "data_nascimento": "10/11/2000",
+        "RA": "8"
+    },
+    "9": {
+        "nome": "Júlio Henrique",
+        "genero": "Não binário",
+        "data_nascimento": "10/11/2000",
+        "RA": "9"
+    },
+    "10": {
+        "nome": "Marcos Tadeu",
+        "genero": "Homem cis",
+        "data_nascimento": "10/11/2000",
+        "RA": "10"
+    },
+    "11": {
+        "nome": "Ana Gabriela",
+        "genero": "Mulher cis",
+        "data_nascimento": "10/11/2000",
+        "RA": "11"
+    },
+    "12": {
+        "nome": "Mariana Bogalho",
+        "genero": "Gênero neutro",
+        "data_nascimento": "10/11/2000",
+        "RA": "12"
+    },
+    "13": {
+        "nome": "Michael Fragoso",
+        "genero": "Não binário",
+        "data_nascimento": "10/11/2000",
+        "RA": "13"
+    },
+    "14": {
+        "nome": "Rodrigo Jerez",
+        "genero": "Homem trans",
+        "data_nascimento": "10/11/2000",
+        "RA": "14"
+    },
+    "15": {
+        "nome": "Richardson Alves",
+        "genero": "Homem cis",
+        "data_nascimento": "10/11/2000",
+        "RA": "15"
+    },
+    "16": {
+        "nome": "Gabriela Daud",
+        "genero": "Mulher trans",
+        "data_nascimento": "10/11/2000",
+        "RA": "16"
+    },
+    "17": {
+        "nome": "Ana Alcântara",
+        "genero": "Mulher cis",
+        "data_nascimento": "10/11/2000",
+        "RA": "17"
     }
 }

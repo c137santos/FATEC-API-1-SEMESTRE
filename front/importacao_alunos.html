@@ -60,13 +60,24 @@
         <button onclick="validaEntrada()">Importar</button>
       </div>
       <a href="../passo_a_passo.docx" download="passo_a_passo.docx">
-        ><p id="tutorial">Passo a passo para uma importação bem sucessida</p></a
+        <p id="tutorial">Passo a passo para uma importação bem sucessida</p></a
       >
     </div>
 
-    <div id="custom-modal" class="modal">
+    <!-- Modal de Mensagem de Erro -->
+    <div id="error-modal" class="modal">
       <div class="modal-content">
         <p id="modal-message"></p>
+        <button id="okButton">Ok</button>
+      </div>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div id="confirmation-modal" class="modal">
+      <div class="modal-message-content">
+        <p id="title-message" class="title-message"></p>
+        <p id="confirmation-message" class="confirmation-message"></p>
+        <p>Deseja prosseguir com a importação?</p>
         <button id="confirmButton" class="confirm-button">Confirmar</button>
         <button id="cancelButton" class="cancel-button">Cancelar</button>
       </div>
